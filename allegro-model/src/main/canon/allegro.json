@@ -1,0 +1,67 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Allegro API Model Types - Used between the caller and the Allegro API.",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.allegro",
+  "version": "1.0",
+	"basePath": "/allegro/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.allegro.canon",
+		"javaFacadePackage": "com.symphony.oss.models.allegro.canon.facade"
+	},
+	"components": {
+		"schemas": {
+      "EntityJson": {
+        "type": "object",
+        "properties": {
+        }
+      },
+      "PresentationML": {
+        "type": "string",
+        "facade": true
+      },
+      "MarkDown": {
+        "type": "string",
+        "facade": true
+      },
+      "ChatMessage": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "threadId": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+          },
+          "presentationML": {
+            "$ref": "#/components/schemas/PresentationML"
+          },
+          "entityJson": {
+            "$ref": "#/components/schemas/EntityJson"
+          }
+        }
+      },
+      "ReceivedChatMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/ChatMessage",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "messageId": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/MessageId"
+          },
+          "markDown": {
+            "$ref": "#/components/schemas/MarkDown"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+		}
+	}
+}

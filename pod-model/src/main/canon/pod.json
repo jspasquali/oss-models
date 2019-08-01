@@ -1,0 +1,225 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Pod Model - The public Pod API see https://developers.symphony.com/restapi/reference",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.pod",
+  "version": "1.0",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.pod.canon",
+		"javaFacadePackage": "com.symphony.oss.models.pod.canon.facade"
+	},
+  "methods": {
+    "/v1/admin/system/protocols/list": {
+      "get": {
+        "summary": "Get a list of all URI protocols supported by the company (pod).",
+        "parameters": {
+          "sessionToken": {
+            "description": "Session authentication token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "System"
+        ],
+        "response": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/UserV2"
+          }
+        }
+      }
+    },
+    "/v2/user": {
+      "get": {
+        "summary": "Get information about the given user.",
+        "parameters": {
+          "sessionToken": {
+            "description": "Session authentication token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "uid": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            }
+          },
+          "email": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "local": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UserV2"
+          }
+        }
+      }
+    },
+    "/v2/sessioninfo": {
+      "get": {
+        "summary": "Get information about the current user's session.",
+        "parameters": {
+          "sessionToken": {
+            "description": "Session authentication token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "Session"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UserV2"
+          }
+        }
+      }
+    },
+    "/v1/podcert": {
+      "get": {
+        "summary": "Retrieve the pod certificate that can be use to validate signed JWT tokens generated from the pod.",
+        "tags": [
+          "Pod"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/PodCertificate"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "PodCertificate": {
+        "type": "object",
+        "properties": {
+          "certificate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+          }
+        }
+      },
+      "Avatar": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "description": "The Avatar Size",
+            "type": "string"
+          },
+          "url": {
+            "description": "Url of the image",
+            "type": "string"
+          }
+        }
+      },
+      "AvatarList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Avatar"
+        }
+      },
+  		
+      "UserV2": {
+        "description": "User record version 2",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "emailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "avatars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Avatar"
+            }
+          },
+          "workPhoneNumber": {
+            "type": "string",
+            "description": "Note: only available if the application has the extended user or contact permission"
+          },
+          "mobilePhoneNumber": {
+            "type": "string",
+            "description": "Note: only available if the application has the extended user or contact permission"
+          },
+          "jobFunction": {
+            "type": "string",
+            "description": "Note: only available if the application has the extended user or contact permission"
+          },
+          "department": {
+            "type": "string",
+            "description": "Note: only available if the application has the extended user or contact permission"
+          },
+          "division": {
+            "type": "string",
+            "description": "Note: only available if the application has the extended user or contact permission"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+		}
+	}
+}

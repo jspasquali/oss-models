@@ -1,0 +1,2205 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Object Model Chat Application Types",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.chat",
+  "version": "1.0",
+	"basePath": "/chat/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.chat.canon",
+		"javaFacadePackage": "com.symphony.oss.models.chat.canon.facade"
+	},
+  "methods": {
+    "/securityContexts/estsablish": {
+      "post": {
+        "summary": "Get or create a securityContext",
+        "operationId": "establish",
+        "payload": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/EstablishSecurityContextRequest"
+          }
+        },
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalObject"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "EstablishSecurityContextRequest": {
+        "type": "object",
+        "required": [
+          "threadId",
+          "rotationId",
+          "exchangeKeyHash",
+          "wrappedKey"
+        ],
+        "properties": {
+          "threadId": {
+            "$ref": "#/components/schemas/ThreadId"
+          },
+          "rotationId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+          },
+          "exchangeKeyHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "cipherSuiteId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+          },
+          "wrappedKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+          },
+          "encryptedKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+          }
+        }
+      },
+      "ThreadIdObject": {
+        "description": "The ID object for an SBE thread. Points to a Stream.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodFundamentalId",
+        "properties": {
+          "threadId": {
+            "$ref": "#/components/schemas/ThreadId"
+          }
+        }
+      },
+      "MessageIdObject": {
+        "description": "The ID object for an SBE message, messageType is the (fully qualified) TYPE_ID for the message type.",
+        "type": "object",
+        "extends": "#/components/schemas/ThreadIdObject",
+        "required": [
+          "messageId",
+          "messageType"
+        ],
+        "properties": {
+          "messageId": {
+            "$ref": "#/components/schemas/MessageId"
+          },
+          "messageType": {
+            "type": "string"
+          }
+        }
+      },
+      "UserMessageIdObject": {
+        "description": "The ID object for a users interaction with an SBE message, messageType is the (fully qualified) TYPE_ID for the message type.",
+        "type": "object",
+        "extends": "#/components/schemas/MessageIdObject",
+        "required": [
+          "userId"
+        ],
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "AttachmentMessageIdObject": {
+        "description": "The ID object for an SBE attachment download message, messageType is the (fully qualified) TYPE_ID for the message type.",
+        "type": "object",
+        "extends": "#/components/schemas/UserMessageIdObject",
+        "required": [
+          "fileId"
+        ],
+        "properties": {
+          "fileId": {
+            "type": "string"
+          }
+        }
+      },
+		  "BookmarkType": {
+        "description": "Taken from BookmarkMessageType.java.",
+        "type": "string",
+        "enum": [
+          "NEW",
+          "DELETE",
+          "UPDATE"
+        ]
+      },
+      "BotCredential": {
+        "type": "object",
+        "facade": true,
+        "description": "A secret credential which a bot needs to bootstrap.",
+        "required": [
+          "encodedPrivateKey",
+          "podId",
+          "userId",
+          "principalBaseHash"
+        ],
+        "properties": {
+          "encodedPrivateKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "principalBaseHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "Bookmark": {
+        "description": "Taken from BookmarkMessage.java.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "timestamp": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "note": {
+            "type": "string",
+            "format": "byte"
+          },
+          "bookmarkedMsgId": {
+            "$ref": "#/components/schemas/MessageId"
+          },
+          "type": {
+            "$ref": "#/components/schemas/BookmarkType"
+          }
+        }
+      },
+      
+      "#Presence V1": [],
+      
+      "PresenceType": {
+        "description": "Taken from PresenceType.java.",
+        "type": "string",
+        "enum": [
+          "UNDEFINED",
+          "AVAILABLE",
+          "BUSY",
+          "DO_NOT_DISTURB",
+          "ON_THE_PHONE",
+          "BE_RIGHT_BACK",
+          "IN_A_MEETING",
+          "AWAY",
+          "OUT_OF_OFFICE",
+          "OFF_WORK",
+          "OFFLINE"
+        ]
+      },
+      "Presence": {
+        "description": "A livecurrent message as persisted in the DB.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "facade": false,
+        "required": [
+          "userId",
+          "timestamp"
+        ],
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "text": {
+            "type": "string"
+          },
+          "timestamp": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "category": {
+            "$ref": "#/components/schemas/PresenceType"
+          },
+          "idle": {
+            "type": "boolean"
+          }
+        }
+      },
+		
+		  "ForwarderRequest": {
+        "description": "A livecurrent message as persisted in the DB.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "facade": false,
+        "properties": {
+          "fugueConfig": {
+            "type": "string"
+          },
+          "assumeRole": {
+            "type": "string"
+          },
+          "topics": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      
+		  "#LiveCurrentMessage": ["And its subclasses"],
+		
+		  "MessageId": {
+        "type": "string",
+        "format": "byte",
+        "facade": true
+      },
+      "ThreadId": {
+        "type": "string",
+        "format": "byte",
+        "facade": true
+      },
+			"MessageType": {
+				"description": "Taken from MessageType.java, obviously this is different in subtle ways from LiveCurrentMessageType.",
+				"type": "string",
+				"enum": [
+					"CLIENT_ID_ASSIGNED",
+					"CROSSPOD",
+					"DELETE_EVENT",
+					"DELIVERYRECEIPT",
+					"DOWNLOAD_EVENT",
+					"EXTERNAL_SOCIALMESSAGE",
+					"KEEPALIVE",
+					"LASTREAD",
+					"LIKE_EVENT",
+					"MAESTRO",
+					"MENTION",
+					"NOTIFICATION",
+					"OBJECT_STATUS",
+					"OFFLINENOTICE",
+					"READRECEIPT",
+					"REMOVE_BADGE_COUNT",
+					"REMOVE_MENTION_BADGE_COUNT",
+					"SIGNAL",
+					"SOCIALMESSAGE",
+					"STATISTIC",
+					"STREAM_HIDDEN",
+					"TRIGGER",
+					"USERINTERACTION",
+					"PRESENCE_CHANGE",
+					"STREAM_SETTINGS"
+				]
+			},
+			"LiveCurrentMessageType": {
+				"description": "Taken from Jackson annotations in ILiveCurrentMessage.java.",
+				"type": "string",
+				"enum": [
+					"DELETE_EVENT",
+					"DELIVERYRECEIPT",
+					"DOWNLOAD_EVENT",
+					"EXTERNAL_SOCIALMESSAGE",
+					"KEEPALIVE",
+					"LASTREAD",
+					"LIKE_EVENT",
+					"MAESTRO",
+					"MESSAGESTATUS",
+					"NOTIFICATION",
+					"OBJECTSTATUS",
+					"OFFLINENOTICE",
+					"READRECEIPT",
+					"REMOVE_BADGE_COUNT",
+					"REMOVE_MENTION_BADGE_COUNT",
+					"SIGNAL",
+					"SOCIALMESSAGE",
+					"STATISTIC",
+					"STREAM_HIDDEN",
+					"Synth",
+          "PRESENCE_CHANGE",
+          "BOOKMARK",
+          "SIGNAL_NOTIFICATION",
+          "MENTION_NOTIFICATION",
+          "WALLPOST_NOTIFICATION",
+          "TYPING",
+          "PUSHED_SIGNAL",
+                  "STREAM_SETTINGS"
+				]
+			},
+			"LiveCurrentMessage": {
+				"description": "A livecurrent message as persisted in the DB.",
+				"type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+				"facade": true,
+				"required": [
+					"version",
+					"messageId",
+					"ingestionDate"
+				],
+				"properties": {
+					"version": {
+						"$ref": "#/components/schemas/LiveCurrentMessageType"
+					},
+					"clientVersionInfo": {
+						"type": "string"
+					},
+					"semVersion": {
+						"type": "string"
+					},
+					"lastState": {
+						"type": "string",
+						"format": "byte"
+					},
+					"messageId": {
+						"$ref": "#/components/schemas/MessageId"
+					},
+					"objectHash": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+					},
+					"schemaVersion": {
+						"type": "integer",
+						"format": "int16"
+					},
+					"threadId": {
+						"$ref": "#/components/schemas/ThreadId"
+					},
+					"ingestionDate": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+					},
+					"fromPod": {
+						"type": "integer",
+						"format": "int32"
+					},
+          "podDistribution": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "traceId": {
+            "type": "string"
+          }
+				}
+			},
+      "PresenceChangeMessage": {
+        "description": "A PresenceV1 livecurrent message.",
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "facade": false,
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "text": {
+            "type": "string"
+          },
+          "timestamp": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "idle": {
+            "type": "boolean"
+          }
+        }
+      },
+			"BaseSocialMaestroMessage": {
+        "description": "A BaseSocialMaestro message as persisted in the DB.",
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "isCopyDisabled": {
+            "type": "boolean"
+          },
+          "copyDisabled": {
+            "type": "boolean",
+            "description": "This attribute is duplicated with isCopyDisabled, I think this may be a Jackson side effect caused by the fact that the getter is called isCopyDisabled and the setter is setIsCopyDisabled which is wrong, it should be setCopyDisabled."
+          },
+          "text": {
+            "type": "string"
+          },
+          "senderAppId": {
+            "type": "string"
+          },
+          "rmsRole": {
+            "type": "string"
+          }
+        }
+      },
+      "ChatType": {
+        "type": "string",
+        "enum": [
+          "BOARD",
+          "CHATROOM",
+          "INSTANT_CHAT",
+          "POST"
+        ]
+      },
+      "HashtagType": {
+        "description": "The type of a Hashtag",
+        "type": "string",
+        "enum": [
+          "KEYWORD"
+        ]
+      },
+      "Hashtag": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/HashtagType"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "UserMentionType": {
+        "description": "The type of a UserMention",
+        "type": "string",
+        "enum": [
+          "USER_FOLLOW"
+        ]
+      },
+      "UserMention": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/UserMentionType"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Entities": {
+        "type": "object",
+        "properties": {
+          "hashtags": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/Hashtag"
+            }
+          },
+          "userMentions": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/UserMention"
+            }
+          }
+        }
+      },
+			"BaseSocialMessage": {
+				"type": "object",
+				"extends": "#/components/schemas/BaseSocialMaestroMessage",
+				"properties": {
+          "sendingApp": {
+            "type": "string"
+          },
+				  "msgFeatures": {
+            "type": "string",
+            "format": "int32"
+          },
+          "encrypted": {
+            "type": "boolean",
+            "description": "This is encoded in msgFeatures."
+          },
+				  "chatType": {
+            "$ref": "#/components/schemas/ChatType"
+          },
+          "tokenIds": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customEntities": {
+            "type": "string",
+            "format": "byte"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "entities": {
+            "$ref": "#/components/schemas/Entities"
+          },
+          "suppressed": {
+            "type": "boolean"
+          },
+          "suppressedBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+					"#attributes is a Map<String, Object> - can't be modelled here": [],
+					"encryptedEntities": {
+						"type": "string",
+						"format": "byte"
+					},
+          "externalOrigination": {
+            "#comment": [
+              "The member variable is defined in SocialMessage but the getter is abstract in BaseSocialMessage so who knows",
+              "where this really goes."
+            ],
+            "type": "boolean"
+          },
+                  "streamBaseHash" : {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+                  },
+                  "streamAbsoluteHash" : {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+                  },
+                  "streamMembershipBaseHash" : {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+                  },
+                  "streamMembershipAbsoluteHash" : {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+                  }
+				}
+			},
+			"ExternalUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "imageUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "imageUrlSmall": {
+            "type": "string",
+            "format": "url"
+          },
+          "prettyName": {
+            "type": "string"
+          },
+          "screenName": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          }
+        }
+      },
+			"ExternalSocialMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/BaseSocialMessage",
+        "properties": {
+          "fromUser": {
+            "$ref": "#/components/schemas/ExternalUser"
+          }
+        }
+      },
+      "Entitlement": {
+        "description": "An entitlement as seen in SocialMessage.",
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Role": {
+        "description": "An entitlement as seen in SocialMessage.",
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+			"User": {
+        "description": "A user.",
+        "#there seem to be different versions of user, this is what the JSON looks like when it comes out": [
+          "on the internalMsg topic as a JSON object."
+        ],
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "isCrossPodUser": {
+            "type": "boolean"
+          },
+          "isExternalUser": {
+            "type": "boolean"
+          },
+          "verifiedForBadge": {
+            "type": "boolean"
+          },
+          "assetClass": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "company": {
+            "type": "string"
+          },
+          "deptName": {
+            "type": "string"
+          },
+          "divName": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "imageUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "imageUrlSmall": {
+            "type": "string",
+            "format": "url"
+          },
+          "industry": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "jobFunction": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "mobileNumber": {
+            "type": "string",
+            "format": "phone"
+          },
+          "prettyName": {
+            "type": "string"
+          },
+          "screenName": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "workPhone": {
+            "type": "string",
+            "format": "phone"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "int64"
+          },
+          "entitlement": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Entitlement"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
+          "samlId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+			"Image": {
+        "description": "An attachment image.",
+        "type": "object",
+        "properties": {
+          "50": {
+            "type": "string",
+            "format": "url"
+          },
+          "150": {
+            "type": "string",
+            "format": "url"
+          },
+          "500": {
+            "type": "string",
+            "format": "url"
+          },
+          "600": {
+            "type": "string",
+            "format": "url"
+          }
+        }
+      },
+      "Attachment": {
+        "description": "An attachment.",
+        "type": "object",
+        "required": [
+          "fileId"
+        ],
+        "properties": {
+          "sizeInBytes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "creatorId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "description": {
+            "type": "string"
+          },
+          "images": {
+            "$ref": "#/components/schemas/Image"
+          },
+          "encrypted": {
+            "type": "boolean"
+          },
+          "blocked": {
+            "type": "boolean"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MessageShare": {
+        "description": "A shared message.",
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+           "$ref": "#/components/schemas/BaseSocialMessage"
+          },
+          "previousMsgId": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      },
+			"Platform": {
+        "type": "string",
+        "enum": [
+          "DESKTOP",
+          "SMS",
+          "EXTERNAL_IM"
+        ]
+      },
+      "SocialMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/BaseSocialMessage",
+        "properties": {
+          "share": {
+            "$ref": "#/components/schemas/MessageShare"
+          },
+          "oboDelegate": {
+            "$ref": "#/components/schemas/User"
+          },
+          "#media": [ "Unclear what this is, it looks like its for code snippets but seems to be deprecated."],
+          "encryptedMedia": {
+            "type": "string",
+            "format": "byte"
+          },
+          "attachments": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "isChime": {
+            "type": "boolean"
+          },
+          "from": {
+            "$ref": "#/components/schemas/User"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "source": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "disclaimer": {
+            "type": "string"
+          },
+          "isBlast": {
+            "type": "boolean"
+          },
+          "isImported": {
+            "type": "boolean"
+          },
+          "format": {
+            "type": "string"
+          },
+          "messageML": {
+            "type": "string"
+          },
+          "fileKeyEncryptedAttachments": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "encryptedFileKey": {
+            "type": "string",
+            "format": "byte"
+          },
+          "presentationML": {
+            "type": "string"
+          },
+          "entityJSON": {
+            "type": "string"
+          },
+          "uniqueMessageId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bulkId": {
+            "type": "string"
+          },
+          "actualFromUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "actualIngestionDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "originatingSystemId": {
+            "type": "string"
+          },
+          "originalMessageId": {
+            "type": "string"
+          },
+          "ignoreDLPWarning": {
+            "type": "boolean"
+          },
+          "reloadPolicies": {
+            "type": "boolean"
+          },
+          "enforceExpressionFiltering": {
+            "type": "boolean"
+          },
+          "enforceExpressionFilteringMinEFV3": {
+            "type": "boolean"
+          }
+        }
+      },
+			"OfflineNoticeType": {
+        "type": "string",
+        "enum": [
+          "IM",
+          "MENTIONS"
+        ]
+      },
+      "OfflineNotice": {
+        "type": "object",
+        "extends": "#/components/schemas/SocialMessage",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OfflineNoticeType"
+          },
+          "toUser": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "MaestroPayloadType": {
+        "type": "string",
+        "enum": [
+          "D9ProvisioningPayload",
+          "activateRoomPayload",
+          "reactivateRoomPayload",
+          "createRoomPayload",
+          "createIMPayload",
+          "deactivateRoomPayload",
+          "joinRoomPayload",
+          "leaveRoomPayload",
+          "memberModifiedPayload",
+          "updateRoomPayload",
+          "updateStreamPayload",
+          "publicCertPayload",
+          "wrappedStreamKeyPayload",
+          "streamKeyRequestPayload",
+          "pubNubMessagePayload",
+          "aliasPayload",
+          "roomRequestPayload",
+          "enabledEmailIntegrationPayload",
+          "externalWrappedStreamKeySavedPayload",
+          "distributionListPayload",
+          "roomSyncPayload",
+          "connectionRequestAlertPayload",
+          "messageSuppressionPayload",
+          "webRtcScreensharingPayload",
+          "createRoomXpodMaestroPayload",
+          "createRoomXpod2MaestroPayload",
+          "synthPayload",
+          "xPodIMStateChangeMaestroPayload",
+          "requestContentExportKeyMaestroPayload",
+          "updateStreamMembershipMetadataPayload",
+          "MaestroPayload"
+        ]
+      },
+      "MaestroPayloadContainer": {
+        "type": "object",
+        "facade": true,
+        "required": [
+          "version"
+        ],
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/MaestroPayloadType"
+          },
+          "cargo":{
+            "$ref": "#/components/schemas/MaestroPayload"
+          }
+        }
+      },
+      "MaestroPayload": {
+        "type": "object",
+        "facade": false,
+        "properties": {
+          "initiatorUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "isSystemEvent": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MemberModifiedMaestroPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "affectedUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "isOwner": {
+            "type": "boolean"
+          }
+        }
+      },
+      "JoinRoomMaestroPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "affectedUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "affectedUserIdList": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            }
+          },
+          "roomType": {
+            "type": "string"
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "rejected": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LeaveRoomMaestroPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "affectedUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "isOwner": {
+            "type": "boolean"
+          },
+          "isRemediation": {
+            "type": "boolean"
+          },
+          "isSilent": {
+            "type": "boolean"
+          },
+          "masterPodId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MaestroEventType": {
+        "type": "string",
+        "enum": [
+          "INSTANT_CHAT",
+          "DEACTIVATE_IM",
+          "REACTIVATE_IM",
+          "UPDATE_STREAM",
+          "CREATE_ROOM",
+          "KEY_GEN_CREATE_ROOM",
+          "CREATE_EXTERNAL_ROOM",
+          "CREATE_EXTERNAL_ROOM2",
+          "DEACTIVATE_ROOM",
+          "REACTIVATE_ROOM",
+          "ACTIVATE_ROOM",
+          "UPDATE_ROOM",
+          "PROMOTE_TO_PERSISTENT",
+          "LOCK_ROOM",
+          "UNLOCK_ROOM",
+          "LEAVE_ROOM",
+          "JOIN_ROOM",
+          "KEY_GEN_JOIN_ROOM",
+          "MEMBER_MODIFIED",
+          "ROOM_REQUEST",
+          "IGNORE_ROOM_REQUEST",
+          "BAN_ROOM_MEMBER",
+          "UNBAN_ROOM_MEMBER",
+          "CREATE_IM",
+          "ROOM_SYNC",
+          "ROOM_SYNC_REQUEST",
+           "REQUEST_CONTENT_EXPORT_KEY",
+          "CHANNEL_CREATE",
+          "CHANNEL_SUBSCRIBE",
+          "CHANNEL_DELETE",
+          "CHANNEL_UNSUBSCRIBE",
+          "CHANNEL_UPDATE",
+          "FILTER_CREATE",
+          "FILTER_UPDATE",
+          "FILTER_DELETE",
+          "FILTER_PUSHED_SIGNAL",
+
+          "CONNECTION_REQUEST_ALERT",
+          "CREATE_ALIAS",
+          "UPDATE_ALIAS",
+          "REMOVE_ALIAS",
+
+          "XPOD_MEMBER_MODIFIED_REQUEST",
+          "XPOD_JOIN_ROOM_REQUEST",
+          "XPOD_LEAVE_ROOM_REQUEST",
+          "XPOD_IM_STATE_CHANGE_REQUEST",
+
+          "CREATE_USER",
+          "UPDATE_USER",
+
+          "DISTRIBUTION_LIST_DEFINE",
+          "NOTIFICATION_SETTING_MUTE",
+          "NOTIFICATION_SETTING_UNMUTE",
+      
+          "PUBLIC_CERT",
+          "EXTERNAL_WRAPPED_STREAM_KEY_SAVED",
+          "EXTERNAL_WRAPPED_STREAM_KEY",
+          "STREAM_KEY_REQUEST",
+
+          "PUBNUB_CHANNEL_CREATED",
+
+          "CONNECTOR_ADDED",
+          "CONNECTOR_REMOVED",
+
+          "STREAM_HIDDEN",
+          "STREAM_UNHIDDEN",
+          "STREAM_READ",
+          "REMOVE_MENTION_BADGE_COUNT",
+          "MENTION",
+          "SIGNALS_ALERT",
+          "MENTION_ALERT",
+          "FOLLOWING_ALERT",
+          "SESSION_EXPIRE",
+
+          "MESSAGE_SUPPRESSION",
+
+          "JOIN_ROOM_REJECTED",
+
+           "INITIATE_SCREENSHARING",
+          "STOP_SCREENSHARING",
+          "JOIN_SCREENSHARING",
+          "LEAVE_SCREENSHARING",
+          "INITIATE_SWITCH_SCREENSHARING",
+          "CANCEL_SWITCH_SCREENSHARING",
+          "SWITCH_SCREENSHARING",
+
+          "MEETING_START",
+          "MEETING_PARTICIPANT_JOIN",
+          "MEETING_PARTICIPANT_AUDIO_MUTE",
+          "MEETING_PARTICIPANT_AUDIO_UNMUTE",
+          "MEETING_PARTICIPANT_VIDEO_MUTE",
+          "MEETING_PARTICIPANT_VIDEO_UNMUTE",
+          "MEETING_PARTICIPANT_SCREENSHARE_MUTE",
+          "MEETING_PARTICIPANT_SCREENSHARE_UNMUTE",
+          "MEETING_PARTICIPANT_LEAVE",
+          "MEETING_STOP",
+          "MEETING_PARTICIPANT_DECLINE",
+          "MEETING_PARTICIPANT_PIN_FOCUS",
+
+          "EXTERNAL_PRESENCE_CHANGE",
+          "EXTERNAL_PRESENCE_REQUEST",
+
+          "SYNTHETIC_TRANSACTION",
+
+          "ENABLED_EMAIL_INTEGRATION",
+          "DISABLED_EMAIL_INTEGRATION",
+
+          "UPDATE_STREAM_MEMBERSHIP_METADATA"
+        ]
+      },
+			"MaestroMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/BaseSocialMaestroMessage",
+        "properties": {
+          "affectedUsers": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "event": {
+            "$ref": "#/components/schemas/MaestroEventType"
+          },
+          "payload":{
+            "$ref": "#/components/schemas/MaestroPayloadContainer"
+          },
+          "requestingUser": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "MaestroSynth": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroMessage",
+        "properties": {
+        }
+      },
+			"DeleteEvent": {
+        "description": "Event to signal a message should be marked as deleted.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "deleteMessageId": {
+            "$ref": "#/components/schemas/MessageId"
+          },
+          "from": {
+            "$ref": "#/components/schemas/User"
+          },
+          "requesterId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+			"DownloadAttachmentEvent": {
+        "description": "Represents an event when a file attachment is downloaded.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "chatType": {
+            "$ref": "#/components/schemas/ChatType"
+          },
+          "downloadedBy": {
+            "$ref": "#/components/schemas/User"
+          },
+          "fileId": {
+            "type": "string"
+          },
+          "msgIngestionDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          }
+        }
+      },
+			"KeepAlive": {
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+			"LikedEvent": {
+        "description": "An event of a user liking a message.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "likedMessageId": {
+            "$ref": "#/components/schemas/MessageId"
+          },
+          "liker": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "likedMessageIngestionTime": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          }
+        }
+      },
+      "MessageStatus": {
+        "description": "A Message status event.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "chatType": {
+            "$ref": "#/components/schemas/ChatType"
+          },
+          "from": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "DeliveryReceipt": {
+        "description": "Notification of the delivery to a client.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/MessageStatus",
+        "properties": {
+          "deliveredMessageIngestionTime": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "suppressed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ReadReceipt": {
+        "description": "Notification from a client that a message was displayed.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/MessageStatus",
+        "properties": {
+          
+        }
+      },
+      "HideStream": {
+        "description": "Stream hidden status change (indicates to the UI what to show).",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/MessageStatus",
+        "properties": {
+          "isHidden": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StreamSettings": {
+        "description": "Stream settings change (indicates to the UI how to show).",
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "operationId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "showToast": {
+            "type": "boolean"
+          },
+          "blinkToast": {
+            "type": "boolean"
+          },
+          "persistToast": {
+            "type": "boolean"
+          },
+          "toastColor": {
+            "type": "string"
+          },
+          "playSound": {
+            "type": "boolean"
+          },
+          "notificationType": {
+            "type": "string"
+          },
+          "xpodDisclaimerCompleted": {
+            "type": "boolean"
+          },
+          "muteStream": {
+            "type": "boolean"
+          },
+          "alias": {
+            "type": "string"
+          },
+          "aliasColor": {
+            "type": "string"
+          },
+          "applyToAlert": {
+            "type": "boolean"
+          },
+          "applyToBackground": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RemoveBadgeCount": {
+        "description": "Notification of messages being read on another client.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/MessageStatus",
+        "properties": {
+          "messageIds": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/MessageId"
+            }
+          }
+        }
+      },
+      "ReadMessageInformation": {
+        "type": "object",
+        "facade": false,
+        "properties": {
+          "streamId": {
+            "type": "string",
+            "format": "byte"
+          },
+          "messageId": {
+            "$ref": "#/components/schemas/MessageId"
+          }
+        }
+      },
+      "RemoveMentionBadgeCount": {
+        "description": "Notification of something to do with mentions.",
+        "type": "object",
+        "facade": false,
+        "extends": "#/components/schemas/MessageStatus",
+        "properties": {
+          "at": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "messageIds": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/ReadMessageInformation"
+            }
+          }
+        }
+      },
+      "ObjectStatus": {
+        "type": "string",
+        "enum": [
+          "CREATED",
+          "ACCEPTED",
+          "REJECTED ",
+          "APPROVED ",
+          "FAILED"
+        ]
+      },
+      "ResponsePayload": {
+        "description": "The response which would have come from the old message ingestion endpoint.",
+        "type": "object",
+        "properties": {
+        }
+      },
+      "ObjectStatusMessage": {
+        "description": "A notification of the change in ingestion status of a submitted message.",
+        "#comment": [
+          "In SBE this is a sun-class of LivecurrentMessage, containing a protobuf object, but the JSON which is output on datafeed",
+          "contains only the contents of the protobuf attribute. This schema maintains the sub-class of LivecurrentMessage but",
+          "also contains the attributes defined in the proto definition for the SBE message type."
+        ],
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "facade": true,
+        "properties": {
+          "protobuf": {
+            "type": "string",
+            "format": "byte"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ObjectStatus"
+          },
+          "responseStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "responsePayload": {
+            "$ref": "#/components/schemas/ResponsePayload"
+          }
+        }
+      },
+      "Signal": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "TypingNotification": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "prettyName": {
+            "type": "string"
+          }
+        }
+      },
+      "SignalNotification": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "filterIds": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "referencedMessageId": {
+            "$ref": "#/components/schemas/MessageId"
+          }
+        }
+      },
+      "MentionNotification": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+        }
+      },
+      "WallPostNotification": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "msg": {
+            "$ref": "#/components/schemas/SocialMessage"
+          }
+        }
+      },
+      "PushedSignal": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+        }
+      },
+      "Statistic": {
+        "description": "There is a Map<String,String> in the java class which I have to ignore here...",
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "fromId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "action": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "appId": {
+            "type": "string"
+          },
+          "referrer": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "appVersion": {
+            "type": "string"
+          }
+        }
+      },
+      "TriggerEvent": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "filterId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/MessageType"
+          }
+        }
+      },
+      "NotificationState": {
+        "type": "string",
+        "enum": [
+          "DEFAULT",
+          "READ"
+        ]
+      },
+      "Notification": {
+        "type": "object",
+        "extends": "#/components/schemas/TriggerEvent",
+        "properties": {
+          "state": {
+            "$ref": "#/components/schemas/NotificationState"
+          }
+        }
+      },
+      "LastRead": {
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "$ref": "#/components/schemas/ThreadId"
+          },
+          "lastReadTime": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          }
+        }
+      },
+      "UserLastRead": {
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "fromId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "lastRead": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/LastRead"
+            }
+          }
+        }
+      },
+			
+			"ExchangeEnvelope": {
+        "description": "Envelope to wrap meta data around each payload sent through the system, and therefore should only contain transient data. The ExchangeEnvelope will be available to every component in the message bus, but <b>SHOULD NOT</b> be persisted outside of that.",
+        "type": "object",
+        "facade": true,
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/LiveCurrentMessage"
+          }
+        }
+      },
+			"MessengerBag": {
+        "description": "Logical grouping of a list of exchange envelopes by the message type.",
+        "type": "object",
+        "properties": {
+          "envelopes": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/ExchangeEnvelope"
+            }
+          }
+        }
+      },
+			"ReceivedMessageBusMsg": {
+        "description": "Base class for the SBE message bus library wire formats.",
+        "type": "object",
+        "facade": false,
+        "properties": {
+          "payload": {
+            "type": "string",
+            "format": "byte"
+          },
+          "id": {
+            "type": "string"
+          },
+          "publishTime": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          }
+        }
+      },
+      
+      "SNSSQSWireObject": {
+        "description": "The SBE message bus library wire format for SnsSqs.",
+        "type": "object",
+        "extends": "#/components/schemas/ReceivedMessageBusMsg",
+        "facade": false,
+        "properties": {
+          "s3Key": {
+            "type": "string"
+          },
+          "s3BucketName": {
+            "type": "string"
+          }
+        }
+      },
+      
+      "UnforwardableMessage": {
+        "description": "A message from a 1.X pod which we can't process'.",
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "bytePayload": {
+            "type": "string",
+            "format": "byte"
+          },
+          "stringPayload": {
+            "type": "string"
+          },
+          "diagnosticMessage": {
+            "type": "string"
+          },
+          "stackTrace": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+			
+			
+			
+			"#This is unsorted content": [
+				"Comment"
+			],
+			
+			
+			
+			
+			
+			
+			
+			"SharedUserInfo": {
+				"description": "The bits of a user record which may be shared with other users.",
+				"type": "object",
+				"extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/VersionedObject",
+				"required": [
+					"prettyName",
+					"screenName"
+				],
+				"properties": {
+					"active": {
+						"type": "boolean"
+					},
+					"assetClass": {
+						"type": "array",
+						"x-canon-cardinality": "SET",
+						"items": {
+							"type": "string"
+						}
+					},
+					"company": {
+						"type": "string"
+					},
+					"deptName": {
+						"type": "string"
+					},
+					"divName": {
+						"type": "string"
+					},
+					"emailAddress": {
+						"type": "string",
+						"format": "email"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"id": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+					},
+					"imageUrl": {
+						"type": "string",
+						"format": "url"
+					},
+					"imageUrlSmall": {
+						"type": "string",
+						"format": "url"
+					},
+					"industry": {
+						"type": "array",
+						"x-canon-cardinality": "SET",
+						"items": {
+							"type": "string"
+						}
+					},
+					"jobFunction": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"mobileNumber": {
+						"type": "string",
+						"format": "phone"
+					},
+					"prettyName": {
+						"type": "string"
+					},
+					"screenName": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"userType": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"workPhone": {
+						"type": "string",
+						"format": "phone"
+					}
+				}
+			},
+			"PrivateUserInfo": {
+				"description": "The bits of a user record which are not shared with other users.",
+				"type": "object",
+				"extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/VersionedObject",
+				"properties": {
+					"createdBy": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+					},
+					"entitlement": {
+						"type": "array",
+						"x-canon-cardinality": "SET",
+						"items": {
+							"$ref": "#/components/schemas/Entitlement"
+						}
+					},
+					"roles": {
+						"type": "array",
+						"x-canon-cardinality": "SET",
+						"items": {
+							"$ref": "#/components/schemas/Role"
+						}
+					},
+					"samlId": {
+						"type": "string"
+					},
+					"source": {
+						"type": "string"
+					},
+					"verifiedForBadge": {
+						"type": "boolean"
+					}
+				}
+			},
+			"Venue": {
+				"description": "A venue, chatroom, MIM or IM.",
+				"type": "object",
+				"extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/VersionedObject",
+				"facade": false,
+				"properties": {
+					"createdBy": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+					},
+					"threadId": {
+						"$ref": "#/components/schemas/ThreadId"
+					}
+				}
+			},
+          "CryptoRotationInfo": {
+            "description": "This is used by podInternalApi",
+            "type": "object",
+            "properties": {
+              "acceptedRotationId": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+              },
+              "acceptedRotationRange": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+              },
+              "retiredRotationId": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+              }
+            }
+          },
+          "StreamType": {
+            "description": "Stream type",
+            "type": "string",
+            "enum": [
+              "ROOM",
+              "MIM",
+              "IM",
+              "MEETING",
+              "POST"
+            ]
+          },
+          "StreamState": {
+            "description": "Stream states",
+            "type": "string",
+            "enum": [
+              "NEGOTIATION",
+              "CREATED",
+              "ACTIVE",
+              "INACTIVE",
+              "DESTROYED"
+            ]
+          },
+          "#StreamMembership": {
+            "description": "Stream membership object",
+            "type": "object",
+            "properties": {
+              "owner": {
+                "description": "If the member is owner of the room",
+                "type": "boolean"
+              },
+              "joinDate": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+              },
+              "userBaseHash": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+              }
+            }
+          },
+          "#StreamMembers": {
+            "type": "object",
+            "description": "Representation of all stream members",
+            "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+            "properties": {
+              "members": {
+                "type": "array",
+                "x-canon-cardinality": "LIST",
+                "items": {
+                  "$ref": "#/components/schemas/StreamMembership"
+                }
+              }
+            }
+          },
+          "Stream": {
+            "description": "Stream object",
+            "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+            "type": "object",
+            "facade": true,
+            "properties": {
+              "copyDisabled": {
+                "description": "If members are allowed to copy message from stream",
+                "type": "boolean"
+              },
+              "creationDate": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+              },
+              "creatorId": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              },
+              "#cryptoRotationInfo": {
+                "$ref": "#/components/schemas/CryptoRotationInfo"
+              },
+              "description": {
+                "description": "Stream description",
+                "type": "string"
+              },
+              "crossPod": {
+                "description": "If the stream is cross pod",
+                "type": "boolean"
+              },
+              "discoverable": {
+                "description": "Show chat in search",
+                "type": "boolean"
+              },
+              "externalOwned": {
+                "description": "If the streams belongs to other pod",
+                "type": "boolean"
+              },
+              "locked": {
+                "description": "If the stream is locked",
+                "type": "boolean"
+              },
+              "publicRoom": {
+                "description": "If the stream is a public room",
+                "type": "boolean"
+              },
+              "readOnly": {
+                "description": "If the stream is readonly, i.e. only creator can send messages to stream ",
+                "type": "boolean"
+              },
+              "keywords": {
+                "description": "List of keywords",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "lastDisabled": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+              },
+              "lockDate": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+              },
+              "meetingId": {
+                "description": "The id of the meeting associated with this stream, only used for meeting types",
+                "type": "string"
+              },
+              "memberAddUserEnabled": {
+                "description": "If members can add people",
+                "type": "boolean"
+              },
+              "multiLateral": {
+                "description": "Stream belongs to more than one pod",
+                "type": "boolean"
+              },
+              "name": {
+                "description": "Stream name",
+                "type": "string"
+              },
+              "ownerPodId": {
+                "description": "Id of the pod which created the stream",
+                "type": "integer",
+                "format": "int64"
+              },
+              "ownerPodName": {
+                "description": "Name of the pod which created the stream",
+                "type": "string"
+              },
+              "parentStreamId": {
+                "$ref": "#/components/schemas/ThreadIdObject"
+              },
+              "podDistributionHistory": {
+                "description": "List of companies, in a xpod stream, which were or are member of this stream",
+                "type": "array",
+                "x-canon-cardinality": "SET",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "podDistributionList": {
+                "description": "List of companies, in a xpod stream, which currently are member of this stream",
+                "type": "array",
+                "x-canon-cardinality": "SET",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "podRestrictionList": {
+                "description": "",
+                "type": "array",
+                "x-canon-cardinality": "SET",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "sendMessageDisabled": {
+                "description": "",
+                "type": "boolean"
+              },
+              "sendMessageDisabledReasonCode": {
+                "description": "",
+                "type": "string"
+              },
+              "shareHistoryEnabled": {
+                "description": "If new members can view history",
+                "type": "boolean"
+              },
+              "state": {
+                "$ref": "#/components/schemas/StreamState"
+              },
+              "streamId": {
+                "$ref": "#/components/schemas/ThreadId"
+              },
+              "type": {
+                "$ref": "#/components/schemas/StreamType"
+              },
+              "largeStream": {
+                "description": "Tell whether is a large room or not",
+                "type": "boolean"
+              }
+            }
+          },
+          "WrappedAccountKey": {
+            "description": "A Symphony wrapped account key",
+            "type": "object",
+            "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+            "properties": {
+                "certId": {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CertificateId"
+                },
+                "kdfVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "keyId": {
+                    "type": "string",
+                    "format": "byte"
+                },
+                "relaySignature": {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+                },
+                "rotationId": {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+                },
+                "userId": {
+                  "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "wrappedKey": {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+                }
+            }
+        },
+        "WrappedContentKey": {
+            "description": "A Symphony wrapped content key",
+            "type": "object",
+            "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+            "properties": {
+                "kdfVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "keyId": {
+                    "type": "string",
+                    "format": "byte"
+                },
+                "relaySignature": {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+                },
+                "rotationId": {
+                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+                },
+                "userId": {
+                  "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+                },
+                "threadId": {
+                  "$ref": "#/components/schemas/ThreadId"
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "wrappedKey": {
+                   "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+                }
+            }
+          },
+          "AuthenticationKey": {
+            "description": "Authentication Key of the user based on AuthenticationKey",
+            "type": "object",
+            "properties": {
+              "currentKey": {
+                "type": "string"
+              },
+              "previousKey": {
+                "type": "string"
+              },
+              "previousKeyExpirationDate": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+              }
+            }
+          },
+          "UserEntitlementMap": {
+            "description": "An user entitlement map as seen in IMaestroUser",
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "boolean"
+              }
+            }
+          },
+          "BaseUser": {
+            "description": "A subset representation of the Symphony Maestro User",
+            "type": "object",
+            "facade": true,
+            "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+            "properties": {
+              "userId": {
+                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              },
+              "username": {
+                "description": "The complete name of the user",
+                "type": "string"
+              },
+              "emailAddress": {
+                "description": "Email address of the user",
+                "type": "string"
+              },
+
+              "prettyName": {
+                "description": "Pretty name of the user",
+                "type": "string"
+              },
+              "surname": {
+                "description": "Last name of the user",
+                "type": "string"
+              },
+              "firstName": {
+                "description": "First name of the user",
+                "type": "string"
+              },
+
+              "title": {
+                "type": "string"
+              },
+              "person": {
+                "description": "Tells whether the user is a person(end user) or service account",
+                "type": "boolean"
+              },
+              "company": {
+                "description": "Company name that the user belongs to",
+                "type": "string"
+              },
+              "isCrossPodUser": {
+                "description": "Tells whether the user is from another POD or not",
+                "type": "boolean"
+              }
+            }
+          }
+		}
+	}
+}

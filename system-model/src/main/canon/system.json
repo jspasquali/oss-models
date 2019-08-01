@@ -1,0 +1,570 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Object Model System Types",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.system",
+	"version": "1.0",
+	"basePath": "/object/system/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.system.canon",
+		"javaFacadePackage": "com.symphony.oss.models.system.canon.facade"
+	},
+  "methods": {
+    "/feeds/{name}": {
+      "parameters": {
+        "name": {
+          "in": "path",
+          "description": "Name of the feed",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch items from the feed",
+        "operationId": "readFeed",
+        "parameters": {
+          "limit": {
+            "in": "query",
+            "description": "How many items to return at one time (max 100)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "response": {
+          "required": false,
+          "multiple": true,
+          "schema": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalObject"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create the feed and subscribe to sequences.",
+        "operationId": "createFeed",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/SubscriptionRequest"
+          }
+        },
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Feed"
+          }
+        }
+      }
+    },
+    "/feeds/{name}/metadata": {
+      "parameters": {
+        "name": {
+          "in": "path",
+          "description": "Name of the feed",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      },
+      "post": {
+        "summary": "Set subscription metadata.",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/SubscriptionMetadataRequest"
+          }
+        }
+      }
+    },
+    "/credentials": {
+      "post": {
+        "summary": "Save the given credential.",
+        "operationId": "saveCredential",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/SaveCredentialRequest"
+          }
+        }
+      }
+    },
+    "/principals/estsablish": {
+      "post": {
+        "summary": "Get or create a principal",
+        "operationId": "establish",
+        "payload": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/EstablishPrincipalRequest"
+          }
+        },
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/EstablishPrincipalResponse"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "ServiceComponentId": {
+        "description": "The ID object for a service component.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodFundamentalId",
+        "required": [
+          "serviceId"
+        ],
+        "properties": {
+          "serviceId": {
+            "type": "string"
+          },
+          "serviceComponentId": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceComponent": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "required": [
+          "serviceId"
+        ],
+        "properties": {
+          "serviceId": {
+            "type": "string"
+          },
+          "serviceComponentId": {
+            "type": "string"
+          },
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          }
+        }
+      },
+      "TwillioServiceComponent": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "extends": "#/components/schemas/ServiceComponent",
+        "required": [
+          "accountSid",
+          "authToken"
+        ],
+        "properties": {
+          "accountSid": {
+            "type": "string"
+          },
+          "authToken": {
+            "type": "string"
+          }
+        }
+      },
+      "FeedId": {
+        "description": "The ID object for a feed.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ContentIdObject",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "FeedType": {
+        "type": "string",
+        "description": "The type of a feed.",
+        "enum": [
+          "FEED",
+          "GATEWAY",
+          "EXTERNAL_GATEWAY"
+        ]
+      },
+      "Feed": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FeedType"
+          },
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "principalBaseHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "queueName": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionRequest": {
+        "type": "object",
+        "description": "Request to create a feed and/or subscription.",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FeedType"
+          },
+          "sequences": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            }
+          }
+        }
+      },
+      "SubscriptionMetadataRequest": {
+        "type": "object",
+        "description": "Request to create subscription metadata.",
+        "properties": {
+          "metadata": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/SignedApplicationObject"
+          },
+          "sequences": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            }
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Member",
+        "facade": true,
+        "builderFacade": true,
+        "description": "A feed subscription.",
+        "properties": {
+          "queueName": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionMetadata": {
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalPayload",
+        "description": "Abstract superclass for feed metadata.",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FeedType"
+          },
+          "sequences": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            }
+          }
+        }
+      },
+      "GatewayMetadata": {
+        "type": "object",
+        "extends": "#/components/schemas/SubscriptionMetadata",
+        "description": "Metadata for a gateway.",
+        "required": [
+          "cipherSuiteId",
+          "encodedPrivateKey",
+          "userName"
+        ],
+        "properties": {
+          "cipherSuiteId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+          },
+          "encodedPrivateKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "userName": {
+            "type": "string"
+          }
+        }
+      },
+      "SmsGatewayMetadata": {
+        "type": "object",
+        "extends": "#/components/schemas/GatewayMetadata",
+        "description": "Metadata for an SMS gateway.",
+        "required": [
+          "phoneNumber"
+        ],
+        "properties": {
+          "phoneNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "SaveCredentialRequest": {
+        "type": "object",
+        "required": [
+          "cipherSuiteId",
+          "encodedPrivateKey",
+          "userName"
+        ],
+        "properties": {
+          "cipherSuiteId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+          },
+          "encodedPrivateKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "userName": {
+            "type": "string"
+          }
+        }
+      },
+      "EstablishPrincipalRequest": {
+        "type": "object",
+        "required": [
+          "cipherSuiteId",
+          "encodedExchangeKey",
+          "encodedSigningKey"
+        ],
+        "properties": {
+          "cipherSuiteId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+          },
+          "encodedExchangeKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPublicKey"
+          },
+          "encodedSigningKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPublicKey"
+          }
+        }
+      },
+      "EstablishPrincipalResponse": {
+        "type": "object",
+        "required": [
+          "principal"
+        ],
+        "properties": {
+          "principal": {
+            "$ref": "#/components/schemas/Principal"
+          },
+          "exchangeKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalObject"
+          },
+          "signingKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalObject"
+          }
+        }
+      },
+      
+      "AuthenticationCredential": {
+        "type": "object",
+        "facade": true,
+        "description": "A secret credential which can be used to authenticate to a Pod public API.",
+        "required": [
+          "principalBaseHash",
+          "encodedPrivateKey",
+          "environmentId",
+          "userName"
+        ],
+        "properties": {
+          "principalBaseHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "encodedPrivateKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "cipherSuiteId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+          },
+          "environmentId": {
+            "type": "string"
+          },
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "userName": {
+            "type": "string"
+          }
+        }
+      },
+			"PrincipalType": {
+				"type": "string",
+				"description": "The type of a principal.",
+				"enum": [
+					"ENVIRONMENT_OPERATING",
+					"POD_OPERATING",
+					"USER",
+					"SERVICE_ACCOUNT"
+				]
+			},
+			"PrincipalContentId": {
+        "type": "string",
+        "description": "Special types for principal related ContentId.",
+        "enum": [
+          "DATAFEED",
+          "MENTIONS",
+          "SECURITY_CONTEXT"
+        ]
+      },
+			"PrincipalInfo": {
+				"type": "object",
+				"required": [
+					"displayName"
+				],
+				"properties": {
+					"displayName": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/DisplayName"
+					},
+					"emailAddress": {
+						"type": "string",
+						"format": "email"
+					}
+				}
+			},
+			"Principal": {
+				"type": "object",
+				"facade": true,
+        "builderFacade": true,
+				"extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+				"properties": {
+					"principalType": {
+						"$ref": "#/components/schemas/PrincipalType"
+					},
+					"environmentId": {
+						"type": "string"
+					},
+					"podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "legacyUserId": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+					},
+          "exchangeKeySequenceHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "signingKeySequenceHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          }
+				}
+			},
+      "PodIdObject": {
+        "description": "The ID object for a pod.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodFundamentalId",
+        "properties": {
+        }
+      },
+      "EnvironmentIdObject": {
+        "description": "The ID object for the one and only Environment object.",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalId",
+        "properties": {
+        }
+      },
+      "Environment": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "required": [
+          "environmentId",
+          "securityContextHash"
+        ],
+        "description": "The environment object, the root of the config structure, base hash is always InferredHashFactory.environment(). The contentSequence of this object is the list of realms in this environment.",
+        "properties": {
+          "environmentId": {
+            "type": "string"
+          },
+          "securityContextHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "operatingPrincipalHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "podsSequenceHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "principalsSequenceHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          }
+        }
+      },
+			"PodInfo": {
+				"type": "object",
+				"required": [
+					"displayName"
+				],
+				"properties": {
+					"displayName": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/DisplayName"
+					}
+				}
+			},
+			"Pod": {
+				"type": "object",
+				"facade": true,
+        "builderFacade": true,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+				"#required": [
+					"rootSecurityContextHash",
+					"publicSecurityContextHash"
+				],
+				"description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
+				"properties": {
+					"podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "operatingPrincipalHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "#REMOVEDcontentSequenceHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "principalsSequenceHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "cipherSuiteId": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+					},
+					"operatingSecurityContextHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "rootSecurityContextHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "publicSecurityContextHash": {
+						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+					},
+					"podUrl": {
+						"type": "string",
+						"format": "url"
+					},
+          "podCertificate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+          },
+          "purgeTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          }
+				}
+			}
+		}
+	}
+}

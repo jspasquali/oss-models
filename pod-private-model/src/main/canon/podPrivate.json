@@ -1,0 +1,96 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Pod Private Model - Methods for use only by members of the pod.",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.podfundamental",
+	"version": "1.0",
+	"basePath": "/object/pod/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.podfundamental.canon",
+		"javaFacadePackage": "com.symphony.oss.models.podfundamental.canon.facade"
+	},
+	"methods": {
+    "/securityContexts/{objectHash}": {
+      "parameters": {
+        "objectHash": {
+          "in": "path",
+          "required": true,
+          "description": "The id of the securityContext to retrieve",
+          "schema": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "get": {
+        "summary": "Return an open securityContext",
+        "tags": [
+          "securityContexts"
+        ],
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/OpenSecurityContextInfo"
+          }
+        }
+      }
+    },
+    "/signingInfo": {
+      "get": {
+        "summary": "Read the pod Security Context, signing key and podId",
+        "operationId": "getSigningInfo",
+        "tags": [
+          "pod"
+        ],
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/SigningInfo"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "SigningInfo": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": false,
+        "required": [
+          "encodedPrivateContextKey",
+          "securityContext",
+          "encodedPrivateSigningKey",
+          "signingKey",
+          "podId"
+        ],
+        "properties": {
+          "encodedPrivateContextKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "encodedSecretContextKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Base64SecretKey"
+          },
+          "securityContext": {
+            "type": "string",
+            "format": "byte"
+          },
+          "encodedPrivateSigningKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "signingKey": {
+            "type": "string",
+            "format": "byte"
+          },
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          }
+        }
+      }
+		}
+	}
+}

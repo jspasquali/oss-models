@@ -1,0 +1,90 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony Key Manager Internal API - Not supported for customer use.",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.internal.km",
+  "version": "1.0",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.internal.km.canon",
+		"javaFacadePackage": "com.symphony.oss.models.internal.km.canon.facade"
+	},
+  "methods": {
+    "/keys/me": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/UserKeys"
+          }
+        }
+      }
+    },
+    "/keys/entityKey": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/WrappedEntityKey"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "UserKeys": {
+        "type": "object",
+        "facade": true,
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "publicKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPublicKey"
+          },
+          "privateKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+          },
+          "certificate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+          },
+          "publicKeySignature": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+          },
+          "privateKeySignature": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+          }
+        }
+      },
+      "WrappedEntityKey": {
+        "type": "object",
+        "facade": false,
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "entityKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+          }
+        }
+      }
+		}
+	}
+}

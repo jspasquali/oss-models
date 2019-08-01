@@ -1,0 +1,348 @@
+{
+	"status": "OK",
+	"userName": 11407433176972,
+	"prettyName": "Bruce Test",
+	"emailAddress": "bruce.test@symphony.com",
+	"imageUrl": "https://s3.amazonaws.com/user-pics-demo/small/symphony_small.png",
+	"imageUrlSmall": "https://s3.amazonaws.com/user-pics-demo/creepy/symphony_creepy.png",
+	"images": {
+		
+	},
+	"agreementPromptRequired": true,
+	"nextAgreementAcceptTime": 1529844818000,
+	"oneTimeUAPromptRequired": false,
+	"myCurrentThreadId": "xYJ1qj1C6VS1lToV+lJX8X///pv8QblFdA==",
+	"socialConnectors": [],
+	"cryptoRotationInfo": {
+		"acceptedRotationId": 0,
+		"acceptedRotationRange": 1,
+		"retiredRotationId": -1
+	},
+	"roomParticipations": [
+		{
+			"memberCount": 1,
+			"requested": false,
+			"userId": 11407433176972,
+			"userPrettyName": "Bruce Test",
+			"crossPodUser": false,
+			"userJoinDate": 1529514001693,
+			"userIsOwner": true,
+			"hidden": false,
+			"description": "Bruce",
+			"creationDate": 1529514001578,
+			"threadId": "LfLSIzX5F21evqvJGxB33X///pvh3HtVdA==",
+			"active": true,
+			"discoverable": true,
+			"copyDisabled": false,
+			"podDistributionList": [
+				166
+			],
+			"cryptoRotationInfo": {
+				"acceptedRotationId": 0,
+				"acceptedRotationRange": 1,
+				"retiredRotationId": -1
+			},
+			"publicRoom": true,
+			"creator": 11407433176972,
+			"roomType": "CHATROOM",
+			"distributionLists": [
+				166
+			],
+			"senderAnonymous": false,
+			"memberAddUserEnabled": true,
+			"forDisplay": false,
+			"allowExternal": false,
+			"moderated": false,
+			"nameKey": "bruceroom",
+			"creatorPrettyName": "Bruce Test",
+			"removalDateAfterLastMessage": 1532106001578,
+			"shareHistoryEnabled": true,
+			"largeStream": false,
+			"restrictedDistributionList": false,
+			"podRestrictionList": [],
+			"podDistributionHistory": [
+				166
+			],
+			"lockDate": -1,
+			"lastDisabled": -1,
+			"futureDeactivationDate": -1,
+			"multiLateralRoom": false,
+			"crossPodRoom": false,
+			"name": "Bruce Room",
+			"readOnly": false,
+			"locked": false
+		}
+	],
+	"filters": [
+		{
+			"createDate": 0,
+			"_id": "5b23c63a43070709487ff4b3",
+			"userId": 11407433176972,
+			"name": "Following",
+			"filterType": "FOLLOWING",
+			"ruleGroup": {
+				"operator": "ANY",
+				"rules": []
+			},
+			"editable": true,
+			"searchable": false,
+			"pushed": false,
+			"anyoneCanPublishContent": true,
+			"contentCreatorWhitelist": [],
+			"receiverWhitelist": []
+		},
+		{
+			"createDate": 0,
+			"_id": "5b23c63a43070709487ff4b4",
+			"userId": 11407433176972,
+			"name": "Keywords",
+			"filterType": "KEYWORD",
+			"ruleGroup": {
+				"operator": "ANY",
+				"rules": []
+			},
+			"editable": true,
+			"searchable": false,
+			"pushed": false,
+			"anyoneCanPublishContent": true,
+			"contentCreatorWhitelist": [],
+			"receiverWhitelist": []
+		},
+		{
+			"createDate": 0,
+			"_id": "5b23c63a43070709487ff4b5",
+			"userId": 11407433176972,
+			"name": "Mentions",
+			"filterType": "MENTIONS",
+			"ruleGroup": {
+				"operator": "ANY",
+				"rules": [
+					{
+						"definitionType": "USER_MENTION",
+						"text": "bruce",
+						"id": "11407433176972",
+						"attributes": null,
+						"connectorId": "lc",
+						"imageUrl": null,
+						"imageUrlSmall": null,
+						"createDate": 1529071162371
+					}
+				]
+			},
+			"editable": false,
+			"searchable": false,
+			"pushed": false,
+			"anyoneCanPublishContent": true,
+			"contentCreatorWhitelist": [],
+			"receiverWhitelist": []
+		}
+	],
+	"channels": [],
+	"pinnedChats": [
+		{
+			"userIds": [
+				11407433176972,
+				11407433176973
+			],
+			"hiddenForUserIds": null,
+			"userPrettyNames": [
+				"Bruce Test",
+				"Andrew Test"
+			],
+			"userViewConfig": {
+				"config": {
+					
+				},
+				"userId": 11407433176972,
+				"viewId": "H+tbVdi41ObtCV/ijKU53H///pvyMK8ddA==",
+				"clientType": "DESKTOP",
+				"pinnedChat": true,
+				"viewType": "IM"
+			},
+			"isHidden": false,
+			"muteStream": null,
+			"creationDate": 1529240047842,
+			"threadId": "H+tbVdi41ObtCV/ijKU53H///pvyMK8ddA==",
+			"active": true,
+			"crossPod": false,
+			"cryptoRotationInfo": {
+				"acceptedRotationId": 0,
+				"acceptedRotationRange": 1,
+				"retiredRotationId": -1
+			},
+			"creator": 11407433176972,
+			"userIdKey": "11407433176972,11407433176973",
+			"sendMessageDisabled": false,
+			"sendMessageDisabledReasonCode": null
+		},
+		{
+			"userIds": [
+				11407433176972,
+				11407433183256
+			],
+			"hiddenForUserIds": null,
+			"userPrettyNames": [
+				"Bruce Test",
+				"Bruce Bot"
+			],
+			"userViewConfig": {
+				"config": {
+					
+				},
+				"userId": 11407433176972,
+				"viewId": "aIZ5GQyM01W4hFWXTlVExn///pdGlsasdA==",
+				"clientType": "DESKTOP",
+				"pinnedChat": true,
+				"viewType": "IM"
+			},
+			"isHidden": false,
+			"muteStream": null,
+			"creationDate": 1549298907482,
+			"threadId": "aIZ5GQyM01W4hFWXTlVExn///pdGlsasdA==",
+			"active": true,
+			"crossPod": false,
+			"cryptoRotationInfo": {
+				"acceptedRotationId": 0,
+				"acceptedRotationRange": 1,
+				"retiredRotationId": -1
+			},
+			"creator": 11407433176972,
+			"userIdKey": "11407433176972,11407433183256",
+			"sendMessageDisabled": false,
+			"sendMessageDisabledReasonCode": null
+		}
+	],
+	"userViewConfigs": [
+		{
+			"config": {
+				
+			},
+			"userId": 11407433176972,
+			"viewId": "H+tbVdi41ObtCV/ijKU53H///pvyMK8ddA==",
+			"clientType": "DESKTOP",
+			"pinnedChat": true,
+			"viewType": "IM"
+		},
+		{
+			"config": {
+				
+			},
+			"userId": 11407433176972,
+			"viewId": "aIZ5GQyM01W4hFWXTlVExn///pdGlsasdA==",
+			"clientType": "DESKTOP",
+			"pinnedChat": true,
+			"viewType": "IM"
+		}
+	],
+	"entitlement": {
+		"imReadEnabled": true,
+		"canUseInternalAudio": true,
+		"canUseInternalVideo": true,
+		"canManageSignalSubscription": true,
+		"postWriteEnabled": true,
+		"roomReadEnabled": true,
+		"canJoinMultiLateralRoom": true,
+		"canProjectInternalScreenShareMobile": false,
+		"isCrossPodEnabled": true,
+		"canShareFilesExternally": true,
+		"canCreatePublicRoom": true,
+		"canCreatePushedSignals": true,
+		"mustBeRecorded": false,
+		"isExternalRoomEnabled": true,
+		"imWriteEnabled": true,
+		"roomWriteEnabled": true,
+		"canIntegrateEmail": false,
+		"canUseInternalVideoMobile": false,
+		"isExternalIMEnabled": true,
+		"postReadEnabled": true,
+		"canCreateMultiLateralRoom": true,
+		"canViewInternalScreenShare": true,
+		"isImageCastingEnabled": false,
+		"callEnabled": false,
+		"isImageCastingPreferred": false,
+		"sendFilesEnabled": true,
+		"canChatWithSponsorPod": false,
+		"canUseInternalAudioMobile": false,
+		"canUseCompactMode": true,
+		"canProjectInternalScreenShare": true,
+		"canUseDialIn": false,
+		"canUseFirehose": false,
+		"isScreenSharingEnabled": false,
+		"delegatesEnabled": true,
+		"isAudioVideoEnabled": true,
+		"canUpdateAvatar": true,
+		"canViewInternalScreenShareMobile": false
+	},
+	"systemAccountOwner": false,
+	"config": {
+		"notificationsOn": true,
+		"showJoinedLeftMessage": false,
+		"show24HrTime": "StandardTime",
+		"showAvatarInChat": false,
+		"fontSize": "NORMAL",
+		"enableCondensedView": false,
+		"quickActionHotKey": [
+			"alt+shift",
+			"option+shift"
+		],
+		"viewSettings": {
+			
+		},
+		"appWideViewConfigs": {
+			"DESKTOP": {
+				"CHANNEL": {
+					"showNotification": true,
+					"blink": false,
+					"persist": false,
+					"notificationColor": "#b5616a",
+					"playSound": true,
+					"showStreamAlerts": false
+				},
+				"CHATROOM": {
+					"showNotification": true,
+					"blink": false,
+					"persist": false,
+					"notificationColor": "#b5616a",
+					"disableInput": false,
+					"playSound": true,
+					"showStreamAlerts": false
+				},
+				"FILTER": {
+					"showNotification": true,
+					"blink": false,
+					"persist": false,
+					"notificationColor": "#b5616a",
+					"playSound": true,
+					"showStreamAlerts": false
+				},
+				"IM": {
+					"showNotification": true,
+					"blink": false,
+					"persist": false,
+					"notificationColor": "#b5616a",
+					"disableInput": false,
+					"playSound": true,
+					"showStreamAlerts": true
+				},
+				"APPLICATION": {
+					"showNotification": true,
+					"blink": true,
+					"persist": false,
+					"notificationColor": "#b5616a",
+					"disableInput": false,
+					"playSound": true,
+					"showStreamAlerts": true
+				},
+				"RTE": {
+					"HINTS": {
+						"hashtag": 99,
+						"formatting": 3
+					}
+				}
+			}
+		}
+	},
+	"fileSharingDisclaimerRequired": false,
+	"compliancePortalOfficer": false,
+	"compliancePortalSuperUser": false
+}

@@ -1,0 +1,590 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Internal Pod Model - Not supported for customer use.",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.internal.pod",
+  "version": "1.0",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.internal.pod.canon",
+		"javaFacadePackage": "com.symphony.oss.models.internal.pod.canon.facade"
+	},
+  "methods": {
+    "/webcontroller/ingestor/v2/MessageService": {
+      "post": {
+        "tags": [
+          "Messages"
+        ],
+        "parameters": {
+          "messagepayload": {
+            "description": "The ID of the customer of returned invoices",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SendMessageV2Response"
+          }
+        }
+      }
+    },
+    "/webcontroller/keystore/wrappedAccountKeys/one": {
+      "get": {
+        "parameters": {
+          "certId": {
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CertificateId"
+            }
+          },
+          "rotationId": {
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+            }
+          },
+          "userId": {
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            }
+          }
+        },
+        "tags": [
+          "Crypto"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/WrappedAccountKeyResponse"
+          }
+        }
+      }
+    },
+    "/keystore/wrappedContentKeys/one": {
+      "get": {
+        "parameters": {
+          "threadId": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+            }
+          },
+          "rotationId": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+            }
+          },
+          "userId": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            }
+          }
+        },
+        "tags": [
+          "Crypto"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/WrappedContentKeyResponse"
+          }
+        }
+      }
+    },
+    "/webcontroller/public/podInfo": {
+      "get": {
+        "tags": [
+          "Session"
+        ],
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PodInfoResponse"
+          }
+        }
+      }
+    },
+    "/keystore/cryptoRotationInfo/multiple": {
+      "post": {
+        "tags": [
+          "Crypto"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+          }
+        },
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/CryptoRotationInfoResponse"
+          }
+        }
+      }
+    },
+    "/webcontroller/maestro/Account": {
+      "get": {
+        "parameters": {
+          "clienttype": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "hasRoomParticipations": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        },
+        "tags": [
+          "Account"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountInfo"
+          }
+        }
+      }
+    },
+    "/webcontroller/dataquery/retrieveMessagePayload": {
+      "get": {
+        "parameters": {
+          "messageId": {
+            "description": "ID of the required message.",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "Messages"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/SocialMessage"
+          }
+        }
+      }
+    },
+    "/dataquery/api/v3/messages/thread": {
+      "get": {
+        "parameters": {
+          "id": {
+            "description": "ID of the required thread.",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "from": {
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "limit": {
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "excludeFields": {
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "Messages"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ThreadOfMessages"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "SendMessageV2Response": {
+        "type": "object",
+        "properties": {
+          "objectHash": {
+            "type": "string",
+            "format": "byte"
+          },
+          "status": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ObjectStatus"
+          }
+        }
+      },
+      "WrappedContentKeyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WrappedContentKey"
+          }
+        }
+      },
+      
+      "WrappedContentKey": {
+        "description": "A Symphony wrapped content key",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "properties": {
+          "relaySignature": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+          },
+          "rotationId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+          },
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wrappedContentKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+          }
+        }
+      },
+        
+      "WrappedAccountKeyResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/WrappedAccountKey"
+          }
+        }
+      },
+      
+      "WrappedAccountKey": {
+        "description": "A Symphony wrapped content key",
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "properties": {
+          "relaySignature": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+          },
+          "rotationId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+          },
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wrappedAccountKey": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+          }
+        }
+      },
+        
+      "CryptoRotationInfoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StreamCryptoRotationInfo"
+            }
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "totalMatched": {
+            "type": "integer"
+          }
+        }
+      },
+      "StreamCryptoRotationInfo": {
+        "type": "object",
+        "properties": {
+          "cryptoRotationInfo": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/CryptoRotationInfo"
+          },
+          "streamId": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+          }
+        }
+      },
+      "PodInfoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PodInfo"
+          }
+        }
+      },
+      "PodInfo": {
+        "type": "object",
+        "properties": {
+          "podId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "externalPodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "baseUrl": {
+            "type": "string"
+          },
+          "keyManagerUrl": {
+            "type": "string"
+          },
+          "defaultMeetingViewMode": {
+            "type": "string"
+          },
+          "featureRtcSwitchMeetingViewModeAvailable": {
+            "type": "boolean"
+          },
+          "publicPod": {
+            "type": "boolean"
+          },
+          "pubnubPublishKey": {
+            "type": "string"
+          },
+          "pubnubSubscribeKey": {
+            "type": "string"
+          },
+          "currentRotationStarted": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "rotationPeriod": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "currentRotationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "mimMaxCompanyAllowed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomMaxCompanyAllowed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "multiLateralRoomMaxCompanyAllowed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "keywordSearchAcrossRoomsMaxKeywordsAllowed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "searchStreamIdBatchSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "keywordSearchAcrossRoomsMaxRoomsAllowed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "searchMaxInMemoryStreams": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomSearchKeywordBatchSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "normalStreamSizeSystemLimit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limitLargeStreamJoinLeaveNotificationsEnabled": {
+            "type": "boolean"
+          },
+          "maxPermittedReceiptsInSearch": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "multiLateralRoomMaxUsersAllowed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sessionLifeSpanInHours": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxSessionsPerUser": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "#discovery": [
+            "map of string"
+          ],
+          "clientEventLoggingAllowed": {
+            "type": "boolean"
+          },
+          "memberBanningAvailable": {
+            "type": "boolean"
+          },
+          "roomLockingAvailable": {
+            "type": "boolean"
+          },
+          "sessionAuditTrailAvailable": {
+            "type": "boolean"
+          },
+          "comppKeywordSearchAcrossRoomsAvailable": {
+            "type": "boolean"
+          },
+          "featureRtcAudio": {
+            "type": "boolean"
+          },
+          "featureRtcVideo": {
+            "type": "boolean"
+          },
+          "featureRtcScreenSharing": {
+            "type": "boolean"
+          },
+          "featureRtcDoubleEncryption": {
+            "type": "boolean"
+          },
+          "featureRtcRecording": {
+            "type": "boolean"
+          },
+          "featureRtcDialIn": {
+            "type": "boolean"
+          },
+          "largeStreamReceiptsEnabled": {
+            "type": "boolean"
+          },
+          "emailService": {
+            "type": "string"
+          },
+          "featureElectronSearch": {
+            "type": "boolean"
+          },
+          "emailLookupService": {
+            "type": "string"
+          },
+          "logPerformanceACPortal": {
+            "type": "boolean"
+          },
+          "comppSearchIMsMIMsAvailable": {
+            "type": "boolean"
+          },
+          "maxConcurrentAttachmentDownloads": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "attachmentRetrySeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defaultRecommendLanguage": {
+            "type": "string"
+          },
+          "canShowHistory": {
+            "type": "boolean"
+          },
+          "cep": {
+            "type": "boolean"
+          },
+          "configurationType": {
+            "type": "string"
+          }
+        }
+      },
+      "AccountInfo": {
+        "type": "object",
+        "facade": true,
+        "properties": {
+          "myCurrentThreadId": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+          },
+          "prettyName": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cryptoRotationInfo": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/CryptoRotationInfo"
+          }
+        }
+      },
+      
+      "MessageEnvelope": {
+        "type": "object",
+        "properties": {
+          "isBookmarked": {
+            "type": "boolean"
+          },
+          "message": {
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/SocialMessage"
+          }
+        }
+      },
+      
+      "ThreadOfMessages": {
+        "description": "A set of messages from a thread.",
+        "type": "object",
+        "properties": {
+          "threadId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "envelopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageEnvelope"
+            }
+          }
+        }
+      }
+		}
+	}
+}
