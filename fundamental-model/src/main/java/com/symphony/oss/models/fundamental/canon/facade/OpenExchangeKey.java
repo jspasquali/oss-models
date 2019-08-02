@@ -174,66 +174,6 @@ public class OpenExchangeKey extends ExchangeKey implements IOpenExchangeKey
     return getCipherSuite().unwrap(wrappedKey, getPrivateKey());
   }
 
-  /**
-   * Create an unsigned ExchangeKey.
-   * 
-   * This should only be used for environment root objects.
-   * 
-   * @param exchangeKeyBuilder  A builder containing the key attributes.
-   * @param privateKey          The private key matching the public key provided in the builder.
-   * @return                    An open signing key object.
-   * 
-   * @Deprecated use Builder.
-   * <code>
-     
-     new OpenExchangeKey.Builder()
-        .withPrincipalHash(initialPrinicpalObject.getAbsoluteHash())
-        .withCipherSuiteId(cipherSuite_.getId())
-        .withEncodedPublicKey(exchangePublicKey)
-        .withPrivateKey(exchangeKeyPair.getPrivate())
-        .build()
-        ;
-        
-   * </code>
-   */
-  @Deprecated
-  public static IOpenExchangeKey createUnsigned(Builder exchangeKeyBuilder, PrivateKey privateKey)
-  {
-    IFundamentalObject exchangeKeyBlob = FundamentalObject.createUnsigned(exchangeKeyBuilder);
-    
-    return new OpenExchangeKey((IExchangeKey)exchangeKeyBlob.getPayload(), privateKey);
-  }
-
-  /**
-   * Create a signed ExchangeKey.
-   * 
-   * @param exchangeKeyBuilder  A builder containing the key attributes.
-   * @param privateKey          The private key matching the public key provided in the builder.
-   * @param signingKey          The key with which the returned object is to be signed.
-   * @return                    An open signing key object.
-   * 
-   * @Deprecated use Builder.
-   * <code>
-     
-     new OpenExchangeKey.Builder()
-        .withPrincipalHash(initialPrinicpalObject.getAbsoluteHash())
-        .withCipherSuiteId(cipherSuite_.getId())
-        .withEncodedPublicKey(exchangePublicKey)
-        .withPrivateKey(exchangeKeyPair.getPrivate())
-        .withSigningKey(signingKey_)
-        .build()
-        ;
-        
-   * </code>
-   */
-  @Deprecated
-  public static IOpenExchangeKey createSigned(Builder exchangeKeyBuilder, PrivateKey privateKey, IOpenSigningKey signingKey)
-  {
-    IFundamentalObject exchangeKeyBlob = FundamentalObject.createSigned(exchangeKeyBuilder, signingKey);
-    
-    return new OpenExchangeKey((IExchangeKey)exchangeKeyBlob.getPayload(), privateKey);
-  }
-
   public static IOpenExchangeKey deserialize(IExchangeKey exchangeKey, PrivateKey privateKey)
   {
     return new OpenExchangeKey(exchangeKey, privateKey);

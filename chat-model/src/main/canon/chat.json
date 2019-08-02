@@ -1534,13 +1534,13 @@
         }
       },
       "Statistic": {
-        "description": "There is a Map<String,String> in the java class which I have to ignore here...",
         "type": "object",
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "fromId": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
           },
+          "#attributes is a Map<String, Object> - can't be modelled here": [],
           "action": {
             "type": "string"
           },
