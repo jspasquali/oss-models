@@ -94,21 +94,6 @@
 
   <repositories>
     <repository>
-      <id>symphony</id>
-      <name>symphony releases</name>
-      <url>https://repo.symphony.com/artifactory/libs-release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>snapshots</id>
-      <url>https://repo.symphony.com/artifactory/libs-snapshot</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-    <repository>
       <id>sonatype-oss-public</id>
       <url>https://oss.sonatype.org/content/groups/public/</url>
       <releases>

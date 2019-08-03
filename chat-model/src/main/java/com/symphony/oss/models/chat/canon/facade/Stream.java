@@ -33,6 +33,7 @@ import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.chat.canon.IThreadIdObject;
+import com.symphony.oss.models.chat.canon.LiveCurrentMessage;
 import com.symphony.oss.models.chat.canon.StreamEntity;
 import com.symphony.oss.models.fundmental.canon.ContentIdObject;
 import com.symphony.oss.models.fundmental.canon.ContentIdType;

@@ -115,7 +115,7 @@
       <artifactId>canon-runtime-java</artifactId>
     </dependency>
 
-    <dependency>
+    <!-- <dependency>
       <groupId>com.symphony.protobuf</groupId>
       <artifactId>socialmessage</artifactId>
       <version>1.0.19</version>
@@ -137,7 +137,7 @@
          <artifactId>S2-protogen</artifactId>
        </exclusion>
       </exclusions>
-    </dependency>
+    </dependency> -->
 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

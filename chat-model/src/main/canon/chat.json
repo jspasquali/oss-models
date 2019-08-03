@@ -331,7 +331,7 @@
 				"description": "A livecurrent message as persisted in the DB.",
 				"type": "object",
         "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
-				"facade": true,
+				"facade": false,
 				"required": [
 					"version",
 					"messageId",
@@ -1457,7 +1457,7 @@
         ],
         "type": "object",
         "extends": "#/components/schemas/LiveCurrentMessage",
-        "facade": true,
+        "facade": false,
         "properties": {
           "protobuf": {
             "type": "string",
