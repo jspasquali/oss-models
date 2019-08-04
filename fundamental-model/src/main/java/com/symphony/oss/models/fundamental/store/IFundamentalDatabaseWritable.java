@@ -58,7 +58,7 @@ public interface IFundamentalDatabaseWritable extends IFundamentalDatabaseReadOn
   void save(IFundamentalObject instance, ITraceContext trace, List<INotification> notifications);
 
   /**
-   * Store the given fundamental IS, and publish a default notification on pubsub.
+   * Store the given fundamental ID, and publish a default notification on pubsub.
    * 
    * @param id        An ID object to be stored.
    * @param trace     A trace context.
@@ -66,6 +66,28 @@ public interface IFundamentalDatabaseWritable extends IFundamentalDatabaseReadOn
    * @return The generated FundamentalObject wrapper for the ID.
    */
   IFundamentalObject save(IFundamentalId id, ITraceContext trace);
+
+  /**
+   * Save the given object and its ID object.
+   * 
+   * Notifications are generated for both ID and object.
+   * 
+   * @param id                    An ID object.
+   * @param fundamentalObject     A VersionedObject whose baseHash is the absoluteHash of the given ID.
+   * @param trace                 A trace context.
+   */
+  void save(IFundamentalId id, IFundamentalObject fundamentalObject, ITraceContext trace);
+
+  /**
+   * Save the given object and its ID object.
+   * 
+   * @param id                    An ID object.
+   * @param fundamentalObject     A VersionedObject whose baseHash is the absoluteHash of the given ID.
+   * @param trace                 A trace context.
+   * @param objectNotifications   One or more Notifications for the object, a notification for the ID will be added.
+   */
+  void save(IFundamentalId id, IFundamentalObject fundamentalObject, ITraceContext trace,
+      List<INotification> objectNotifications);
 
   /**
    * Create a new version of the given existingVersion containing the values in the given updatedVersion.
@@ -112,6 +134,4 @@ public interface IFundamentalDatabaseWritable extends IFundamentalDatabaseReadOn
    */
   void saveIfNotExists(IFundamentalId id, IFundamentalObject fundamentalObject, ITraceContext trace,
       List<INotification> objectNotifications) throws ObjectExistsException;
-
-
 }

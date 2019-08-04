@@ -804,6 +804,9 @@
           },
           "subscriptionHash": {
             "$ref": "#/components/schemas/Hash"
+          },
+          "initialVersion": {
+              "type": "boolean"
           }
 				}
 			},

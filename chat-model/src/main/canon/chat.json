@@ -388,7 +388,7 @@
         "description": "A PresenceV1 livecurrent message.",
         "type": "object",
         "extends": "#/components/schemas/LiveCurrentMessage",
-        "facade": false,
+        "facade": true,
         "properties": {
           "userId": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
@@ -841,6 +841,7 @@
       "SocialMessage": {
         "type": "object",
         "extends": "#/components/schemas/BaseSocialMessage",
+        "facade": true,
         "properties": {
           "share": {
             "$ref": "#/components/schemas/MessageShare"

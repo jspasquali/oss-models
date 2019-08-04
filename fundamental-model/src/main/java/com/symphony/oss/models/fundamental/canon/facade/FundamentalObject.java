@@ -106,6 +106,7 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
   {
     protected Instant   createdDate_;
     protected Instant   purgeDate_;
+    protected Duration  purgeDuration_;
     
     protected AbstractFundamentalObjectBuilder(Class<B> type)
     {
@@ -140,7 +141,24 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
      */
     public B withPurgeDate(Instant purgeDate)
     {
+      purgeDuration_ = null;
       purgeDate_ = purgeDate;
+      
+      return self();
+    }
+    
+    /**
+     * Set the date when the object should be purged, as an offset from the current time.
+     * 
+     * @param amount  The amount of time.
+     * @param unit    The unit of time.
+     * 
+     * @return This (fluent method)
+     */
+    public B withPurgeTime(long amount, TemporalUnit unit)
+    {
+      purgeDate_ = null;
+      purgeDuration_ = Duration.of(amount, unit);
       
       return self();
     }
@@ -228,6 +246,9 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
           .withPodId(podId_)
           ;
       
+      if(purgeDate_ == null && purgeDuration_ != null)
+        purgeDate_ = createdDate_.plus(purgeDuration_);
+        
       if(purgeDate_ != null)
         builder.withPurgeDate(purgeDate_);
       
@@ -391,21 +412,6 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
       
       return self();
     }
-    
-    /**
-     * Set the date when the object should be purged, as an offset from the current time.
-     * 
-     * @param amount  The amount of time.
-     * @param unit    The unit of time.
-     * 
-     * @return This (fluent method)
-     */
-    public B withPurgeTime(long amount, TemporalUnit unit)
-    {
-      purgeDate_ = Instant.now().plus(Duration.of(amount, unit));
-      
-      return self();
-    }
 
     @Override
     public IFundamentalObject construct()
@@ -419,6 +425,8 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
           .withPayloadType(payload_.getCanonType())
           ;
       
+      if(purgeDate_ == null && purgeDuration_ != null)
+        purgeDate_ = createdDate_.plus(purgeDuration_);
       
       if(purgeDate_ != null)
         builder.withPurgeDate(purgeDate_);
@@ -528,21 +536,6 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
       
       return self();
     }
-    
-    /**
-     * Set the date when the object should be purged, as an offset from the current time.
-     * 
-     * @param amount  The amount of time.
-     * @param unit    The unit of time.
-     * 
-     * @return This (fluent method)
-     */
-    public B withPurgeTime(long amount, TemporalUnit unit)
-    {
-      purgeDate_ = Instant.now().plus(Duration.of(amount, unit));
-      
-      return self();
-    }
 
     @Override
     public IFundamentalObject construct()
@@ -555,6 +548,8 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
           .withPayloadType(payloadType_)
           ;
       
+      if(purgeDate_ == null && purgeDuration_ != null)
+        purgeDate_ = createdDate_.plus(purgeDuration_);
       
       if(purgeDate_ != null)
         builder.withPurgeDate(purgeDate_);
