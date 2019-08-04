@@ -514,8 +514,7 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
    */
   public static abstract class AbstractFundamentalObjectJsonPayloadBuilder<B extends AbstractFundamentalObjectJsonPayloadBuilder<B>> extends AbstractFundamentalObjectVersionedObjectBuilder<B>
   {
-    protected IJsonDomNode jsonPayload_;
-    protected String       payloadType_;
+    protected IEntity      payload_;
     protected PodId        podId_;
 
     protected AbstractFundamentalObjectJsonPayloadBuilder(Class<B> type)
@@ -544,8 +543,7 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
           .withCreatedDate(createdDate_)
           .withSequences(sequences_)
           .withPodId(podId_)
-          .withPayload(jsonPayload_)
-          .withPayloadType(payloadType_)
+          .withPayload(payload_)
           ;
       
       if(purgeDate_ == null && purgeDuration_ != null)
@@ -583,7 +581,7 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
     @Override
     protected void validate()
     {
-      if(jsonPayload_ == null)
+      if(payload_ == null)
         throw new IllegalStateException("Payload is required.");
       
       super.validate();
@@ -598,16 +596,17 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
      */
     public B withPayload(IEntity payload)
     {
-      jsonPayload_ = payload.getJsonObject();
-      payloadType_ = payload.getCanonType();
+      payload_ = payload;
       
       return self();
     }
     
     @Override
-    public B withPayload(IFundamentalPayload value)
+    public B withPayload(IFundamentalPayload payload)
     {
-      throw new IllegalStateException("An IJsonPayload is required.");
+      payload_ = payload;
+      
+      return self();
     }
   }
   

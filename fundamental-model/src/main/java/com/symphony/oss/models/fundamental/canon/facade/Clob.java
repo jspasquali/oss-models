@@ -27,6 +27,7 @@ package com.symphony.oss.models.fundamental.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
+import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.IJsonDomNode;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
@@ -44,6 +45,10 @@ import com.symphony.oss.models.fundmental.canon.IClobEntity;
 @Immutable
 public class Clob extends ClobEntity implements IClob
 {
+  private static final String PAYLOAD = "payload";
+  
+  private final IEntity payload_;
+  
   /**
    * Constructor from builder.
    * 
@@ -52,6 +57,8 @@ public class Clob extends ClobEntity implements IClob
   public Clob(AbstractClobBuilder<?,?> builder)
   {
     super(builder);
+    
+    payload_ = builder.payload_;
   }
   
   /**
@@ -63,6 +70,8 @@ public class Clob extends ClobEntity implements IClob
   public Clob(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    
+    payload_ = initPayload(modelRegistry);
   }
   
   /**
@@ -74,8 +83,15 @@ public class Clob extends ClobEntity implements IClob
   public Clob(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    
+    payload_ = initPayload(modelRegistry);
   }
    
+  private IEntity initPayload(IModelRegistry modelRegistry)
+  {
+    return modelRegistry.newInstance((ImmutableJsonObject) getJsonObject().getObject(PAYLOAD));
+  }
+
   /**
    * Copy constructor.
    * 
@@ -84,8 +100,15 @@ public class Clob extends ClobEntity implements IClob
   public Clob(IClob other)
   {
     super(other);
+    payload_ = other.getPayload();
   }
   
+  @Override
+  public IEntity getPayload()
+  {
+    return payload_;
+  }
+
   /**
    * Abstract builder for Clob. If there are sub-classes of this type then their builders sub-class this builder.
    *
@@ -94,7 +117,7 @@ public class Clob extends ClobEntity implements IClob
    */
   public static abstract class AbstractClobBuilder<B extends AbstractClobBuilder<B,T>, T extends IClobEntity> extends AbstractClobEntityBuilder<B,T>
   {
-    protected IJsonDomNode jsonPayload_;
+    protected IEntity payload_;
     
     protected AbstractClobBuilder(Class<B> type)
     {
@@ -104,18 +127,30 @@ public class Clob extends ClobEntity implements IClob
     protected AbstractClobBuilder(Class<B> type, IClobEntity initial)
     {
       super(type, initial);
-    }
+}
+    
+//    /**
+//     * Set the JSON payload.
+//     * 
+//     * @param jsonPayload The payload.
+//     * 
+//     * @return this (fluent method)
+//     */
+//    public B withPayload(ImmutableJsonObject jsonPayload)
+//    {}
     
     /**
-     * Set the JSON payload.
+     * Set the payload.
      * 
-     * @param jsonPayload The payload.
+     * @param payload The payload.
      * 
      * @return this (fluent method)
      */
-    public B withPayload(IJsonDomNode jsonPayload)
+    public B withPayload(IEntity payload)
     {
-      jsonPayload_ = jsonPayload;
+      payload_ = payload;
+      
+      withPayloadType(payload_.getCanonType());
       
       return self();
     }
@@ -125,9 +160,9 @@ public class Clob extends ClobEntity implements IClob
     {
       super.getJsonObject(jsonObject);
   
-      if(jsonPayload_ != null)
+      if(payload_ != null)
       {
-        jsonObject.addIfNotNull("payload", jsonPayload_);
+        jsonObject.addIfNotNull(PAYLOAD, payload_.getJsonObject());
       }
     }
   }

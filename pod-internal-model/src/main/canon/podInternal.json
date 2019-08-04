@@ -561,7 +561,7 @@
             "type": "boolean"
           },
           "message": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/SocialMessage"
+            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/LiveCurrentMessage"
           }
         }
       },

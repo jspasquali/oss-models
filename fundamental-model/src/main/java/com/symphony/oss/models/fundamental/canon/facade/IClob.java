@@ -27,7 +27,8 @@ package com.symphony.oss.models.fundamental.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.fundamental.canon.facade.IVersionedObject;
+import org.symphonyoss.s2.canon.runtime.IEntity;
+
 import com.symphony.oss.models.fundmental.canon.IClobEntity;
 
 /**
@@ -40,6 +41,11 @@ import com.symphony.oss.models.fundmental.canon.IClobEntity;
 public interface IClob
   extends IVersionedObject, IClobEntity
 {
+  /**
+   * 
+   * @return The payload of this CLOB.
+   */
+  IEntity getPayload();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl
