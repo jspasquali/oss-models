@@ -35,9 +35,13 @@ import org.symphonyoss.s2.common.hash.Hash;
 import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.fundamental.canon.facade.PodId;
+import com.symphony.oss.models.fundamental.canon.facade.SimpleSecurityContext;
 import com.symphony.oss.models.fundmental.canon.ContentIdObject;
 import com.symphony.oss.models.fundmental.canon.ContentIdType;
+import com.symphony.oss.models.fundmental.canon.IMemberIdObject;
+import com.symphony.oss.models.fundmental.canon.MemberIdObject;
 import com.symphony.oss.models.system.canon.IPodEntity;
+import com.symphony.oss.models.system.canon.PodEntitlements;
 import com.symphony.oss.models.system.canon.PodEntity;
 import com.symphony.oss.models.system.canon.PodIdObject;
 
@@ -80,11 +84,11 @@ public class Pod extends PodEntity implements IPod
   }
   
   /**
-   * Return the hash for all objects sequence for the given podId.
+   * Return the ID for the all objects sequence for the given podId.
    * 
-   * @param podId The podId for which the ID hash is required.
+   * @param podId The podId for which the ID is required.
    * 
-   * @return The ID hash for the given podId.
+   * @return The ID for the all objects sequence for the given podId.
    */
   public static IFundamentalId getContentSequenceHashId(PodId podId)
   {
@@ -94,6 +98,24 @@ public class Pod extends PodEntity implements IPod
         .withContentType(FundamentalObject.TYPE_ID)
         .withIdType(ContentIdType.ABSOLUTE_SEQUENCE)
         .build();
+  }
+  
+  /**
+   * Return the ID for the PodEntitlements of given podId.
+   * 
+   * @param podId The podId for which the ID is required.
+   * 
+   * @return The ID for the PodEntitlements of given podId.
+   */
+  public static IFundamentalId getEntitlementsId(PodId podId)
+  {
+    return new ContentIdObject.Builder()
+        .withSubjectHash(getIdHash(podId))
+        .withSubjectType(Pod.TYPE_ID)
+        .withContentType(PodEntitlements.TYPE_ID)
+        .withIdType(ContentIdType.ATTRIBUTE)
+        .build()
+        ;
   }
   
   /**
