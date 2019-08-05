@@ -19,7 +19,6 @@ package com.symphony.oss.models.system.canon.facade;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
-import org.symphonyoss.s2.fugue.naming.CredentialName;
 import org.symphonyoss.s2.fugue.naming.INameFactory;
 
 import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
@@ -27,15 +26,11 @@ import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenPrincipalCredential;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.IOpenSigningKey;
 import com.symphony.oss.models.fundamental.canon.facade.OpenSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.SecurityContextMember;
 import com.symphony.oss.models.fundamental.secret.FundamentalSecretManager;
 import com.symphony.oss.models.fundamental.store.IFundamentalDatabaseWritable;
 import com.symphony.oss.models.fundmental.canon.ISequence;
 import com.symphony.oss.models.fundmental.canon.ISequenceHashes;
-import com.symphony.oss.models.fundmental.canon.MembershipStatus;
-import com.symphony.oss.models.fundmental.canon.SecurityContextPermission;
 import com.symphony.oss.models.fundmental.canon.Sequence;
 import com.symphony.oss.models.fundmental.canon.SequenceHashes;
 import com.symphony.oss.models.fundmental.canon.SequenceType;
@@ -51,8 +46,6 @@ import com.symphony.oss.models.system.canon.PodIdObject;
  */
 public class OpenPod extends Pod implements IOpenPod
 {
-  private final IOpenSecurityContext               operatingSecurityContext_;
-  private final IOpenPrincipal                     operatingPrincipal_;
   private final ISequence                          podsSequence_;
   private final IOpenSecurityContext               rootSecurityContext_;
   private final IOpenSecurityContext               publicSecurityContext_;
@@ -64,26 +57,12 @@ public class OpenPod extends Pod implements IOpenPod
   {
     super(builder.pod_);
     
-    operatingSecurityContext_ = builder.operatingSecurityContext_;
-    operatingPrincipal_ = builder.operatingPrincipal_;
     podsSequence_ = builder.podsSequence_;
     rootSecurityContext_ = builder.rootSecurityContext_;
     publicSecurityContext_ = builder.publicSecurityContext_;
     environment_ = builder.environment_;
     podPrincipalsSequence_ = builder.podPrincipalsSequence_;
     contentSequence_ = builder.contentSequence_;
-  }
-
-  @Override
-  public IOpenSecurityContext getOperatingSecurityContext()
-  {
-    return operatingSecurityContext_;
-  }
-
-  @Override
-  public IOpenPrincipal getOperatingPrincipal()
-  {
-    return operatingPrincipal_;
   }
 
   @Override
@@ -137,8 +116,6 @@ public class OpenPod extends Pod implements IOpenPod
 
     private IOpenPrincipalCredential           environmentCredential_;
     private IOpenSecurityContext               environmentOperatingSecurityContext_;
-    private IOpenSecurityContext               operatingSecurityContext_;
-    private IOpenPrincipal                     operatingPrincipal_;
     private ISequence                          podsSequence_;
     private IOpenSecurityContext               rootSecurityContext_;
     private IOpenSecurityContext               publicSecurityContext_;
@@ -250,22 +227,12 @@ public class OpenPod extends Pod implements IOpenPod
         environmentOperatingSecurityContext_  = fundamentalDatabase_.fetchOpenSecurityContext(environment_.getSecurityContextHash(), environmentCredential_);
         podsSequence_                         = fundamentalDatabase_.fetchAbsolute(environment_.getPodsSequenceHash(), environmentCredential_, ISequence.class);
         
-        operatingSecurityContext_ = new OpenSecurityContext.Generator()
-            .withFundamentalDatabase(fundamentalDatabase_)
-            .withTrace(trace_)
-            .withSigningKey(environmentCredential_.getSigningKey())
-            .withPodId(getPodId())
-            .build();
-        
-        withOperatingSecurityContextHash(operatingSecurityContext_.getAbsoluteHash());
-        
         IFundamentalId podPrincipalsSequenceId = Pod.getPrincipalsSequenceHashId(getPodId());
         
         podPrincipalsSequence_ = new Sequence.Builder()
             .withBaseHash(podPrincipalsSequenceId.getAbsoluteHash())
             .withPrevHash(podPrincipalsSequenceId.getAbsoluteHash())
             .withType(SequenceType.CURRENT)
-            .withSecurityContextHash(operatingSecurityContext_.getAbsoluteHash())
             .withSigningKeyHash(environmentCredential_.getSigningKey().getAbsoluteHash())
             .withPodId(getPodId())
             
@@ -281,25 +248,6 @@ public class OpenPod extends Pod implements IOpenPod
         fundamentalDatabase_.save(podPrincipalsSequenceId, trace_);
         fundamentalDatabase_.save(podPrincipalsSequenceObject, trace_);
         
-        operatingPrincipal_ = new OpenPrincipal.PodOperatingPrincipalBuilder()
-            .withFundamentalDatabase(fundamentalDatabase_)
-            .withModelRegistry(modelRegistry_)
-            .withTrace(trace_)
-            .withSigningKey(environmentCredential_.getSigningKey())
-            .withEnvironmentId(nameFactory_.getEnvironmentId())
-            .withPodId(getPodId())
-            .withSecurityContext(operatingSecurityContext_)
-            .withSecurityContextMember(operatingSecurityContext_, SecurityContextPermission.OWNER)
-            .withSecurityContextMember(environmentOperatingSecurityContext_, SecurityContextPermission.MEMBER)
-            .withSequences(new SequenceHashes.Builder().withCurrent(podPrincipalsSequence_.getBaseHash()).build())
-            .build();
-        
-        withOperatingPrincipalHash(operatingPrincipal_.getBaseHash());
-        
-        CredentialName name = nameFactory_.getCredentialName(getPodId().getValue(), CredentialManager.OPERATING_PRINCIPAL_NAME);
-        fundamentalSecretManager_.putSecret(name, operatingPrincipal_.getCredential());
-        
-        IOpenSigningKey signingKey = operatingPrincipal_.getCredential().getSigningKey();
         
 //        THere isn't much point doing this here 'cos we don't want the operating principal to be a member of this and we
 //        don't yet have any actual user principals
@@ -312,20 +260,20 @@ public class OpenPod extends Pod implements IOpenPod
         publicSecurityContext_ = new OpenSecurityContext.Generator()
             .withFundamentalDatabase(fundamentalDatabase_)
             .withTrace(trace_)
-            .withSigningKey(signingKey)
+            .withSigningKey(environmentCredential_.getSigningKey())
             .withPodId(getPodId())
             .build();
         
-        new SecurityContextMember.Builder()
-            .withSecurityContext(publicSecurityContext_)
-            .withExchangeKey(operatingPrincipal_.getExchangeKey())
-            .withSigningKey(signingKey)
-            .withMembershipStatus(MembershipStatus.MEMBER)
-            .withPermission(SecurityContextPermission.OWNER)
-            .withPodId(getPodId())
-            .withFundamentalDatabase(fundamentalDatabase_)
-            .withTrace(trace_)
-          .build();
+//        new SecurityContextMember.Builder()
+//            .withSecurityContext(publicSecurityContext_)
+//            .withExchangeKey(operatingPrincipal_.getExchangeKey())
+//            .withSigningKey(signingKey)
+//            .withMembershipStatus(MembershipStatus.MEMBER)
+//            .withPermission(SecurityContextPermission.OWNER)
+//            .withPodId(getPodId())
+//            .withFundamentalDatabase(fundamentalDatabase_)
+//            .withTrace(trace_)
+//          .build();
         
         withPublicSecurityContextHash(publicSecurityContext_.getAbsoluteHash());
         
@@ -340,13 +288,13 @@ public class OpenPod extends Pod implements IOpenPod
             .withBaseHash(podContentSequenceId.getAbsoluteHash())
             .withPrevHash(podContentSequenceId.getAbsoluteHash())
             .withType(SequenceType.ABSOLUTE)
-            .withSecurityContextHash(operatingSecurityContext_.getAbsoluteHash())
-            .withSigningKeyHash(signingKey.getAbsoluteHash())
+            .withSecurityContextHash(environmentOperatingSecurityContext_.getAbsoluteHash())
+            .withSigningKeyHash(environmentCredential_.getSigningKey().getAbsoluteHash())
             .withPodId(getPodId())
             .build();
         
         IFundamentalObject contentSequenceObject = new FundamentalObject.ObjectBuilder()
-            .withSigningKey(signingKey)
+            .withSigningKey(environmentCredential_.getSigningKey())
             .withPayload(contentSequence_)
             .build();
         
@@ -365,7 +313,7 @@ public class OpenPod extends Pod implements IOpenPod
             .withBaseHash(podId.getAbsoluteHash())
             .withPrevHash(podId.getAbsoluteHash())
             .withSecurityContext(environmentOperatingSecurityContext_)
-            .withSigningKey(signingKey)
+            .withSigningKey(environmentCredential_.getSigningKey())
             .withPayload(pod_)
             .withSequences(sequences)
             .withPodId(pod_.getPodId())

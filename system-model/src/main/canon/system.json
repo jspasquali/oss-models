@@ -531,7 +531,7 @@
 					"podId": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
           },
-          "operatingPrincipalHash": {
+          "#operatingPrincipalHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
           },
           "#REMOVEDcontentSequenceHash": {
@@ -543,7 +543,7 @@
           "cipherSuiteId": {
 						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
 					},
-					"operatingSecurityContextHash": {
+					"#operatingSecurityContextHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
           },
           "rootSecurityContextHash": {
@@ -564,7 +564,27 @@
             "format": "int32"
           }
 				}
-			}
+			},
+      "PodEntitlements": {
+        "type": "object",
+        "facade": false,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "description": "Pod level entitlements.",
+        "properties": {
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "objectStoreApiEnabled": {
+            "type": "boolean"
+          },
+          "objectStoreApiWriteEnabled": {
+            "type": "boolean"
+          },
+          "objectStoreFeedsEnabled": {
+            "type": "boolean"
+          }
+        }
+      }
 		}
 	}
 }

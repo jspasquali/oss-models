@@ -69,7 +69,7 @@
     
     <s2.common.version>0.2.1</s2.common.version>
     <canon.version>0.2.7</canon.version>
-    <fugue.version>0.2.20</fugue.version>
+    <fugue.version>0.2.21</fugue.version>
     
     <canon.template.groupid>org.symphonyoss.s2.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
