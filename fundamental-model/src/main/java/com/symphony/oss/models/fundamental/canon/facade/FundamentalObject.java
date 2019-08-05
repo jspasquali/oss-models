@@ -491,19 +491,21 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
   }
   
   /**
-   * Builder for objects with an application object payload.
+   * Builder for objects with an IEntity payload.
+   * 
+   * These objects are stored as unencrypted Clob objects in the datastore.
    * 
    * @author Bruce Skingle
    *
    */
-  public static class JsonPayloadBuilder extends AbstractFundamentalObjectJsonPayloadBuilder<JsonPayloadBuilder>
+  public static class EntityObjectBuilder extends AbstractFundamentalObjectEntityObjectBuilder<EntityObjectBuilder>
   {
     /**
      * Constructor.
      */
-    public JsonPayloadBuilder()
+    public EntityObjectBuilder()
     {
-      super(JsonPayloadBuilder.class);
+      super(EntityObjectBuilder.class);
     }
   }
   
@@ -512,12 +514,12 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
    *
    * @param <B> The concrete type of the builder, used for fluent methods.
    */
-  public static abstract class AbstractFundamentalObjectJsonPayloadBuilder<B extends AbstractFundamentalObjectJsonPayloadBuilder<B>> extends AbstractFundamentalObjectVersionedObjectBuilder<B>
+  public static abstract class AbstractFundamentalObjectEntityObjectBuilder<B extends AbstractFundamentalObjectEntityObjectBuilder<B>> extends AbstractFundamentalObjectVersionedObjectBuilder<B>
   {
     protected IEntity      payload_;
     protected PodId        podId_;
 
-    protected AbstractFundamentalObjectJsonPayloadBuilder(Class<B> type)
+    protected AbstractFundamentalObjectEntityObjectBuilder(Class<B> type)
     {
       super(type);
     }
