@@ -1399,6 +1399,9 @@
             "items": {
               "$ref": "#/components/schemas/MessageId"
             }
+          },
+          "badgeAnchorTimestamp": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
           }
         }
       },
