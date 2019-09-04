@@ -81,7 +81,6 @@
   <modules>
         <module>allegro-model</module>
         <module>auth-model</module>
-        <module>calendar-model</module>
         <module>chat-model</module>
         <module>fundamental-model</module>
         <module>km-internal-model</module>

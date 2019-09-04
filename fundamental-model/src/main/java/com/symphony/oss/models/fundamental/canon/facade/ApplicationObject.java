@@ -25,14 +25,21 @@
 
 package com.symphony.oss.models.fundamental.canon.facade;
 
+import java.io.IOException;
+
 import javax.annotation.concurrent.Immutable;
 
+import org.symphonyoss.s2.canon.runtime.CanonRuntime;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+import org.symphonyoss.s2.common.dom.json.IJsonDomNode;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
+import org.symphonyoss.s2.common.dom.json.JsonString;
+import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
+import org.symphonyoss.s2.common.dom.json.jackson.JacksonAdaptor;
 import org.symphonyoss.s2.common.hash.Hash;
 
-import com.symphony.oss.models.fundamental.canon.facade.IApplicationObject;
-import com.symphony.oss.models.fundamental.canon.facade.IBlob;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.symphony.oss.models.fundmental.canon.ApplicationObjectEntity;
 
 /**
@@ -45,6 +52,7 @@ import com.symphony.oss.models.fundmental.canon.ApplicationObjectEntity;
 public class ApplicationObject extends ApplicationObjectEntity implements IApplicationObject
 {
   private static final String UNENCRYPTED = "This object is unencrypted, it has no Blob";
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   
   private IBlob blob_;
   
@@ -81,7 +89,59 @@ public class ApplicationObject extends ApplicationObjectEntity implements IAppli
     
     blob_ = other.getBlob();
   }
+
+  /**
+   * Constructor from serialized form.
+   * 
+   * @param jsonObject A Jackson parse tree of the serialized form.
+   */
+  public ApplicationObject(ObjectNode jsonObject)
+  {
+    // The modelRegistry parameter is required because of the shape of Canon generated code, but is not used in this case so we pass null.
+    super(adapt(jsonObject), null);
+  }
   
+  private static ImmutableJsonObject adapt(ObjectNode jsonObject)
+  {
+    MutableJsonObject mutableJsonObject = JacksonAdaptor.adaptObject(jsonObject);
+    
+    IJsonDomNode typeId = mutableJsonObject.get(CanonRuntime.JSON_TYPE);
+    
+    if(typeId == null)
+    {
+      mutableJsonObject.addIfNotNull(CanonRuntime.JSON_TYPE, TYPE_ID);
+      mutableJsonObject.addIfNotNull(CanonRuntime.JSON_VERSION, TYPE_VERSION);
+    }
+    else if(!(typeId instanceof JsonString))
+    {
+      throw new IllegalArgumentException("If _type is present it must be a string value");
+    }
+    
+    return mutableJsonObject.immutify();
+  }
+  
+  /**
+   * Constructor from serialized form.
+   * 
+   * @param json The serialized form.
+   */
+  public ApplicationObject(String json)
+  {
+    this(parse(json));
+  }
+  
+  private static ObjectNode parse(String json)
+  { 
+    try
+    {
+      return (ObjectNode)OBJECT_MAPPER.readTree(json);
+    }
+    catch(IOException | ClassCastException e)
+    {
+      throw new IllegalArgumentException("A valid JSON object is required.");
+    }
+  }
+
   @Override
   public void setBlob(IBlob blob)
   {
