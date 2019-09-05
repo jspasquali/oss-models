@@ -49,7 +49,7 @@ public interface IFundamentalDatabaseWritable extends IFundamentalDatabaseReadOn
   
 
   /**
-   * Store the given fundamental object, and publish the given notification on pubsub.
+   * Store the given fundamental object, and publish the given notifications on pubsub.
    * 
    * @param instance      An object to be stored.
    * @param trace         A trace context.
@@ -64,7 +64,10 @@ public interface IFundamentalDatabaseWritable extends IFundamentalDatabaseReadOn
    * @param trace     A trace context.
    * 
    * @return The generated FundamentalObject wrapper for the ID.
+   * 
+   * @deprecated Use void save(IFundamentalId id, IFundamentalObject fundamentalObject, ITraceContext trace);
    */
+  @Deprecated
   IFundamentalObject save(IFundamentalId id, ITraceContext trace);
 
   /**

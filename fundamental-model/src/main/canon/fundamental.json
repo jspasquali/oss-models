@@ -786,6 +786,9 @@
           "payloadHash": {
             "$ref": "#/components/schemas/Hash"
           },
+          "payloadId": {
+            "$ref": "#/components/schemas/FundamentalId"
+          },
 					"payload": {
 						"$ref": "#/components/schemas/FundamentalObject"
 					},
