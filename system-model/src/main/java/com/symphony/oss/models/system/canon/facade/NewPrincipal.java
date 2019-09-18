@@ -205,7 +205,7 @@ public class NewPrincipal extends Principal implements IPrincipal
       try
       {
         principal_ = Principal.fetchByUserIdChecked(userId_, fundamentalDatabase_, credential_);
-        principalObject_ = principal_.getBlob().getPayloadContainer(); 
+        principalObject_ = principal_.getFundamentalObject(); 
       }
       catch (NoSuchObjectException e)
       {
@@ -237,8 +237,7 @@ public class NewPrincipal extends Principal implements IPrincipal
             .withSequences(new SequenceHashes.Builder().withCurrent(Pod.getPrincipalsSequenceHashId(podId_).getAbsoluteHash()).build())
             .build();
         
-        fundamentalDatabase_.save(userId, trace_);
-        fundamentalDatabase_.save(principalObject_, trace_);
+        fundamentalDatabase_.save(userId, principalObject_, trace_);
       }
       
       KeyChecker<IExchangeKey> exchangeKeyChecker = new KeyChecker<>(subjectExchangeKey_);

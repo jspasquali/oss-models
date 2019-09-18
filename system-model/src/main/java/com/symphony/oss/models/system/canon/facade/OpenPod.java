@@ -245,8 +245,7 @@ public class OpenPod extends Pod implements IOpenPod
         
         withPrincipalsSequenceHash(podPrincipalsSequenceObject.getAbsoluteHash());
         
-        fundamentalDatabase_.save(podPrincipalsSequenceId, trace_);
-        fundamentalDatabase_.save(podPrincipalsSequenceObject, trace_);
+        fundamentalDatabase_.save(podPrincipalsSequenceId, podPrincipalsSequenceObject, trace_);
         
         
 //        THere isn't much point doing this here 'cos we don't want the operating principal to be a member of this and we
@@ -298,8 +297,7 @@ public class OpenPod extends Pod implements IOpenPod
             .withPayload(contentSequence_)
             .build();
         
-        fundamentalDatabase_.save(podContentSequenceId, trace_);
-        fundamentalDatabase_.save(contentSequenceObject, trace_);
+        fundamentalDatabase_.save(podContentSequenceId, contentSequenceObject, trace_);
         
         IPodIdObject podId = new PodIdObject.Builder().withPodId(getPodId()).build();
 
@@ -309,18 +307,15 @@ public class OpenPod extends Pod implements IOpenPod
             .withCurrent(podsSequence_.getBaseHash())
             .build();
         
-        IFundamentalObject podObject = new FundamentalObject.ApplicationObjectBuilder()
+        IFundamentalObject podObject = new FundamentalObject.EntityObjectBuilder()
             .withBaseHash(podId.getAbsoluteHash())
             .withPrevHash(podId.getAbsoluteHash())
-            .withSecurityContext(environmentOperatingSecurityContext_)
-            .withSigningKey(environmentCredential_.getSigningKey())
             .withPayload(pod_)
             .withSequences(sequences)
             .withPodId(pod_.getPodId())
             .build();
                 
-        fundamentalDatabase_.save(podId, trace_);
-        fundamentalDatabase_.save(podObject, trace_);
+        fundamentalDatabase_.save(podId, podObject, trace_);
 
         return new OpenPod(this);
       }

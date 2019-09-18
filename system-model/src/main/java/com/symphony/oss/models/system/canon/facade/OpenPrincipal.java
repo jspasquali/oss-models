@@ -73,7 +73,7 @@ public class OpenPrincipal extends Principal implements IOpenPrincipal
   public OpenPrincipal(IPrincipal principal, IOpenPrincipalCredential credential, IOpenExchangeKey exchangeKey, IOpenSigningKey signingKey)
   {
     super(principal);
-    setBlob(principal.getBlob());
+    setContainer(principal.getContainer());
     credential_ = credential;
     exchangeKey_ = exchangeKey;
     signingKey_ = signingKey;

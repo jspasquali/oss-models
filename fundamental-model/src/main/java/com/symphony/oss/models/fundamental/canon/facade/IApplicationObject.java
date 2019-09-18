@@ -47,9 +47,42 @@ public interface IApplicationObject
 
   Hash getBaseHash();
 
+  /**
+   * 
+   * @return The container of this ApplicationObject.
+   * @deprecated Use getContainer()
+   */
+  @Deprecated
   IBlob getBlob();
   
+  /**
+   * 
+   * @return The container of this ApplicationObject.
+   */
+  IVersionedObject getContainer();
+  
+  /**
+   * Set the container of this ApplicationObject.
+   * 
+   * @param blob The container. 
+   * 
+   * @deprecated Use setContainer()
+   */
+  @Deprecated
   void setBlob(IBlob blob);
+
+  /**
+   * Set the container of this ApplicationObject.
+   * 
+   * @param container The container. 
+   */
+  void setContainer(IVersionedObject container);
+
+  /**
+   * 
+   * @return The FundamentalObject containing this ApplicationObject.
+   */
+  IFundamentalObject getFundamentalObject();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

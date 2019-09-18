@@ -20,9 +20,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.symphony.oss</groupId>
-    <artifactId>oss-parent-pom</artifactId>
-    <version>0.0.5</version>
+		<groupId>com.symphony.oss</groupId>
+		<artifactId>oss-parent-pom</artifactId>
+		<version>0.0.6</version>
   </parent>
 
   <groupId>com.symphony.oss.models</groupId>
@@ -69,7 +69,7 @@
     
     <s2.common.version>0.2.3</s2.common.version>
     <canon.version>0.2.8</canon.version>
-    <fugue.version>0.2.23</fugue.version>
+    <fugue.version>0.2.26</fugue.version>
     
     <canon.template.groupid>org.symphonyoss.s2.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>

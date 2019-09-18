@@ -29,7 +29,6 @@ import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.IJsonDomNode;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
@@ -89,18 +88,12 @@ public class Clob extends ClobEntity implements IClob
    
   private IEntity initPayload(IModelRegistry modelRegistry)
   {
-    return modelRegistry.newInstance((ImmutableJsonObject) getJsonObject().getObject(PAYLOAD));
-  }
-
-  /**
-   * Copy constructor.
-   * 
-   * @param other Another instance from which all attributes are to be copied.
-   */
-  public Clob(IClob other)
-  {
-    super(other);
-    payload_ = other.getPayload();
+    IEntity payload = modelRegistry.newInstance((ImmutableJsonObject) getJsonObject().getObject(PAYLOAD));
+    
+    if(payload instanceof IApplicationObject)
+      ((IApplicationObject)payload).setContainer(this);
+    
+    return payload;
   }
   
   @Override

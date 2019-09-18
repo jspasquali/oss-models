@@ -506,17 +506,6 @@
           }
         }
       },
-			"PodInfo": {
-				"type": "object",
-				"required": [
-					"displayName"
-				],
-				"properties": {
-					"displayName": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/DisplayName"
-					}
-				}
-			},
 			"Pod": {
 				"type": "object",
 				"facade": true,
@@ -562,6 +551,9 @@
           "purgeTimeSeconds": {
             "type": "integer",
             "format": "int32"
+          },
+          "ceserviceUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
           }
 				}
 			},

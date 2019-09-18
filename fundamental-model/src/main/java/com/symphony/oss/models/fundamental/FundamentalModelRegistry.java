@@ -31,6 +31,7 @@ import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.common.fault.CodingFault;
 
 import com.symphony.oss.models.fundamental.canon.facade.IBlob;
+import com.symphony.oss.models.fundamental.canon.facade.IClob;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalPayload;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenPrincipalCredential;
@@ -111,7 +112,24 @@ public class FundamentalModelRegistry extends ModelRegistry
       }
     }
     
+    if(payload instanceof IClob)
+    {
+      return ((IClob)payload).getPayload();
+    }
+    
     return payload;
+  }
+  
+  /**
+   * Return the opened payload of the given unencrypted object.
+   * 
+   * @param existingInstance  A FundamentalObject to be opened.
+   * 
+   * @return The opened payload of the given object.
+   */
+  public IEntity open(IFundamentalObject existingInstance)
+  {
+    return open(existingInstance, (IOpenPrincipalCredential)null);
   }
   
   /**
@@ -137,6 +155,11 @@ public class FundamentalModelRegistry extends ModelRegistry
       if(payload instanceof IBlob)
       {
         return ((IBlob)payload).open(securityContext, this);
+      }
+      
+      if(payload instanceof IClob)
+      {
+        return ((IClob)payload).getPayload();
       }
       
       return payload;

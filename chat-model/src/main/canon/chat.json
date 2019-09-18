@@ -433,7 +433,11 @@
           "BOARD",
           "CHATROOM",
           "INSTANT_CHAT",
-          "POST"
+          "POST",
+          "ACTION",
+          "MEETING",
+          "NOTES",
+          "SUPPRESS_JUSTIFICATION"
         ]
       },
       "HashtagType": {
@@ -2203,7 +2207,33 @@
                 "type": "boolean"
               }
             }
+          },
+      "PodInitialization": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "required": [
+          "podId",
+          "podCertificate"
+        ],
+        "description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
+        "properties": {
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "podUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "podCertificate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+          },
+          "ceserviceUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
           }
+        }
+      }
 		}
 	}
 }

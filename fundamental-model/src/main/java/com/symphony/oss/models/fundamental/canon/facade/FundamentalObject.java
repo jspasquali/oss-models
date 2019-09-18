@@ -443,7 +443,7 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
       
       IBlob blob = builder.build();
       
-      payload_.setBlob(blob);
+      payload_.setContainer(blob);
       
       super.withPayload(blob);
       
@@ -566,7 +566,8 @@ public class FundamentalObject extends FundamentalObjectEntity implements IFunda
       
       IClob blob = builder.build();
       
-//      payload_.setBlob(blob);
+      if(payload_ instanceof IApplicationObject)
+        ((IApplicationObject)payload_).setContainer(blob);
       
       super.withPayload(blob);
       

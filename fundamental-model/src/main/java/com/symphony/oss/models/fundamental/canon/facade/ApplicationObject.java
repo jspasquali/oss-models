@@ -51,10 +51,12 @@ import com.symphony.oss.models.fundmental.canon.ApplicationObjectEntity;
 @Immutable
 public class ApplicationObject extends ApplicationObjectEntity implements IApplicationObject
 {
-  private static final String UNENCRYPTED = "This object is unencrypted, it has no Blob";
+  private static final String       UNENCRYPTED   = "This object is unencrypted, it has no Blob";
+  private static final String       NO_CONTAINER   = "This object has no container";
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-  
-  private IBlob blob_;
+
+  private IBlob                     blob_;
+  private IVersionedObject          container_;
   
 
   /**
@@ -87,7 +89,16 @@ public class ApplicationObject extends ApplicationObjectEntity implements IAppli
   {
     super(other);
     
-    blob_ = other.getBlob();
+    try
+    {
+      blob_ = other.getBlob();
+    }
+    catch(IllegalStateException e)
+    {
+      blob_ = null;
+    }
+    
+    container_ = other.getContainer();
   }
 
   /**
@@ -143,12 +154,29 @@ public class ApplicationObject extends ApplicationObjectEntity implements IAppli
   }
 
   @Override
+  @Deprecated
   public void setBlob(IBlob blob)
   {
-    blob_ = blob;
+    container_ = blob_ = blob;
   }
   
   @Override
+  public IVersionedObject getContainer()
+  {
+    return container_;
+  }
+
+  @Override
+  public void setContainer(IVersionedObject container)
+  {
+    container_ = container;
+    
+    if(container instanceof IBlob)
+      blob_ = (IBlob) container;
+  }
+
+  @Override
+  @Deprecated
   public IBlob getBlob()
   {
     if(blob_ == null)
@@ -160,28 +188,37 @@ public class ApplicationObject extends ApplicationObjectEntity implements IAppli
   @Override
   public Hash getAbsoluteHash()
   {
-    if(blob_ == null)
-      throw new IllegalStateException(UNENCRYPTED);
+    if(container_ == null)
+      throw new IllegalStateException(NO_CONTAINER);
     
-    return blob_.getAbsoluteHash();
+    return container_.getAbsoluteHash();
   }
 
   @Override
   public Hash getPrevHash()
   {
-    if(blob_ == null)
-      throw new IllegalStateException(UNENCRYPTED);
+    if(container_ == null)
+      throw new IllegalStateException(NO_CONTAINER);
     
-    return blob_.getPrevHash();
+    return container_.getPrevHash();
   }
 
   @Override
   public Hash getBaseHash()
   {
-    if(blob_ == null)
-      throw new IllegalStateException(UNENCRYPTED);
+    if(container_ == null)
+      throw new IllegalStateException(NO_CONTAINER);
     
-    return blob_.getBaseHash();
+    return container_.getBaseHash();
+  }
+
+  @Override
+  public IFundamentalObject getFundamentalObject()
+  {
+    if(container_ == null)
+      throw new IllegalStateException(NO_CONTAINER);
+    
+    return container_.getPayloadContainer();
   }
 
 //  @Override

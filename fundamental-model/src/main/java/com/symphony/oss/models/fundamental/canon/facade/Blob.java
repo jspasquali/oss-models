@@ -147,7 +147,7 @@ public class Blob extends BlobEntity implements IBlob
     try
     {
       applicationObject_ = (IApplicationObject) principalContext.getModelRegistry().parseOne(securityContext.decrypt(getEncryptedPayload()).getReader());
-      applicationObject_.setBlob(this);
+      applicationObject_.setContainer(this);
       
       return applicationObject_;
     }
@@ -168,7 +168,7 @@ public class Blob extends BlobEntity implements IBlob
       IEntity entity = modelRegistry.parseOne(securityContext.decrypt(getEncryptedPayload()).getReader());
       
       applicationObject_ = (IApplicationObject) entity;
-      applicationObject_.setBlob(this);
+      applicationObject_.setContainer(this);
       
       return applicationObject_;
     }
