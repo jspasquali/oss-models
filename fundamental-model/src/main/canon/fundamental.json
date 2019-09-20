@@ -168,6 +168,50 @@
         }
       }
     },
+    
+    
+    
+    
+    
+    "/objects/batch": {
+      "parameters": {
+        "traceContextHash": {
+          "in": "query",
+          "required": false,
+          "description": "The id of the trace context of which this operation is a part",
+          "schema": {
+            "$ref": "#/components/schemas/Hash"
+          }
+        }
+      },
+      
+      "post": {
+        "summary": "Read a batch of objects",
+        "operationId": "getObjects",
+        "tags": [
+          "objects"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/ObjectBatchRequest"
+          }
+        },
+        "response": {
+          "required": false,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/FundamentalObject"
+          }
+        }
+      }
+    },
+      
+      
+      
+      
+      
     "/objects/{objectHash}/versions": {
       "parameters": {
         "objectHash": {
@@ -398,6 +442,25 @@
         }
       },
       
+      "ObjectBatchRequest": {
+        "description": "A request for a batch of objects.",
+        "type": "object",
+        "required": [
+          "hashes"
+        ],
+        "properties": {
+          "currentVersion": {
+              "type": "boolean"
+          },
+          "hashes": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Hash"
+            }
+          }
+        }
+      },
       "UserIdObject": {
         "description": "The ID object for an SBE user. Points to a Principal.",
         "type": "object",
