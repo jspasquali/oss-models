@@ -28,6 +28,7 @@ package com.symphony.oss.models.fundamental.canon.facade;
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.hash.Hash;
+import org.symphonyoss.s2.fugue.store.IFugueId;
 
 import com.symphony.oss.models.fundmental.canon.IFundamentalIdEntity;
 
@@ -39,12 +40,13 @@ import com.symphony.oss.models.fundmental.canon.IFundamentalIdEntity;
  */
 @Immutable
 public interface IFundamentalId
-  extends IFundamentalIdEntity
+  extends IFundamentalIdEntity, IFugueId
 {
   /**
    * 
    * @return the absolute hash of this ID.
    */
+  @Override
   Hash getAbsoluteHash();
 }
 /*----------------------------------------------------------------------------------------------------
