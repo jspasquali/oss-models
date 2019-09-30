@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.symphony.oss.models</groupId>
     <artifactId>oss-models</artifactId>
-    <version>0.0.11</version>
+    <version>0.0.12-SNAPSHOT</version>
   </parent>
 
   <artifactId>sbe-id</artifactId>
