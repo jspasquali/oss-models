@@ -150,22 +150,24 @@ public interface IFundamentalDatabaseReadOnly
   /**
    * Fetch versions of the object with the given baseHash.
    * 
-   * @param baseHash    The baseHash of the object required.
-   * @param limit       The maximum number of versions to return.
-   * @param after       A pagination token received from a previous call to continue the query.
-   * @param consumer    A consumer to receive retrieved versions.
-   * @param credential  A credential to decrypt retrieved objects.
-   * @param type        The expected type of the object.
+   * @param baseHash      The baseHash of the object required.
+   * @param scanForwards  If true then scan objects in chronological order, else in reverse order.
+   * @param limit         The maximum number of versions to return.
+   * @param after         A pagination token received from a previous call to continue the query.
+   * @param consumer      A consumer to receive retrieved versions.
+   * @param credential    A credential to decrypt retrieved objects.
+   * @param type          The expected type of the object.
    * 
    * @return Pagination information to allow the query to be continued in a further call.
    */
-  <E extends IEntity> IPagination fetchVersions(Hash baseHash, @Nullable Integer limit, String after, Consumer<E> consumer,
+  <E extends IEntity> IPagination fetchVersions(Hash baseHash, boolean scanForwards, @Nullable Integer limit, String after, Consumer<E> consumer,
       @Nullable IOpenPrincipalCredential credential, Class<E> type);
 
   /**
    * Fetch opened objects from the given sequence in reverse chronological (most recent first) order.
    * 
    * @param sequenceHash    The baseHash of the object required.
+   * @param scanForwards    If true then scan objects in chronological order, else in reverse order.
    * @param limit           The maximum number of versions to return.
    * @param after           A pagination token received from a previous call to continue the query.
    * @param consumer        A consumer to receive retrieved versions.
@@ -174,20 +176,21 @@ public interface IFundamentalDatabaseReadOnly
    * 
    * @return Pagination information to allow the query to be continued in a further call.
    */
-  <E extends IEntity> IPagination fetchSequenceRecentObjects(Hash sequenceHash, @Nullable Integer limit, String after, Consumer<E> consumer,
+  <E extends IEntity> IPagination fetchSequenceObjects(Hash sequenceHash, boolean scanForwards, @Nullable Integer limit, String after, Consumer<E> consumer,
       IOpenPrincipalCredential credential, Class<E> type);
 
   /**
    * Fetch unopened objects from the given sequence in reverse chronological (most recent first) order.
    * 
    * @param sequenceHash    The baseHash of the object required.
+   * @param scanForwards    If true then scan objects in chronological order, else in reverse order.
    * @param limit           The maximum number of versions to return.
    * @param after           A pagination token received from a previous call to continue the query.
    * @param consumer        A consumer to receive retrieved versions.
    * 
    * @return Pagination information to allow the query to be continued in a further call.
    */
-  IPagination fetchSequenceRecentObjects(Hash sequenceHash, @Nullable Integer limit, String after, Consumer<IEntity> consumer);
+  IPagination fetchSequenceObjects(Hash sequenceHash, boolean scanForwards, @Nullable Integer limit, String after, Consumer<IEntity> consumer);
 
   /**
    * Fetch the current (latest) version of the object pointed to by the given id object.

@@ -242,7 +242,7 @@ public class NewPrincipal extends Principal implements IPrincipal
       
       KeyChecker<IExchangeKey> exchangeKeyChecker = new KeyChecker<>(subjectExchangeKey_);
       
-      fundamentalDatabase_.fetchSequenceRecentObjects(principal_.getExchangeKeySequenceHash(), null, null, 
+      fundamentalDatabase_.fetchSequenceObjects(principal_.getExchangeKeySequenceHash(), true, null, null, 
           exchangeKeyChecker, credential_, IExchangeKey.class);
            
       if(exchangeKeyChecker.existingKey_ == null)
@@ -269,7 +269,7 @@ public class NewPrincipal extends Principal implements IPrincipal
       
       KeyChecker<ISigningKey> signingKeyChecker = new KeyChecker<>(subjectSigningKey_);
       
-      fundamentalDatabase_.fetchSequenceRecentObjects(principal_.getSigningKeySequenceHash(), null, null, 
+      fundamentalDatabase_.fetchSequenceObjects(principal_.getSigningKeySequenceHash(), true, null, null, 
           signingKeyChecker, credential_, ISigningKey.class);
       
       if(signingKeyChecker.existingKey_ == null)

@@ -73,6 +73,14 @@
           "schema": {
             "type": "string"
           }
+        },
+        "scanForwards": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": false,
+          "schema": {
+            "type": "boolean"
+          }
         }
       },
       "get": {
@@ -237,6 +245,14 @@
           "required": false,
           "schema": {
             "type": "string"
+          }
+        },
+        "scanForwards": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": false,
+          "schema": {
+            "type": "boolean"
           }
         }
       },

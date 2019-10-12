@@ -25,7 +25,7 @@ import com.symphony.oss.models.fundamental.canon.facade.WrappedKey;
 /**
  * Implementation of a public key cipher, these methods are not inherited by ICipherSuite.
  * 
- * @author bruce.skingle
+ * @author Bruce Skingle
  *
  */
 public interface IPublicKeyCipherSuiteImpl extends IPublicKeyCipherSuite
