@@ -31,6 +31,8 @@ import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
+import com.symphony.oss.models.chat.canon.CreateIMMaestroPayload;
+import com.symphony.oss.models.chat.canon.CreateRoomMaestroPayload;
 import com.symphony.oss.models.chat.canon.IMaestroPayload;
 import com.symphony.oss.models.chat.canon.JoinRoomMaestroPayload;
 import com.symphony.oss.models.chat.canon.LeaveRoomMaestroPayload;
@@ -112,8 +114,12 @@ public class MaestroPayloadContainer extends MaestroPayloadContainerEntity imple
       case "D9ProvisioningPayload":                 // return D9new ProvisioningPayload.Builder().withValues(getJsonObject(), false).build();
       case "activateRoomPayload":                   // return new ActivateRoomMaestroPayload.Builder().withValues(getJsonObject(), false).build();
       case "reactivateRoomPayload":                 // return new ReactivateRoomMaestroPayload.Builder().withValues(getJsonObject(), false).build();
-      case "createRoomPayload":                     // return new CreateRoomMaestroPayload.Builder().withValues(getJsonObject(), false).build();
-      case "createIMPayload":                       // return new CreateIMMaestroPayload.Builder().withValues(getJsonObject(), false).build();
+      case "createRoomPayload":
+        return new CreateRoomMaestroPayload(cargoJson, modelRegistry);
+        
+      case "createIMPayload":
+        return new CreateIMMaestroPayload(cargoJson, modelRegistry);
+        
       case "deactivateRoomPayload":                 // return new DeactivateRoomPayload.Builder().withValues(getJsonObject(), false).build();
         return getCargo();
 

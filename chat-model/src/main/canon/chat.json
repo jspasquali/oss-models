@@ -1086,6 +1086,87 @@
           }
         }
       },
+      "CreateRoomMaestroPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "copyDisabled": {
+            "type": "boolean"
+          },
+          "creationDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "creator": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "cryptoRotationInfo": {
+            "$ref": "#/components/schemas/CryptoRotationInfo"
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "isScheduledMeeting": {
+            "type": "boolean"
+          },
+          "isMultiLateral": {
+            "type": "boolean"
+          },
+          "discoverable": {
+            "type": "boolean"
+          },
+          "isRoomPublic": {
+            "type": "boolean"
+          },
+          "parentThreadID": {
+            "$ref": "#/components/schemas/ThreadId"
+          },
+          "memberAddUserEnabled": {
+            "type": "boolean"
+          },
+          "shareHistoryEnabled": {
+            "type": "boolean"
+          },
+          "podDistributionHistory": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            }
+          },
+          "podRestrictionList": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            }
+          },
+          "keywords": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateIMMaestroPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "affectedUserId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "roomType": {
+            "type": "string"
+          }
+        }
+      },
       "MaestroEventType": {
         "type": "string",
         "enum": [

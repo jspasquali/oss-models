@@ -131,6 +131,36 @@
   },
 	"components": {
 		"schemas": {
+      "ExternalAddressMapping": {
+        "type": "object",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "properties": {
+          "serviceId": {
+            "type": "string"
+          },
+          "serviceComponentId": {
+            "type": "string"
+          },
+          "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "clientPodId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "principalBaseHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "PhoneNumberAddressMapping": {
+        "type": "object",
+        "extends": "#/components/schemas/ExternalAddressMapping",
+        "properties": {
+          "phoneNumber": {
+            "type": "string"
+          }
+        }
+      },
       "ServiceComponentId": {
         "description": "The ID object for a service component.",
         "type": "object",
@@ -144,6 +174,28 @@
           },
           "serviceComponentId": {
             "type": "string"
+          },
+          "clientPodId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          }
+        }
+      },
+      "ServiceComponentContentId": {
+        "description": "The ID object for content of some service component.",
+        "type": "object",
+        "extends": "#/components/schemas/ServiceComponentId",
+        "properties": {
+          "subjectHash": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+          },
+          "subjectType": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "idType": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ContentIdType"
           }
         }
       },
@@ -163,6 +215,9 @@
             "type": "string"
           },
           "podId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+          },
+          "clientPodId": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
           }
         }
