@@ -43,11 +43,11 @@ import com.symphony.oss.models.chat.canon.ThreadIdObject;
 import com.symphony.oss.models.chat.canon.TypingNotification;
 import com.symphony.oss.models.chat.canon.UserMessageIdObject;
 import com.symphony.oss.models.chat.canon.WallPostNotification;
-import com.symphony.oss.models.chat.canon.facade.BaseUser;
 import com.symphony.oss.models.chat.canon.facade.MessageId;
 import com.symphony.oss.models.chat.canon.facade.PresenceChangeMessage;
 import com.symphony.oss.models.chat.canon.facade.SocialMessage;
 import com.symphony.oss.models.chat.canon.facade.ThreadId;
+import com.symphony.oss.models.chat.canon.facade.User;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.fundamental.canon.facade.IUserIdFunction;
 import com.symphony.oss.models.fundamental.canon.facade.IUserIdObject;
@@ -89,7 +89,6 @@ import com.symphony.oss.models.system.PrincipalSecurityContext;
  */
 public class SbeIdFactory
 {
-  private final PodId           externalPodId_;
   private final IUserIdFunction userIdFunction_;
   
   /**
@@ -100,7 +99,6 @@ public class SbeIdFactory
    */
   public SbeIdFactory(long internalPodId, long externalPodId)
   {
-    externalPodId_ = PodId.newBuilder().build((int)externalPodId);
     userIdFunction_ = UserId.getUserIdFunction(internalPodId, externalPodId);
   }
 
@@ -125,7 +123,7 @@ public class SbeIdFactory
    * 
    * @return            The 2.0 object ID for the mirror of the given ID.
    */
-  public IUserIdObject userId(PodAndUserId internalOrExternalUserId)
+  public IUserIdObject principalId(PodAndUserId internalOrExternalUserId)
   {
     return new UserIdObject.Builder().withPodAndUserId(
         toExternalUserId(internalOrExternalUserId)).build();
@@ -519,7 +517,7 @@ public class SbeIdFactory
   public IMemberIdObject getPrincipalSecurityContextKeysId(PodAndUserId userId, RotationId rotationId)
   {
 
-    IUserIdObject userIdObject = userId(userId);
+    IUserIdObject userIdObject = principalId(userId);
     Hash principalBaseHash = userIdObject.getAbsoluteHash();
     
     IPrincipalSecurityContext principalSecurityContext = new PrincipalSecurityContext(principalBaseHash);
@@ -547,7 +545,7 @@ public class SbeIdFactory
    */
   public IMemberIdObject getThreadSecurityContextKeysId(PodAndUserId userId, PodId podId, ThreadId threadId, RotationId rotationId)
   {
-    IUserIdObject userIdObject = userId(userId);
+    IUserIdObject userIdObject = principalId(userId);
     Hash principalBaseHash = userIdObject.getAbsoluteHash();
     
     IThreadIdObject threadIdObject = new ThreadIdObject.Builder()
@@ -571,14 +569,14 @@ public class SbeIdFactory
    * 
    * @param userId A UserId.
    * 
-   * @return The ID objects whose absolute hash is the base hash of the BaseUser info object for the given user.
+   * @return The ID objects whose absolute hash is the base hash of the IUser info object for the given user.
    */
-  public IFundamentalId getBaseUserId(PodAndUserId userId)
+  public IFundamentalId getUserId(PodAndUserId userId)
   {
-    IUserIdObject userIdObject = userId(userId);
+    IUserIdObject userIdObject = principalId(userId);
     Hash principalBaseHash = userIdObject.getAbsoluteHash();
     
-    return BaseUser.getBaseUserId(principalBaseHash, externalPodId_);
+    return User.getBaseUserId(principalBaseHash, userIdObject.getPodId());
     
   }
 }

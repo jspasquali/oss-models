@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-05-23 13:16:21 BST
+ *  At                  2019-10-30 08:40:35 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,19 +27,28 @@ package com.symphony.oss.models.chat.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.fundamental.canon.facade.IApplicationObject;
-import com.symphony.oss.models.chat.canon.IBaseUserEntity;
+import com.symphony.oss.models.chat.canon.IUserEntity;
 
 /**
- * Facade for Object ObjectSchema(BaseUser)
+ * Facade for Object ObjectSchema(User)
  *
- * A subset representation of the Symphony Maestro User
- * Generated from ObjectSchema(BaseUser) at #/components/schemas/BaseUser
+ * A user.
+ * Generated from ObjectSchema(User) at #/components/schemas/User
  */
 @Immutable
-public interface IBaseUser
-  extends IApplicationObject, IBaseUserEntity
+public interface IUser
+  extends IUserEntity
 {
+  /**
+   * Return true iff this user has the given entitlement.
+   * 
+   * If an unknown entitlementId is given this method returns false.
+   * 
+   * @param entitlementId The ID of an entitlement.
+   * 
+   * @return true iff this user has the given entitlement.
+   */
+  boolean hasEntitlement(String entitlementId);
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

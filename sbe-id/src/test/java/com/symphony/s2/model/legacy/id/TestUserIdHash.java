@@ -76,7 +76,7 @@ public class TestUserIdHash
      * value matches the library computed one. 
      */
     PodAndUserId userId = PodAndUserId.newBuilder().build(EXTERNAL_USER_ID);
-    Hash userIdHash = factory_.userId(userId).getAbsoluteHash();
+    Hash userIdHash = factory_.principalId(userId).getAbsoluteHash();
     
     IUserIdObject userIdObject = new UserIdObject.Builder()
         .withPodAndUserId(userId)

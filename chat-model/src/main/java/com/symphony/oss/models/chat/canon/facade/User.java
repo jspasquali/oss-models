@@ -19,11 +19,14 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-05-23 13:16:21 BST
+ *  At                  2019-10-30 08:40:35 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
 package com.symphony.oss.models.chat.canon.facade;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -32,7 +35,8 @@ import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 import org.symphonyoss.s2.common.hash.Hash;
 
-import com.symphony.oss.models.chat.canon.BaseUserEntity;
+import com.symphony.oss.models.chat.canon.IEntitlement;
+import com.symphony.oss.models.chat.canon.UserEntity;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.fundamental.canon.facade.PodId;
 import com.symphony.oss.models.fundmental.canon.ContentIdType;
@@ -40,20 +44,23 @@ import com.symphony.oss.models.fundmental.canon.PodContentIdObject;
 import com.symphony.oss.models.system.canon.facade.Principal;
 
 /**
- * Facade for Object ObjectSchema(BaseUser)
+ * Facade for Object ObjectSchema(User)
  *
- * A subset representation of the Symphony Maestro User
- * Generated from ObjectSchema(BaseUser) at #/components/schemas/BaseUser
+ * A user.
+ * Generated from ObjectSchema(User) at #/components/schemas/User
  */
 @Immutable
-public class BaseUser extends BaseUserEntity implements IBaseUser
+@SuppressWarnings("unused")
+public class User extends UserEntity implements IUser
 {
+  private Map<String, Boolean>  entitlementMap_ = null;
+  
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public BaseUser(AbstractBaseUserBuilder<?,?> builder)
+  public User(AbstractUserBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -64,7 +71,7 @@ public class BaseUser extends BaseUserEntity implements IBaseUser
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public BaseUser(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public User(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -75,7 +82,7 @@ public class BaseUser extends BaseUserEntity implements IBaseUser
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public BaseUser(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public User(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -85,9 +92,32 @@ public class BaseUser extends BaseUserEntity implements IBaseUser
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public BaseUser(IBaseUser other)
+  public User(IUser other)
   {
     super(other);
+  }
+  
+  private synchronized Map<String, Boolean> getEntitlementMap()
+  {
+    if(entitlementMap_ == null)
+    {
+      entitlementMap_ = new HashMap<>();
+      
+      for(IEntitlement entitlement : getEntitlement())
+      {
+        entitlementMap_.put(entitlement.getName(), entitlement.getValue());
+      }
+    }
+    
+    return entitlementMap_;
+  }
+  
+  @Override
+  public boolean hasEntitlement(String entitlementId)
+  {
+    Boolean result = getEntitlementMap().get(entitlementId);
+    
+    return Boolean.TRUE == result;
   }
   
   /**
@@ -106,7 +136,7 @@ public class BaseUser extends BaseUserEntity implements IBaseUser
     return new PodContentIdObject.Builder()
         .withSubjectHash(principalBaseHash)
         .withSubjectType(Principal.TYPE_ID)
-        .withContentType(BaseUser.TYPE_ID)
+        .withContentType(User.TYPE_ID)
         .withIdType(ContentIdType.ATTRIBUTE)
         .withPodId(podId)
         .build();

@@ -75,17 +75,7 @@
         }
       }
     },
-    "/feeds/{name}/metadata": {
-      "parameters": {
-        "name": {
-          "in": "path",
-          "description": "Name of the feed",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      },
+    "/gateways/metadata": {
       "post": {
         "summary": "Set subscription metadata.",
         "payload": {
@@ -396,7 +386,7 @@
       },
       "SubscriptionMetadata": {
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalPayload",
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
         "description": "Abstract superclass for feed metadata.",
         "properties": {
           "type": {
@@ -408,6 +398,23 @@
             "items": {
               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
             }
+          }
+        }
+      },
+      "ExternalGatewayMetadata": {
+        "type": "object",
+        "extends": "#/components/schemas/SubscriptionMetadata",
+        "description": "Metadata for an external gateway.",
+        "required": [
+          "subscriptionMetadata",
+          "externalFeedId"
+        ],
+        "properties": {
+          "subscriptionMetadata": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/SignedApplicationObject"
+          },
+          "externalFeedId": {
+            "$ref": "#/components/schemas/FeedId"
           }
         }
       },

@@ -751,7 +751,7 @@
             "$ref": "#/components/schemas/Instant"
           },
           "payload": {
-            "$ref": "#/components/schemas/FundamentalPayload"
+            "$ref": "#/components/schemas/ApplicationObject"
           }
         }
       },

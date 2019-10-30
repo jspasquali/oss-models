@@ -32,6 +32,52 @@
           }
         }
       }
+    },
+    "/users/{userId}": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External userId of the user",
+          "required": true,
+          "schema": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get the base user object",
+        "operationId": "getUser",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      }
+    },
+    "/users/{userId}/entitlements/{entitlementId}": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External userId of the user",
+          "required": true,
+          "schema": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          }
+        },
+        "entitlementId": {
+          "in": "path",
+          "description": "Entitlement ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get the given entitlement for the given user. Returns 201 if the entitlement exist or 403 if not.",
+        "operationId": "validateEntitlement"
+      }
     }
   },
 	"components": {
@@ -639,6 +685,7 @@
           "on the internalMsg topic as a JSON object."
         ],
         "type": "object",
+        "facade": true,
         "properties": {
           "active": {
             "type": "boolean"
@@ -2241,78 +2288,30 @@
               }
             }
           },
-          "BaseUser": {
-            "description": "A subset representation of the Symphony Maestro User",
-            "type": "object",
-            "facade": true,
-            "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
-            "properties": {
-              "userId": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
-              },
-              "username": {
-                "description": "The complete name of the user",
-                "type": "string"
-              },
-              "emailAddress": {
-                "description": "Email address of the user",
-                "type": "string"
-              },
-
-              "prettyName": {
-                "description": "Pretty name of the user",
-                "type": "string"
-              },
-              "surname": {
-                "description": "Last name of the user",
-                "type": "string"
-              },
-              "firstName": {
-                "description": "First name of the user",
-                "type": "string"
-              },
-
-              "title": {
-                "type": "string"
-              },
-              "person": {
-                "description": "Tells whether the user is a person(end user) or service account",
-                "type": "boolean"
-              },
-              "company": {
-                "description": "Company name that the user belongs to",
-                "type": "string"
-              },
-              "isCrossPodUser": {
-                "description": "Tells whether the user is from another POD or not",
-                "type": "boolean"
-              }
-            }
-          },
-      "PodInitialization": {
-        "type": "object",
-        "facade": false,
-        "builderFacade": false,
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
-        "required": [
-          "podId",
-          "podCertificate"
-        ],
-        "description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
-        "properties": {
-          "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
-          },
-          "podUrl": {
-            "type": "string",
-            "format": "url"
-          },
-          "podCertificate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
-          },
-          "ceserviceUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
-          }
+         "PodInitialization": {
+           "type": "object",
+           "facade": false,
+           "builderFacade": false,
+           "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+           "required": [
+             "podId",
+             "podCertificate"
+           ],
+           "description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
+           "properties": {
+             "podId": {
+               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+             },
+             "podUrl": {
+               "type": "string",
+               "format": "url"
+             },
+             "podCertificate": {
+               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+             },
+             "ceserviceUserId": {
+               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+             }
         }
       }
 		}

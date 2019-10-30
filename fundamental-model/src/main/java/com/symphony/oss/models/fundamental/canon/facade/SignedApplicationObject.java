@@ -96,7 +96,7 @@ public class SignedApplicationObject extends SignedApplicationObjectEntity imple
   public static abstract class AbstractSignedApplicationObjectBuilder<B extends AbstractSignedApplicationObjectBuilder<B,T>, T extends ISignedApplicationObjectEntity> extends AbstractSignedApplicationObjectEntityBuilder<B,T>
   {
     protected IOpenSigningKey signingKey_;
-    protected IFundamentalPayload payload_;
+    protected IApplicationObject payload_;
     
     protected AbstractSignedApplicationObjectBuilder(Class<B> type)
     {
@@ -129,7 +129,7 @@ public class SignedApplicationObject extends SignedApplicationObjectEntity imple
      * 
      * @return This (fluent method)
      */
-    public B withPayload(IFundamentalPayload payload)
+    public B withPayload(IApplicationObject payload)
     {
       payload_ = payload;
       
