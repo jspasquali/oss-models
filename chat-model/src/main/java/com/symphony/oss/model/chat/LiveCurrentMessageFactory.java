@@ -59,7 +59,7 @@ public class LiveCurrentMessageFactory
    * 
    * @return  The given JSON as a LiveCurrentMessage.
    */
-  public static ILiveCurrentMessage  newLiveCurrentMessage(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public ILiveCurrentMessage  newLiveCurrentMessage(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
       IJsonDomNode versionNode = mutableJsonObject.get("version");
       
@@ -111,7 +111,7 @@ public class LiveCurrentMessageFactory
         throw new IllegalArgumentException("No version present.");
   }
 
-  private static MutableJsonObject unwrapObjectStatus(MutableJsonObject mutableJsonObject)
+  public MutableJsonObject unwrapObjectStatus(MutableJsonObject mutableJsonObject)
   {
     return mutableJsonObject;
   }
