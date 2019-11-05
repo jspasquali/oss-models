@@ -680,7 +680,7 @@
         }
       },
 			"User": {
-        "description": "A user.",
+        "description": "A user, based on IUser.",
         "#there seem to be different versions of user, this is what the JSON looks like when it comes out": [
           "on the internalMsg topic as a JSON object."
         ],
@@ -797,6 +797,284 @@
             "type": "string"
           }
         }
+      },
+      "MaestroUser": {
+        "description": "A Symphony maestro user based on IMaestroUser",
+        "type": "object",
+        "facade": true,
+        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "properties": {
+          "active": {
+            "description": "Tells whether the user is active or not",
+            "type": "boolean"
+          },
+          "assetClass": {
+            "description": "List of asset classes",
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "authenticationKeys": {
+            "$ref": "#/components/schemas/AuthenticationKey"
+          },
+          "company": {
+            "description": "Name of the company",
+            "type": "string"
+          },
+          "connectGroup": {
+            "description": "The group that the user belongs to",
+            "type": "string"
+          },
+          "createdBy": {
+            "description": "Who created the user",
+            "type": "string"
+          },
+          "creationDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "deactivationDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "delegates": {
+            "description": "List of delegates",
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            }
+          },
+          "deptCode": {
+            "description": "Dept code",
+            "type": "string"
+          },
+          "deptName": {
+            "description": "Dept name",
+            "type": "string"
+          },
+          "divName": {
+            "description": "Division name",
+            "type": "string"
+          },
+          "emailAddress": {
+            "description": "Email address of the user",
+            "type": "string",
+            "format": "email"
+          },
+          "entitlement": {
+            "$ref": "#/components/schemas/MaestroUserEntitlement"
+          },
+          "externalVersionId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "filterRole": {
+            "type": "string"
+          },
+          "firstName": {
+            "description": "First name of the user",
+            "type": "string"
+          },
+          "focusedUser": {
+            "description": "Tells whether the user is focused or not",
+            "type": "boolean"
+          },
+          "imageMetadata": {
+            "$ref": "#/components/schemas/UserImageMetadata"
+          },
+          "images": {
+            "$ref": "#/components/schemas/Image"
+          },
+          "imageUrl": {
+            "description": "URL that points to the image",
+            "type": "string"
+          },
+          "imageUrlSmall": {
+            "description": "URL that points to the small image",
+            "type": "string"
+          },
+          "industry": {
+            "description": "List of industries",
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "initials": {
+            "description": "The initials words of the user",
+            "type": "string"
+          },
+          "jobFunction": {
+            "description": "Job function of the user",
+            "type": "string"
+          },
+          "lastLoginDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "location": {
+            "description": "Location of the user",
+            "type": "string"
+          },
+          "mobileNumber": {
+            "description": "User's mobile number",
+            "type": "string"
+          },
+          "modifiedDate": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "myCurrentThreadId": {
+            "$ref": "#/components/schemas/ThreadId"
+          },
+          "picOptOut": {
+            "type": "string"
+          },
+          "preferences": {
+            "$ref": "#/components/schemas/UserPreferences"
+          },
+          "prettyName": {
+            "description": "Pretty name of the user",
+            "type": "string"
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/RegistrationStatus"
+          },
+          "roles": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
+          "samlId": {
+            "type": "string"
+          },
+          "screenName": {
+            "description": "What GS uses instead of username",
+            "type": "string"
+          },
+          "smsNumber": {
+            "description": "User's sms number",
+            "type": "string"
+          },
+          "socialConnectors": {
+            "description": "List of social connectors",
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "sourceId": {
+            "type": "string"
+          },
+          "surname": {
+            "description": "Last name of the user",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "userId": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+          },
+          "username": {
+            "description": "The complete name of the user",
+            "type": "string"
+          },
+          "workPhone": {
+            "description": "User's work phone",
+            "type": "string"
+          },
+          "isComplianceUser": {
+            "description": "Tells whether the user is a compliance user or not",
+            "type": "boolean"
+          },
+          "isCrossPodUser": {
+            "description": "Tells whether the user is using Cross Pod or not",
+            "type": "boolean"
+          },
+          "externalIMContact": {
+            "description": "Tells whether the user is an external IM contact or not",
+            "type": "boolean"
+          },
+          "externalSMSContact": {
+            "description": "Tells whether the user is an external SMS contact or not",
+            "type": "boolean"
+          },
+          "person": {
+            "description": "Tells whether the user is a person or not",
+            "type": "boolean"
+          },
+          "isSuperUser": {
+            "description": "Tells whether the user is a super user or not",
+            "type": "boolean"
+          },
+          "verifiedForBadge": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserImageMetadata": {
+        "description": "Metadata of the user's images based on UserImageMetadata",
+        "type": "object",
+        "properties": {
+          "imageSourceUrl": {
+            "type": "string"
+          },
+          "imageSourceHash": {
+            "type": "string"
+          },
+          "imageSourceLastUpdated": {
+            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+          },
+          "imageSource": {
+            "type": "string"
+          }
+        }
+      },
+      "UserPreferences": {
+        "description": "Preferences of the user based on IPreferences",
+        "type": "object",
+        "properties": {
+          "recommendCompactModeTurnedOn": {
+            "type": "boolean"
+          },
+          "recommendedLanguage": {
+            "type": "string"
+          }
+        }
+      },
+      "MaestroUserEntitlement": {
+        "description": "An user entitlements as seen in IMaestroUser",
+        "type": "object",
+        "facade": true,
+        "properties": {
+          "userEntitlementMap": {
+            "$ref": "#/components/schemas/UserEntitlementMap"
+          }
+        }
+      },
+      "RegistrationStatus": {
+        "type": "string",
+        "enum": [
+          "INVITED",
+          "REGISTERING",
+          "REGISTERED"
+        ]
+      },
+      "Source": {
+        "type": "string",
+        "enum": [
+          "SERVICE",
+          "ADMIN",
+          "DIRECTORY",
+          "SELF_REGISTRATION"
+        ]
       },
 			"Image": {
         "description": "An attachment image.",
@@ -2279,13 +2557,8 @@
           "UserEntitlementMap": {
             "description": "An user entitlement map as seen in IMaestroUser",
             "type": "object",
+            "facade": true,
             "properties": {
-              "name": {
-                "type": "string"
-              },
-              "value": {
-                "type": "boolean"
-              }
             }
           },
          "PodInitialization": {

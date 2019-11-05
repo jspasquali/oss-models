@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-08-03 18:20:01 GMT-07:00
+ *  At                  2019-11-05 08:42:22 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,30 +27,37 @@ package com.symphony.oss.models.chat.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
+
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
-import com.symphony.oss.models.chat.canon.IMessageIdObject;
-import com.symphony.oss.models.chat.canon.LiveCurrentMessage;
-import com.symphony.oss.models.chat.canon.SocialMessageEntity;
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundmental.canon.ContentIdObject;
-import com.symphony.oss.models.fundmental.canon.ContentIdType;
+import org.symphonyoss.s2.canon.runtime.IEntity;
+import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+
+import java.util.List;
+import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
+
+import com.symphony.oss.models.chat.canon.MaestroUserEntity;
+import com.symphony.oss.models.chat.canon.IMaestroUserEntity;
+import com.symphony.oss.models.chat.canon.ChatModel;
 
 /**
- * Facade for Object ObjectSchema(SocialMessage)
- * Generated from ObjectSchema(SocialMessage) at #/components/schemas/SocialMessage
+ * Facade for Object ObjectSchema(MaestroUser)
+ *
+ * A Symphony maestro user based on IMaestroUser
+ * Generated from ObjectSchema(MaestroUser) at #/components/schemas/MaestroUser
  */
 @Immutable
-public class SocialMessage extends SocialMessageEntity implements ISocialMessage
+@SuppressWarnings("unused")
+public class MaestroUser extends MaestroUserEntity implements IMaestroUser
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public SocialMessage(AbstractSocialMessageBuilder<?,?> builder)
+  public MaestroUser(AbstractMaestroUserBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -61,7 +68,7 @@ public class SocialMessage extends SocialMessageEntity implements ISocialMessage
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public SocialMessage(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public MaestroUser(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -72,7 +79,7 @@ public class SocialMessage extends SocialMessageEntity implements ISocialMessage
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public SocialMessage(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public MaestroUser(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -82,34 +89,17 @@ public class SocialMessage extends SocialMessageEntity implements ISocialMessage
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public SocialMessage(ISocialMessage other)
+  public MaestroUser(IMaestroUser other)
   {
     super(other);
   }
 
-  /**
-   * Return the ID object for the sequence of messages belonging to the given message.
-   * This is the sequence onto which DeliveryReceipts, ReadReceipts and ObjectStatus messages
-   * are added.
-   * 
-   * @param messageId The ID of the stream.
-   * 
-   * @return The ID object for the sequence of messages belonging to the given thread (stream).
-   */
-  public static IFundamentalId getMessageContentSequenceId(IMessageIdObject messageId)
+  @Override
+  public boolean hasEntitlement(String entitlementId)
   {
-    return getMessageSequenceId(messageId, LiveCurrentMessage.TYPE_ID);
+    return getEntitlement().hasEntitlement(entitlementId);
   }
-
-  private static IFundamentalId getMessageSequenceId(IMessageIdObject messageId, String contentType)
-  {
-    return new ContentIdObject.Builder()
-        .withSubjectHash(messageId.getAbsoluteHash())
-        .withSubjectType(Stream.TYPE_ID)
-        .withContentType(contentType)
-        .withIdType(ContentIdType.ABSOLUTE_SEQUENCE)
-        .build();
-  }
+  
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl
