@@ -22,7 +22,7 @@
           "required": true,
           "description": "The id of the securityContext to retrieve",
           "schema": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           }
         }
       },
@@ -34,7 +34,7 @@
         "response": {
           "required": false,
           "schema": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/OpenSecurityContextInfo"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/OpenSecurityContextInfo"
           }
         }
       }
@@ -70,24 +70,24 @@
         ],
         "properties": {
           "encodedPrivateContextKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "encodedSecretContextKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/Base64SecretKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContext": {
             "type": "string",
             "format": "byte"
           },
           "encodedPrivateSigningKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKey": {
             "type": "string",
             "format": "byte"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       }

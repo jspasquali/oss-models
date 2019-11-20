@@ -44,21 +44,21 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CertificateId"
+              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/CertificateId"
             }
           },
           "rotationId": {
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
             }
           },
           "userId": {
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
             }
           }
         },
@@ -80,21 +80,21 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+              "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
             }
           },
           "rotationId": {
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
             }
           },
           "userId": {
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
             }
           }
         },
@@ -132,7 +132,7 @@
           "required": true,
           "multiple": true,
           "schema": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
           }
         },
         "response": {
@@ -191,7 +191,7 @@
         "response": {
           "required": true,
           "schema": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/SocialMessage"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/SocialMessage"
           }
         }
       }
@@ -253,7 +253,7 @@
             "format": "byte"
           },
           "status": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ObjectStatus"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ObjectStatus"
           }
         }
       },
@@ -269,23 +269,23 @@
       "WrappedContentKey": {
         "description": "A Symphony wrapped content key",
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "properties": {
           "relaySignature": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "rotationId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
           },
           "userId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           },
           "version": {
             "type": "integer",
             "format": "int32"
           },
           "wrappedContentKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
           }
         }
       },
@@ -302,23 +302,23 @@
       "WrappedAccountKey": {
         "description": "A Symphony wrapped content key",
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "properties": {
           "relaySignature": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "rotationId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
           },
           "userId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           },
           "version": {
             "type": "integer",
             "format": "int32"
           },
           "wrappedAccountKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
           }
         }
       },
@@ -344,10 +344,10 @@
         "type": "object",
         "properties": {
           "cryptoRotationInfo": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/CryptoRotationInfo"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/CryptoRotationInfo"
           },
           "streamId": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
           }
         }
       },
@@ -539,7 +539,7 @@
         "facade": true,
         "properties": {
           "myCurrentThreadId": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
           },
           "prettyName": {
             "type": "string"
@@ -549,7 +549,7 @@
             "format": "int64"
           },
           "cryptoRotationInfo": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/CryptoRotationInfo"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/CryptoRotationInfo"
           }
         }
       },
@@ -561,7 +561,7 @@
             "type": "boolean"
           },
           "message": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/LiveCurrentMessage"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/LiveCurrentMessage"
           }
         }
       },

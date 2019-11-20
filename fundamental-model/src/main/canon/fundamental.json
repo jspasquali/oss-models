@@ -414,7 +414,7 @@
         ],
         "properties": {
           "userId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/UserId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/UserId"
           }
         }
       },
@@ -461,7 +461,7 @@
         ],
         "properties": {
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -488,7 +488,7 @@
             "$ref": "#/components/schemas/HashType"
           },
           "signature": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "payload": {
             "$ref": "#/components/schemas/FundamentalPayload"
@@ -524,13 +524,13 @@
         "builderFacade": false,
         "properties": {
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "createdDate": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "purgeDate": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "payloadType": {
             "type": "string"
@@ -578,7 +578,7 @@
         ],
         "properties": {
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -658,7 +658,7 @@
 			},
 			"ApplicationObject": {
 				"type": "object",
-        "extends": "../../../../core-model/src/main/canon/core.json#/components/schemas/ApplicationPayload",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
 				"facade": true,
 				"description": "The encrypted payload of a Blob",
         "properties": {
@@ -675,7 +675,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "createdDate": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "payload": {
             "$ref": "#/components/schemas/ApplicationObject"
@@ -690,7 +690,7 @@
         "description": "An unencrypted but signed payload. Sometimes we need to have a client sign a request which the sever may need to read, this might then be encrypted by an operating principal and become the payload of an encrypted blob.",
         "properties": {
           "signature": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "payload": {
             "$ref": "#/components/schemas/SignedPayload"
@@ -712,7 +712,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "encryptedPayload": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncryptedData"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
           }
         }
       },
@@ -760,10 +760,10 @@
 						}
 					},
           "expirationDate": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "broadcast": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/BroadcastType"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/BroadcastType"
           },
           "conflationId": {
               "type": "string"
@@ -775,7 +775,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "notificationDate": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "payloadBaseHash": {
             "$ref": "#/components/schemas/Hash"
@@ -875,7 +875,7 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
           },
           "parentHash": {
             "$ref": "#/components/schemas/Hash"
@@ -896,10 +896,10 @@
 				],
 				"properties": {
 					"encodedExchangeKey": {
-						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
+						"$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
 					},
 					"encryptedPrivateKey": {
-						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
+						"$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
 					}
 				}
 			},
@@ -943,16 +943,16 @@
         ],
         "properties": {
           "encodedPrivateKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "encodedSecretKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/Base64SecretKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContextHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -966,7 +966,7 @@
         ],
         "properties": {
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
             "$ref": "#/components/schemas/Hash"
@@ -987,24 +987,24 @@
         ],
         "properties": {
           "encodedPrivateContextKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "encodedSecretContextKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/Base64SecretKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContext": {
             "type": "string",
             "format": "byte"
           },
           "encodedPrivateSigningKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKey": {
             "type": "string",
             "format": "byte"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -1073,10 +1073,10 @@
             "$ref": "#/components/schemas/Hash"
           },
           "wrappedKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
           },
           "encryptedKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
           },
           "kdfVersion": {
               "type": "integer",
@@ -1087,7 +1087,7 @@
               "format": "byte"
           },
           "relaySignature": {
-              "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+              "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "version": {
               "type": "integer",
@@ -1107,19 +1107,19 @@
             "$ref": "#/components/schemas/HashType"
           },
 					"timestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "parentHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "parentTimestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "rootHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "rootTimestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "subjectType": {
 						"type": "string"
@@ -1150,7 +1150,7 @@
             "type": "string"
           },
           "timestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "subjectType": {
             "type": "string"
@@ -1179,19 +1179,19 @@
             "$ref": "#/components/schemas/Hash"
           },
           "transactionTimestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "transactionParentHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "transactionParentTimestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "transactionRootHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "transactionRootTimestamp": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "tenantId": {
             "type": "string"
@@ -1267,10 +1267,10 @@
             "$ref": "#/components/schemas/Hash"
           },
           "expiredAt": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "revokedAt": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           }
         }
       },
@@ -1289,10 +1289,10 @@
 						"$ref": "#/components/schemas/Hash"
 					},
 					"cipherSuiteId": {
-						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+						"$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
 					},
           "encodedPublicKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
           },
           "status": {
             "$ref": "#/components/schemas/PublicKeyStatus"
@@ -1309,7 +1309,7 @@
         ],
         "properties": {
           "userId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/UserId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/UserId"
           },
           "certId": {
             "$ref": "#/components/schemas/CertificateId"
@@ -1366,19 +1366,19 @@
             "$ref": "#/components/schemas/Hash"
           },
           "encodedExchangeKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKeyHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "encodedSigningKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "environmentId": {
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },

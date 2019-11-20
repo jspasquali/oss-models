@@ -123,7 +123,7 @@
 		"schemas": {
       "ExternalAddressMapping": {
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "properties": {
           "serviceId": {
             "type": "string"
@@ -132,13 +132,13 @@
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "clientPodId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           }
         }
       },
@@ -154,7 +154,7 @@
       "ServiceComponentId": {
         "description": "The ID object for a service component.",
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodFundamentalId",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/PodFundamentalId",
         "required": [
           "serviceId"
         ],
@@ -166,7 +166,7 @@
             "type": "string"
           },
           "clientPodId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -176,7 +176,7 @@
         "extends": "#/components/schemas/ServiceComponentId",
         "properties": {
           "subjectHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "subjectType": {
             "type": "string"
@@ -185,7 +185,7 @@
             "type": "string"
           },
           "idType": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ContentIdType"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ContentIdType"
           }
         }
       },
@@ -193,7 +193,7 @@
         "type": "object",
         "facade": false,
         "builderFacade": false,
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "required": [
           "serviceId"
         ],
@@ -205,10 +205,10 @@
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "clientPodId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -233,7 +233,7 @@
       "FeedId": {
         "description": "The ID object for a feed.",
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ContentIdObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ContentIdObject",
         "required": [
           "name"
         ],
@@ -256,16 +256,16 @@
         "type": "object",
         "facade": false,
         "builderFacade": false,
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "properties": {
           "type": {
             "$ref": "#/components/schemas/FeedType"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "queueName": {
             "type": "string"
@@ -308,7 +308,7 @@
             "type": "string"
           },
           "payload": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Notification"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Notification"
           }
         }
       },
@@ -351,7 +351,7 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
             }
           }
         }
@@ -361,20 +361,20 @@
         "description": "Request to create subscription metadata.",
         "properties": {
           "metadata": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/SignedApplicationObject"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/SignedApplicationObject"
           },
           "sequences": {
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
             }
           }
         }
       },
       "Subscription": {
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Member",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Member",
         "facade": true,
         "builderFacade": true,
         "description": "A feed subscription.",
@@ -386,7 +386,7 @@
       },
       "SubscriptionMetadata": {
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "description": "Abstract superclass for feed metadata.",
         "properties": {
           "type": {
@@ -396,7 +396,7 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
             }
           }
         }
@@ -411,7 +411,7 @@
         ],
         "properties": {
           "subscriptionMetadata": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/SignedApplicationObject"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/SignedApplicationObject"
           },
           "externalFeedId": {
             "$ref": "#/components/schemas/FeedId"
@@ -429,10 +429,10 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
           },
           "encodedPrivateKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "userName": {
             "type": "string"
@@ -461,10 +461,10 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
           },
           "encodedPrivateKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "userName": {
             "type": "string"
@@ -480,13 +480,13 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
           },
           "encodedExchangeKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
           },
           "encodedSigningKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
           }
         }
       },
@@ -500,10 +500,10 @@
             "$ref": "#/components/schemas/Principal"
           },
           "exchangeKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalObject"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/FundamentalObject"
           },
           "signingKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalObject"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/FundamentalObject"
           }
         }
       },
@@ -520,22 +520,22 @@
         ],
         "properties": {
           "principalBaseHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "encodedPrivateKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "cipherSuiteId": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
           },
           "environmentId": {
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "userId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           },
           "userName": {
             "type": "string"
@@ -568,7 +568,7 @@
 				],
 				"properties": {
 					"displayName": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/DisplayName"
+						"$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/DisplayName"
 					},
 					"emailAddress": {
 						"type": "string",
@@ -580,7 +580,7 @@
 				"type": "object",
 				"facade": true,
         "builderFacade": true,
-				"extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+				"extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
 				"properties": {
 					"principalType": {
 						"$ref": "#/components/schemas/PrincipalType"
@@ -589,30 +589,30 @@
 						"type": "string"
 					},
 					"podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "legacyUserId": {
-						"$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
 					},
           "exchangeKeySequenceHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "signingKeySequenceHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           }
 				}
 			},
       "PodIdObject": {
         "description": "The ID object for a pod.",
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodFundamentalId",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/PodFundamentalId",
         "properties": {
         }
       },
       "EnvironmentIdObject": {
         "description": "The ID object for the one and only Environment object.",
         "type": "object",
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/FundamentalId",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/FundamentalId",
         "properties": {
         }
       },
@@ -620,7 +620,7 @@
         "type": "object",
         "facade": true,
         "builderFacade": true,
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "required": [
           "environmentId",
           "securityContextHash"
@@ -631,16 +631,16 @@
             "type": "string"
           },
           "securityContextHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "operatingPrincipalHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "podsSequenceHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "principalsSequenceHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           }
         }
       },
@@ -648,7 +648,7 @@
 				"type": "object",
 				"facade": true,
         "builderFacade": true,
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
 				"#required": [
 					"rootSecurityContextHash",
 					"publicSecurityContextHash"
@@ -656,53 +656,53 @@
 				"description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
 				"properties": {
 					"podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "#operatingPrincipalHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "#REMOVEDcontentSequenceHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "principalsSequenceHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "cipherSuiteId": {
-						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
+						"$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
 					},
 					"#operatingSecurityContextHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "rootSecurityContextHash": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
           },
           "publicSecurityContextHash": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
 					},
 					"podUrl": {
 						"type": "string",
 						"format": "url"
 					},
           "podCertificate": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemCertificate"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
           },
           "purgeTimeSeconds": {
             "type": "integer",
             "format": "int32"
           },
           "ceserviceUserId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           }
 				}
 			},
       "PodEntitlements": {
         "type": "object",
         "facade": false,
-        "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
         "description": "Pod level entitlements.",
         "properties": {
           "podId": {
-            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "objectStoreApiEnabled": {
             "type": "boolean"

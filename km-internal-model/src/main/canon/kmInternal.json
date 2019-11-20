@@ -57,19 +57,19 @@
             "format": "int64"
           },
           "publicKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
           },
           "privateKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "certificate": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemCertificate"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
           },
           "publicKeySignature": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "privateKeySignature": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           }
         }
       },
@@ -81,7 +81,7 @@
             "type": "string"
           },
           "entityKey": {
-            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
           }
         }
       }

@@ -35,7 +35,7 @@
         "builderFacade": true,
         "properties": {
           "threadId": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
           },
           "presentationML": {
             "$ref": "#/components/schemas/PresentationML"
@@ -52,7 +52,7 @@
         "builderFacade": true,
         "properties": {
           "messageId": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/MessageId"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/MessageId"
           },
           "markDown": {
             "$ref": "#/components/schemas/MarkDown"
@@ -69,7 +69,7 @@
         "builderFacade": false,
         "properties": {
           "socialMessage": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/SocialMessage"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/SocialMessage"
           }
         }
       },
@@ -80,7 +80,7 @@
         "builderFacade": false,
         "properties": {
           "maestroMessage": {
-            "$ref": "../../../../chat-model/src/main/canon/chat.json#/components/schemas/MaestroMessage"
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/MaestroMessage"
           }
         }
       }
