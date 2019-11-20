@@ -22,6 +22,8 @@ import java.time.Instant;
 
 import org.junit.Test;
 
+import com.symphony.oss.models.core.canon.facade.InstantBuilder;
+
 public class TestInstantBuilder
 {
   @Test

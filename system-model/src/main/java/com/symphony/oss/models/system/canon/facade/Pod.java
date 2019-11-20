@@ -32,9 +32,9 @@ import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 import org.symphonyoss.s2.common.hash.Hash;
 
+import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundamental.canon.facade.PodId;
 import com.symphony.oss.models.fundamental.canon.facade.SimpleSecurityContext;
 import com.symphony.oss.models.fundmental.canon.ContentIdObject;
 import com.symphony.oss.models.fundmental.canon.ContentIdType;

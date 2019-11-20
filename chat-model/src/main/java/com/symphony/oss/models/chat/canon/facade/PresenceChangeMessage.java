@@ -32,7 +32,7 @@ import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
 import com.symphony.oss.models.chat.canon.PresenceChangeMessageEntity;
-import com.symphony.oss.models.fundamental.canon.facade.TimeStamp;
+import com.symphony.oss.models.core.canon.facade.TimeStamp;
 
 /**
  * Facade for Object ObjectSchema(PresenceChangeMessage)

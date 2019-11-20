@@ -32,12 +32,10 @@ import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundamental.canon.facade.ISigningKey;
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
-import com.symphony.oss.models.fundamental.crypto.cipher.SignatureVerificationException;
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.oss.models.crypto.canon.EncodedSignature;
+import com.symphony.oss.models.crypto.cipher.SignatureVerificationException;
 import com.symphony.oss.models.fundmental.canon.CertificateId;
-import com.symphony.oss.models.fundmental.canon.EncodedSignature;
 import com.symphony.oss.models.fundmental.canon.SigningKeyEntity;
 import com.symphony.oss.models.fundmental.canon.SigningKeyIdObject;
 

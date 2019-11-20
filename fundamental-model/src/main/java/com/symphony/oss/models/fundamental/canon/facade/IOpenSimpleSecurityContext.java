@@ -22,8 +22,8 @@ import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
 import com.symphony.oss.models.fundamental.canon.facade.ISimpleSecurityContext;
-import com.symphony.oss.models.fundamental.crypto.cipher.ICipherSuite;
-import com.symphony.oss.models.fundmental.canon.EncryptedData;
+import com.symphony.oss.models.crypto.canon.EncryptedData;
+import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 
 /**
  * An open SecurityContext which has private and secret keys available.
@@ -48,6 +48,7 @@ public interface IOpenSimpleSecurityContext extends ISimpleSecurityContext
    * 
    * @return The cipher suite for the secret key.
    */
+  @Override
   ICipherSuite getCipherSuite();
 
 }

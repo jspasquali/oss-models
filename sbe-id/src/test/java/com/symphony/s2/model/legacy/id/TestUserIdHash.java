@@ -29,9 +29,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 import org.symphonyoss.s2.common.hash.Hash;
 
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.oss.models.core.canon.facade.UserId;
 import com.symphony.oss.models.fundamental.canon.facade.IUserIdObject;
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
-import com.symphony.oss.models.fundamental.canon.facade.UserId;
 import com.symphony.oss.models.fundamental.canon.facade.UserIdObject;
 import com.symphony.oss.models.sbe.id.SbeIdFactory;
 

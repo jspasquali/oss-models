@@ -76,11 +76,11 @@
   </build>
 
   <dependencies>
-    <dependency>
+    <!-- <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>fundamental-model</artifactId>
       <version>${project.version}</version>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>chat-model</artifactId>
@@ -113,14 +113,14 @@
       <artifactId>canon-runtime-java</artifactId>
     </dependency>
 
-    <dependency>
+    <!-- <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>

@@ -1,0 +1,107 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Object Model Core Types",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.core",
+	"version": "1.0",
+	"basePath": "/object/core/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.core.canon",
+		"javaFacadePackage": "com.symphony.oss.models.core.canon.facade"
+	},
+	"methods": {
+  },
+	"components": {
+		"schemas": {
+      "TimeStamp": {
+        "description": "A millisecond resolution timestamp, compatible java.util.Date.",
+        "type": "integer",
+        "format": "int64",
+        "facade": true
+      },
+      "PodId": {
+        "type": "integer",
+        "format": "int32",
+        "facade": true
+      },
+      "UserId": {
+        "type": "integer",
+        "format": "int64",
+        "facade": true
+      },
+      "PodAndUserId": {
+        "type": "integer",
+        "format": "int64",
+        "facade": true
+      },
+      "BroadcastType": {
+        "type": "string",
+        "enum": [
+          "ALL"
+        ]
+      },
+      "Instant": {
+        "description": "A nanosecond resolution timestamp, compatible with the Java8 definition of Instant.",
+        "type": "string",
+        "x-canon-attributes": {
+          "javaExternalPackage": "java.time",
+          "javaExternalType": "Instant"
+        }
+      },
+      "ApplicationPayload": {
+        "type": "object",
+        "description": "An application payload.",
+        "properties": {
+        }
+      },
+			"Envelope": {
+				"type": "object",
+				"facade": true,
+				"builderFacade": false,
+				"description": "This is not a persisted object it exists only on a pub sub topic.",
+
+				"properties": {
+          "podId": {
+            "$ref": "#/components/schemas/PodId"
+          },
+          "createdDate": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "purgeDate": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "payloadType": {
+            "type": "string"
+          },
+					"distributionList": {
+						"type": "array",
+						"x-canon-cardinality": "SET",
+						"items": {
+							"$ref": "#/components/schemas/PodAndUserId"
+						}
+					},
+          "expirationDate": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "broadcast": {
+            "$ref": "#/components/schemas/BroadcastType"
+          },
+          "conflationId": {
+              "type": "string"
+          },
+          "notificationDate": {
+            "$ref": "#/components/schemas/Instant"
+          },
+					"payload": {
+						"$ref": "#/components/schemas/ApplicationPayload"
+					}
+				}
+			}
+		}
+	}
+}

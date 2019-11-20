@@ -57,19 +57,19 @@
             "format": "int64"
           },
           "publicKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPublicKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
           },
           "privateKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "certificate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemCertificate"
           },
           "publicKeySignature": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           },
           "privateKeySignature": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           }
         }
       },
@@ -81,7 +81,7 @@
             "type": "string"
           },
           "entityKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           }
         }
       }

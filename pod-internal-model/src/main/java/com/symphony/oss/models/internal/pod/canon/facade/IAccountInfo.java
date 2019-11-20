@@ -27,7 +27,7 @@ package com.symphony.oss.models.internal.pod.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.internal.pod.canon.IAccountInfoEntity;
 
 /**

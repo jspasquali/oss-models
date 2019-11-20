@@ -29,7 +29,7 @@ import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.hash.Hash;
 
-import com.symphony.oss.models.fundamental.canon.facade.IBlob;
+import com.symphony.oss.models.core.canon.IApplicationPayload;
 import com.symphony.oss.models.fundmental.canon.IApplicationObjectEntity;
 
 /**
@@ -39,7 +39,7 @@ import com.symphony.oss.models.fundmental.canon.IApplicationObjectEntity;
  */
 @Immutable
 public interface IApplicationObject
-  extends IApplicationObjectEntity
+  extends IApplicationPayload, IApplicationObjectEntity
 {
   Hash getAbsoluteHash();
 

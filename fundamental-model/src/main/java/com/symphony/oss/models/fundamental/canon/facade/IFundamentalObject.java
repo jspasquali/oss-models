@@ -31,8 +31,8 @@ import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 import org.symphonyoss.s2.fugue.store.IFugueObject;
 
+import com.symphony.oss.models.crypto.cipher.SignatureVerificationException;
 import com.symphony.oss.models.fundamental.canon.facade.ISigningKey;
-import com.symphony.oss.models.fundamental.crypto.cipher.SignatureVerificationException;
 import com.symphony.oss.models.fundmental.canon.IFundamentalObjectEntity;
 
 /**

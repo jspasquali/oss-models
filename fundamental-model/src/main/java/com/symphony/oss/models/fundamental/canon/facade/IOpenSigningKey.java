@@ -18,10 +18,8 @@ package com.symphony.oss.models.fundamental.canon.facade;
 
 import org.symphonyoss.s2.canon.runtime.IEntity;
 
-import com.symphony.oss.models.fundamental.canon.facade.IOpenPublicKey;
-import com.symphony.oss.models.fundamental.canon.facade.ISigningKey;
-import com.symphony.oss.models.fundmental.canon.EncodedSignature;
-import com.symphony.oss.models.fundmental.canon.EncryptedData;
+import com.symphony.oss.models.crypto.canon.EncodedSignature;
+import com.symphony.oss.models.crypto.canon.EncryptedData;
 
 /**
  * An open signing key, i.e. an object containing the matching private key for the public key contained

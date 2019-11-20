@@ -33,15 +33,10 @@ import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 
+import com.symphony.oss.models.crypto.canon.CipherSuiteId;
+import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 import com.symphony.oss.models.fundamental.store.IFundamentalDatabaseWritable;
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundamental.canon.facade.IOpenPrincipalCredential;
-import com.symphony.oss.models.fundamental.canon.facade.IOpenSimpleSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.IVersionedObject;
-import com.symphony.oss.models.fundamental.canon.facade.RotationId;
-import com.symphony.oss.models.fundamental.canon.facade.WrappedKey;
-import com.symphony.oss.models.fundamental.crypto.cipher.ICipherSuite;
-import com.symphony.oss.models.fundmental.canon.CipherSuiteId;
 import com.symphony.oss.models.fundmental.canon.ISimpleSecurityContextEntity;
 
 /**

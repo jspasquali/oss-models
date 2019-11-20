@@ -132,10 +132,10 @@
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "clientPodId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -166,7 +166,7 @@
             "type": "string"
           },
           "clientPodId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -205,10 +205,10 @@
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "clientPodId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -262,7 +262,7 @@
             "$ref": "#/components/schemas/FeedType"
           },
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -429,10 +429,10 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
           },
           "encodedPrivateKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "userName": {
             "type": "string"
@@ -461,10 +461,10 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
           },
           "encodedPrivateKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "userName": {
             "type": "string"
@@ -480,13 +480,13 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
           },
           "encodedExchangeKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPublicKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
           },
           "encodedSigningKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPublicKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
           }
         }
       },
@@ -523,19 +523,19 @@
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
           },
           "encodedPrivateKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "cipherSuiteId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
           },
           "environmentId": {
             "type": "string"
           },
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "userName": {
             "type": "string"
@@ -589,10 +589,10 @@
 						"type": "string"
 					},
 					"podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "legacyUserId": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+						"$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
 					},
           "exchangeKeySequenceHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -656,7 +656,7 @@
 				"description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
 				"properties": {
 					"podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "#operatingPrincipalHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -668,7 +668,7 @@
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
           },
           "cipherSuiteId": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
 					},
 					"#operatingSecurityContextHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -684,14 +684,14 @@
 						"format": "url"
 					},
           "podCertificate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemCertificate"
           },
           "purgeTimeSeconds": {
             "type": "integer",
             "format": "int32"
           },
           "ceserviceUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
 				}
 			},
@@ -702,7 +702,7 @@
         "description": "Pod level entitlements.",
         "properties": {
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "objectStoreApiEnabled": {
             "type": "boolean"

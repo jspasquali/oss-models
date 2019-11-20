@@ -31,6 +31,10 @@ import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.oss.models.core.canon.facade.PodId;
+import com.symphony.oss.models.crypto.canon.CipherSuiteId;
+import com.symphony.oss.models.crypto.canon.PemPublicKey;
 import com.symphony.oss.models.fundamental.canon.facade.ExchangeKey;
 import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IAbstractPublicKey;
@@ -39,13 +43,9 @@ import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenPrincipalCredential;
 import com.symphony.oss.models.fundamental.canon.facade.ISigningKey;
 import com.symphony.oss.models.fundamental.canon.facade.IUserIdObject;
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
-import com.symphony.oss.models.fundamental.canon.facade.PodId;
 import com.symphony.oss.models.fundamental.canon.facade.SigningKey;
 import com.symphony.oss.models.fundamental.canon.facade.UserIdObject;
-import com.symphony.oss.models.fundmental.canon.CipherSuiteId;
 import com.symphony.oss.models.fundmental.canon.ISequence;
-import com.symphony.oss.models.fundmental.canon.PemPublicKey;
 import com.symphony.oss.models.fundmental.canon.SequenceHashes;
 import com.symphony.oss.models.system.canon.IPrincipalEntity;
 import com.symphony.oss.models.system.canon.PrincipalType;

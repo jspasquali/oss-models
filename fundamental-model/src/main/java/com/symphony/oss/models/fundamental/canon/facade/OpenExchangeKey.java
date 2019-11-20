@@ -20,16 +20,9 @@ import java.security.PrivateKey;
 
 import javax.crypto.SecretKey;
 
-import com.symphony.oss.models.fundamental.canon.facade.ExchangeKey;
-import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
-import com.symphony.oss.models.fundamental.canon.facade.IExchangeKey;
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
-import com.symphony.oss.models.fundamental.canon.facade.IOpenExchangeKey;
-import com.symphony.oss.models.fundamental.canon.facade.IOpenSigningKey;
-import com.symphony.oss.models.fundamental.canon.facade.OpenExchangeKey;
-import com.symphony.oss.models.fundamental.canon.facade.WrappedKey;
-import com.symphony.oss.models.fundamental.crypto.cipher.ISymmetricCipherSuite;
-import com.symphony.oss.models.fundmental.canon.PemPrivateKey;
+import com.symphony.oss.models.crypto.canon.PemPrivateKey;
+import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.models.crypto.cipher.ISymmetricCipherSuite;
 
 /**
  * An open exchange key.

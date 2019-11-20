@@ -35,13 +35,13 @@ import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenPrincipalCredential;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenSigningKey;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenSimpleSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
 import com.symphony.oss.models.fundamental.canon.facade.SecurityContext;
 import com.symphony.oss.models.fundamental.canon.facade.SimpleSecurityContext;
 import com.symphony.oss.models.fundamental.canon.facade.UserIdObject;

@@ -29,9 +29,8 @@ import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
-import com.symphony.oss.models.fundamental.canon.facade.IAbstractPublicKey;
-import com.symphony.oss.models.fundamental.crypto.cipher.SignatureVerificationException;
-import com.symphony.oss.models.fundmental.canon.EncodedSignature;
+import com.symphony.oss.models.crypto.canon.EncodedSignature;
+import com.symphony.oss.models.crypto.cipher.SignatureVerificationException;
 import com.symphony.oss.models.fundmental.canon.ISigningKeyEntity;
 
 /**

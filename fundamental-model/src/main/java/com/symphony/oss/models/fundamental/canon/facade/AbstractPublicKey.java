@@ -32,9 +32,9 @@ import javax.annotation.concurrent.Immutable;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 
+import com.symphony.oss.models.crypto.cipher.CipherSuite;
+import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 import com.symphony.oss.models.fundamental.canon.facade.IAbstractPublicKey;
-import com.symphony.oss.models.fundamental.crypto.cipher.CipherSuite;
-import com.symphony.oss.models.fundamental.crypto.cipher.ICipherSuite;
 import com.symphony.oss.models.fundmental.canon.AbstractPublicKeyEntity;
 
 /**

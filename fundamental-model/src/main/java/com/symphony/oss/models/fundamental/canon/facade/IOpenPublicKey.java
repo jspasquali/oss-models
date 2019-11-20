@@ -18,8 +18,7 @@ package com.symphony.oss.models.fundamental.canon.facade;
 
 import java.security.PrivateKey;
 
-import com.symphony.oss.models.fundamental.canon.facade.IAbstractPublicKey;
-import com.symphony.oss.models.fundmental.canon.PemPrivateKey;
+import com.symphony.oss.models.crypto.canon.PemPrivateKey;
 
 /**
  * An open public key, i.e. an object containing the matching private key for the public key contained

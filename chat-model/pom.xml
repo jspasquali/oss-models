@@ -88,11 +88,16 @@
       <version>${project.version}</version>
     </dependency>
 
-    <dependency>
+<!--     <dependency>
       <groupId>org.symphonyoss.s2.fugue</groupId>
       <artifactId>inmemory-fugue</artifactId>
       <version>${fugue.version}</version>
       <scope>test</scope>
+    </dependency> -->
+    <dependency>
+      <groupId>org.symphonyoss.s2.fugue</groupId>
+      <artifactId>fugue-core</artifactId>
+      <version>${fugue.version}</version>
     </dependency>
 
     <dependency>
@@ -139,10 +144,10 @@
       </exclusions>
     </dependency> -->
 
-    <dependency>
+    <!-- <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
@@ -150,6 +155,20 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
     </dependency>
   </dependencies>
 </project>

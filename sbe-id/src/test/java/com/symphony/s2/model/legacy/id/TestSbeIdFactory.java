@@ -24,8 +24,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 
 import com.symphony.oss.models.chat.canon.facade.MessageId;
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
-import com.symphony.oss.models.fundamental.canon.facade.PodId;
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.sbe.id.SbeIdFactory;
 
 @SuppressWarnings("javadoc")

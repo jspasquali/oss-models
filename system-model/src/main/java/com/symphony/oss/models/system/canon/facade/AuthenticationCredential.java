@@ -33,7 +33,7 @@ import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
-import com.symphony.oss.models.fundamental.crypto.cipher.CipherSuite;
+import com.symphony.oss.models.crypto.cipher.CipherSuite;
 import com.symphony.oss.models.system.canon.AuthenticationCredentialEntity;
 
 /**

@@ -31,8 +31,8 @@ import javax.annotation.concurrent.Immutable;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.store.IFugueObjectPayload;
 
+import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
-import com.symphony.oss.models.fundamental.canon.facade.PodId;
 import com.symphony.oss.models.fundmental.canon.IFundamentalPayloadEntity;
 
 /**

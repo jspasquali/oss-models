@@ -20,9 +20,9 @@ import java.security.PrivateKey;
 
 import org.symphonyoss.s2.canon.runtime.IEntity;
 
-import com.symphony.oss.models.fundmental.canon.EncodedSignature;
-import com.symphony.oss.models.fundmental.canon.EncryptedData;
-import com.symphony.oss.models.fundmental.canon.PemPrivateKey;
+import com.symphony.oss.models.crypto.canon.EncodedSignature;
+import com.symphony.oss.models.crypto.canon.EncryptedData;
+import com.symphony.oss.models.crypto.canon.PemPrivateKey;
 
 /**
  * An open signing key.

@@ -33,14 +33,14 @@ import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.IJsonDomNode;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.common.hash.HashProvider;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 import org.symphonyoss.s2.fugue.store.IFuguePodId;
 
-import com.symphony.oss.models.fundamental.crypto.cipher.SignatureVerificationException;
+import com.symphony.oss.models.core.canon.facade.PodId;
+import com.symphony.oss.models.crypto.cipher.SignatureVerificationException;
 import com.symphony.oss.models.fundmental.canon.DeletedObject;
 import com.symphony.oss.models.fundmental.canon.DeletionType;
 import com.symphony.oss.models.fundmental.canon.FundamentalObjectEntity;

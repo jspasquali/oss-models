@@ -333,41 +333,12 @@
   },
 	"components": {
 		"schemas": {
-      "PodId": {
-        "type": "integer",
-        "format": "int32",
-        "facade": true
-      },
-      "UserId": {
-        "type": "integer",
-        "format": "int64",
-        "facade": true
-      },
-      "PodAndUserId": {
-        "type": "integer",
-        "format": "int64",
-        "facade": true
-      },
-      "TimeStamp": {
-        "description": "A millisecond resolution timestamp, compatible java.util.Date.",
-        "type": "integer",
-        "format": "int64",
-        "facade": true
-      },
       "RotationId": {
         "description": "A crypto rotation identifier.",
         "type": "integer",
         "format": "int64",
         "facade": true
       },
-			"Instant": {
-				"description": "A nanosecond resolution timestamp, compatible with the Java8 definition of Instant.",
-				"type": "string",
-				"x-canon-attributes": {
-					"javaExternalPackage": "java.time",
-					"javaExternalType": "Instant"
-				}
-			},
 			"HashType": {
 				"description": "A Hash type ID.",
 				"type": "integer",
@@ -384,51 +355,6 @@
 					"javaExternalType": "Hash",
 					"isDirectExternal": "true"
 				}
-			},
-			"CipherSuiteId": {
-				"description": "An ID of a Cipher Suite",
-				"type": "string",
-				"enum": [
-          "RSA2048_AES256",
-          "ECC521_AES256",
-          "RSA1024_AES128"
-				]
-			},
-			"PemPublicKey": {
-				"description": "A PublicKey encoded in the PEM format",
-				"type": "string",
-				"format": "PemPublicKey"
-			},
-      "PemPrivateKey": {
-        "description": "A PrivateKey encoded in the PEM format",
-        "type": "string",
-        "format": "PemPrivateKey"
-      },
-      "PemCertificate": {
-        "description": "A Certificate encoded in the PEM format",
-        "type": "string",
-        "format": "PemCertificate"
-      },
-      "Base64SecretKey": {
-        "description": "A SecretKey encoded in the Base64 format",
-        "type": "string",
-        "format": "Base64SecretKey"
-      },
-			"EncryptedData": {
-				"description": "An encrypted payload encoded as Base64",
-				"type": "string",
-				"format": "byte"
-			},
-			"EncodedSignature": {
-				"description": "A signature encoded as Base64",
-				"type": "string",
-				"format": "byte"
-			},
-			"WrappedKey": {
-				"description": "A wrapped (encrypted) key encoded as Base64",
-				"facade": true,
-				"type": "string",
-				"format": "byte"
 			},
 			"DisplayName": {
 				"description": "The default display name for an entity",
@@ -488,7 +414,7 @@
         ],
         "properties": {
           "userId": {
-            "$ref": "#/components/schemas/UserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/UserId"
           }
         }
       },
@@ -535,7 +461,7 @@
         ],
         "properties": {
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -562,7 +488,7 @@
             "$ref": "#/components/schemas/HashType"
           },
           "signature": {
-            "$ref": "#/components/schemas/EncodedSignature"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           },
           "payload": {
             "$ref": "#/components/schemas/FundamentalPayload"
@@ -598,13 +524,13 @@
         "builderFacade": false,
         "properties": {
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "createdDate": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "purgeDate": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "payloadType": {
             "type": "string"
@@ -652,7 +578,7 @@
         ],
         "properties": {
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -732,6 +658,7 @@
 			},
 			"ApplicationObject": {
 				"type": "object",
+        "extends": "../../../../core-model/src/main/canon/core.json#/components/schemas/ApplicationPayload",
 				"facade": true,
 				"description": "The encrypted payload of a Blob",
         "properties": {
@@ -748,7 +675,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "createdDate": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "payload": {
             "$ref": "#/components/schemas/ApplicationObject"
@@ -763,7 +690,7 @@
         "description": "An unencrypted but signed payload. Sometimes we need to have a client sign a request which the sever may need to read, this might then be encrypted by an operating principal and become the payload of an encrypted blob.",
         "properties": {
           "signature": {
-            "$ref": "#/components/schemas/EncodedSignature"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           },
           "payload": {
             "$ref": "#/components/schemas/SignedPayload"
@@ -785,7 +712,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "encryptedPayload": {
-            "$ref": "#/components/schemas/EncryptedData"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncryptedData"
           }
         }
       },
@@ -815,12 +742,6 @@
           }
         }
       },
-      "BroadcastType": {
-        "type": "string",
-        "enum": [
-          "ALL"
-        ]
-      },
 			"Notification": {
 				"type": "object",
 				"facade": true,
@@ -839,10 +760,10 @@
 						}
 					},
           "expirationDate": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "broadcast": {
-            "$ref": "#/components/schemas/BroadcastType"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/BroadcastType"
           },
           "conflationId": {
               "type": "string"
@@ -854,7 +775,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "notificationDate": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "payloadBaseHash": {
             "$ref": "#/components/schemas/Hash"
@@ -954,7 +875,7 @@
         ],
         "properties": {
           "cipherSuiteId": {
-            "$ref": "#/components/schemas/CipherSuiteId"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
           },
           "parentHash": {
             "$ref": "#/components/schemas/Hash"
@@ -975,10 +896,10 @@
 				],
 				"properties": {
 					"encodedExchangeKey": {
-						"$ref": "#/components/schemas/PemPublicKey"
+						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
 					},
 					"encryptedPrivateKey": {
-						"$ref": "#/components/schemas/WrappedKey"
+						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
 					}
 				}
 			},
@@ -1022,16 +943,16 @@
         ],
         "properties": {
           "encodedPrivateKey": {
-            "$ref": "#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "encodedSecretKey": {
-            "$ref": "#/components/schemas/Base64SecretKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContextHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -1045,7 +966,7 @@
         ],
         "properties": {
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
             "$ref": "#/components/schemas/Hash"
@@ -1066,24 +987,24 @@
         ],
         "properties": {
           "encodedPrivateContextKey": {
-            "$ref": "#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "encodedSecretContextKey": {
-            "$ref": "#/components/schemas/Base64SecretKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContext": {
             "type": "string",
             "format": "byte"
           },
           "encodedPrivateSigningKey": {
-            "$ref": "#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKey": {
             "type": "string",
             "format": "byte"
           },
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },
@@ -1152,10 +1073,10 @@
             "$ref": "#/components/schemas/Hash"
           },
           "wrappedKey": {
-            "$ref": "#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           },
           "encryptedKey": {
-            "$ref": "#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           },
           "kdfVersion": {
               "type": "integer",
@@ -1166,7 +1087,7 @@
               "format": "byte"
           },
           "relaySignature": {
-              "$ref": "#/components/schemas/EncodedSignature"
+              "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           },
           "version": {
               "type": "integer",
@@ -1186,19 +1107,19 @@
             "$ref": "#/components/schemas/HashType"
           },
 					"timestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "parentHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "parentTimestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "rootHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "rootTimestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "subjectType": {
 						"type": "string"
@@ -1229,7 +1150,7 @@
             "type": "string"
           },
           "timestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "subjectType": {
             "type": "string"
@@ -1258,19 +1179,19 @@
             "$ref": "#/components/schemas/Hash"
           },
           "transactionTimestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "transactionParentHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "transactionParentTimestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "transactionRootHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "transactionRootTimestamp": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "tenantId": {
             "type": "string"
@@ -1346,10 +1267,10 @@
             "$ref": "#/components/schemas/Hash"
           },
           "expiredAt": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           },
           "revokedAt": {
-            "$ref": "#/components/schemas/Instant"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/Instant"
           }
         }
       },
@@ -1368,10 +1289,10 @@
 						"$ref": "#/components/schemas/Hash"
 					},
 					"cipherSuiteId": {
-						"$ref": "#/components/schemas/CipherSuiteId"
+						"$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
 					},
           "encodedPublicKey": {
-            "$ref": "#/components/schemas/PemPublicKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
           },
           "status": {
             "$ref": "#/components/schemas/PublicKeyStatus"
@@ -1388,7 +1309,7 @@
         ],
         "properties": {
           "userId": {
-            "$ref": "#/components/schemas/UserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/UserId"
           },
           "certId": {
             "$ref": "#/components/schemas/CertificateId"
@@ -1445,19 +1366,19 @@
             "$ref": "#/components/schemas/Hash"
           },
           "encodedExchangeKey": {
-            "$ref": "#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKeyHash": {
             "$ref": "#/components/schemas/Hash"
           },
           "encodedSigningKey": {
-            "$ref": "#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "environmentId": {
             "type": "string"
           },
           "podId": {
-            "$ref": "#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       },

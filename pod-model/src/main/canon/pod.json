@@ -55,7 +55,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
             }
           },
           "email": {
@@ -129,7 +129,7 @@
         "type": "object",
         "properties": {
           "certificate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemCertificate"
           }
         }
       },

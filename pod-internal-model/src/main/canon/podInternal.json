@@ -58,7 +58,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
             }
           }
         },
@@ -94,7 +94,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
             }
           }
         },
@@ -272,20 +272,20 @@
         "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
         "properties": {
           "relaySignature": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           },
           "rotationId": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
           },
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "version": {
             "type": "integer",
             "format": "int32"
           },
           "wrappedContentKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           }
         }
       },
@@ -305,20 +305,20 @@
         "extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/ApplicationObject",
         "properties": {
           "relaySignature": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
           },
           "rotationId": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
           },
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "version": {
             "type": "integer",
             "format": "int32"
           },
           "wrappedAccountKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           }
         }
       },

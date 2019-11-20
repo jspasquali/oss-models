@@ -29,8 +29,8 @@ import java.security.PublicKey;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 import com.symphony.oss.models.fundamental.canon.facade.IVersionedObject;
-import com.symphony.oss.models.fundamental.crypto.cipher.ICipherSuite;
 import com.symphony.oss.models.fundmental.canon.IAbstractPublicKeyEntity;
 
 /**

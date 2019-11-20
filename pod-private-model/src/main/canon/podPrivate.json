@@ -70,24 +70,24 @@
         ],
         "properties": {
           "encodedPrivateContextKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "encodedSecretContextKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Base64SecretKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContext": {
             "type": "string",
             "format": "byte"
           },
           "encodedPrivateSigningKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKey": {
             "type": "string",
             "format": "byte"
           },
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           }
         }
       }

@@ -18,10 +18,10 @@ package com.symphony.oss.models.fundamental.canon.facade;
 
 import javax.crypto.SecretKey;
 
+import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.models.crypto.cipher.ISymmetricCipherSuite;
 import com.symphony.oss.models.fundamental.canon.facade.IExchangeKey;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenPublicKey;
-import com.symphony.oss.models.fundamental.canon.facade.WrappedKey;
-import com.symphony.oss.models.fundamental.crypto.cipher.ISymmetricCipherSuite;
 
 /**
  * An open exchange key, i.e. an object containing the matching private key for the public key contained

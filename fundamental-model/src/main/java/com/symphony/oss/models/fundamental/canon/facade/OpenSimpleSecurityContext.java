@@ -21,10 +21,7 @@ import javax.crypto.SecretKey;
 import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
-import com.symphony.oss.models.fundamental.canon.facade.IOpenSimpleSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.ISimpleSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.SimpleSecurityContext;
-import com.symphony.oss.models.fundmental.canon.EncryptedData;
+import com.symphony.oss.models.crypto.canon.EncryptedData;
 
 public class OpenSimpleSecurityContext extends SimpleSecurityContext implements IOpenSimpleSecurityContext
 {

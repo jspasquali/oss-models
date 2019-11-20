@@ -78,7 +78,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>chat-model</artifactId>
+      <artifactId>fundamental-model</artifactId>
       <version>${project.version}</version>
     </dependency>
 
@@ -90,26 +90,40 @@
       <groupId>org.symphonyoss.s2.common</groupId>
       <artifactId>S2-common-dom</artifactId>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.symphonyoss.s2.common</groupId>
       <artifactId>S2-common-dom-jackson</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>org.symphonyoss.s2.canon</groupId>
       <artifactId>canon-runtime-java</artifactId>
     </dependency>
 
-    <dependency>
+    <!-- <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-    </dependency>
+    </dependency> -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
     </dependency>
   </dependencies>
 </project>

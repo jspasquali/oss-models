@@ -1,0 +1,68 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Object Model Crypto Types",
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"id": "com.symphony.s2.model.crypto",
+	"version": "1.0",
+	"basePath": "/object/crypto/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.crypto.canon",
+		"javaFacadePackage": "com.symphony.oss.models.crypto.canon.facade"
+	},
+	"methods": {
+  },
+	"components": {
+		"schemas": {
+      "CipherSuiteId": {
+        "description": "An ID of a Cipher Suite",
+        "type": "string",
+        "enum": [
+          "RSA2048_AES256",
+          "ECC521_AES256",
+          "RSA1024_AES128"
+        ]
+      },
+      "PemPublicKey": {
+        "description": "A PublicKey encoded in the PEM format",
+        "type": "string",
+        "format": "PemPublicKey"
+      },
+      "PemPrivateKey": {
+        "description": "A PrivateKey encoded in the PEM format",
+        "type": "string",
+        "format": "PemPrivateKey"
+      },
+      "PemCertificate": {
+        "description": "A Certificate encoded in the PEM format",
+        "type": "string",
+        "format": "PemCertificate"
+      },
+      "Base64SecretKey": {
+        "description": "A SecretKey encoded in the Base64 format",
+        "type": "string",
+        "format": "Base64SecretKey"
+      },
+      "EncryptedData": {
+        "description": "An encrypted payload encoded as Base64",
+        "type": "string",
+        "format": "byte"
+      },
+      "EncodedSignature": {
+        "description": "A signature encoded as Base64",
+        "type": "string",
+        "format": "byte"
+      },
+      "WrappedKey": {
+        "description": "A wrapped (encrypted) key encoded as Base64",
+        "facade": true,
+        "type": "string",
+        "format": "byte"
+      }
+		}
+	}
+}

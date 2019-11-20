@@ -40,7 +40,7 @@
           "description": "External userId of the user",
           "required": true,
           "schema": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
         }
       },
@@ -62,7 +62,7 @@
           "description": "External userId of the user",
           "required": true,
           "schema": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
         },
         "entitlementId": {
@@ -101,13 +101,13 @@
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
           },
           "cipherSuiteId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/CipherSuiteId"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/CipherSuiteId"
           },
           "wrappedKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           },
           "encryptedKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
           }
         }
       },
@@ -147,7 +147,7 @@
         ],
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
         }
       },
@@ -185,13 +185,13 @@
         ],
         "properties": {
           "encodedPrivateKey": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemPrivateKey"
+            "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPrivateKey"
           },
           "podId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
           },
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "principalBaseHash": {
             "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -205,10 +205,10 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "timestamp": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "note": {
             "type": "string",
@@ -253,7 +253,7 @@
         ],
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "value": {
             "type": "integer",
@@ -263,7 +263,7 @@
             "type": "string"
           },
           "timestamp": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "category": {
             "$ref": "#/components/schemas/PresenceType"
@@ -411,7 +411,7 @@
 						"$ref": "#/components/schemas/ThreadId"
 					},
 					"ingestionDate": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+						"$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
 					},
 					"fromPod": {
 						"type": "integer",
@@ -437,13 +437,13 @@
         "facade": true,
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "text": {
             "type": "string"
           },
           "timestamp": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "idle": {
             "type": "boolean"
@@ -621,7 +621,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "imageUrl": {
             "type": "string",
@@ -687,6 +687,9 @@
         "type": "object",
         "facade": true,
         "properties": {
+          "authenticationKeys": {
+            "$ref": "#/components/schemas/AuthenticationKey"
+          },
           "active": {
             "type": "boolean"
           },
@@ -723,7 +726,7 @@
             "type": "string"
           },
           "id": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "imageUrl": {
             "type": "string",
@@ -832,17 +835,17 @@
             "type": "string"
           },
           "creationDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "deactivationDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "delegates": {
             "description": "List of delegates",
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
             }
           },
           "deptCode": {
@@ -911,7 +914,7 @@
             "type": "string"
           },
           "lastLoginDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "location": {
             "description": "Location of the user",
@@ -922,7 +925,7 @@
             "type": "string"
           },
           "modifiedDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "myCurrentThreadId": {
             "$ref": "#/components/schemas/ThreadId"
@@ -980,7 +983,7 @@
             "type": "string"
           },
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "username": {
             "description": "The complete name of the user",
@@ -1030,7 +1033,7 @@
             "type": "string"
           },
           "imageSourceLastUpdated": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "imageSource": {
             "type": "string"
@@ -1119,7 +1122,7 @@
             "type": "string"
           },
           "creatorId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "description": {
             "type": "string"
@@ -1248,7 +1251,7 @@
             "$ref": "#/components/schemas/User"
           },
           "actualIngestionDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "originatingSystemId": {
             "type": "string"
@@ -1345,7 +1348,7 @@
         "facade": false,
         "properties": {
           "initiatorUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "isSystemEvent": {
             "type": "boolean"
@@ -1357,7 +1360,7 @@
         "extends": "#/components/schemas/MaestroPayload",
         "properties": {
           "affectedUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "isOwner": {
             "type": "boolean"
@@ -1369,13 +1372,13 @@
         "extends": "#/components/schemas/MaestroPayload",
         "properties": {
           "affectedUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "affectedUserIdList": {
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
             }
           },
           "roomType": {
@@ -1394,7 +1397,7 @@
         "extends": "#/components/schemas/MaestroPayload",
         "properties": {
           "affectedUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "isOwner": {
             "type": "boolean"
@@ -1419,10 +1422,10 @@
             "type": "boolean"
           },
           "creationDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "creator": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "cryptoRotationInfo": {
             "$ref": "#/components/schemas/CryptoRotationInfo"
@@ -1461,14 +1464,14 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
             }
           },
           "podRestrictionList": {
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+              "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
             }
           },
           "keywords": {
@@ -1485,7 +1488,7 @@
         "extends": "#/components/schemas/MaestroPayload",
         "properties": {
           "affectedUserId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "roomType": {
             "type": "string"
@@ -1646,7 +1649,7 @@
             "$ref": "#/components/schemas/User"
           },
           "requesterId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
         }
       },
@@ -1666,7 +1669,7 @@
             "type": "string"
           },
           "msgIngestionDate": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           }
         }
       },
@@ -1676,7 +1679,7 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
         }
       },
@@ -1690,10 +1693,10 @@
             "$ref": "#/components/schemas/MessageId"
           },
           "liker": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "likedMessageIngestionTime": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           }
         }
       },
@@ -1718,7 +1721,7 @@
         "extends": "#/components/schemas/MessageStatus",
         "properties": {
           "deliveredMessageIngestionTime": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "suppressed": {
             "type": "boolean"
@@ -1751,7 +1754,7 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "operationId": {
             "type": "string"
@@ -1811,7 +1814,7 @@
             }
           },
           "badgeAnchorTimestamp": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           }
         }
       },
@@ -1835,7 +1838,7 @@
         "extends": "#/components/schemas/MessageStatus",
         "properties": {
           "at": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           },
           "messageIds": {
             "type": "array",
@@ -1894,7 +1897,7 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           }
         }
       },
@@ -1903,7 +1906,7 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "userId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "prettyName": {
             "type": "string"
@@ -1952,7 +1955,7 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "fromId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "#attributes is a Map<String, Object> - can't be modelled here": [],
           "action": {
@@ -2013,7 +2016,7 @@
             "$ref": "#/components/schemas/ThreadId"
           },
           "lastReadTime": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           }
         }
       },
@@ -2022,7 +2025,7 @@
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
           "fromId": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
           },
           "lastRead": {
             "type": "array",
@@ -2070,7 +2073,7 @@
             "type": "string"
           },
           "publishTime": {
-            "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+            "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
           }
         }
       },
@@ -2164,7 +2167,7 @@
 						"type": "string"
 					},
 					"id": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+						"$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
 					},
 					"imageUrl": {
 						"type": "string",
@@ -2221,7 +2224,7 @@
 				"extends": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/VersionedObject",
 				"properties": {
 					"createdBy": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+						"$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
 					},
 					"entitlement": {
 						"type": "array",
@@ -2255,7 +2258,7 @@
 				"facade": false,
 				"properties": {
 					"createdBy": {
-						"$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+						"$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
 					},
 					"threadId": {
 						"$ref": "#/components/schemas/ThreadId"
@@ -2308,7 +2311,7 @@
                 "type": "boolean"
               },
               "joinDate": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+                "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
               },
               "userBaseHash": {
                 "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/Hash"
@@ -2340,10 +2343,10 @@
                 "type": "boolean"
               },
               "creationDate": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+                "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
               },
               "creatorId": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+                "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
               },
               "#cryptoRotationInfo": {
                 "$ref": "#/components/schemas/CryptoRotationInfo"
@@ -2384,10 +2387,10 @@
                 }
               },
               "lastDisabled": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+                "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
               },
               "lockDate": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+                "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
               },
               "meetingId": {
                 "description": "The id of the meeting associated with this stream, only used for meeting types",
@@ -2488,20 +2491,20 @@
                     "format": "byte"
                 },
                 "relaySignature": {
-                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+                    "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
                 },
                 "rotationId": {
                     "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
                 },
                 "userId": {
-                  "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+                  "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
                 },
                 "version": {
                     "type": "integer",
                     "format": "int32"
                 },
                 "wrappedKey": {
-                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+                    "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
                 }
             }
         },
@@ -2519,13 +2522,13 @@
                     "format": "byte"
                 },
                 "relaySignature": {
-                    "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/EncodedSignature"
+                    "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/EncodedSignature"
                 },
                 "rotationId": {
                     "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/RotationId"
                 },
                 "userId": {
-                  "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+                  "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
                 },
                 "threadId": {
                   "$ref": "#/components/schemas/ThreadId"
@@ -2535,7 +2538,7 @@
                     "format": "int32"
                 },
                 "wrappedKey": {
-                   "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/WrappedKey"
+                   "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/WrappedKey"
                 }
             }
           },
@@ -2544,13 +2547,13 @@
             "type": "object",
             "properties": {
               "currentKey": {
-                "type": "string"
+                "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
               },
               "previousKey": {
-                "type": "string"
+                "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemPublicKey"
               },
               "previousKeyExpirationDate": {
-                "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/TimeStamp"
+                "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/TimeStamp"
               }
             }
           },
@@ -2573,17 +2576,17 @@
            "description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
            "properties": {
              "podId": {
-               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodId"
+               "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodId"
              },
              "podUrl": {
                "type": "string",
                "format": "url"
              },
              "podCertificate": {
-               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PemCertificate"
+               "$ref": "../../../../crypto-model/src/main/canon/crypto.json#/components/schemas/PemCertificate"
              },
              "ceserviceUserId": {
-               "$ref": "../../../../fundamental-model/src/main/canon/fundamental.json#/components/schemas/PodAndUserId"
+               "$ref": "../../../../core-model/src/main/canon/core.json#/components/schemas/PodAndUserId"
              }
         }
       }

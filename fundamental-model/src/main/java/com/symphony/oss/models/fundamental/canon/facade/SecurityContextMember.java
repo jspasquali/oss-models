@@ -34,6 +34,7 @@ import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 
+import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
 import com.symphony.oss.models.fundamental.store.IFundamentalDatabaseReadOnly;
 import com.symphony.oss.models.fundamental.store.IFundamentalDatabaseWritable;
 import com.symphony.oss.models.fundmental.canon.IMemberIdObject;

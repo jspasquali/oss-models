@@ -31,10 +31,10 @@ import javax.crypto.SecretKey;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
 import com.symphony.oss.models.fundamental.canon.facade.IExchangeKey;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
-import com.symphony.oss.models.fundamental.canon.facade.WrappedKey;
 import com.symphony.oss.models.fundmental.canon.CertificateId;
 import com.symphony.oss.models.fundmental.canon.ExchangeKeyEntity;
 import com.symphony.oss.models.fundmental.canon.ExchangeKeyIdObject;

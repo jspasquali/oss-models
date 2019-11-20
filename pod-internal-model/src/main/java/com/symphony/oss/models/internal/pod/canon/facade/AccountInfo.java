@@ -31,7 +31,7 @@ import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
-import com.symphony.oss.models.fundamental.canon.facade.PodAndUserId;
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.internal.pod.canon.AccountInfoEntity;
 
 /**
