@@ -108,6 +108,19 @@ public class PodAndUserId extends PodAndUserIdTypeDef
         
       return new PodAndUserId(value);
     }
+
+    /**
+     * Create an ID from separate pod and user IDs.
+     * 
+     * @param podId   Pod ID.
+     * @param userId  User ID.
+     * 
+     * @return A combined ID.
+     */
+    public PodAndUserId build(PodId podId, UserId userId)
+    {
+      return new PodAndUserId(userId.replacePodId(userId.getValue(), podId.asInteger()));
+    }
     
     @Override
     public Long toValue(PodAndUserId instance)
