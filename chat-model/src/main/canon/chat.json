@@ -2480,7 +2480,7 @@
             "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
             "properties": {
                 "certId": {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/CertificateId"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/CertificateId"
                 },
                 "kdfVersion": {
                     "type": "integer",

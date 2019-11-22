@@ -28,7 +28,7 @@ package com.symphony.oss.models.core.canon.facade;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.fundmental.canon.RotationIdTypeDef;
+import com.symphony.oss.models.core.canon.RotationIdTypeDef;
 
 /**
  * Facade for
