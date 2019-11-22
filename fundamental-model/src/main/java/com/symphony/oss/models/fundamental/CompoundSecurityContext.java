@@ -26,6 +26,7 @@ import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 
+import com.symphony.oss.models.core.canon.facade.RotationId;
 import com.symphony.oss.models.crypto.canon.CipherSuiteId;
 import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
 import com.symphony.oss.models.fundamental.canon.facade.FundamentalObject;
@@ -34,7 +35,6 @@ import com.symphony.oss.models.fundamental.canon.facade.IFundamentalObject;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenPrincipalCredential;
 import com.symphony.oss.models.fundamental.canon.facade.IOpenSigningKey;
 import com.symphony.oss.models.fundamental.canon.facade.ISimpleSecurityContext;
-import com.symphony.oss.models.fundamental.canon.facade.RotationId;
 import com.symphony.oss.models.fundamental.canon.facade.SecurityContextMember;
 import com.symphony.oss.models.fundamental.canon.facade.SimpleSecurityContext;
 import com.symphony.oss.models.fundamental.store.IFundamentalDatabaseReadOnly;

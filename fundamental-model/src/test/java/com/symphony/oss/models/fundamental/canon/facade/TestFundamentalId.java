@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.common.hash.HashProvider;
 
+import com.symphony.oss.models.core.canon.facade.RotationId;
 import com.symphony.oss.models.fundmental.canon.ISecurityContextRotationId;
 import com.symphony.oss.models.fundmental.canon.SecurityContextRotationId;
 import com.symphony.oss.models.fundmental.canon.SecurityContextRotationIdType;

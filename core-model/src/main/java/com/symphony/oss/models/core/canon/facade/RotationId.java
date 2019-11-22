@@ -23,7 +23,7 @@
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.fundamental.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;

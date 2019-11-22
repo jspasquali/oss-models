@@ -39,6 +39,16 @@
         "format": "int64",
         "facade": true
       },
+      "RotationId": {
+        "description": "A crypto rotation identifier.",
+        "type": "integer",
+        "format": "int64",
+        "facade": true
+      },
+      "CertificateId": {
+        "type": "integer",
+        "format": "int64"
+      },
       "BroadcastType": {
         "type": "string",
         "enum": [

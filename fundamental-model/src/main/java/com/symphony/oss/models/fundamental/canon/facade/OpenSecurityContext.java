@@ -28,6 +28,7 @@ import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 import org.symphonyoss.s2.fugue.core.trace.NoOpTraceContext;
 
+import com.symphony.oss.models.core.canon.facade.RotationId;
 import com.symphony.oss.models.crypto.canon.Base64SecretKey;
 import com.symphony.oss.models.crypto.canon.EncryptedData;
 import com.symphony.oss.models.crypto.canon.PemPrivateKey;

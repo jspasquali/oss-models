@@ -95,7 +95,7 @@
             "$ref": "#/components/schemas/ThreadId"
           },
           "rotationId": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           },
           "exchangeKeyHash": {
             "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
@@ -2270,13 +2270,13 @@
             "type": "object",
             "properties": {
               "acceptedRotationId": {
-                "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
               },
               "acceptedRotationRange": {
-                "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
               },
               "retiredRotationId": {
-                "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
               }
             }
           },
@@ -2494,7 +2494,7 @@
                     "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
                 },
                 "rotationId": {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
                 },
                 "userId": {
                   "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
@@ -2525,7 +2525,7 @@
                     "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
                 },
                 "rotationId": {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
                 },
                 "userId": {
                   "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"

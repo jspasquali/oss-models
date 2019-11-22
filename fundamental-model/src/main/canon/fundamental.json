@@ -333,12 +333,6 @@
   },
 	"components": {
 		"schemas": {
-      "RotationId": {
-        "description": "A crypto rotation identifier.",
-        "type": "integer",
-        "format": "int64",
-        "facade": true
-      },
 			"HashType": {
 				"description": "A Hash type ID.",
 				"type": "integer",
@@ -360,10 +354,6 @@
 				"description": "The default display name for an entity",
 				"type": "string"
 			},
-      "CertificateId": {
-        "type": "integer",
-        "format": "int64"
-      },
 			
       "#Transaction": {
         "description": "An ID object and additional objects to be created in a single transaction.",
@@ -881,7 +871,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "rotationId": {
-            "$ref": "#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           }
         }
       },
@@ -928,7 +918,7 @@
             "$ref": "#/components/schemas/Hash"
           },
           "rotationId": {
-            "$ref": "#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           }
         }
       },
@@ -1312,7 +1302,7 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/UserId"
           },
           "certId": {
-            "$ref": "#/components/schemas/CertificateId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/CertificateId"
           }
         }
       },
