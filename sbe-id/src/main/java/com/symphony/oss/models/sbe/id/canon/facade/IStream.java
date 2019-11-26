@@ -19,25 +19,26 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-04-26 09:30:36 BST
+ *  At                  2019-05-20 08:14:54 BST
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.chat.canon.facade;
+package com.symphony.oss.models.sbe.id.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.chat.canon.IBotCredentialEntity;
+import com.symphony.oss.models.fundamental.canon.facade.IApplicationObject;
+import com.symphony.oss.models.sbe.id.canon.IStreamEntity;
 
 /**
- * Facade for Object ObjectSchema(BotCredential)
+ * Facade for Object ObjectSchema(Stream)
  *
- * A secret credential which a bot needs to bootstrap.
- * Generated from ObjectSchema(BotCredential) at #/components/schemas/BotCredential
+ * Stream object
+ * Generated from ObjectSchema(Stream) at #/components/schemas/Stream
  */
 @Immutable
-public interface IBotCredential
-  extends IBotCredentialEntity
+public interface IStream
+  extends IApplicationObject, IStreamEntity
 {
 }
 /*----------------------------------------------------------------------------------------------------

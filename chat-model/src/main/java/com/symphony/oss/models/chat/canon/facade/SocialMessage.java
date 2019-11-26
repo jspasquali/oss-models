@@ -31,12 +31,7 @@ import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
-import com.symphony.oss.models.chat.canon.IMessageIdObject;
-import com.symphony.oss.models.chat.canon.LiveCurrentMessage;
 import com.symphony.oss.models.chat.canon.SocialMessageEntity;
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundmental.canon.ContentIdObject;
-import com.symphony.oss.models.fundmental.canon.ContentIdType;
 
 /**
  * Facade for Object ObjectSchema(SocialMessage)
@@ -87,29 +82,29 @@ public class SocialMessage extends SocialMessageEntity implements ISocialMessage
     super(other);
   }
 
-  /**
-   * Return the ID object for the sequence of messages belonging to the given message.
-   * This is the sequence onto which DeliveryReceipts, ReadReceipts and ObjectStatus messages
-   * are added.
-   * 
-   * @param messageId The ID of the stream.
-   * 
-   * @return The ID object for the sequence of messages belonging to the given thread (stream).
-   */
-  public static IFundamentalId getMessageContentSequenceId(IMessageIdObject messageId)
-  {
-    return getMessageSequenceId(messageId, LiveCurrentMessage.TYPE_ID);
-  }
-
-  private static IFundamentalId getMessageSequenceId(IMessageIdObject messageId, String contentType)
-  {
-    return new ContentIdObject.Builder()
-        .withSubjectHash(messageId.getAbsoluteHash())
-        .withSubjectType(Stream.TYPE_ID)
-        .withContentType(contentType)
-        .withIdType(ContentIdType.ABSOLUTE_SEQUENCE)
-        .build();
-  }
+//  /**
+//   * Return the ID object for the sequence of messages belonging to the given message.
+//   * This is the sequence onto which DeliveryReceipts, ReadReceipts and ObjectStatus messages
+//   * are added.
+//   * 
+//   * @param messageId The ID of the stream.
+//   * 
+//   * @return The ID object for the sequence of messages belonging to the given thread (stream).
+//   */
+//  public static IFundamentalId getMessageContentSequenceId(IMessageIdObject messageId)
+//  {
+//    return getMessageSequenceId(messageId, LiveCurrentMessage.TYPE_ID);
+//  }
+//
+//  private static IFundamentalId getMessageSequenceId(IMessageIdObject messageId, String contentType)
+//  {
+//    return new ContentIdObject.Builder()
+//        .withSubjectHash(messageId.getAbsoluteHash())
+//        .withSubjectType(Stream.TYPE_ID)
+//        .withContentType(contentType)
+//        .withIdType(ContentIdType.ABSOLUTE_SEQUENCE)
+//        .build();
+//  }
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

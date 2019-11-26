@@ -35,7 +35,7 @@
         "builderFacade": true,
         "properties": {
           "threadId": {
-            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           },
           "presentationML": {
             "$ref": "#/components/schemas/PresentationML"

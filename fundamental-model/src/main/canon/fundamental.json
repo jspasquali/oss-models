@@ -22,7 +22,7 @@
           "description": "ID of the Sequence to read",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
         "limit": {
@@ -54,7 +54,7 @@
           "description": "ID of the Sequence to read",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
         "limit": {
@@ -101,7 +101,7 @@
           "required": false,
           "description": "The id of the trace context of which this operation is a part",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -127,7 +127,7 @@
           "required": true,
           "description": "The id of the object to retrieve",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
         "traceContextHash": {
@@ -135,7 +135,7 @@
           "required": false,
           "description": "The id of the trace context of which this operation is a part",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -188,7 +188,7 @@
           "required": false,
           "description": "The id of the trace context of which this operation is a part",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -227,7 +227,7 @@
           "required": true,
           "description": "The id of the object to retrieve",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
         "limit": {
@@ -274,7 +274,7 @@
           "required": true,
           "description": "The hash of the ID object which points to the object to retrieve",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
         "traceContextHash": {
@@ -282,7 +282,7 @@
           "required": false,
           "description": "The id of the trace context of which this operation is a part",
           "schema": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -333,23 +333,6 @@
   },
 	"components": {
 		"schemas": {
-			"HashType": {
-				"description": "A Hash type ID.",
-				"type": "integer",
-				"format": "int32",
-				"minimum": 0,
-				"maximum": 2
-			},
-			"Hash": {
-				"description": "A Hash value, encoded as Base64.",
-				"type": "string",
-				"format": "byte",
-				"x-canon-attributes": {
-					"javaExternalPackage": "org.symphonyoss.s2.common.hash",
-					"javaExternalType": "Hash",
-					"isDirectExternal": "true"
-				}
-			},
 			"DisplayName": {
 				"description": "The default display name for an entity",
 				"type": "string"
@@ -388,7 +371,7 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           }
         }
@@ -429,7 +412,7 @@
         ],
         "properties": {
           "subjectHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "subjectType": {
             "type": "string"
@@ -464,7 +447,7 @@
         ],
         "properties": {
           "contentHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -475,7 +458,7 @@
         "builderFacade": true,
         "properties": {
           "hashType": {
-            "$ref": "#/components/schemas/HashType"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
           },
           "signature": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
@@ -551,7 +534,7 @@
         ],
         "properties": {
           "hashType": {
-            "$ref": "#/components/schemas/HashType"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
           },
           "sortKey": {
             "type": "string"
@@ -600,19 +583,19 @@
           "absolute": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           },
           "current": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           },
           "hashCurrent": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           }
         }
@@ -625,7 +608,7 @@
         "builderFacade": true,
         "properties": {
           "signingKeyHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "sequences": {
             "$ref": "#/components/schemas/SequenceHashes"
@@ -639,10 +622,10 @@
 				"extends": "#/components/schemas/ObjectPayload",
 				"properties": {
 					"prevHash": {
-						"$ref": "#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"baseHash": {
-						"$ref": "#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					}
 				}
 			},
@@ -662,7 +645,7 @@
         "builderFacade": true,
         "properties": {
           "signingKeyHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "createdDate": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
@@ -699,7 +682,7 @@
         ],
         "properties": {
           "securityContextHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "encryptedPayload": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
@@ -746,7 +729,7 @@
 						"type": "array",
 						"x-canon-cardinality": "SET",
 						"items": {
-							"$ref": "#/components/schemas/Hash"
+							"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 						}
 					},
           "expirationDate": {
@@ -759,22 +742,22 @@
               "type": "string"
           },
 					"contextHash": {
-						"$ref": "#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"traceContextHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "notificationDate": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "payloadBaseHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "payloadPrevHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "payloadHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "payloadId": {
             "$ref": "#/components/schemas/FundamentalId"
@@ -783,10 +766,10 @@
 						"$ref": "#/components/schemas/FundamentalObject"
 					},
           "legacyIdHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "referencedLegacyIdHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "sequence": {
             "type": "integer",
@@ -796,7 +779,7 @@
               "type": "boolean"
           },
           "subscriptionHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "initialVersion": {
               "type": "boolean"
@@ -868,7 +851,7 @@
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
           },
           "parentHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "rotationId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
@@ -915,7 +898,7 @@
             "$ref": "#/components/schemas/SecurityContextRotationIdType"
           },
           "securityContextBaseHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "rotationId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
@@ -939,7 +922,7 @@
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/Base64SecretKey"
           },
           "securityContextHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "podId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
@@ -959,7 +942,7 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -1019,10 +1002,10 @@
 				],
 				"properties": {
 					"groupBaseHash": {
-						"$ref": "#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"memberBaseHash": {
-						"$ref": "#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"membershipStatus": {
 						"$ref": "#/components/schemas/MembershipStatus"
@@ -1057,10 +1040,10 @@
         "description": "wrappedKey is the SecurityContext SecretKey wrapped by the member's Public ExchangeKey. encryptedKey is the SecurityContext SecretKey encrypted with the member's AccountSecretKey. This may be added as an update by the member as a performance optimization.",
         "properties": {
           "securityContextHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "memberExchangeKeyHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "wrappedKey": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
@@ -1094,19 +1077,19 @@
         ],
 				"properties": {
           "hashType": {
-            "$ref": "#/components/schemas/HashType"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
           },
 					"timestamp": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "parentHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "parentTimestamp": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "rootHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "rootTimestamp": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
@@ -1166,19 +1149,19 @@
         ],
         "properties": {
           "transactionHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "transactionTimestamp": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "transactionParentHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "transactionParentTimestamp": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           },
           "transactionRootHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "transactionRootTimestamp": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
@@ -1254,7 +1237,7 @@
         ],
         "properties": {
           "keyHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "expiredAt": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
@@ -1276,7 +1259,7 @@
 				],
 				"properties": {
 					"principalBaseHash": {
-						"$ref": "#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"cipherSuiteId": {
 						"$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
@@ -1350,16 +1333,16 @@
         ],
         "properties": {
           "principalBaseHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "exchangeKeyHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "encodedExchangeKey": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
           },
           "signingKeyHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "encodedSigningKey": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
@@ -1393,7 +1376,7 @@
             "$ref": "#/components/schemas/SequenceType"
           },
           "securityContextHash": {
-            "$ref": "#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       }

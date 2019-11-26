@@ -44,14 +44,14 @@
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/CertificateId"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/CertificateId"
             }
           },
           "rotationId": {
             "in": "query",
             "required": true,
             "schema": {
-              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
             }
           },
           "userId": {
@@ -80,14 +80,14 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
             }
           },
           "rotationId": {
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
             }
           },
           "userId": {
@@ -132,7 +132,7 @@
           "required": true,
           "multiple": true,
           "schema": {
-            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           }
         },
         "response": {
@@ -275,7 +275,7 @@
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "rotationId": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           },
           "userId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
@@ -308,7 +308,7 @@
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
           },
           "rotationId": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/RotationId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           },
           "userId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
@@ -347,7 +347,7 @@
             "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/CryptoRotationInfo"
           },
           "streamId": {
-            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           }
         }
       },
@@ -539,7 +539,7 @@
         "facade": true,
         "properties": {
           "myCurrentThreadId": {
-            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           },
           "prettyName": {
             "type": "string"

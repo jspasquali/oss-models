@@ -44,7 +44,7 @@ import com.symphony.oss.models.crypto.cipher.SignatureVerificationException;
 import com.symphony.oss.models.fundmental.canon.DeletedObject;
 import com.symphony.oss.models.fundmental.canon.DeletionType;
 import com.symphony.oss.models.fundmental.canon.FundamentalObjectEntity;
-import com.symphony.oss.models.fundmental.canon.HashType;
+import com.symphony.oss.models.core.canon.HashType;
 import com.symphony.oss.models.fundmental.canon.IDeletedObject;
 import com.symphony.oss.models.fundmental.canon.IFundamentalObjectEntity;
 import com.symphony.oss.models.fundmental.canon.ISequenceHashes;

@@ -67,9 +67,9 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>  
     
-    <s2.common.version>0.2.6</s2.common.version>
-    <canon.version>0.2.12</canon.version>
-    <fugue.version>0.2.37-SNAPSHOT</fugue.version>
+    <s2.common.version>0.2.7</s2.common.version>
+    <canon.version>0.2.13</canon.version>
+    <fugue.version>0.2.37</fugue.version>
     
     <canon.template.groupid>org.symphonyoss.s2.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
@@ -91,6 +91,7 @@
         <module>system-model</module>
         <module>core-model</module>
         <module>crypto-model</module>
+        <module>object-model</module>
   </modules>
 
   <repositories>

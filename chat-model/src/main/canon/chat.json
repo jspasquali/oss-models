@@ -15,155 +15,9 @@
 		"javaFacadePackage": "com.symphony.oss.models.chat.canon.facade"
 	},
   "methods": {
-    "/securityContexts/estsablish": {
-      "post": {
-        "summary": "Get or create a securityContext",
-        "operationId": "establish",
-        "payload": {
-          "required": true,
-          "schema": {
-            "$ref": "#/components/schemas/EstablishSecurityContextRequest"
-          }
-        },
-        "response": {
-          "required": true,
-          "schema": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/FundamentalObject"
-          }
-        }
-      }
-    },
-    "/users/{userId}": {
-      "parameters": {
-        "userId": {
-          "in": "path",
-          "description": "External userId of the user",
-          "required": true,
-          "schema": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-          }
-        }
-      },
-      "get": {
-        "summary": "Get the base user object",
-        "operationId": "getUser",
-        "response": {
-          "required": false,
-          "schema": {
-            "$ref": "#/components/schemas/User"
-          }
-        }
-      }
-    },
-    "/users/{userId}/entitlements/{entitlementId}": {
-      "parameters": {
-        "userId": {
-          "in": "path",
-          "description": "External userId of the user",
-          "required": true,
-          "schema": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-          }
-        },
-        "entitlementId": {
-          "in": "path",
-          "description": "Entitlement ID",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      },
-      "get": {
-        "summary": "Get the given entitlement for the given user. Returns 201 if the entitlement exist or 403 if not.",
-        "operationId": "validateEntitlement"
-      }
-    }
   },
 	"components": {
 		"schemas": {
-      "EstablishSecurityContextRequest": {
-        "type": "object",
-        "required": [
-          "threadId",
-          "rotationId",
-          "exchangeKeyHash",
-          "wrappedKey"
-        ],
-        "properties": {
-          "threadId": {
-            "$ref": "#/components/schemas/ThreadId"
-          },
-          "rotationId": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
-          },
-          "exchangeKeyHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
-          },
-          "cipherSuiteId": {
-            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
-          },
-          "wrappedKey": {
-            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
-          },
-          "encryptedKey": {
-            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
-          }
-        }
-      },
-      "ThreadIdObject": {
-        "description": "The ID object for an SBE thread. Points to a Stream.",
-        "type": "object",
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/PodFundamentalId",
-        "properties": {
-          "threadId": {
-            "$ref": "#/components/schemas/ThreadId"
-          }
-        }
-      },
-      "MessageIdObject": {
-        "description": "The ID object for an SBE message, messageType is the (fully qualified) TYPE_ID for the message type.",
-        "type": "object",
-        "extends": "#/components/schemas/ThreadIdObject",
-        "required": [
-          "messageId",
-          "messageType"
-        ],
-        "properties": {
-          "messageId": {
-            "$ref": "#/components/schemas/MessageId"
-          },
-          "messageType": {
-            "type": "string"
-          }
-        }
-      },
-      "UserMessageIdObject": {
-        "description": "The ID object for a users interaction with an SBE message, messageType is the (fully qualified) TYPE_ID for the message type.",
-        "type": "object",
-        "extends": "#/components/schemas/MessageIdObject",
-        "required": [
-          "userId"
-        ],
-        "properties": {
-          "userId": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-          }
-        }
-      },
-      "AttachmentMessageIdObject": {
-        "description": "The ID object for an SBE attachment download message, messageType is the (fully qualified) TYPE_ID for the message type.",
-        "type": "object",
-        "extends": "#/components/schemas/UserMessageIdObject",
-        "required": [
-          "fileId"
-        ],
-        "properties": {
-          "fileId": {
-            "type": "string"
-          }
-        }
-      },
 		  "BookmarkType": {
         "description": "Taken from BookmarkMessageType.java.",
         "type": "string",
@@ -172,31 +26,6 @@
           "DELETE",
           "UPDATE"
         ]
-      },
-      "BotCredential": {
-        "type": "object",
-        "facade": true,
-        "description": "A secret credential which a bot needs to bootstrap.",
-        "required": [
-          "encodedPrivateKey",
-          "podId",
-          "userId",
-          "principalBaseHash"
-        ],
-        "properties": {
-          "encodedPrivateKey": {
-            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
-          },
-          "podId": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
-          },
-          "userId": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-          },
-          "principalBaseHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
-          }
-        }
       },
       "Bookmark": {
         "description": "Taken from BookmarkMessage.java.",
@@ -245,7 +74,7 @@
       "Presence": {
         "description": "A livecurrent message as persisted in the DB.",
         "type": "object",
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
         "facade": false,
         "required": [
           "userId",
@@ -277,7 +106,7 @@
 		  "ForwarderRequest": {
         "description": "A livecurrent message as persisted in the DB.",
         "type": "object",
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
         "facade": false,
         "properties": {
           "fugueConfig": {
@@ -299,11 +128,6 @@
 		  "#LiveCurrentMessage": ["And its subclasses"],
 		
 		  "MessageId": {
-        "type": "string",
-        "format": "byte",
-        "facade": true
-      },
-      "ThreadId": {
         "type": "string",
         "format": "byte",
         "facade": true
@@ -376,7 +200,7 @@
 			"LiveCurrentMessage": {
 				"description": "A livecurrent message as persisted in the DB.",
 				"type": "object",
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
 				"facade": false,
 				"required": [
 					"version",
@@ -401,14 +225,14 @@
 						"$ref": "#/components/schemas/MessageId"
 					},
 					"objectHash": {
-						"$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"schemaVersion": {
 						"type": "integer",
 						"format": "int16"
 					},
 					"threadId": {
-						"$ref": "#/components/schemas/ThreadId"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
 					},
 					"ingestionDate": {
 						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
@@ -604,16 +428,16 @@
             "type": "boolean"
           },
                   "streamBaseHash" : {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
                   },
                   "streamAbsoluteHash" : {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
                   },
                   "streamMembershipBaseHash" : {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
                   },
                   "streamMembershipAbsoluteHash" : {
-                    "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
                   }
 				}
 			},
@@ -805,7 +629,7 @@
         "description": "A Symphony maestro user based on IMaestroUser",
         "type": "object",
         "facade": true,
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
         "properties": {
           "active": {
             "description": "Tells whether the user is active or not",
@@ -928,7 +752,7 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
           },
           "myCurrentThreadId": {
-            "$ref": "#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           },
           "picOptOut": {
             "type": "string"
@@ -1452,7 +1276,7 @@
             "type": "boolean"
           },
           "parentThreadID": {
-            "$ref": "#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           },
           "memberAddUserEnabled": {
             "type": "boolean"
@@ -2013,7 +1837,7 @@
         "type": "object",
         "properties": {
           "threadId": {
-            "$ref": "#/components/schemas/ThreadId"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
           },
           "lastReadTime": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
@@ -2118,153 +1942,6 @@
           }
         }
       },
-			
-			
-			
-			"#This is unsorted content": [
-				"Comment"
-			],
-			
-			
-			
-			
-			
-			
-			
-			"SharedUserInfo": {
-				"description": "The bits of a user record which may be shared with other users.",
-				"type": "object",
-				"extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/VersionedObject",
-				"required": [
-					"prettyName",
-					"screenName"
-				],
-				"properties": {
-					"active": {
-						"type": "boolean"
-					},
-					"assetClass": {
-						"type": "array",
-						"x-canon-cardinality": "SET",
-						"items": {
-							"type": "string"
-						}
-					},
-					"company": {
-						"type": "string"
-					},
-					"deptName": {
-						"type": "string"
-					},
-					"divName": {
-						"type": "string"
-					},
-					"emailAddress": {
-						"type": "string",
-						"format": "email"
-					},
-					"firstName": {
-						"type": "string"
-					},
-					"id": {
-						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-					},
-					"imageUrl": {
-						"type": "string",
-						"format": "url"
-					},
-					"imageUrlSmall": {
-						"type": "string",
-						"format": "url"
-					},
-					"industry": {
-						"type": "array",
-						"x-canon-cardinality": "SET",
-						"items": {
-							"type": "string"
-						}
-					},
-					"jobFunction": {
-						"type": "string"
-					},
-					"location": {
-						"type": "string"
-					},
-					"mobileNumber": {
-						"type": "string",
-						"format": "phone"
-					},
-					"prettyName": {
-						"type": "string"
-					},
-					"screenName": {
-						"type": "string"
-					},
-					"surname": {
-						"type": "string"
-					},
-					"title": {
-						"type": "string"
-					},
-					"userType": {
-						"type": "string"
-					},
-					"username": {
-						"type": "string"
-					},
-					"workPhone": {
-						"type": "string",
-						"format": "phone"
-					}
-				}
-			},
-			"PrivateUserInfo": {
-				"description": "The bits of a user record which are not shared with other users.",
-				"type": "object",
-				"extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/VersionedObject",
-				"properties": {
-					"createdBy": {
-						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-					},
-					"entitlement": {
-						"type": "array",
-						"x-canon-cardinality": "SET",
-						"items": {
-							"$ref": "#/components/schemas/Entitlement"
-						}
-					},
-					"roles": {
-						"type": "array",
-						"x-canon-cardinality": "SET",
-						"items": {
-							"$ref": "#/components/schemas/Role"
-						}
-					},
-					"samlId": {
-						"type": "string"
-					},
-					"source": {
-						"type": "string"
-					},
-					"verifiedForBadge": {
-						"type": "boolean"
-					}
-				}
-			},
-			"Venue": {
-				"description": "A venue, chatroom, MIM or IM.",
-				"type": "object",
-				"extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/VersionedObject",
-				"facade": false,
-				"properties": {
-					"createdBy": {
-						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-					},
-					"threadId": {
-						"$ref": "#/components/schemas/ThreadId"
-					}
-				}
-			},
           "CryptoRotationInfo": {
             "description": "This is used by podInternalApi",
             "type": "object",
@@ -2280,204 +1957,10 @@
               }
             }
           },
-          "StreamType": {
-            "description": "Stream type",
-            "type": "string",
-            "enum": [
-              "ROOM",
-              "MIM",
-              "IM",
-              "MEETING",
-              "POST"
-            ]
-          },
-          "StreamState": {
-            "description": "Stream states",
-            "type": "string",
-            "enum": [
-              "NEGOTIATION",
-              "CREATED",
-              "ACTIVE",
-              "INACTIVE",
-              "DESTROYED"
-            ]
-          },
-          "#StreamMembership": {
-            "description": "Stream membership object",
-            "type": "object",
-            "properties": {
-              "owner": {
-                "description": "If the member is owner of the room",
-                "type": "boolean"
-              },
-              "joinDate": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
-              },
-              "userBaseHash": {
-                "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
-              }
-            }
-          },
-          "#StreamMembers": {
-            "type": "object",
-            "description": "Representation of all stream members",
-            "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
-            "properties": {
-              "members": {
-                "type": "array",
-                "x-canon-cardinality": "LIST",
-                "items": {
-                  "$ref": "#/components/schemas/StreamMembership"
-                }
-              }
-            }
-          },
-          "Stream": {
-            "description": "Stream object",
-            "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
-            "type": "object",
-            "facade": true,
-            "properties": {
-              "copyDisabled": {
-                "description": "If members are allowed to copy message from stream",
-                "type": "boolean"
-              },
-              "creationDate": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
-              },
-              "creatorId": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-              },
-              "#cryptoRotationInfo": {
-                "$ref": "#/components/schemas/CryptoRotationInfo"
-              },
-              "description": {
-                "description": "Stream description",
-                "type": "string"
-              },
-              "crossPod": {
-                "description": "If the stream is cross pod",
-                "type": "boolean"
-              },
-              "discoverable": {
-                "description": "Show chat in search",
-                "type": "boolean"
-              },
-              "externalOwned": {
-                "description": "If the streams belongs to other pod",
-                "type": "boolean"
-              },
-              "locked": {
-                "description": "If the stream is locked",
-                "type": "boolean"
-              },
-              "publicRoom": {
-                "description": "If the stream is a public room",
-                "type": "boolean"
-              },
-              "readOnly": {
-                "description": "If the stream is readonly, i.e. only creator can send messages to stream ",
-                "type": "boolean"
-              },
-              "keywords": {
-                "description": "List of keywords",
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "lastDisabled": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
-              },
-              "lockDate": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
-              },
-              "meetingId": {
-                "description": "The id of the meeting associated with this stream, only used for meeting types",
-                "type": "string"
-              },
-              "memberAddUserEnabled": {
-                "description": "If members can add people",
-                "type": "boolean"
-              },
-              "multiLateral": {
-                "description": "Stream belongs to more than one pod",
-                "type": "boolean"
-              },
-              "name": {
-                "description": "Stream name",
-                "type": "string"
-              },
-              "ownerPodId": {
-                "description": "Id of the pod which created the stream",
-                "type": "integer",
-                "format": "int64"
-              },
-              "ownerPodName": {
-                "description": "Name of the pod which created the stream",
-                "type": "string"
-              },
-              "parentStreamId": {
-                "$ref": "#/components/schemas/ThreadIdObject"
-              },
-              "podDistributionHistory": {
-                "description": "List of companies, in a xpod stream, which were or are member of this stream",
-                "type": "array",
-                "x-canon-cardinality": "SET",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "podDistributionList": {
-                "description": "List of companies, in a xpod stream, which currently are member of this stream",
-                "type": "array",
-                "x-canon-cardinality": "SET",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "podRestrictionList": {
-                "description": "",
-                "type": "array",
-                "x-canon-cardinality": "SET",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "sendMessageDisabled": {
-                "description": "",
-                "type": "boolean"
-              },
-              "sendMessageDisabledReasonCode": {
-                "description": "",
-                "type": "string"
-              },
-              "shareHistoryEnabled": {
-                "description": "If new members can view history",
-                "type": "boolean"
-              },
-              "state": {
-                "$ref": "#/components/schemas/StreamState"
-              },
-              "streamId": {
-                "$ref": "#/components/schemas/ThreadId"
-              },
-              "type": {
-                "$ref": "#/components/schemas/StreamType"
-              },
-              "largeStream": {
-                "description": "Tell whether is a large room or not",
-                "type": "boolean"
-              }
-            }
-          },
           "WrappedAccountKey": {
             "description": "A Symphony wrapped account key",
             "type": "object",
-            "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+            "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
             "properties": {
                 "certId": {
                     "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/CertificateId"
@@ -2511,7 +1994,7 @@
         "WrappedContentKey": {
             "description": "A Symphony wrapped content key",
             "type": "object",
-            "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+            "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
             "properties": {
                 "kdfVersion": {
                     "type": "integer",
@@ -2531,7 +2014,7 @@
                   "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
                 },
                 "threadId": {
-                  "$ref": "#/components/schemas/ThreadId"
+                  "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
                 },
                 "version": {
                     "type": "integer",
@@ -2568,7 +2051,7 @@
            "type": "object",
            "facade": false,
            "builderFacade": false,
-           "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+           "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
            "required": [
              "podId",
              "podCertificate"

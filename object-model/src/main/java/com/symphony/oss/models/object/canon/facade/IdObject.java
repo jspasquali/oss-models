@@ -19,42 +19,65 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-05-20 08:14:54 BST
+ *  At                  2019-11-25 09:18:48 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.chat.canon.facade;
+package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
+import org.symphonyoss.s2.common.hash.Hash;
+import org.symphonyoss.s2.common.hash.HashProvider;
 
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.chat.canon.IThreadIdObject;
-import com.symphony.oss.models.chat.canon.LiveCurrentMessage;
-import com.symphony.oss.models.chat.canon.StreamEntity;
-import com.symphony.oss.models.fundmental.canon.ContentIdObject;
-import com.symphony.oss.models.fundmental.canon.ContentIdType;
+import com.symphony.oss.models.object.canon.IdObjectEntity;
 
 /**
- * Facade for Object ObjectSchema(Stream)
+ * Facade for Object ObjectSchema(IdObject)
  *
- * Stream object
- * Generated from ObjectSchema(Stream) at #/components/schemas/Stream
+ * An ID object, applications define IDs as a sub-type of this.
+ * Generated from ObjectSchema(IdObject) at #/components/schemas/IdObject
  */
 @Immutable
-public class Stream extends StreamEntity implements IStream
+public class IdObject extends IdObjectEntity implements IIdObject
 {
+  private final Hash hash_;
+  
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public Stream(AbstractStreamBuilder<?,?> builder)
+  public IdObject(AbstractIdObjectBuilder<?,?> builder)
   {
-    super(builder);
+    super(initHashType(builder));
+    
+    hash_ = generateHash();
+  }
+  
+  private static AbstractIdObjectBuilder<?,?> initHashType(AbstractIdObjectBuilder<?,?> builder)
+  {
+    if(builder.getHashType() == null)
+    {
+      for(Object value : builder.getCanonAllFields())
+      {
+        if(value instanceof Hash)
+        {
+          builder.withHashType(((Hash)value).getTypeId());
+          break;
+        }
+      }
+      
+      if(builder.getHashType() == null)
+      {
+        // We will have to use type 1 forever with IDs containing no hashes.
+        builder.withHashType(1);
+      }
+    }
+    return builder;
   }
   
   /**
@@ -63,9 +86,11 @@ public class Stream extends StreamEntity implements IStream
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public Stream(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public IdObject(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    
+    hash_ = generateHash();
   }
   
   /**
@@ -74,9 +99,11 @@ public class Stream extends StreamEntity implements IStream
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public Stream(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public IdObject(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    
+    hash_ = generateHash();
   }
    
   /**
@@ -84,43 +111,22 @@ public class Stream extends StreamEntity implements IStream
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public Stream(IStream other)
+  public IdObject(IIdObject other)
   {
     super(other);
+    
+    hash_ = generateHash();
   }
 
-  /**
-   * Return the ID object for the sequence of messages belonging to the given thread (stream).
-   * 
-   * @param threadId The ID of the stream.
-   * 
-   * @return The ID object for the sequence of messages belonging to the given thread (stream).
-   */
-  public static IFundamentalId getStreamContentSequenceId(IThreadIdObject threadId)
+  @Override
+  public Hash getHash()
   {
-    return getStreamSequenceId(threadId, LiveCurrentMessage.TYPE_ID);
+    return hash_;
   }
 
-  /**
-   * Return the ID object for the sequence of child streams whose parent is this stream.
-   * 
-   * @param threadId The ID of the stream.
-   * 
-   * @return The ID object for the sequence of messages belonging to the given thread (stream).
-   */
-  public static IFundamentalId getChildStreamSequenceId(IThreadIdObject threadId)
+  private Hash generateHash()
   {
-    return getStreamSequenceId(threadId, Stream.TYPE_ID);
-  }
-
-  private static IFundamentalId getStreamSequenceId(IThreadIdObject threadId, String contentType)
-  {
-    return new ContentIdObject.Builder()
-        .withSubjectHash(threadId.getAbsoluteHash())
-        .withSubjectType(Stream.TYPE_ID)
-        .withContentType(contentType)
-        .withIdType(ContentIdType.CURRENT_SEQUENCE)
-        .build();
+    return HashProvider.getHashOf(getHashType().asInteger(), serialize());
   }
 }
 /*----------------------------------------------------------------------------------------------------

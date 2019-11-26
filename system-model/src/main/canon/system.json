@@ -138,7 +138,7 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -176,7 +176,7 @@
         "extends": "#/components/schemas/ServiceComponentId",
         "properties": {
           "subjectHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "subjectType": {
             "type": "string"
@@ -265,7 +265,7 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "principalBaseHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "queueName": {
             "type": "string"
@@ -351,7 +351,7 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           }
         }
@@ -367,7 +367,7 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           }
         }
@@ -396,7 +396,7 @@
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
-              "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
             }
           }
         }
@@ -520,7 +520,7 @@
         ],
         "properties": {
           "principalBaseHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "encodedPrivateKey": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
@@ -595,10 +595,10 @@
 						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
 					},
           "exchangeKeySequenceHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "signingKeySequenceHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
 				}
 			},
@@ -631,16 +631,16 @@
             "type": "string"
           },
           "securityContextHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "operatingPrincipalHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "podsSequenceHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "principalsSequenceHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
@@ -659,25 +659,25 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           },
           "#operatingPrincipalHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "#REMOVEDcontentSequenceHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "principalsSequenceHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "cipherSuiteId": {
 						"$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
 					},
 					"#operatingSecurityContextHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "rootSecurityContextHash": {
-            "$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "publicSecurityContextHash": {
-						"$ref": "https://models.oss.symphony.com/fundamental.json#/components/schemas/Hash"
+						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
 					},
 					"podUrl": {
 						"type": "string",

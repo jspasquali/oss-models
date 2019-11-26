@@ -17,31 +17,24 @@
  * Proforma generated from
  *		Template groupId		 org.symphonyoss.s2.canon
  *           artifactId canon-template-java
- *		Template name		   proforma/java/Object/I_.java.ftl
+ *		Template name		   proforma/java/Model/I_ModelEntity.java.ftl
  *		Template version	   1.0
- *  At                  2019-05-20 08:14:54 BST
+ *  At                  2019-11-22 16:33:59 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.chat.canon.facade;
+package com.symphony.oss.models.sbe.id.canon.facade;
 
-import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.fundamental.canon.facade.IApplicationObject;
-import com.symphony.oss.models.chat.canon.IStreamEntity;
+import org.symphonyoss.s2.canon.runtime.IEntity;
 
 /**
- * Facade for Object ObjectSchema(Stream)
- *
- * Stream object
- * Generated from ObjectSchema(Stream) at #/components/schemas/Stream
+ * Base interface for Sbeid model entities.
  */
-@Immutable
-public interface IStream
-  extends IApplicationObject, IStreamEntity
+public interface ISbeidModelEntity extends IEntity
 {
 }
 /*----------------------------------------------------------------------------------------------------
- * End of template proforma/java/Object/I_.java.ftl
+ * End of template proforma/java/Model/I_ModelEntity.java.ftl
  * End of code generation
  *------------------------------------------------------------------------------------------------- */

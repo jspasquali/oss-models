@@ -32,10 +32,8 @@ import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.common.hash.HashProvider;
 import org.symphonyoss.s2.fugue.IFugueServer;
+import com.symphony.oss.models.core.canon.HashType;
 
-import com.symphony.oss.models.fundamental.canon.facade.ITraceTransaction;
-import com.symphony.oss.models.fundamental.canon.facade.TraceTransaction;
-import com.symphony.oss.models.fundmental.canon.HashType;
 import com.symphony.oss.models.fundmental.canon.TraceTransactionEntity;
 
 /**

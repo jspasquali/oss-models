@@ -28,7 +28,7 @@ package com.symphony.oss.models.chat.canon.facade;
 import javax.annotation.concurrent.Immutable;
 
 import com.symphony.oss.models.chat.canon.IMaestroUserEntity;
-import com.symphony.oss.models.fundamental.canon.facade.IApplicationObject;
+import com.symphony.oss.models.core.canon.IApplicationPayload;
 
 /**
  * Facade for Object ObjectSchema(MaestroUser)
@@ -38,7 +38,7 @@ import com.symphony.oss.models.fundamental.canon.facade.IApplicationObject;
  */
 @Immutable
 public interface IMaestroUser
-  extends IApplicationObject, IMaestroUserEntity
+  extends IApplicationPayload, IMaestroUserEntity
 {
   /**
    * Check to see if the user has the given entitlement ID.

@@ -19,31 +19,28 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/TypeDef/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-02-05 11:16:49 GMT
+ *  At                  2019-11-25 09:18:48 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.chat.canon.facade;
+package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.apache.commons.codec.binary.Base64;
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
-import com.symphony.oss.models.chat.canon.ThreadIdTypeDef;
+import com.symphony.oss.models.object.canon.PartitionKeyTypeDef;
 
 /**
  * Facade for
- * Formatted as Base64 encoded bytes
- * Generated from TypeDef(ThreadId,type=String) at #/components/schemas/ThreadId
+ * A partition key.
+ * Generated from TypeDef(PartitionKey,type=String) at #/components/schemas/PartitionKey
  */
 @Immutable
-public class ThreadId extends ThreadIdTypeDef
+public class PartitionKey extends PartitionKeyTypeDef implements org.symphonyoss.s2.fugue.kv.IKvPartitionKey
 {
   private static Builder theBuilder = new Builder();
   
-  private ThreadId(@Nonnull ImmutableByteArray value)
+  private PartitionKey(@Nonnull String value)
   {
     super(value);
   }
@@ -62,73 +59,28 @@ public class ThreadId extends ThreadIdTypeDef
     return theBuilder;
   }
   
-  @Override
-  public String toString()
-  {
-    return toBase64String();
-  }
-
   /**
-   * 
-   * @return This thread ID as a Base64 string.
+   * Builder for PartitionKey.
    */
-  public String toBase64String()
-  {
-    return getValue().toBase64String();
-  }
-  
-  /**
-   * 
-   * @return This threadId as a URL safe Base64 String.
-   */
-  public String toBase64UrlSafeString()
-  {
-    return getValue().toBase64UrlSafeString();
-  }
-  /**
-   * Builder for ThreadId.
-   */
-  public static class Builder extends ThreadIdTypeDef.Builder
+  public static class Builder extends PartitionKeyTypeDef.Builder
   {
     private Builder()
     {
     }
     
-    /**
-     * Convenience method to construct from byte array.
-     * 
-     * @param value thread ID as byte[]
-     * @return A ThreadId for the given byte representation.
-     * 
-     * @throws NullPointerException If the value is null.
-     */
-    public ThreadId build(@Nonnull byte[] value)
+    @Override
+    public PartitionKey build(@Nonnull String value)
     {
-      return new ThreadId(ImmutableByteArray.newInstance(value));
+      if(value == null)
+        throw new NullPointerException("value is required.");
+        
+      return new PartitionKey(value);
     }
     
     @Override
-    public ThreadId build(@Nonnull ImmutableByteArray value)
-    {
-      return new ThreadId(value);
-    }
-    
-    @Override
-    public ImmutableByteArray toValue(ThreadId instance)
+    public String toValue(PartitionKey instance)
     {
       return instance.getValue();
-    }
-
-    /**
-     * Build a ThreadId from the given Base64 format string.
-     * 
-     * @param threadIdStr A thread ID value as a Base64 String.
-     * 
-     * @return A ThreadId representing the given value.
-     */
-    public ThreadId build(String threadIdStr)
-    {
-      return new ThreadId(ImmutableByteArray.newInstance(Base64.decodeBase64(threadIdStr)));
     }
   }
 }

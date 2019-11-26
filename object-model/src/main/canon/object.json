@@ -1,0 +1,264 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Authentication Service Model",
+		"license": {
+			"name": "Private"
+		}
+	},
+	"id": "com.symphony.s2.model.object",
+  "version": "1.0",
+	"basePath": "/object/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.oss.models.object.canon",
+		"javaFacadePackage": "com.symphony.oss.models.object.canon.facade"
+	},
+  "methods": {
+    "/objects/partition/{partitionKey}/sort/{sortKey}": {
+      "parameters": {
+        "partitionKey": {
+          "in": "path",
+          "description": "Partition Key Value",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/PartitionKey"
+          }
+        },
+        "sortKey": {
+          "in": "path",
+          "description": "Sort Key Value",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SortKey"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the given object.",
+        "operationId": "fetchObject",
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/KvItem"
+          }
+        }
+      }
+    },
+    "/partitions/upsert": {
+      "parameters": {
+      },
+      "post": {
+        "summary": "Upsert a partition",
+        "operationId": "upsertPartition",
+        "tags": [
+          "partitions"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/UpsertPartitionRequest"
+          }
+        },
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Partition"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "PartitionKey": {
+        "description": "A partition key.",
+        "type": "string",
+        "facade": true
+      },
+      "SortKey": {
+        "description": "A sort key.",
+        "type": "string",
+        "facade": true
+      },
+      "IdObject": {
+        "description": "An ID object, applications define IDs as a sub-type of this.",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "required": [
+          "hashType"
+        ],
+        "properties": {
+          "hashType": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
+          },
+          "sortKey": {
+            "type": "string"
+          }
+        }
+      },
+      "UserIdObject": {
+        "description": "An ID object belonging to a user.",
+        "type": "object",
+        "extends": "#/components/schemas/IdObject",
+        "facade": true,
+        "required": [
+          "userId"
+        ],
+        "properties": {
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "NamedUserIdObject": {
+        "description": "An ID object for a named object belonging to a user.",
+        "type": "object",
+        "extends": "#/components/schemas/UserIdObject",
+        "facade": true,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ContentIdObject": {
+        "description": "A UserIdObject object referring to some content type.",
+        "type": "object",
+        "extends": "#/components/schemas/UserIdObject",
+        "facade": true,
+        "required": [
+          "contentType"
+        ],
+        "properties": {
+          "contentType": {
+            "type": "string"
+          }
+        }
+      },
+      "KvItem": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "builderFacade": false,
+        "description": "Base type for objects in the object store.",
+        "required": [
+          "partitionKey",
+          "sortKey",
+          "owner",
+          "hashType"
+        ],
+        "properties": {
+          "partitionKey": {
+            "$ref": "#/components/schemas/PartitionKey"
+          },
+          "sortKey": {
+            "$ref": "#/components/schemas/SortKey"
+          },
+          "owner": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "purgeDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+          "header": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload"
+          },
+          "encryptedPayload": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
+          },
+          "cipherSuiteId": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
+          },
+          "threadId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "rotationId": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          },
+          "hashType": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
+          }
+        }
+      },
+      "Partition": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "builderFacade": false,
+        "description": "A partition in the object store.",
+
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/UserIdObject"
+          }
+        }
+      },
+      "PartitionThread": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "builderFacade": false,
+        "description": "A partition in the object store.",
+
+        "properties": {
+          "partitionId": {
+            "$ref": "#/components/schemas/UserIdObject"
+          },
+          "threadId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          }
+        }
+      },
+      "UpsertPartitionRequest": {
+        "type": "object",
+        "description": "Request to upsert a partition in the object store.",
+
+        "properties": {
+          "partitionId": {
+            "$ref": "#/components/schemas/UserIdObject"
+          },
+          "threadIds": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+            }
+          }
+        }
+      },
+      "AffectedUsers": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "facade": false,
+        "builderFacade": false,
+        "description": "Header type for objects in the  object store.",
+
+        "properties": {
+          "requestingUser": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "affectedUsers": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+            }
+          },
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          },
+          "effectiveDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          }
+        }
+      }
+    }
+	}
+}

@@ -33,15 +33,9 @@ import javax.annotation.concurrent.Immutable;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
 
 import com.symphony.oss.models.chat.canon.IEntitlement;
 import com.symphony.oss.models.chat.canon.UserEntity;
-import com.symphony.oss.models.core.canon.facade.PodId;
-import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
-import com.symphony.oss.models.fundmental.canon.ContentIdType;
-import com.symphony.oss.models.fundmental.canon.PodContentIdObject;
-import com.symphony.oss.models.system.canon.facade.Principal;
 
 /**
  * Facade for Object ObjectSchema(User)
@@ -120,27 +114,27 @@ public class User extends UserEntity implements IUser
     return Boolean.TRUE == result;
   }
   
-  /**
-   * Return the ID object for the principal's BaseUser record as viewed from some pod.
-   * 
-   * @param principalBaseHash The base hash of the principal whose BaseUsert this ID represents.
-   * @param podId             The podId of the pod whose view this object represents.
-   * 
-   * In xpod scenarios the view of a user from the local and remote pods are different so we need to include
-   * the viewing pod's ID in this object.
-   * 
-   * @return The ID object for the principal's personal security context.
-   */
-  public static IFundamentalId getBaseUserId(Hash principalBaseHash, PodId podId)
-  {
-    return new PodContentIdObject.Builder()
-        .withSubjectHash(principalBaseHash)
-        .withSubjectType(Principal.TYPE_ID)
-        .withContentType(User.TYPE_ID)
-        .withIdType(ContentIdType.ATTRIBUTE)
-        .withPodId(podId)
-        .build();
-  }
+//  /**
+//   * Return the ID object for the principal's BaseUser record as viewed from some pod.
+//   * 
+//   * @param principalBaseHash The base hash of the principal whose BaseUsert this ID represents.
+//   * @param podId             The podId of the pod whose view this object represents.
+//   * 
+//   * In xpod scenarios the view of a user from the local and remote pods are different so we need to include
+//   * the viewing pod's ID in this object.
+//   * 
+//   * @return The ID object for the principal's personal security context.
+//   */
+//  public static IFundamentalId getBaseUserId(Hash principalBaseHash, PodId podId)
+//  {
+//    return new PodContentIdObject.Builder()
+//        .withSubjectHash(principalBaseHash)
+//        .withSubjectType(Principal.TYPE_ID)
+//        .withContentType(User.TYPE_ID)
+//        .withIdType(ContentIdType.ATTRIBUTE)
+//        .withPodId(podId)
+//        .build();
+//  }
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

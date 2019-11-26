@@ -18,6 +18,23 @@
   },
 	"components": {
 		"schemas": {
+      "HashType": {
+        "description": "A Hash type ID.",
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0,
+        "maximum": 2
+      },
+      "Hash": {
+        "description": "A Hash value, encoded as Base64.",
+        "type": "string",
+        "format": "byte",
+        "x-canon-attributes": {
+          "javaExternalPackage": "org.symphonyoss.s2.common.hash",
+          "javaExternalType": "Hash",
+          "isDirectExternal": "true"
+        }
+      },
       "TimeStamp": {
         "description": "A millisecond resolution timestamp, compatible java.util.Date.",
         "type": "integer",
@@ -37,6 +54,11 @@
       "PodAndUserId": {
         "type": "integer",
         "format": "int64",
+        "facade": true
+      },
+      "ThreadId": {
+        "type": "string",
+        "format": "byte",
         "facade": true
       },
       "RotationId": {

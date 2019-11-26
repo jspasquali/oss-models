@@ -22,47 +22,50 @@ import javax.annotation.Nullable;
 
 import org.symphonyoss.s2.common.hash.Hash;
 
-import com.symphony.oss.models.chat.canon.AttachmentMessageIdObject;
 import com.symphony.oss.models.chat.canon.Bookmark;
 import com.symphony.oss.models.chat.canon.DeliveryReceipt;
-import com.symphony.oss.models.chat.canon.IAttachmentMessageIdObject;
-import com.symphony.oss.models.chat.canon.IMessageIdObject;
-import com.symphony.oss.models.chat.canon.IThreadIdObject;
-import com.symphony.oss.models.chat.canon.IUserMessageIdObject;
 import com.symphony.oss.models.chat.canon.LikedEvent;
 import com.symphony.oss.models.chat.canon.MaestroMessage;
 import com.symphony.oss.models.chat.canon.MentionNotification;
-import com.symphony.oss.models.chat.canon.MessageIdObject;
 import com.symphony.oss.models.chat.canon.ObjectStatusMessage;
 import com.symphony.oss.models.chat.canon.OfflineNotice;
 import com.symphony.oss.models.chat.canon.PushedSignal;
 import com.symphony.oss.models.chat.canon.ReadReceipt;
 import com.symphony.oss.models.chat.canon.Signal;
 import com.symphony.oss.models.chat.canon.SignalNotification;
-import com.symphony.oss.models.chat.canon.ThreadIdObject;
 import com.symphony.oss.models.chat.canon.TypingNotification;
-import com.symphony.oss.models.chat.canon.UserMessageIdObject;
 import com.symphony.oss.models.chat.canon.WallPostNotification;
 import com.symphony.oss.models.chat.canon.facade.MessageId;
 import com.symphony.oss.models.chat.canon.facade.PresenceChangeMessage;
 import com.symphony.oss.models.chat.canon.facade.SocialMessage;
-import com.symphony.oss.models.chat.canon.facade.ThreadId;
 import com.symphony.oss.models.chat.canon.facade.User;
 import com.symphony.oss.models.core.canon.facade.IUserIdFunction;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.core.canon.facade.RotationId;
+import com.symphony.oss.models.core.canon.facade.ThreadId;
 import com.symphony.oss.models.core.canon.facade.UserId;
 import com.symphony.oss.models.fundamental.canon.facade.IFundamentalId;
 import com.symphony.oss.models.fundamental.canon.facade.IUserIdObject;
 import com.symphony.oss.models.fundamental.canon.facade.SecurityContextMember;
 import com.symphony.oss.models.fundamental.canon.facade.UserIdObject;
+import com.symphony.oss.models.fundmental.canon.ContentIdType;
 import com.symphony.oss.models.fundmental.canon.IMemberIdObject;
 import com.symphony.oss.models.fundmental.canon.ISecurityContextRotationId;
+import com.symphony.oss.models.fundmental.canon.PodContentIdObject;
 import com.symphony.oss.models.fundmental.canon.SecurityContextRotationId;
 import com.symphony.oss.models.fundmental.canon.SecurityContextRotationIdType;
+import com.symphony.oss.models.sbe.id.canon.AttachmentMessageIdObject;
+import com.symphony.oss.models.sbe.id.canon.IAttachmentMessageIdObject;
+import com.symphony.oss.models.sbe.id.canon.IMessageIdObject;
+import com.symphony.oss.models.sbe.id.canon.IThreadIdObject;
+import com.symphony.oss.models.sbe.id.canon.IUserMessageIdObject;
+import com.symphony.oss.models.sbe.id.canon.MessageIdObject;
+import com.symphony.oss.models.sbe.id.canon.ThreadIdObject;
+import com.symphony.oss.models.sbe.id.canon.UserMessageIdObject;
 import com.symphony.oss.models.system.IPrincipalSecurityContext;
 import com.symphony.oss.models.system.PrincipalSecurityContext;
+import com.symphony.oss.models.system.canon.facade.Principal;
 
 /**
  * BREAKING CHANGE
@@ -576,7 +579,14 @@ public class SbeIdFactory
     IUserIdObject userIdObject = principalId(userId);
     Hash principalBaseHash = userIdObject.getAbsoluteHash();
     
-    return User.getBaseUserId(principalBaseHash, userIdObject.getPodId());
+    return new PodContentIdObject.Builder()
+    .withSubjectHash(principalBaseHash)
+    .withSubjectType(Principal.TYPE_ID)
+    .withContentType(User.TYPE_ID)
+    .withIdType(ContentIdType.ATTRIBUTE)
+    .withPodId(userIdObject.getPodId())
+    .build();
+    //return User.getBaseUserId(principalBaseHash, userIdObject.getPodId());
     
   }
 }

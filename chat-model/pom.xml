@@ -41,7 +41,12 @@
             <configuration>
               <srcDirs>src/main/canon</srcDirs>
               <proformaCopyDir>src/main</proformaCopyDir>
-
+              <uriMapping>
+                <property>
+                 <name>https://models.oss.symphony.com/core.json</name>
+                 <value>../../../../core-model/src/main/canon/core.json</value>
+                </property>
+              </uriMapping>
               <templateArtifacts>
                 <templateArtifact>
                   <groupId>${canon.template.groupid}</groupId>
@@ -77,6 +82,16 @@
   </build>
 
   <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>core-model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>crypto-model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <!-- <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>fundamental-model</artifactId>
