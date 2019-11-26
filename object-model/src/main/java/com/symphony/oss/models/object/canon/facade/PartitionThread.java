@@ -55,7 +55,7 @@ import com.symphony.oss.models.object.canon.ObjectModel;
 public class PartitionThread extends PartitionThreadEntity implements IPartitionThread
 {
   private final PartitionKey partitionKey_ = PartitionKey.newBuilder().build("PT#" + getPartitionId().getHash());
-  private final SortKey      sortKey_      = SortKey.newBuilder().build(getThreadId());
+  private final SortKey      sortKey_      = SortKey.newBuilder().build(getThreadId().toBase64String());
   
   /**
    * Constructor from builder.
