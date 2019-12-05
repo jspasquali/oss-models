@@ -303,24 +303,9 @@
         "properties": {
         }
       },
-      "SystemObject": {
-        "type": "object",
-        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
-        "facade": true,
-        "builderFacade": true,
-        "description": "Base type for system objects in the object store.",
-        "required": [
-          "hashType"
-        ],
-        "properties": {
-          "hashType": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
-          }
-        }
-      },
       "AbstractStoredApplicationObject": {
         "type": "object",
-        "extends": "#/components/schemas/SystemObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
         "facade": false,
         "builderFacade": false,
         "description": "Base type for stored application objects in the object store.",
@@ -448,7 +433,7 @@
       },
       "Partition": {
         "type": "object",
-        "extends": "#/components/schemas/SystemObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
         "facade": true,
         "builderFacade": false,
         "description": "A partition in the object store.",
@@ -461,7 +446,7 @@
       },
       "PartitionThread": {
         "type": "object",
-        "extends": "#/components/schemas/SystemObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
         "facade": true,
         "builderFacade": false,
         "description": "A partition in the object store.",

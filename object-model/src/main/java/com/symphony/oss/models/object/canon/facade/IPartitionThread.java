@@ -27,6 +27,7 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.symphony.oss.models.core.canon.facade.ISystemObject;
 import com.symphony.oss.models.object.canon.IPartitionThreadEntity;
 
 /**

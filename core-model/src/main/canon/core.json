@@ -91,6 +91,21 @@
         "properties": {
         }
       },
+      "SystemObject": {
+        "type": "object",
+        "extends": "#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "builderFacade": true,
+        "description": "Base type for system objects in the object store.",
+        "required": [
+          "hashType"
+        ],
+        "properties": {
+          "hashType": {
+            "$ref": "#/components/schemas/HashType"
+          }
+        }
+      },
       "Pagination":  {
         "type": "object",
         "facade": false,

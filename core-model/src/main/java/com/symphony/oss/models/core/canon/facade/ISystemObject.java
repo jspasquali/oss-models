@@ -23,14 +23,14 @@
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.object.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.hash.Hash;
 
 import com.symphony.oss.models.core.canon.IApplicationPayload;
-import com.symphony.oss.models.object.canon.ISystemObjectEntity;
+import com.symphony.oss.models.core.canon.ISystemObjectEntity;
 
 /**
  * Facade for Object ObjectSchema(SystemObjectPayload)

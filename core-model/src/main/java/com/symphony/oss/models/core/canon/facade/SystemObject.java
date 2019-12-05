@@ -23,7 +23,7 @@
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.object.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -34,8 +34,8 @@ import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.common.hash.HashProvider;
 
 import com.symphony.oss.models.core.canon.HashType;
-import com.symphony.oss.models.object.canon.ISystemObjectEntity;
-import com.symphony.oss.models.object.canon.SystemObjectEntity;
+import com.symphony.oss.models.core.canon.ISystemObjectEntity;
+import com.symphony.oss.models.core.canon.SystemObjectEntity;
 
 /**
  * Facade for Object ObjectSchema(SystemObject)
