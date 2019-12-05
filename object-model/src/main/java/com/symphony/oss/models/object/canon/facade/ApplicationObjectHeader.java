@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-25 14:38:42 GMT
+ *  At                  2019-12-02 20:02:19 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -36,26 +36,26 @@ import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 
 
-import com.symphony.oss.models.object.canon.NamedUserIdObjectEntity;
-import com.symphony.oss.models.object.canon.INamedUserIdObjectEntity;
+import com.symphony.oss.models.object.canon.ApplicationObjectHeaderEntity;
+import com.symphony.oss.models.object.canon.IApplicationObjectHeaderEntity;
 import com.symphony.oss.models.object.canon.ObjectModel;
 
 /**
- * Facade for Object ObjectSchema(NamedUserIdObject)
+ * Facade for Object ObjectSchema(ApplicationObjectHeader)
  *
- * An ID object for a named object belonging to a user.
- * Generated from ObjectSchema(NamedUserIdObject) at #/components/schemas/NamedUserIdObject
+ * Base type for header or encrypted payloads in the object store.
+ * Generated from ObjectSchema(ApplicationObjectHeader) at #/components/schemas/ApplicationObjectHeader
  */
 @Immutable
 @SuppressWarnings("unused")
-public class NamedUserIdObject extends NamedUserIdObjectEntity implements INamedUserIdObject
+public class ApplicationObjectHeader extends ApplicationObjectHeaderEntity implements IApplicationObjectHeader
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public NamedUserIdObject(AbstractNamedUserIdObjectBuilder<?,?> builder)
+  public ApplicationObjectHeader(AbstractApplicationObjectHeaderBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -66,7 +66,7 @@ public class NamedUserIdObject extends NamedUserIdObjectEntity implements INamed
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public NamedUserIdObject(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public ApplicationObjectHeader(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -77,7 +77,7 @@ public class NamedUserIdObject extends NamedUserIdObjectEntity implements INamed
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public NamedUserIdObject(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public ApplicationObjectHeader(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -87,11 +87,29 @@ public class NamedUserIdObject extends NamedUserIdObjectEntity implements INamed
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public NamedUserIdObject(INamedUserIdObject other)
+  public ApplicationObjectHeader(IApplicationObjectHeader other)
   {
     super(other);
   }
   
+  /**
+   * Abstract builder for ApplicationObjectHeader. If there are sub-classes of this type then their builders sub-class this builder.
+   *
+   * @param <B> The concrete type of the builder, used for fluent methods.
+   * @param <T> The concrete type of the built object.
+   */
+  public static abstract class AbstractApplicationObjectHeaderBuilder<B extends AbstractApplicationObjectHeaderBuilder<B,T>, T extends IApplicationObjectHeaderEntity> extends AbstractApplicationObjectHeaderEntityBuilder<B,T>
+  {
+    protected AbstractApplicationObjectHeaderBuilder(Class<B> type)
+    {
+      super(type);
+    }
+    
+    protected AbstractApplicationObjectHeaderBuilder(Class<B> type, IApplicationObjectHeaderEntity initial)
+    {
+      super(type, initial);
+    }
+  }
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

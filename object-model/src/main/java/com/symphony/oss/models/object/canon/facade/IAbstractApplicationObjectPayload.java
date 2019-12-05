@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-25 09:18:48 GMT
+ *  At                  2019-12-02 20:02:19 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,18 +27,24 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.object.canon.IUserIdObjectEntity;
+import com.symphony.oss.models.core.canon.IApplicationPayload;
+import com.symphony.oss.models.object.canon.IAbstractApplicationObjectPayloadEntity;
 
 /**
- * Facade for Object ObjectSchema(UserIdObject)
+ * Facade for Object ObjectSchema(AbstractApplicationObjectPayload)
  *
- * An ID object belonging to a user.
- * Generated from ObjectSchema(UserIdObject) at #/components/schemas/UserIdObject
+ * Base type for header or encrypted payloads in the object store.
+ * Generated from ObjectSchema(AbstractApplicationObjectPayload) at #/components/schemas/AbstractApplicationObjectPayload
  */
 @Immutable
-public interface IUserIdObject
-  extends IIdObject, IUserIdObjectEntity
+public interface IAbstractApplicationObjectPayload
+  extends IApplicationPayload, IAbstractApplicationObjectPayloadEntity
 {
+  /**
+   * 
+   * @return The stored application object of which this is a part.
+   */
+  IStoredApplicationObject getStoredApplicationObject();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

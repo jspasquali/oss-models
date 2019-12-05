@@ -15,11 +15,11 @@
  *
  *----------------------------------------------------------------------------------------------------
  * Proforma generated from
- *    Template groupId     org.symphonyoss.s2.canon
+ *		Template groupId		 org.symphonyoss.s2.canon
  *           artifactId canon-template-java
- *    Template name      proforma/java/Object/I_.java.ftl
- *    Template version     1.0
- *  At                  2019-11-25 13:41:26 GMT
+ *		Template name		   proforma/java/Object/I_.java.ftl
+ *		Template version	   1.0
+ *  At                  2019-12-02 20:02:19 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,26 +27,18 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.hash.Hash;
-
-import com.symphony.oss.models.core.canon.IApplicationPayload;
-import com.symphony.oss.models.object.canon.IKvItemEntity;
+import com.symphony.oss.models.object.canon.IApplicationObjectPayloadEntity;
 
 /**
- * Facade for Object ObjectSchema(KvItem)
+ * Facade for Object ObjectSchema(ApplicationObjectPayload)
  *
- * Base type for objects in the object store.
- * Generated from ObjectSchema(KvItem) at #/components/schemas/KvItem
+ * Base type for header or encrypted payloads in the object store.
+ * Generated from ObjectSchema(ApplicationObjectPayload) at #/components/schemas/ApplicationObjectPayload
  */
 @Immutable
-public interface IKvItem
-  extends IApplicationPayload, IKvItemEntity, org.symphonyoss.s2.fugue.kv.IKvItem
+public interface IApplicationObjectPayload
+  extends IAbstractApplicationObjectPayload, IApplicationObjectPayloadEntity
 {
-  /**
-   * 
-   * @return The hash of this object.
-   */
-  Hash getHash();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

@@ -68,14 +68,12 @@
     <maven.compiler.target>1.8</maven.compiler.target>  
     
     <s2.common.version>0.2.7</s2.common.version>
-    <canon.version>0.2.13</canon.version>
-    <fugue.version>0.2.37</fugue.version>
+    <canon.version>0.2.14</canon.version>
+    <fugue.version>0.2.38</fugue.version>
     
     <canon.template.groupid>org.symphonyoss.s2.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
     <canon.template.version>${canon.version}</canon.template.version>
-    
-    <symphony.persistence.version>2.0.1</symphony.persistence.version>
   </properties>
   
   <modules>
@@ -119,6 +117,114 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
+  
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.symphonyoss.s2.canon</groupId>
+          <artifactId>canon-maven-plugin</artifactId>
+          <version>${canon.version}</version>
+        </plugin>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.symphonyoss.s2.canon
+                    </groupId>
+                    <artifactId>
+                      canon-maven-plugin
+                    </artifactId>
+                    <versionRange>
+                      [0.0.1-SNAPSHOT,)
+                    </versionRange>
+                    <goals>
+                      <goal>
+                        generate-sources
+                      </goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.symphonyoss.s2.canon</groupId>
+        <artifactId>canon-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate-sources</goal>
+            </goals>
+            <configuration>
+              <srcDirs>src/main/canon</srcDirs>
+              <proformaCopyDir>src/main</proformaCopyDir>
+              <uriMapping>
+                <property>
+                 <name>https://models.oss.symphony.com/fundamental.json</name>
+                 <value>../../../../fundamental-model/src/main/canon/fundamental.json</value>
+                </property>
+                <property>
+                 <name>https://models.oss.symphony.com/core.json</name>
+                 <value>../../../../core-model/src/main/canon/core.json</value>
+                </property>
+                <property>
+                 <name>https://models.oss.symphony.com/crypto.json</name>
+                 <value>../../../../crypto-model/src/main/canon/crypto.json</value>
+                </property>
+                <property>
+                 <name>https://models.oss.symphony.com/chat.json</name>
+                 <value>../../../../chat-model/src/main/canon/chat.json</value>
+                </property>
+              </uriMapping>
+
+              <templateArtifacts>
+                <templateArtifact>
+                  <groupId>${canon.template.groupid}</groupId>
+                  <artifactId>${canon.template.java}</artifactId>
+                  <version>${canon.template.version}</version>
+                </templateArtifact>
+              </templateArtifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>target/generated-sources/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   
   <dependencyManagement>
     <dependencies>
@@ -223,48 +329,4 @@
     </dependency>
   </dependencies>
   
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.symphonyoss.s2.canon</groupId>
-          <artifactId>canon-maven-plugin</artifactId>
-          <version>${canon.version}</version>
-        </plugin>
-        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>
-                      org.symphonyoss.s2.canon
-                    </groupId>
-                    <artifactId>
-                      canon-maven-plugin
-                    </artifactId>
-                    <versionRange>
-                      [0.0.1-SNAPSHOT,)
-                    </versionRange>
-                    <goals>
-                      <goal>
-                        generate-sources
-                      </goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore />
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>

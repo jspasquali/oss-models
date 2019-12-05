@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.symphony.oss.models.chat.canon.ChatModel;
-import com.symphony.oss.models.fundmental.canon.FundamentalModel;
+import com.symphony.oss.models.core.canon.CoreModel;
 
 public class TestExampleMessages
 {
@@ -46,7 +46,7 @@ public class TestExampleMessages
     ModelRegistry regsitry = new ModelRegistry()
         .withFactories(PodInternalModel.FACTORIES)
         .withFactories(ChatModel.FACTORIES)
-        .withFactories(FundamentalModel.FACTORIES);
+        .withFactories(CoreModel.FACTORIES);
     
     URL messages = getClass().getResource("/exampleMessages");
     File file = new File(messages.getFile());

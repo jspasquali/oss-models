@@ -27,7 +27,6 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.core.canon.IApplicationPayload;
 import com.symphony.oss.models.object.canon.IPartitionEntity;
 
 /**
@@ -38,13 +37,13 @@ import com.symphony.oss.models.object.canon.IPartitionEntity;
  */
 @Immutable
 public interface IPartition
-  extends IApplicationPayload, IPartitionEntity, IAbstractKvItem
+  extends ISystemObject, IPartitionEntity
 {
-  /**
-   * 
-   * @return the partition key for objects in this partition.
-   */
-  PartitionKey getObjectKey();
+//  /**
+//   * 
+//   * @return the partition key for objects in this partition.
+//   */
+//  PartitionKey getObjectKey();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

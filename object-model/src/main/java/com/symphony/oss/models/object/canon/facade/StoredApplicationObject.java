@@ -19,43 +19,39 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-25 09:18:48 GMT
+ *  At                  2019-11-29 11:39:41 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
 package com.symphony.oss.models.object.canon.facade;
 
+import java.time.Instant;
+
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
+import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
+import org.symphonyoss.s2.common.hash.Hash;
 
-import org.symphonyoss.s2.canon.runtime.IEntity;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-
-
-import com.symphony.oss.models.object.canon.UserIdObjectEntity;
-import com.symphony.oss.models.object.canon.IUserIdObjectEntity;
-import com.symphony.oss.models.object.canon.ObjectModel;
+import com.symphony.oss.models.object.canon.IStoredApplicationObjectEntity;
+import com.symphony.oss.models.object.canon.StoredApplicationObjectEntity;
 
 /**
- * Facade for Object ObjectSchema(UserIdObject)
+ * Facade for Object ObjectSchema(StoredApplicationObject)
  *
- * An ID object belonging to a user.
- * Generated from ObjectSchema(UserIdObject) at #/components/schemas/UserIdObject
+ * Base type for application objects in the object store.
+ * Generated from ObjectSchema(StoredApplicationObject) at #/components/schemas/StoredApplicationObject
  */
 @Immutable
-@SuppressWarnings("unused")
-public class UserIdObject extends UserIdObjectEntity implements IUserIdObject
+public class StoredApplicationObject extends StoredApplicationObjectEntity implements IStoredApplicationObject
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public UserIdObject(AbstractUserIdObjectBuilder<?,?> builder)
+  public StoredApplicationObject(AbstractStoredApplicationObjectBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -66,7 +62,7 @@ public class UserIdObject extends UserIdObjectEntity implements IUserIdObject
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public UserIdObject(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public StoredApplicationObject(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -77,7 +73,7 @@ public class UserIdObject extends UserIdObjectEntity implements IUserIdObject
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public UserIdObject(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public StoredApplicationObject(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -87,11 +83,56 @@ public class UserIdObject extends UserIdObjectEntity implements IUserIdObject
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public UserIdObject(IUserIdObject other)
+  public StoredApplicationObject(IStoredApplicationObject other)
   {
     super(other);
   }
+
+  @Override
+  public Hash getBaseHash()
+  {
+    if(super.getBaseHash() == null)
+      return getAbsoluteHash();
+    
+    return super.getBaseHash();
+  }
   
+  /**
+   * 
+   * @return True iff this is a base object (the initial version of an object for a given baseHash)
+   */
+  public boolean isBaseObject()
+  {
+    return super.getBaseHash() == null;
+  }
+
+  /**
+   * Abstract builder for StoredApplicationObject. If there are sub-classes of this type then their builders sub-class this builder.
+   *
+   * @param <B> The concrete type of the builder, used for fluent methods.
+   * @param <T> The concrete type of the built object.
+   */
+  public static abstract class AbstractStoredApplicationObjectBuilder<B extends AbstractStoredApplicationObjectBuilder<B,T>, T extends IStoredApplicationObjectEntity> extends AbstractStoredApplicationObjectEntityBuilder<B,T>
+  {
+    protected AbstractStoredApplicationObjectBuilder(Class<B> type)
+    {
+      super(type);
+    }
+    
+    protected AbstractStoredApplicationObjectBuilder(Class<B> type, IStoredApplicationObjectEntity initial)
+    {
+      super(type, initial);
+    }
+
+    @Override
+    public Instant getCreatedDate()
+    {
+      if(super.getCreatedDate() == null)
+         return Instant.now();
+      
+      return super.getCreatedDate();
+    }
+  }
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

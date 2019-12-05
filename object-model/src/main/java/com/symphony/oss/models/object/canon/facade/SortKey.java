@@ -64,6 +64,8 @@ public class SortKey extends SortKeyTypeDef implements org.symphonyoss.s2.fugue.
    */
   public static class Builder extends SortKeyTypeDef.Builder
   {
+    private static final String PROHIBITED_CHARS = "#/&$+,;=";
+
     private Builder()
     {
     }
@@ -73,6 +75,12 @@ public class SortKey extends SortKeyTypeDef implements org.symphonyoss.s2.fugue.
     {
       if(value == null)
         throw new NullPointerException("value is required.");
+      
+      for(char c : PROHIBITED_CHARS.toCharArray())
+      {
+        if(value.indexOf(c) != -1)
+          throw new IllegalArgumentException("Sort Keys may not contain any of " + PROHIBITED_CHARS);
+      }
         
       return new SortKey(value);
     }

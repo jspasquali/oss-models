@@ -15,11 +15,11 @@
  *
  *----------------------------------------------------------------------------------------------------
  * Proforma generated from
- *    Template groupId     org.symphonyoss.s2.canon
+ *		Template groupId		 org.symphonyoss.s2.canon
  *           artifactId canon-template-java
- *    Template name      proforma/java/Object/I_.java.ftl
- *    Template version     1.0
- *  At                  2019-11-25 09:18:48 GMT
+ *		Template name		   proforma/java/Object/I_.java.ftl
+ *		Template version	   1.0
+ *  At                  2019-12-04 07:16:22 GMT-08:00
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,26 +27,19 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.hash.Hash;
-
-import com.symphony.oss.models.core.canon.IApplicationPayload;
-import com.symphony.oss.models.object.canon.IIdObjectEntity;
+import com.symphony.oss.models.object.canon.IAbstractStoredApplicationObject;
+import com.symphony.oss.models.object.canon.IDeletedApplicationObjectEntity;
 
 /**
- * Facade for Object ObjectSchema(IdObject)
+ * Facade for Object ObjectSchema(DeletedApplicationObject)
  *
- * An ID object, applications define IDs as a sub-type of this.
- * Generated from ObjectSchema(IdObject) at #/components/schemas/IdObject
+ * A tombstone marker for an object which was deleted.
+ * Generated from ObjectSchema(DeletedApplicationObject) at #/components/schemas/DeletedApplicationObject
  */
 @Immutable
-public interface IIdObject
-  extends IApplicationPayload, IIdObjectEntity
+public interface IDeletedApplicationObject
+  extends IAbstractStoredApplicationObject, IDeletedApplicationObjectEntity
 {
-  /**
-   * 
-   * @return the hash of this ID.
-   */
-  Hash getHash();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

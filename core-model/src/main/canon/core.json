@@ -91,6 +91,35 @@
         "properties": {
         }
       },
+      "Pagination":  {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "properties": {
+          "cursors": {
+            "$ref": "#/components/schemas/Cursors"
+          },
+          "previous": {
+            "type": "string"
+          },
+          "next": {
+            "type": "string"
+          }
+        }
+      },
+      "Cursors":  {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "properties": {
+          "before": {
+            "type": "string"
+          },
+          "after": {
+            "type": "string"
+          }
+        }
+      },
 			"Envelope": {
 				"type": "object",
 				"facade": true,

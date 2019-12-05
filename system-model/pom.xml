@@ -27,65 +27,6 @@
 
   <artifactId>system-model</artifactId>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.symphonyoss.s2.canon</groupId>
-        <artifactId>canon-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>generate-sources</goal>
-            </goals>
-            <configuration>
-              <srcDirs>src/main/canon</srcDirs>
-              <proformaCopyDir>src/main</proformaCopyDir>
-              <uriMapping>
-                <property>
-                 <name>https://models.oss.symphony.com/core.json</name>
-                 <value>../../../../core-model/src/main/canon/core.json</value>
-                </property>
-                <property>
-                 <name>https://models.oss.symphony.com/fundamental.json</name>
-                 <value>../../../../fundamental-model/src/main/canon/fundamental.json</value>
-                </property>
-              </uriMapping>
-
-              <templateArtifacts>
-                <templateArtifact>
-                  <groupId>${canon.template.groupid}</groupId>
-                  <artifactId>${canon.template.java}</artifactId>
-                  <version>${canon.template.version}</version>
-                </templateArtifact>
-              </templateArtifacts>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>add-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>target/generated-sources/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-    </plugins>
-  </build>
-
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>

@@ -14,14 +14,117 @@
 		"javaFacadePackage": "com.symphony.oss.models.object.canon.facade"
 	},
   "methods": {
-    "/objects/partition/{partitionKey}/sort/{sortKey}": {
+    "/objects/{objectHash}": {
       "parameters": {
-        "partitionKey": {
+        "objectHash": {
+          "in": "path",
+          "required": true,
+          "description": "The id of the object.",
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        },
+        "traceContextHash": {
+          "in": "query",
+          "required": false,
+          "description": "The id of the trace context of which this operation is a part",
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "get": {
+        "summary": "Read an object",
+        "operationId": "getObject",
+        "tags": [
+          "objects"
+        ],
+        "parameters": {
+          "currentVersion": {
+            "in": "query",
+            "required": false,
+            "description": "If true then the hash is a baseHash and we return the current version, otherwise the hash is an absoluteHash and we return that absolute version.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        },
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/StoredApplicationObject"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create an object",
+        "operationId": "createObjects",
+        "tags": [
+          "objects"
+        ],
+        "payload": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AbstractStoredApplicationObject"
+          }
+        }
+      }
+    },
+    "/objects/{objectHash}/versions": {
+      "parameters": {
+        "objectHash": {
+          "in": "path",
+          "required": true,
+          "description": "The id of the object to retrieve",
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        },
+        "limit": {
+          "in": "query",
+          "description": "How many items to return at one time (max 100)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "after": {
+          "in": "query",
+          "description": "after cursor from a previous query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "scanForwards": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": false,
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      },
+      "get": {
+        "summary": "List the versions of an object",
+        "operationId": "readVersions",
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/PageOfAbstractStoredApplicationObject"
+          }
+        }
+      }
+    },
+    "/partitions/{partitionHash}/{sortKey}": {
+      "parameters": {
+        "partitionHash": {
           "in": "path",
           "description": "Partition Key Value",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/PartitionKey"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
         "sortKey": {
@@ -40,7 +143,7 @@
           "required": true,
           "multiple": false,
           "schema": {
-            "$ref": "#/components/schemas/KvItem"
+            "$ref": "#/components/schemas/StoredApplicationObject"
           }
         }
       }
@@ -69,11 +172,58 @@
           }
         }
       }
+    },
+    "/partitions/{partitionHash}/page": {
+      "parameters": {
+        "partitionHash": {
+          "in": "path",
+          "description": "Partition Key Value",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        },
+        "limit": {
+          "in": "query",
+          "description": "How many items to return at one time (max 100)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "after": {
+          "in": "query",
+          "description": "after cursor from a previous query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "scanForwards": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": false,
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      },
+      "get": {
+        "summary": "List the contents of a partition",
+        "operationId": "readSequence",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/PageOfStoredApplicationObject"
+          }
+        }
+      }
     }
   },
 	"components": {
 		"schemas": {
-      "PartitionKey": {
+      "#PartitionKey": {
         "description": "A partition key.",
         "type": "string",
         "facade": true
@@ -104,7 +254,6 @@
         "description": "An ID object belonging to a user.",
         "type": "object",
         "extends": "#/components/schemas/IdObject",
-        "facade": true,
         "required": [
           "userId"
         ],
@@ -118,7 +267,6 @@
         "description": "An ID object for a named object belonging to a user.",
         "type": "object",
         "extends": "#/components/schemas/UserIdObject",
-        "facade": true,
         "required": [
           "name"
         ],
@@ -128,47 +276,97 @@
           }
         }
       },
-      "ContentIdObject": {
-        "description": "A UserIdObject object referring to some content type.",
+      "AbstractApplicationObjectPayload": {
         "type": "object",
-        "extends": "#/components/schemas/UserIdObject",
         "facade": true,
-        "required": [
-          "contentType"
-        ],
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "builderFacade": true,
+        "description": "Base type for header or encrypted payloads in the object store.",
         "properties": {
-          "contentType": {
-            "type": "string"
-          }
         }
       },
-      "KvItem": {
+      "ApplicationObjectHeader": {
+        "type": "object",
+        "facade": true,
+        "extends": "#/components/schemas/AbstractApplicationObjectPayload",
+        "builderFacade": true,
+        "description": "Base type for header or encrypted payloads in the object store.",
+        "properties": {
+        }
+      },
+      "ApplicationObjectPayload": {
+        "type": "object",
+        "facade": true,
+        "extends": "#/components/schemas/AbstractApplicationObjectPayload",
+        "builderFacade": true,
+        "description": "Base type for header or encrypted payloads in the object store.",
+        "properties": {
+        }
+      },
+      "SystemObject": {
         "type": "object",
         "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
         "facade": true,
-        "builderFacade": false,
-        "description": "Base type for objects in the object store.",
+        "builderFacade": true,
+        "description": "Base type for system objects in the object store.",
         "required": [
-          "partitionKey",
-          "sortKey",
-          "owner",
           "hashType"
         ],
         "properties": {
-          "partitionKey": {
-            "$ref": "#/components/schemas/PartitionKey"
+          "hashType": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
+          }
+        }
+      },
+      "AbstractStoredApplicationObject": {
+        "type": "object",
+        "extends": "#/components/schemas/SystemObject",
+        "facade": false,
+        "builderFacade": false,
+        "description": "Base type for stored application objects in the object store.",
+        "required": [
+          "partitionHash",
+          "sortKey"
+        ],
+        "properties": {
+          "partitionHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
           "sortKey": {
             "$ref": "#/components/schemas/SortKey"
           },
+          "createdDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
           "owner": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           },
+          "baseHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "prevHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "prevSortKey": {
+            "$ref": "#/components/schemas/SortKey"
+          },
           "purgeDate": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
-          },
+          }
+        }
+      },
+      "StoredApplicationObject": {
+        "type": "object",
+        "extends": "#/components/schemas/AbstractStoredApplicationObject",
+        "facade": true,
+        "builderFacade": true,
+        "description": "A stored application object in the object store.",
+        "required": [
+          "encryptedPayload"
+        ],
+        "properties": {
           "header": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload"
+            "$ref": "#/components/schemas/ApplicationObjectHeader"
           },
           "encryptedPayload": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
@@ -181,15 +379,76 @@
           },
           "rotationId": {
               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          }
+        }
+      },
+      "DeletionType": {
+        "type": "string",
+        "enum": [
+          "LOGICAL",
+          "PHYSICAL"
+        ]
+      },
+      "DeletedApplicationObject": {
+        "type": "object",
+        "extends": "#/components/schemas/AbstractStoredApplicationObject",
+        "facade": true,
+        "builderFacade": true,
+        "description": "A tombstone marker for an object which was deleted.",
+        "required": [
+          "deletionType"
+        ],
+        "properties": {
+          "deletionType": {
+            "$ref": "#/components/schemas/DeletionType"
+          }
+        }
+      },
+      "PageOfStoredApplicationObject":  {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "properties": {
+          "pagination": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Pagination"
           },
-          "hashType": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
+          "data": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/StoredApplicationObject"
+            }
+          }
+        }
+      },
+      "PageOfAbstractStoredApplicationObject":  {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "properties": {
+          "pagination": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Pagination"
+          },
+          "data": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/AbstractStoredApplicationObject"
+            }
           }
         }
       },
       "Partition": {
         "type": "object",
-        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "extends": "#/components/schemas/SystemObject",
         "facade": true,
         "builderFacade": false,
         "description": "A partition in the object store.",
@@ -202,7 +461,7 @@
       },
       "PartitionThread": {
         "type": "object",
-        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "extends": "#/components/schemas/SystemObject",
         "facade": true,
         "builderFacade": false,
         "description": "A partition in the object store.",
@@ -235,7 +494,7 @@
       },
       "AffectedUsers": {
         "type": "object",
-        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "extends": "#/components/schemas/ApplicationObjectHeader",
         "facade": false,
         "builderFacade": false,
         "description": "Header type for objects in the  object store.",

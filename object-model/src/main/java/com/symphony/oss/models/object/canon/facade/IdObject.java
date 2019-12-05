@@ -15,10 +15,10 @@
  *
  *----------------------------------------------------------------------------------------------------
  * Proforma generated from
- *		Template groupId		 org.symphonyoss.s2.canon
+ *    Template groupId     org.symphonyoss.s2.canon
  *           artifactId canon-template-java
- *		Template name		   proforma/java/Object/_.java.ftl
- *		Template version	   1.0
+ *    Template name      proforma/java/Object/_.java.ftl
+ *    Template version     1.0
  *  At                  2019-11-25 09:18:48 GMT
  *----------------------------------------------------------------------------------------------------
  */

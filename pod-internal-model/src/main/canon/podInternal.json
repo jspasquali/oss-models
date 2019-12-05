@@ -269,7 +269,7 @@
       "WrappedContentKey": {
         "description": "A Symphony wrapped content key",
         "type": "object",
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
         "properties": {
           "relaySignature": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
@@ -302,7 +302,7 @@
       "WrappedAccountKey": {
         "description": "A Symphony wrapped content key",
         "type": "object",
-        "extends": "https://models.oss.symphony.com/fundamental.json#/components/schemas/ApplicationObject",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
         "properties": {
           "relaySignature": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"

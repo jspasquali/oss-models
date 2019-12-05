@@ -30,6 +30,8 @@ import java.time.Instant;
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
+import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
+import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
 import org.symphonyoss.s2.fugue.store.IFuguePodId;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
@@ -54,9 +56,6 @@ import com.symphony.oss.models.object.canon.ObjectModel;
 @SuppressWarnings("unused")
 public class PartitionThread extends PartitionThreadEntity implements IPartitionThread
 {
-  private final PartitionKey partitionKey_ = PartitionKey.newBuilder().build("PT#" + getPartitionId().getHash());
-  private final SortKey      sortKey_      = SortKey.newBuilder().build(getThreadId().toBase64String());
-  
   /**
    * Constructor from builder.
    * 
@@ -97,48 +96,6 @@ public class PartitionThread extends PartitionThreadEntity implements IPartition
   public PartitionThread(IPartitionThread other)
   {
     super(other);
-  }
-
-  @Override
-  public PartitionKey getPartitionKey()
-  {
-    return partitionKey_;
-  }
-
-  @Override
-  public SortKey getSortKey()
-  {
-    return sortKey_;
-  }
-
-  @Override
-  public PodAndUserId getOwner()
-  {
-    return getPartitionId().getUserId();
-  }
-
-  @Override
-  public Instant getPurgeDate()
-  {
-    return null;
-  }
-
-  @Override
-  public String getJson()
-  {
-    return super.toString();
-  }
-
-  @Override
-  public String getType()
-  {
-    return super.getCanonType();
-  }
-
-  @Override
-  public IFuguePodId getPodId()
-  {
-    return getPartitionId().getUserId().getPodId();
   }
 }
 /*----------------------------------------------------------------------------------------------------

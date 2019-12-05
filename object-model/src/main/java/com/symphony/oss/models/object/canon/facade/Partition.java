@@ -25,16 +25,12 @@
 
 package com.symphony.oss.models.object.canon.facade;
 
-import java.time.Instant;
-
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.fugue.store.IFuguePodId;
 
-import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.object.canon.PartitionEntity;
 
 /**
@@ -46,11 +42,6 @@ import com.symphony.oss.models.object.canon.PartitionEntity;
 @Immutable
 public class Partition extends PartitionEntity implements IPartition
 {
-  private static SortKey  sortKey_ = SortKey.newBuilder().build("P#");
-  
-  private final PartitionKey partitionKey_ = PartitionKey.newBuilder().build("P#" + getId().getHash());
-  private final PartitionKey objectKey_ = PartitionKey.newBuilder().build("O#" + getId().getHash());
-  
   /**
    * Constructor from builder.
    * 
@@ -91,54 +82,6 @@ public class Partition extends PartitionEntity implements IPartition
   public Partition(IPartition other)
   {
     super(other);
-  }
-
-  @Override
-  public PartitionKey getPartitionKey()
-  {
-    return partitionKey_;
-  }
-
-  @Override
-  public SortKey getSortKey()
-  {
-    return sortKey_;
-  }
-
-  @Override
-  public PartitionKey getObjectKey()
-  {
-    return objectKey_;
-  }
-
-  @Override
-  public PodAndUserId getOwner()
-  {
-    return getId().getUserId();
-  }
-
-  @Override
-  public Instant getPurgeDate()
-  {
-    return null;
-  }
-
-  @Override
-  public String getJson()
-  {
-    return super.toString();
-  }
-
-  @Override
-  public String getType()
-  {
-    return super.getCanonType();
-  }
-
-  @Override
-  public IFuguePodId getPodId()
-  {
-    return getId().getUserId().getPodId();
   }
 }
 /*----------------------------------------------------------------------------------------------------

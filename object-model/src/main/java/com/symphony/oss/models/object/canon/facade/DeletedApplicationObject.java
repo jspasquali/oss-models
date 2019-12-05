@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-25 09:18:48 GMT
+ *  At                  2019-12-04 07:16:22 GMT-08:00
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -30,47 +30,38 @@ import javax.annotation.concurrent.Immutable;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
-import org.symphonyoss.s2.common.hash.HashProvider;
-import org.symphonyoss.s2.fugue.store.IFuguePodId;
 
-import com.symphony.oss.models.object.canon.KvItemEntity;
+import com.symphony.oss.models.object.canon.DeletedApplicationObjectEntity;
+import com.symphony.oss.models.object.canon.IDeletedApplicationObjectEntity;
 
 /**
- * Facade for Object ObjectSchema(KvItem)
+ * Facade for Object ObjectSchema(DeletedApplicationObject)
  *
- * Base type for objects in the  object store.
- * Generated from ObjectSchema(KvItem) at #/components/schemas/KvItem
+ * A tombstone marker for an object which was deleted.
+ * Generated from ObjectSchema(DeletedApplicationObject) at #/components/schemas/DeletedApplicationObject
  */
 @Immutable
-public class KvItem extends KvItemEntity implements IKvItem
+public class DeletedApplicationObject extends DeletedApplicationObjectEntity implements IDeletedApplicationObject
 {
-  private final Hash    hash_;
-  private final SortKey uniqieSortKey_;
-
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public KvItem(AbstractKvItemBuilder<?,?> builder)
+  public DeletedApplicationObject(AbstractDeletedApplicationObjectBuilder<?,?> builder)
   {
     super(builder);
-    hash_ = generateHash();
-    uniqieSortKey_ = generateSortKey();
   }
-
+  
   /**
    * Constructor from serialised form.
    * 
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public KvItem(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public DeletedApplicationObject(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
-    hash_ = generateHash();
-    uniqieSortKey_ = generateSortKey();
   }
   
   /**
@@ -79,11 +70,9 @@ public class KvItem extends KvItemEntity implements IKvItem
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public KvItem(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public DeletedApplicationObject(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
-    hash_ = generateHash();
-    uniqieSortKey_ = generateSortKey();
   }
    
   /**
@@ -91,55 +80,28 @@ public class KvItem extends KvItemEntity implements IKvItem
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public KvItem(IKvItem other)
+  public DeletedApplicationObject(IDeletedApplicationObject other)
   {
     super(other);
-    
-    hash_ = other.getHash();
-    uniqieSortKey_ = other.getSortKey();
   }
   
-  protected Hash generateHash()
+  /**
+   * Abstract builder for DeletedApplicationObject. If there are sub-classes of this type then their builders sub-class this builder.
+   *
+   * @param <B> The concrete type of the builder, used for fluent methods.
+   * @param <T> The concrete type of the built object.
+   */
+  public static abstract class AbstractDeletedApplicationObjectBuilder<B extends AbstractDeletedApplicationObjectBuilder<B,T>, T extends IDeletedApplicationObjectEntity> extends AbstractDeletedApplicationObjectEntityBuilder<B,T>
   {
-//    if(getId() != null)
-//      return ((IdPayloadContainer)getPayload()).getId().getAbsoluteHash();
+    protected AbstractDeletedApplicationObjectBuilder(Class<B> type)
+    {
+      super(type);
+    }
     
-    return HashProvider.getHashOf(getHashType().asInteger(), serialize());
-  }
-  
-  private SortKey generateSortKey()
-  {
-    return SortKey.newBuilder().build(super.getSortKey() + getHash().toStringBase64());
-  }
-
-  @Override
-  public SortKey getSortKey()
-  {
-    return uniqieSortKey_;
-  }
-
-  @Override
-  public String getJson()
-  {
-    return super.toString();
-  }
-
-  @Override
-  public String getType()
-  {
-    return getCanonType();
-  }
-
-  @Override
-  public IFuguePodId getPodId()
-  {
-    return getOwner().getPodId();
-  }
-
-  @Override
-  public Hash getHash()
-  {
-    return hash_;
+    protected AbstractDeletedApplicationObjectBuilder(Class<B> type, IDeletedApplicationObjectEntity initial)
+    {
+      super(type, initial);
+    }
   }
 }
 /*----------------------------------------------------------------------------------------------------

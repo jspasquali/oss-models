@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-25 14:38:42 GMT
+ *  At                  2019-11-28 11:12:37 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,20 +27,32 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.object.canon.INamedUserIdObjectEntity;
+import org.symphonyoss.s2.common.hash.Hash;
+
+import com.symphony.oss.models.core.canon.IApplicationPayload;
+import com.symphony.oss.models.object.canon.ISystemObjectEntity;
 
 /**
- * Facade for Object ObjectSchema(NamedUserIdObject)
+ * Facade for Object ObjectSchema(SystemObjectPayload)
  *
- * An ID object for a named object belonging to a user.
- * Generated from ObjectSchema(NamedUserIdObject) at #/components/schemas/NamedUserIdObject
+ * Base type for system objects in the object store.
+ * Generated from ObjectSchema(SystemObjectPayload) at #/components/schemas/SystemObjectPayload
  */
 @Immutable
-public interface INamedUserIdObject
-  extends IUserIdObject, INamedUserIdObjectEntity
+public interface ISystemObject extends IApplicationPayload, ISystemObjectEntity
 {
+  /**
+   * 
+   * @return The absolute hash of this object.
+   */
+  Hash getAbsoluteHash();
+
+  /**
+   * In some cases we store multiple copies of the primary storage record for an object with different
+   * partition and sort keys. In these cases it is only necessary to save the main instance to
+   * secondary storage.
+   * 
+   * @return True if this object should be saved to secondary storage.
+   */
+  boolean isSaveToSecondaryStorage();
 }
-/*----------------------------------------------------------------------------------------------------
- * End of template proforma/java/Object/I_.java.ftl
- * End of code generation
- *------------------------------------------------------------------------------------------------- */
