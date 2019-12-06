@@ -25,6 +25,8 @@
 
 package com.symphony.oss.models.object.canon.facade;
 
+import java.time.Instant;
+
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
@@ -101,6 +103,15 @@ public class DeletedApplicationObject extends DeletedApplicationObjectEntity imp
     protected AbstractDeletedApplicationObjectBuilder(Class<B> type, IDeletedApplicationObjectEntity initial)
     {
       super(type, initial);
+    }
+
+    @Override
+    public Instant getCreatedDate()
+    {
+      if(super.getCreatedDate() == null)
+         return Instant.now();
+      
+      return super.getCreatedDate();
     }
   }
 }
