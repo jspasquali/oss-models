@@ -191,4 +191,46 @@ public class FundamentalModelRegistry extends ModelRegistry
       throw new CodingFault("This can't happen because the IO is all in-memory", e);
     }
   }
+
+  public IFundamentalObject parseOneFundamental(String existing)
+  {
+    try(
+        StringReader reader = new StringReader(existing)
+        )
+    {
+      return parseOneFundamental(reader);
+    }
+    catch (IOException e)
+    {
+      throw new CodingFault("This can't happen because the IO is all in-memory", e);
+    }
+  }
+  
+
+  /**
+   * Return a new entity instance parsed from the given input and decrypted if possible using the given credential.
+   * 
+   * @param reader A Reader containing the serialized form of an entity.
+   * 
+   * @return The deserialized entity.
+   * 
+   * @throws IOException If the payload cannot be read from the given Reader. 
+   * 
+   * @throws NullPointerException if the value is null.
+   * @throws IllegalArgumentException if the value is not of the expected type or is otherwise invalid.
+   * This may be the case if the schema defines limits on the magnitude of the value, or if a facade
+   * has been written for the type.
+   */
+  public IFundamentalObject parseOneFundamental(Reader reader) throws IOException
+  {
+    IEntity existingInstance = parseOne(reader);
+    
+    
+    if(existingInstance instanceof IFundamentalObject)
+    {
+      return (IFundamentalObject) existingInstance;
+    }
+    
+    throw new IllegalArgumentException("Expected FundamentalObject but got " + existingInstance.getCanonType());
+  }
 }

@@ -291,4 +291,8 @@ public interface IFundamentalDatabaseReadOnly
 
   <E extends IEntity> E fetchMemberFor(Hash securityContextBaseHash, Hash principalBaseHash, IOpenPrincipalCredential credential,
       Class<E> type) throws NoSuchObjectException;
+
+  IFundamentalObject fetchCurrentFundamentalObject(Hash baseHash) throws NoSuchObjectException;
+
+  IFundamentalObject fetchAbsoluteFundamentalObject(Hash objectHash) throws NoSuchObjectException;
 }
