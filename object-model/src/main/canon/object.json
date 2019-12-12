@@ -173,6 +173,31 @@
         }
       }
     },
+    "/feeds/upsert": {
+      "parameters": {
+      },
+      "post": {
+        "summary": "Upsert a feed",
+        "operationId": "upsertFeed",
+        "tags": [
+          "feeds"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/UpsertFeedRequest"
+          }
+        },
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Feed"
+          }
+        }
+      }
+    },
     "/partitions/{partitionHash}/page": {
       "parameters": {
         "partitionHash": {
@@ -466,7 +491,7 @@
 
         "properties": {
           "partitionId": {
-            "$ref": "#/components/schemas/UserIdObject"
+            "$ref": "#/components/schemas/NamedUserIdObject"
           },
           "threadIds": {
             "type": "array",
@@ -477,6 +502,62 @@
           }
         }
       },
+      
+      
+      
+      
+      "Feed": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "description": "A Feed in the object store.",
+
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/NamedUserIdObject"
+          },
+          "queueName": {
+            "type": "string"
+          }
+        }
+      },
+      "FeedSubscription": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "description": "A Feed subscription in the object store.",
+
+        "properties": {
+          "FeedId": {
+            "$ref": "#/components/schemas/NamedUserIdObject"
+          },
+          "partitionHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "queueName": {
+            "type": "string"
+          }
+        }
+      },
+      "UpsertFeedRequest": {
+        "type": "object",
+        "description": "Request to upsert a Feed in the object store.",
+
+        "properties": {
+          "FeedId": {
+            "$ref": "#/components/schemas/NamedUserIdObject"
+          },
+          "partitionHashes": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+            }
+          }
+        }
+      },
+      
+      
+      
+      
       "AffectedUsers": {
         "type": "object",
         "extends": "#/components/schemas/ApplicationObjectHeader",
