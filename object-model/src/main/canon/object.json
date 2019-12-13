@@ -392,6 +392,27 @@
           }
         }
       },
+      "ApplicationObjectNotification": {
+        "type": "object",
+        "description": "A notification about a stored application object in the object store.",
+        "required": [
+          "absoluteHash"
+        ],
+        "properties": {
+          "absoluteHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "partitionHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          },
+          "sortKey": {
+            "$ref": "#/components/schemas/SortKey"
+          }
+        }
+      },
       "DeletionType": {
         "type": "string",
         "enum": [
