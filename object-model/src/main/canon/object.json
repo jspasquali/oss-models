@@ -198,6 +198,36 @@
         }
       }
     },
+    "/feeds/{name}/objects": {
+      "parameters": {
+        "name": {
+          "in": "path",
+          "description": "Name of the feed",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      },
+      "post": {
+        "summary": "Fetch and/or acknowledge messages from a feed.",
+        "operationId": "readFeed",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/FeedRequest"
+          }
+        },
+        "response": {
+          "required": false,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/FeedObject"
+          }
+        }
+      }
+    },
     "/partitions/{partitionHash}/page": {
       "parameters": {
         "partitionHash": {
@@ -315,7 +345,7 @@
         "facade": true,
         "extends": "#/components/schemas/AbstractApplicationObjectPayload",
         "builderFacade": true,
-        "description": "Base type for header or encrypted payloads in the object store.",
+        "description": "Base type for header payloads in the object store.",
         "properties": {
         }
       },
@@ -324,7 +354,7 @@
         "facade": true,
         "extends": "#/components/schemas/AbstractApplicationObjectPayload",
         "builderFacade": true,
-        "description": "Base type for header or encrypted payloads in the object store.",
+        "description": "Base type for encrypted payloads in the object store.",
         "properties": {
         }
       },
@@ -394,6 +424,7 @@
       },
       "ApplicationObjectNotification": {
         "type": "object",
+        "extends": "#/components/schemas/AbstractStoredApplicationObject",
         "description": "A notification about a stored application object in the object store.",
         "required": [
           "absoluteHash"
@@ -402,14 +433,9 @@
           "absoluteHash": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           },
-          "partitionHash": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-          },
-          "podId": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
-          },
-          "sortKey": {
-            "$ref": "#/components/schemas/SortKey"
+          "payloadLen": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -571,6 +597,74 @@
             "x-canon-cardinality": "SET",
             "items": {
               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+            }
+          }
+        }
+      },
+      "FeedObjectDelete": {
+        "type": "object",
+        "facade": true,
+        "description": "Request to delete (acknowledge) a message from a feed.",
+        "properties": {
+          "receiptHandle": {
+            "type": "string"
+          }
+        }
+      },
+      "FeedObjectExtend": {
+        "type": "object",
+        "facade": true,
+         "description": "Request to extend the visibility timeout (nak) a message from a feed.",
+        "properties": {
+          "receiptHandle": {
+            "type": "string"
+          },
+          "visibilityTimeout": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "FeedObject": {
+        "type": "object",
+        "facade": true,
+        "description": "A message from a feed.",
+        "properties": {
+          "messageId": {
+            "type": "string"
+          },
+          "receiptHandle": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/AbstractStoredApplicationObject"
+          }
+        }
+      },
+      "FeedRequest": {
+        "type": "object",
+        "description": "Request to fetch and/or acknowledge messages from a feed.",
+        "properties": {
+          "maxItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "waitTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "delete": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/FeedObjectDelete"
+            }
+          },
+          "extend": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/FeedObjectExtend"
             }
           }
         }
