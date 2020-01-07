@@ -1741,15 +1741,8 @@
         "type": "object",
         "extends": "#/components/schemas/LiveCurrentMessage",
         "properties": {
-          "filterIds": {
-            "type": "array",
-            "x-canon-cardinality": "SET",
-            "items": {
-              "type": "string"
-            }
-          },
-          "referencedMessageId": {
-            "$ref": "#/components/schemas/MessageId"
+          "referencedMessage": {
+            "$ref": "#/components/schemas/SocialMessage"
           }
         }
       },
