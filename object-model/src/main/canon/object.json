@@ -198,14 +198,14 @@
         }
       }
     },
-    "/feeds/{name}/objects": {
+    "/feeds/{feedHash}/objects": {
       "parameters": {
-        "name": {
+        "feedHash": {
           "in": "path",
-          "description": "Name of the feed",
+          "description": "Hash of Feed",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         }
       },
