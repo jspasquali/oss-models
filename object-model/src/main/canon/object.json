@@ -255,6 +255,14 @@
             "type": "string"
           }
         },
+        "sortKeyPrefix": {
+          "in": "query",
+          "description": "Prefix for sort key of returned objects",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
         "scanForwards": {
           "in": "query",
           "description": "if true then scan in chronological order, else reverse",
@@ -503,6 +511,53 @@
           }
         }
       },
+      
+      
+      "Permission": {
+        "type": "string",
+        "enum": [
+          "READ",
+          "WRITE"
+        ]
+      },
+      "UserPermissionsRequest": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "description": "Requested resource permissions for a user.",
+        "required": [
+          "userId"
+        ],
+        "properties": {
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "permissions": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            }
+          }
+        }
+      },
+      "ResourcePermissions": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "facade": false,
+        "builderFacade": false,
+        "description": "Resource permissions.",
+        "properties": {
+          "permissions": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            }
+          }
+        }
+      },
+      
       "Partition": {
         "type": "object",
         "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
@@ -540,11 +595,11 @@
           "partitionId": {
             "$ref": "#/components/schemas/NamedUserIdObject"
           },
-          "threadIds": {
+          "userPermissions": {
             "type": "array",
-            "x-canon-cardinality": "SET",
+            "x-canon-cardinality": "LIST",
             "items": {
-              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+            "$ref": "#/components/schemas/UserPermissionsRequest"
             }
           }
         }
@@ -597,6 +652,13 @@
             "x-canon-cardinality": "SET",
             "items": {
               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+            }
+          },
+          "userPermissions": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+            "$ref": "#/components/schemas/UserPermissionsRequest"
             }
           }
         }
