@@ -307,9 +307,6 @@
         "properties": {
           "hashType": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/HashType"
-          },
-          "sortKey": {
-            "type": "string"
           }
         }
       },
