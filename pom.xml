@@ -202,24 +202,24 @@
               <goal>generate-sources</goal>
             </goals>
             <configuration>
-              <srcDirs>src/main/canon</srcDirs>
+              <srcDirs>src/main/resources/canon</srcDirs>
               <proformaCopyDir>src/main</proformaCopyDir>
               <uriMapping>
                 <property>
                  <name>https://models.oss.symphony.com/fundamental.json</name>
-                 <value>../../../../fundamental-model/src/main/canon/fundamental.json</value>
+                 <value>../../../../../fundamental-model/src/main/resources/canon/fundamental.json</value>
                 </property>
                 <property>
                  <name>https://models.oss.symphony.com/core.json</name>
-                 <value>../../../../core-model/src/main/canon/core.json</value>
+                 <value>../../../../../core-model/src/main/resources/canon/core.json</value>
                 </property>
                 <property>
                  <name>https://models.oss.symphony.com/crypto.json</name>
-                 <value>../../../../crypto-model/src/main/canon/crypto.json</value>
+                 <value>../../../../../crypto-model/src/main/resources/canon/crypto.json</value>
                 </property>
                 <property>
                  <name>https://models.oss.symphony.com/chat.json</name>
-                 <value>../../../../chat-model/src/main/canon/chat.json</value>
+                 <value>../../../../../chat-model/src/main/resources/canon/chat.json</value>
                 </property>
               </uriMapping>
 
