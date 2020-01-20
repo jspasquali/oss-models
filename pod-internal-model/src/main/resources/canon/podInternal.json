@@ -14,6 +14,28 @@
 		"javaFacadePackage": "com.symphony.oss.models.internal.pod.canon.facade"
 	},
   "methods": {
+    "/datafeed2/api/v1/feeds": {
+      "get": {
+        "response": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/Feed"
+          }
+        }
+      }
+    },
+    "/settings-web/api/v1/tokens": {
+      "get": {
+        "response": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/TokenHolder"
+          }
+        }
+      }
+    },
     "/webcontroller/ingestor/v2/MessageService": {
       "post": {
         "tags": [
@@ -21,7 +43,7 @@
         ],
         "parameters": {
           "messagepayload": {
-            "description": "The ID of the customer of returned invoices",
+            "description": "A chat message to be sent.",
             "in": "body",
             "required": true,
             "schema": {
@@ -245,6 +267,31 @@
   },
 	"components": {
 		"schemas": {
+      "Feed": {
+        "type": "object",
+        "properties": {
+          "feedId": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenHolder": {
+        "type": "object",
+        "properties": {
+          "tokenContext": {
+            "type": "string"
+          },
+          "service": {
+            "type": "string"
+          },
+          "granted": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
       "SendMessageV2Response": {
         "type": "object",
         "properties": {
