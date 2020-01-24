@@ -16,11 +16,76 @@
   "methods": {
     "/datafeed2/api/v1/feeds": {
       "get": {
+        "description": "Get the metadata (id) for all feeds.",
         "response": {
           "required": true,
           "multiple": true,
           "schema": {
             "$ref": "#/components/schemas/Feed"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new feed.",
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Feed"
+          }
+        }
+      }
+    },
+    "/datafeed2/api/v1/feeds/{feedId}": {
+      "parameters": {
+        "feedId": {
+          "in": "path",
+          "required": true,
+          "description": "The id of the feed.",
+          "schema": {
+            "$ref": "#/components/schemas/FeedId"
+          }
+        }
+      },
+      "get": {
+        "description": "Get the metadata (id) for the given feed.",
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Feed"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete the given feed."
+      }
+    },
+    "/datafeed2/api/v1/feeds/{feedId}/events": {
+      "parameters": {
+        "feedId": {
+          "in": "path",
+          "required": true,
+          "description": "The id of the feed.",
+          "schema": {
+            "$ref": "#/components/schemas/FeedId"
+          }
+        }
+      },
+      "post": {
+        "description": "Get events for the given feed.",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/AckIdObject"
+          }
+        },
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Events"
           }
         }
       }
@@ -267,11 +332,65 @@
   },
 	"components": {
 		"schemas": {
+      "FeedId": {
+        "type": "string"
+      },
+      "AckId": {
+        "type": "string"
+      },
+      "AckIdObject": {
+        "description": "An object containing the ackId associated with events that the client has received through an individual feed.",
+        "type": "object",
+        "properties": {
+          "ackId": {
+            "$ref": "#/components/schemas/AckId"
+          }
+        }
+      },
+      "Event": {
+        "description": "An object representing metadata for an individual event.",
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "readOnly": true,
+            "description": "A UUID for an individual event."
+          },
+          "name": {
+            "type": "string",
+            "description": "The event name from the event's version property."
+          },
+          "payload": {
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/LiveCurrentMessage"
+          },
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      
       "Feed": {
+        "description": "An object representing metadata for an individual client's feed.",
         "type": "object",
         "properties": {
           "feedId": {
-            "type": "string"
+            "$ref": "#/components/schemas/FeedId"
+          }
+        }
+      },
+      "Events": {
+        "description": "An object representing metadata for an individual request to retrieve events for a particular feed.",
+        "type": "object",
+        "properties": {
+          "ackId": {
+            "$ref": "#/components/schemas/AckId"
+          },
+          "events": {
+            "type": "array",
+            "description": "An array of Event items, which is empty if no events are retrieved within the maximum timeout period for the long polling request.",
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
           }
         }
       },
