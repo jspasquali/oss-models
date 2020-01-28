@@ -29,10 +29,8 @@
         "type": "string",
         "facade": true
       },
-      "ChatMessage": {
+      "AbstractChatMessage": {
         "type": "object",
-        "facade": true,
-        "builderFacade": true,
         "properties": {
           "threadId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
@@ -45,9 +43,17 @@
           }
         }
       },
-      "ReceivedChatMessage": {
+      "ChatMessage": {
         "type": "object",
-        "extends": "#/components/schemas/ChatMessage",
+        "extends": "#/components/schemas/AbstractChatMessage",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+        }
+      },
+      "AbstractReceivedChatMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/AbstractChatMessage",
         "facade": true,
         "builderFacade": true,
         "properties": {
@@ -62,11 +68,31 @@
           }
         }
       },
+      "ReceivedChatMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/AbstractReceivedChatMessage",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "messageId": {
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/MessageId"
+          },
+          "markDown": {
+            "$ref": "#/components/schemas/MarkDown"
+          },
+          "text": {
+            "type": "string"
+          },
+          "liveCurrentMessage": {
+            "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/LiveCurrentMessage"
+          }
+        }
+      },
       "ReceivedSocialMessage": {
         "type": "object",
-        "extends": "#/components/schemas/ReceivedChatMessage",
-        "facade": false,
-        "builderFacade": false,
+        "extends": "#/components/schemas/AbstractReceivedChatMessage",
+        "facade": true,
+        "builderFacade": true,
         "properties": {
           "socialMessage": {
             "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/SocialMessage"
@@ -75,9 +101,9 @@
       },
       "ReceivedMaestroMessage": {
         "type": "object",
-        "extends": "#/components/schemas/ReceivedChatMessage",
-        "facade": false,
-        "builderFacade": false,
+        "extends": "#/components/schemas/AbstractReceivedChatMessage",
+        "facade": true,
+        "builderFacade": true,
         "properties": {
           "maestroMessage": {
             "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/MaestroMessage"

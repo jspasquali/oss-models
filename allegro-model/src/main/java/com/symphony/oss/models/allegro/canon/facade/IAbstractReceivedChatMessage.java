@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Symphony Communication Services, LLC.
+ * Copyright 2020 Symphony Communication Services, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-03-05 11:02:53 GMT
+ *  At                  2020-01-27 13:01:50 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,17 +27,31 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
+import org.symphonyoss.symphony.messageml.elements.MessageML;
+
 import com.symphony.oss.models.allegro.canon.IAbstractChatMessage;
-import com.symphony.oss.models.allegro.canon.IChatMessageEntity;
+import com.symphony.oss.models.allegro.canon.IAbstractReceivedChatMessageEntity;
+import com.symphony.oss.models.chat.canon.ILiveCurrentMessage;
 
 /**
- * Facade for Object ObjectSchema(ChatMessage)
- * Generated from ObjectSchema(ChatMessage) at #/components/schemas/ChatMessage
+ * Facade for Object ObjectSchema(AbstractReceivedChatMessage)
+ * Generated from ObjectSchema(AbstractReceivedChatMessage) at #/components/schemas/AbstractReceivedChatMessage
  */
 @Immutable
-public interface IChatMessage
-  extends IAbstractChatMessage, IChatMessageEntity
+public interface IAbstractReceivedChatMessage
+  extends IAbstractChatMessage, IAbstractReceivedChatMessageEntity
 {
+  /**
+   * 
+   * @return The MessageML parse tree for the message.
+   */
+  MessageML getMessageML();
+  
+  /**
+   * 
+   * @return The LiveCurrentMessage which represents this message in the cloud.
+   */
+  ILiveCurrentMessage getLiveCurrentMessage();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

@@ -27,8 +27,6 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.symphony.messageml.elements.MessageML;
-
 import com.symphony.oss.models.allegro.canon.IReceivedChatMessageEntity;
 
 /**
@@ -37,13 +35,9 @@ import com.symphony.oss.models.allegro.canon.IReceivedChatMessageEntity;
  */
 @Immutable
 public interface IReceivedChatMessage
-  extends IChatMessage, IReceivedChatMessageEntity
+  extends IAbstractReceivedChatMessage, IReceivedChatMessageEntity
 {
-  /**
-   * 
-   * @return The MessageML parse tree for the message.
-   */
-  MessageML getMessageML();
+
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

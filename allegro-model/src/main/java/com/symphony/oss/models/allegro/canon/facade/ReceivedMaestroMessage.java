@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Symphony Communication Services, LLC.
+ * Copyright 2020 Symphony Communication Services, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2019-03-05 11:05:29 GMT
+ *  At                  2020-01-27 13:01:50 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,31 +27,36 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
+
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
-import com.symphony.oss.models.allegro.canon.IReceivedChatMessageEntity;
-import com.symphony.oss.models.allegro.canon.ReceivedChatMessageEntity;
+import org.symphonyoss.s2.canon.runtime.IEntity;
+import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+
+import java.util.List;
+import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
+
+import com.symphony.oss.models.allegro.canon.ReceivedMaestroMessageEntity;
+import com.symphony.oss.models.chat.canon.IMaestroMessage;
+import com.symphony.oss.models.allegro.canon.IReceivedMaestroMessageEntity;
+import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**
- * This class represents a message which has been received from Symphony and decrypted.
- * Messages are not persisted in this format and this class lacks the constructors needed to
- * deserialize an instance from JSON because the MessageML cannot be reconstructed without
- * an IDataProvider
- * 
- * Facade for Object ObjectSchema(ReceivedChatMessage)
- * Generated from ObjectSchema(ReceivedChatMessage) at #/components/schemas/ReceivedChatMessage
+ * Facade for Object ObjectSchema(ReceivedMaestroMessage)
+ * Generated from ObjectSchema(ReceivedMaestroMessage) at #/components/schemas/ReceivedMaestroMessage
  */
 @Immutable
-public class ReceivedChatMessage extends ReceivedChatMessageEntity implements IReceivedChatMessage
+@SuppressWarnings("unused")
+public class ReceivedMaestroMessage extends ReceivedMaestroMessageEntity implements IReceivedMaestroMessage
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public ReceivedChatMessage(AbstractReceivedChatMessageBuilder<?,?> builder)
+  public ReceivedMaestroMessage(AbstractReceivedMaestroMessageBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -62,7 +67,7 @@ public class ReceivedChatMessage extends ReceivedChatMessageEntity implements IR
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public ReceivedChatMessage(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public ReceivedMaestroMessage(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -73,37 +78,41 @@ public class ReceivedChatMessage extends ReceivedChatMessageEntity implements IR
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public ReceivedChatMessage(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public ReceivedMaestroMessage(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
-  
-  
    
   /**
    * Copy constructor.
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public ReceivedChatMessage(IReceivedChatMessage other)
+  public ReceivedMaestroMessage(IReceivedMaestroMessage other)
   {
     super(other);
   }
+  
+  @Override
+  public IMaestroMessage getLiveCurrentMessage()
+  {
+    return getMaestroMessage();
+  }
 
   /**
-   * Abstract builder for ReceivedChatMessage. If there are sub-classes of this type then their builders sub-class this builder.
+   * Abstract builder for ReceivedMaestroMessage. If there are sub-classes of this type then their builders sub-class this builder.
    *
    * @param <B> The concrete type of the builder, used for fluent methods.
    * @param <T> The concrete type of the built object.
    */
-  public static abstract class AbstractReceivedChatMessageBuilder<B extends AbstractReceivedChatMessageBuilder<B,T>, T extends IReceivedChatMessageEntity> extends AbstractReceivedChatMessageEntityBuilder<B,T>
+  public static abstract class AbstractReceivedMaestroMessageBuilder<B extends AbstractReceivedMaestroMessageBuilder<B,T>, T extends IReceivedMaestroMessageEntity> extends AbstractReceivedMaestroMessageEntityBuilder<B,T>
   {
-    protected AbstractReceivedChatMessageBuilder(Class<B> type)
+    protected AbstractReceivedMaestroMessageBuilder(Class<B> type)
     {
       super(type);
     }
     
-    protected AbstractReceivedChatMessageBuilder(Class<B> type, IReceivedChatMessageEntity initial)
+    protected AbstractReceivedMaestroMessageBuilder(Class<B> type, IReceivedMaestroMessageEntity initial)
     {
       super(type, initial);
     }

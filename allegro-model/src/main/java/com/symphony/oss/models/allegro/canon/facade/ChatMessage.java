@@ -38,6 +38,8 @@ import org.symphonyoss.symphony.messageml.exceptions.InvalidInputException;
 import org.symphonyoss.symphony.messageml.exceptions.ProcessingException;
 import org.symphonyoss.symphony.messageml.util.IDataProvider;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.symphony.oss.models.allegro.canon.ChatMessageEntity;
 import com.symphony.oss.models.allegro.canon.EntityJson;
 import com.symphony.oss.models.allegro.canon.IChatMessageEntity;
@@ -50,6 +52,7 @@ import com.symphony.oss.models.allegro.canon.IChatMessageEntity;
 public class ChatMessage extends ChatMessageEntity implements IChatMessage
 {
   private static final String FORMAT_MESSAGEMLV2 = "com.symphony.messageml.v2";
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   
   /**
    * Constructor from builder.
@@ -145,7 +148,19 @@ public class ChatMessage extends ChatMessageEntity implements IChatMessage
     {
       entityJson_ = entityJson;
       
-      return self();
+      JsonNode json;
+      try
+      {
+        json = OBJECT_MAPPER.readTree(entityJson);
+        
+        withEntityJson(new EntityJson((MutableJsonObject) JacksonAdaptor.adapt(json), modelRegistry_));
+        
+        return self();
+      }
+      catch (IOException e)
+      {
+        throw new IllegalArgumentException("Invalid JSON", e);
+      }
     }
     
     /**
