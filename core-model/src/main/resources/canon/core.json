@@ -85,6 +85,14 @@
           "javaExternalType": "Instant"
         }
       },
+      "BigDecimal": {
+        "description": "A BigDecimal value.",
+        "type": "string",
+        "x-canon-attributes": {
+          "javaExternalPackage":  "java.math",
+          "javaExternalType":     "BigDecimal"
+        }
+      },
       "ApplicationPayload": {
         "type": "object",
         "description": "An application payload.",

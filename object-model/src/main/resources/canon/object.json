@@ -400,6 +400,45 @@
           }
         }
       },
+      "EncryptedApplicationPayload": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "description": "An encrypted application object.",
+        "required": [
+          "encryptedPayload",
+          "cipherSuiteId",
+          "threadId",
+          "rotationId"
+        ],
+        "properties": {
+          "encryptedPayload": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
+          },
+          "cipherSuiteId": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
+          },
+          "threadId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "rotationId": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          }
+        }
+      },
+      "EncryptedApplicationPayloadAndHeader": {
+        "type": "object",
+        "extends": "#/components/schemas/EncryptedApplicationPayload",
+
+        "description": "An encrypted application object plus unencrypted header.",
+        "required": [
+          "header"
+        ],
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/ApplicationObjectHeader"
+          }
+        }
+      },
       "StoredApplicationObject": {
         "type": "object",
         "extends": "#/components/schemas/AbstractStoredApplicationObject",
