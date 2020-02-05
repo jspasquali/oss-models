@@ -52,7 +52,7 @@
         "response": {
           "required": false,
           "schema": {
-            "$ref": "#/components/schemas/StoredApplicationObject"
+            "$ref": "#/components/schemas/AbstractStoredApplicationObject"
           }
         }
       },
@@ -112,7 +112,7 @@
         "response": {
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/PageOfStoredApplicationObject"
+            "$ref": "#/components/schemas/PageOfAbstractStoredApplicationObject"
           }
         }
       }
@@ -526,7 +526,7 @@
           }
         }
       },
-      "#PageOfAbstractStoredApplicationObject":  {
+      "PageOfAbstractStoredApplicationObject":  {
         "type": "object",
         "facade": false,
         "builderFacade": false,
