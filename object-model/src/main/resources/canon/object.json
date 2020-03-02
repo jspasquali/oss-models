@@ -445,9 +445,6 @@
         "facade": true,
         "builderFacade": true,
         "description": "A stored application object in the object store.",
-        "required": [
-          "encryptedPayload"
-        ],
         "properties": {
           "header": {
             "$ref": "#/components/schemas/ApplicationObjectHeader"
