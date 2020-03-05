@@ -1,0 +1,134 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Authentication Service Model",
+		"license": {
+			"name": "Private"
+		}
+	},
+	"id": "com.symphony.s2.model.authc",
+  "version": "1.0",
+	"basePath": "/authc/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.s2.authc.canon",
+		"javaFacadePackage": "com.symphony.s2.authc.canon.facade"
+	},
+  "methods": {
+    "/users/{userId}/keys/{keyId}": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External User ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        },
+        "keyId": {
+          "in": "path",
+          "description": "Key ID",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/KeyId"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the public signing key to validate a JWT for the given user and key ID.",
+        "operationId": "fetchKey",
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PrincipalAuthcKey"
+          }
+        }
+      }
+    },
+    "/users/{userId}/keys/first": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External User ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the public signing key to validate a JWT for the given user, call the method with a keyId if possible.",
+        "operationId": "fetchKey",
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PrincipalAuthcKey"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "KeyId": {
+        "description": "A key identifier (SHA-1 hash), encoded as Base64.",
+        "type": "string",
+        "format": "byte",
+        "facade": true
+      },
+      "PrincipalAuthcKey": {
+        "description": "An RSA Public Key for a principal to authenticate with.",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "facade": true,
+        "builderFacade": true,
+        "required": [
+          "podId",
+          "encodedPublicKey"
+        ],
+        "properties": {
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          },
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "encodedPublicKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
+          },
+          "expirationDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+          "purgeDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          }
+        }
+      },
+      "PrincipalCredential": {
+        "type": "object",
+        "facade": true,
+        "description": "A secret credential.",
+        "required": [
+          "podId",
+          "keyId",
+          "encodedPrivateKey"
+        ],
+        "properties": {
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          },
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "keyId": {
+            "$ref": "#/components/schemas/KeyId"
+          },
+          "encodedPrivateKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
+          }
+        }
+      }
+    }
+	}
+}

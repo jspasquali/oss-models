@@ -90,6 +90,7 @@
         <module>core-model</module>
         <module>crypto-model</module>
         <module>object-model</module>
+        <module>authc-model</module>
   </modules>
 
   <repositories>
