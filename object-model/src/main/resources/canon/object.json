@@ -669,6 +669,21 @@
           },
           "queueName": {
             "type": "string"
+          },
+          "sortKeyPrefix": {
+            "type": "string"
+          }
+        }
+      },
+      "PartitionSelection": {
+        "type": "object",
+        "description": "Reference to part of a partition.",
+        "properties": {
+          "partitionHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "sortKeyPrefix": {
+            "type": "string"
           }
         }
       },
@@ -680,11 +695,19 @@
           "FeedId": {
             "$ref": "#/components/schemas/NamedUserIdObject"
           },
+          "#DEPRECATED": "Use partitionSelections",
           "partitionHashes": {
             "type": "array",
             "x-canon-cardinality": "SET",
             "items": {
               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+            }
+          },
+          "partitionSelections": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/PartitionSelection"
             }
           },
           "userPermissions": {
