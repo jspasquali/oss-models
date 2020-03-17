@@ -40,11 +40,6 @@ import com.symphony.oss.models.object.canon.IAbstractApplicationObjectPayloadEnt
 public interface IAbstractApplicationObjectPayload
   extends IApplicationPayload, IAbstractApplicationObjectPayloadEntity
 {
-  /**
-   * 
-   * @return The stored application object of which this is a part.
-   */
-  IStoredApplicationObject getStoredApplicationObject();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

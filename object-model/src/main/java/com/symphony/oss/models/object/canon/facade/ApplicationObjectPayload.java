@@ -39,6 +39,7 @@ import org.symphonyoss.s2.common.dom.json.jackson.JacksonAdaptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.symphony.oss.models.object.ObjectModelRegistry;
 import com.symphony.oss.models.object.canon.ApplicationObjectPayloadEntity;
 import com.symphony.oss.models.object.canon.IApplicationObjectPayloadEntity;
 
@@ -52,6 +53,8 @@ import com.symphony.oss.models.object.canon.IApplicationObjectPayloadEntity;
 public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity implements IApplicationObjectPayload
 {
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+  private final IStoredApplicationObject storedApplicationObject_;
+  
   /**
    * Constructor from builder.
    * 
@@ -60,6 +63,8 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
   public ApplicationObjectPayload(AbstractApplicationObjectPayloadBuilder<?,?> builder)
   {
     super(builder);
+    
+    storedApplicationObject_ = builder.storedApplicationObject_;
   }
   
   /**
@@ -71,6 +76,8 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
   public ApplicationObjectPayload(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    
+    storedApplicationObject_ = modelRegistry instanceof ObjectModelRegistry ? ((ObjectModelRegistry)modelRegistry).getStoredApplicationObject() : null;
   }
   
   /**
@@ -82,6 +89,8 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
   public ApplicationObjectPayload(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    
+    storedApplicationObject_ = modelRegistry instanceof ObjectModelRegistry ? ((ObjectModelRegistry)modelRegistry).getStoredApplicationObject() : null;
   }
    
   /**
@@ -92,6 +101,8 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
   public ApplicationObjectPayload(IApplicationObjectPayload other)
   {
     super(other);
+    
+    storedApplicationObject_ = other.getStoredApplicationObject();
   }
   
   /**
@@ -113,6 +124,8 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
   {
     // The modelRegistry parameter is required because of the shape of Canon generated code, but is not used in this case so we pass null.
     super(adapt(jsonObject), null);
+    
+    storedApplicationObject_ = null;
   }
   
   private static ImmutableJsonObject adapt(ObjectNode jsonObject)
@@ -146,6 +159,12 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
     }
   }
   
+  @Override
+  public IStoredApplicationObject getStoredApplicationObject()
+  {
+    return storedApplicationObject_;
+  }
+  
   /**
    * Abstract builder for ApplicationObjectPayload. If there are sub-classes of this type then their builders sub-class this builder.
    *
@@ -154,6 +173,8 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
    */
   public static abstract class AbstractApplicationObjectPayloadBuilder<B extends AbstractApplicationObjectPayloadBuilder<B,T>, T extends IApplicationObjectPayloadEntity> extends AbstractApplicationObjectPayloadEntityBuilder<B,T>
   {
+    private IStoredApplicationObject storedApplicationObject_;
+    
     protected AbstractApplicationObjectPayloadBuilder(Class<B> type)
     {
       super(type);
@@ -162,6 +183,20 @@ public class ApplicationObjectPayload extends ApplicationObjectPayloadEntity imp
     protected AbstractApplicationObjectPayloadBuilder(Class<B> type, IApplicationObjectPayloadEntity initial)
     {
       super(type, initial);
+    }
+    
+    /**
+     * Set the StoredApplicationObject.
+     * 
+     * @param storedApplicationObject The StoredApplicationObject.
+     * 
+     * @return This (fluent method)
+     */
+    public B withStoredApplicationObject(IStoredApplicationObject storedApplicationObject)
+    {
+      storedApplicationObject_ = storedApplicationObject;
+      
+      return self();
     }
   }
 }

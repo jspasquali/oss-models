@@ -40,8 +40,6 @@ import com.symphony.oss.models.object.canon.IAbstractApplicationObjectPayloadEnt
  */
 public class AbstractApplicationObjectPayload extends AbstractApplicationObjectPayloadEntity implements IAbstractApplicationObjectPayload
 {
-  private IStoredApplicationObject storedApplicationObject_;
-  
   /**
    * Constructor from builder.
    * 
@@ -83,17 +81,6 @@ public class AbstractApplicationObjectPayload extends AbstractApplicationObjectP
   {
     super(other);
   }
-  
-  @Override
-  public IStoredApplicationObject getStoredApplicationObject()
-  {
-    return storedApplicationObject_;
-  }
-
-  public void setStoredApplicationObject(IStoredApplicationObject storedApplicationObject)
-  {
-    storedApplicationObject_ = storedApplicationObject;
-  }
 
   /**
    * Abstract builder for AbstractApplicationObjectPayload. If there are sub-classes of this type then their builders sub-class this builder.
@@ -103,8 +90,6 @@ public class AbstractApplicationObjectPayload extends AbstractApplicationObjectP
    */
   public static abstract class AbstractAbstractApplicationObjectPayloadBuilder<B extends AbstractAbstractApplicationObjectPayloadBuilder<B,T>, T extends IAbstractApplicationObjectPayloadEntity> extends AbstractAbstractApplicationObjectPayloadEntityBuilder<B,T>
   {
-    private IStoredApplicationObject storedApplicationObject_;
-    
     protected AbstractAbstractApplicationObjectPayloadBuilder(Class<B> type)
     {
       super(type);
@@ -113,20 +98,6 @@ public class AbstractApplicationObjectPayload extends AbstractApplicationObjectP
     protected AbstractAbstractApplicationObjectPayloadBuilder(Class<B> type, IAbstractApplicationObjectPayloadEntity initial)
     {
       super(type, initial);
-    }
-    
-    /**
-     * Set the StoredApplicationObject.
-     * 
-     * @param storedApplicationObject The StoredApplicationObject.
-     * 
-     * @return This (fluent method)
-     */
-    public B withStoredApplicationObject(IStoredApplicationObject storedApplicationObject)
-    {
-      storedApplicationObject_ = storedApplicationObject;
-      
-      return self();
     }
   }
 }
