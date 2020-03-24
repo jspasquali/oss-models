@@ -36,7 +36,6 @@ import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 import org.symphonyoss.s2.common.exception.NoSuchObjectException;
-import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
 import org.symphonyoss.s2.fugue.kv.IKvSortKey;
@@ -220,26 +219,26 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
     
     if(keyId != null)
     {
-      key = fetchPublicKey(kvStore, podId, getPartitionKeyFor(userId), keyId, trace);
+      key = fetchPublicKey(kvStore, getPartitionKeyFor(userId), keyId, trace);
       log_.info("User key = " + key);
     }
     
     if(key == null)
     {
-      key = fetchPublicKey(kvStore, podId, getPartitionKeyFor(podId), keyId, trace);
+      key = fetchPublicKey(kvStore, getPartitionKeyFor(podId), keyId, trace);
       log_.info("Pod key = " + key);
     }
     
     return key;
   }
 
-  private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, PodId podId, IKvPartitionKey partitionKey,
+  private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, IKvPartitionKey partitionKey,
       KeyId keyId, ITraceContext trace)
   {
     try
     {
       if(keyId != null)
-        return kvStore.fetch(new KvPartitionSortKeyProvider(podId, partitionKey, keyId.toString()), IPrincipalAuthcKey.class, trace);
+        return kvStore.fetch(new KvPartitionSortKeyProvider(partitionKey, keyId.toString()), IPrincipalAuthcKey.class, trace);
     }
     catch (NoSuchObjectException e)
     {
@@ -248,7 +247,7 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
 
     try
     {
-      return kvStore.fetchFirst(new KvPartitionKeyProvider(podId, partitionKey), IPrincipalAuthcKey.class, trace);
+      return kvStore.fetchFirst(new KvPartitionKeyProvider(partitionKey), IPrincipalAuthcKey.class, trace);
     }
     catch (NoSuchObjectException e2)
     {

@@ -25,12 +25,14 @@ package com.symphony.oss.models.core.kv.store;
 
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.function.Consumer;
 
 import org.symphonyoss.s2.canon.runtime.IEntity;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 import org.symphonyoss.s2.fugue.kv.IKvItem;
+import org.symphonyoss.s2.fugue.kv.IKvPagination;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionKeyProvider;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
 import org.symphonyoss.s2.fugue.kv.table.IKvTable;
@@ -111,4 +113,18 @@ public class KvStore implements IKvStore
     return normalize(kvTable_.fetchLast(partitionKey, trace), type);
   }
 
+  @Override
+  public <T extends IKvItem> IKvPagination fetch(IKvPartitionKeyProvider partitionKey, boolean scanForwards, Integer limit, String after, String sortKeyPrefix, Class<T> type, Consumer<T> consumer, ITraceContext trace)
+  {
+    Consumer<String> stringConsumer = new Consumer<String>()
+    {
+      @Override
+      public void accept(String json)
+      {
+        consumer.accept(normalize(json, type));
+      }
+    };
+    
+    return kvTable_.fetchPartitionObjects(partitionKey, scanForwards, limit, after, sortKeyPrefix, stringConsumer, trace);
+  }
 }
