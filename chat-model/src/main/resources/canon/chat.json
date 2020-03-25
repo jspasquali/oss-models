@@ -1149,7 +1149,8 @@
           "xPodIMStateChangeMaestroPayload",
           "requestContentExportKeyMaestroPayload",
           "updateStreamMembershipMetadataPayload",
-          "MaestroPayload"
+          "MaestroPayload",
+          "malwareScanUpdatePayload"
         ]
       },
       "MaestroPayloadContainer": {
