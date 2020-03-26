@@ -1,0 +1,221 @@
+/**
+ * Copyright 2020 Symphony Communication Services, LLC.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *----------------------------------------------------------------------------------------------------
+ * Proforma generated from
+ *		Template groupId		 org.symphonyoss.s2.canon
+ *           artifactId canon-template-java
+ *		Template name		   proforma/java/Object/_.java.ftl
+ *		Template version	   1.0
+ *  At                  2020-03-18 11:36:51 GMT
+ *----------------------------------------------------------------------------------------------------
+ */
+
+package com.symphony.s2.authz.canon.facade;
+
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.concurrent.Immutable;
+
+import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
+import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
+import org.symphonyoss.s2.common.hash.Hash;
+import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
+import org.symphonyoss.s2.fugue.core.trace.NoOpTraceContext;
+import org.symphonyoss.s2.fugue.kv.IKvPagination;
+import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
+import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
+import org.symphonyoss.s2.fugue.kv.IKvSortKey;
+import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
+import org.symphonyoss.s2.fugue.kv.KvPartitionKeyProvider;
+import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
+import org.symphonyoss.s2.fugue.kv.KvSortKey;
+
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.oss.models.core.canon.facade.PodId;
+import com.symphony.oss.models.core.kv.store.IKvStore;
+import com.symphony.s2.authz.canon.EntitlementAction;
+import com.symphony.s2.authz.canon.IPodEntitlementMappingEntity;
+import com.symphony.s2.authz.canon.PodEntitlementMappingEntity;
+
+/**
+ * Facade for Object ObjectSchema(PodEntitlementMapping)
+ *
+ * A pod entitlement setting.
+ * Generated from ObjectSchema(PodEntitlementMapping) at #/components/schemas/PodEntitlementMapping
+ */
+@Immutable
+@SuppressWarnings("unused")
+public class PodEntitlementMapping extends PodEntitlementMappingEntity implements IPodEntitlementMapping
+{
+  /**
+   * Constructor from builder.
+   * 
+   * @param builder A mutable builder containing all values.
+   */
+  public PodEntitlementMapping(AbstractPodEntitlementMappingBuilder<?,?> builder)
+  {
+    super(builder);
+  }
+  
+  /**
+   * Constructor from serialised form.
+   * 
+   * @param jsonObject An immutable JSON object containing the serialized form of the object.
+   * @param modelRegistry A model registry to use to deserialize any nested objects.
+   */
+  public PodEntitlementMapping(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  {
+    super(jsonObject, modelRegistry);
+  }
+  
+  /**
+   * Constructor from mutable JSON object.
+   * 
+   * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
+   * @param modelRegistry A model registry to use to deserialize any nested objects.
+   */
+  public PodEntitlementMapping(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  {
+    super(mutableJsonObject, modelRegistry);
+  }
+   
+  /**
+   * Copy constructor.
+   * 
+   * @param other Another instance from which all attributes are to be copied.
+   */
+  public PodEntitlementMapping(IPodEntitlementMapping other)
+  {
+    super(other);
+  }
+  
+  /**
+   * Return the partition key for the mapping of the given pod.
+   * 
+   * @param podId The ID of the required pod.
+   * 
+   * @return The partition key for the mapping of the given pod.
+   */
+  public static IKvPartitionKey getPartitionKeyFor(PodId podId)
+  {
+    return new KvPartitionKey("PE#" + podId);
+  }
+
+  /**
+   * Return the sort key for the mapping of the given entitlement.
+   * 
+   * @param entitlementHash The ID of the required entitlement.
+   * 
+   * @return The sort key for the mapping of the given entitlement.
+   */
+  public static IKvSortKey getSortKeyFor(Hash entitlementHash)
+  {
+    return new KvSortKey(entitlementHash.toStringBase64());
+  }
+  
+  /**
+   * Return the partition and sort key for the mapping of the given entitlement to the pod user.
+   * 
+   * @param podId The ID of the required pod.
+   * @param entitlementHash The ID of the required entitlement.
+   * 
+   * @return The partition and sort key for the mapping of the given entitlement to the given pod.
+   */
+  public static IKvPartitionSortKeyProvider getPartitionSortKeyFor(PodId podId, Hash entitlementHash)
+  {
+    return new KvPartitionSortKeyProvider(getPartitionKeyFor(podId), getSortKeyFor(entitlementHash));
+  }
+  
+  @Override
+  public IKvPartitionKey getPartitionKey()
+  {
+    return getPartitionKeyFor(getPodId());
+  }
+  
+  @Override
+  public IKvSortKey getSortKey()
+  {
+    return new KvSortKey(getEntitlementHash().toStringBase64());
+  }
+
+  @Override
+  public String getJson()
+  {
+    return super.toString();
+  }
+
+  @Override
+  public String getType()
+  {
+    return getCanonType();
+  }
+
+  @Override
+  public Instant getPurgeDate()
+  {
+    return null;
+  }
+  
+  /**
+   * Abstract builder for PodEntitlementMapping. If there are sub-classes of this type then their builders sub-class this builder.
+   *
+   * @param <B> The concrete type of the builder, used for fluent methods.
+   * @param <T> The concrete type of the built object.
+   */
+  public static abstract class AbstractPodEntitlementMappingBuilder<B extends AbstractPodEntitlementMappingBuilder<B,T>, T extends IPodEntitlementMappingEntity> extends AbstractPodEntitlementMappingEntityBuilder<B,T>
+  {
+    protected AbstractPodEntitlementMappingBuilder(Class<B> type)
+    {
+      super(type);
+    }
+    
+    protected AbstractPodEntitlementMappingBuilder(Class<B> type, IPodEntitlementMappingEntity initial)
+    {
+      super(type, initial);
+    }
+  }
+
+//  static Map<Hash, EntitlementAction> fetchEntitlements(IKvStore kvStore, PodId podId, Set<Hash> entitlementHashes)
+//  { 
+//    Map<Hash, EntitlementAction>  result = new HashMap<>();
+//    ITraceContext trace = NoOpTraceContext.INSTANCE;
+////    new EntitlementRequest.Builder()
+////      .withUserId();
+////    new EntitlementResponse.Builder();
+//    
+//    String after = null;
+//    do
+//    {
+//      IKvPagination pagination = kvStore.fetch(new KvPartitionKeyProvider(getPartitionKeyFor(podId)),
+//          true, null, after, null, IPodEntitlementMapping.class, (item) ->
+//          {
+//            result.put(item.getEntitlementHash(), item.getAction());
+//          }, trace);
+//      
+//      after = pagination.getAfter();
+//    }while(after != null);
+//    
+//    return result;
+//  }
+}
+/*----------------------------------------------------------------------------------------------------
+ * End of template proforma/java/Object/_.java.ftl
+ * End of code generation
+ *------------------------------------------------------------------------------------------------- */

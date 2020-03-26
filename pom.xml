@@ -91,6 +91,7 @@
         <module>crypto-model</module>
         <module>object-model</module>
         <module>authc-model</module>
+        <module>authz-model</module>
   </modules>
 
   <repositories>
@@ -213,6 +214,10 @@
                 <property>
                  <name>https://models.oss.symphony.com/core.json</name>
                  <value>core-model/src/main/resources/canon/core.json</value>
+                </property>
+                <property>
+                 <name>https://models.oss.symphony.com/object.json</name>
+                 <value>object-model/src/main/resources/canon/object.json</value>
                 </property>
                 <property>
                  <name>https://models.oss.symphony.com/crypto.json</name>

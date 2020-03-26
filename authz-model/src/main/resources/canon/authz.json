@@ -1,0 +1,275 @@
+{
+	"canon": "0.0.1",
+	"info": {
+		"title": "Symphony 2.0 Authorization Service Model",
+		"license": {
+			"name": "Private"
+		}
+	},
+	"id": "com.symphony.s2.model.authz",
+  "version": "1.0",
+	"basePath": "/authz/v1",
+	"model": {
+		"javaGenPackage": "com.symphony.s2.authz.canon",
+		"javaFacadePackage": "com.symphony.s2.authz.canon.facade"
+	},
+  "methods": {
+    "/users/{userId}/entitlements/has-all": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External User ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "post": {
+        "summary": "Ensure that the given user or their pod has all given entitlements, returns 403 FORBIDDEN if not.",
+        "operationId": "checkEntitlements",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/EntitlementRequest"
+          }
+        }
+      }
+    },
+    "/users/{userId}/entitlements/upsert": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External User ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "post": {
+        "summary": "Upsert the given entitlement mapping.",
+        "operationId": "upsertEntitlement",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/UserEntitlementMapping"
+          }
+        },
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/UserEntitlementMapping"
+          }
+        }
+      }
+    },
+    "/pods/{podId}/entitlements/upsert": {
+      "parameters": {
+        "podId": {
+          "in": "path",
+          "description": "Pod ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          }
+        }
+      },
+      "post": {
+        "summary": "Upsert the given entitlement mapping.",
+        "operationId": "upsertEntitlement",
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PodEntitlementMapping"
+          }
+        },
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/PodEntitlementMapping"
+          }
+        }
+      }
+    },
+    "/entitlements/{entitlementHash}": {
+      "parameters": {
+        "entitlementHash": {
+          "in": "path",
+          "description": "Entitlement ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the given entitlement.",
+        "operationId": "fetchEntitlement",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/Entitlement"
+          }
+        }
+      }
+    },
+    "/entitlements/upsert": {
+      "parameters": {
+      },
+      "post": {
+        "summary": "Upsert an entitlement",
+        "operationId": "upsertEntitlement",
+        "tags": [
+          "entitlements"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Entitlement"
+          }
+        },
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Entitlement"
+          }
+        }
+      }
+    }
+  },
+	"components": {
+		"schemas": {
+      "EntitlementType": {
+        "type": "string",
+        "enum": [
+          "USER",
+          "POD"
+        ]
+      },
+      "EntitlementAction": {
+        "type": "string",
+        "enum": [
+          "ALLOW",
+          "DENY"
+
+        ]
+      },
+      "Entitlement": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "facade": true,
+        "builderFacade": false,
+        "description": "An entitlement definition.",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://models.oss.symphony.com/object.json#/components/schemas/NamedUserIdObject"
+          },
+          "description": {
+            "type": "string"
+          },
+          "entitlementType": {
+            "$ref": "#/components/schemas/EntitlementType"
+          }
+        }
+      },
+      "EntitlementMapping": {
+        "description": "A Principal (user) entitlement setting.",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "entitlementHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "action": {
+            "$ref": "#/components/schemas/EntitlementAction"
+          }
+        }
+      },
+      "UserEntitlementMapping": {
+        "description": "A user entitlement setting.",
+        "type": "object",
+        "extends": "#/components/schemas/EntitlementMapping",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "PodEntitlementMapping": {
+        "description": "A pod entitlement setting.",
+        "type": "object",
+        "extends": "#/components/schemas/EntitlementMapping",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          }
+        }
+      },
+      "EntitlementRef": {
+        "description": "An entitlement hash and type.",
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "required": [
+          "entitlementHash"
+        ],
+        "properties": {
+          "entitlementHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "entitlementType": {
+            "$ref": "#/components/schemas/EntitlementType"
+          }
+        }
+      },
+      "EntitlementRequest": {
+        "description": "A user ID and the set of entitlements a caller is interested in.",
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "properties": {
+          "entitlementRefs": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/EntitlementRef"
+            }
+          }
+        }
+      },
+      "EntitlementResponse": {
+        "description": "A user ID and the set of entitlements valid for a particular user at the current moment.",
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "requestHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "entitlements": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    }
+	}
+}
