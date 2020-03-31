@@ -14,6 +14,38 @@
 		"javaFacadePackage": "com.symphony.s2.authz.canon.facade"
 	},
   "methods": {
+    "/entitlements/{entitlementHash}": {
+      "parameters": {
+        "entitlementHash": {
+          "in": "path",
+          "description": "Entitlement ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the given entitlement.",
+        "operationId": "fetchEntitlement",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/Entitlement"
+          }
+        }
+      },
+      "put": {
+        "summary": "Put the given entitlement.",
+        "operationId": "putEntitlement",
+        "payload": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Entitlement"
+          }
+        }
+      }
+    },
     "/users/{userId}/entitlements/has-all": {
       "parameters": {
         "userId": {
@@ -33,6 +65,38 @@
           "multiple": false,
           "schema": {
             "$ref": "#/components/schemas/EntitlementRequest"
+          }
+        }
+      }
+    },
+    "/users/{userId}/entitlements": {
+      "parameters": {
+        "userId": {
+          "in": "path",
+          "description": "External User ID",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch all of the given users entitlements.",
+        "operationId": "fetchUserEntitlements",
+        "parameters": {
+          "entitlementOwner": {
+            "in": "query",
+            "description": "Entitlement Owner User ID",
+            "required": false,
+            "schema": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+            }
+          }
+        },
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/EntitlementResponse"
           }
         }
       }
@@ -94,53 +158,6 @@
           }
         }
       }
-    },
-    "/entitlements/{entitlementHash}": {
-      "parameters": {
-        "entitlementHash": {
-          "in": "path",
-          "description": "Entitlement ID",
-          "required": true,
-          "schema": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-          }
-        }
-      },
-      "get": {
-        "summary": "Fetch the given entitlement.",
-        "operationId": "fetchEntitlement",
-        "response": {
-          "required": false,
-          "schema": {
-            "$ref": "#/components/schemas/Entitlement"
-          }
-        }
-      }
-    },
-    "/entitlements/upsert": {
-      "parameters": {
-      },
-      "post": {
-        "summary": "Upsert an entitlement",
-        "operationId": "upsertEntitlement",
-        "tags": [
-          "entitlements"
-        ],
-        "payload": {
-          "required": true,
-          "multiple": false,
-          "schema": {
-            "$ref": "#/components/schemas/Entitlement"
-          }
-        },
-        "response": {
-          "required": false,
-          "multiple": false,
-          "schema": {
-            "$ref": "#/components/schemas/Entitlement"
-          }
-        }
-      }
     }
   },
 	"components": {
@@ -160,6 +177,20 @@
 
         ]
       },
+      "EntitlementId": {
+        "description": "An ID of an entitlement, may be subclassed by services defining entitlements.",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/object.json#/components/schemas/NamedUserIdObject",
+        "facade": true,
+        "required": [
+          "entitlementType"
+        ],
+        "properties": {
+          "entitlementType": {
+            "$ref": "#/components/schemas/EntitlementType"
+          }
+        }
+      },
       "Entitlement": {
         "type": "object",
         "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
@@ -171,13 +202,25 @@
         ],
         "properties": {
           "id": {
-            "$ref": "https://models.oss.symphony.com/object.json#/components/schemas/NamedUserIdObject"
+            "$ref": "#/components/schemas/EntitlementId"
           },
           "description": {
             "type": "string"
+          }
+        }
+      },
+      "UserStatus": {
+        "description": "The status of a user account.",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "facade": true,
+        "builderFacade": false,
+        "properties": {
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           },
-          "entitlementType": {
-            "$ref": "#/components/schemas/EntitlementType"
+          "active": {
+            "type": "boolean"
           }
         }
       },
@@ -188,8 +231,8 @@
         "facade": true,
         "builderFacade": true,
         "properties": {
-          "entitlementHash": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          "entitlementId": {
+            "$ref": "#/components/schemas/EntitlementId"
           },
           "action": {
             "$ref": "#/components/schemas/EntitlementAction"
@@ -261,12 +304,15 @@
           "userId": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
           },
-          "requestHash": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          "userStatus": {
+            "$ref": "#/components/schemas/UserStatus"
           },
           "entitlements": {
-            "type": "string",
-            "format": "byte"
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/UserEntitlementMapping"
+            }
           }
         }
       }

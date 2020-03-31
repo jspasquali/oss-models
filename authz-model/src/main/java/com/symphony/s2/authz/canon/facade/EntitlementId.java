@@ -19,44 +19,35 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2020-02-04 15:19:57 GMT
+ *  At                  2020-03-31 10:35:02 BST
  *----------------------------------------------------------------------------------------------------
  */
 
 package com.symphony.s2.authz.canon.facade;
-
-import java.time.Instant;
 
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.IKvSortKey;
-import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
-import org.symphonyoss.s2.fugue.kv.KvSortKey;
-import org.symphonyoss.s2.fugue.store.IFuguePodId;
 
-import com.symphony.s2.authz.canon.EntitlementEntity;
+import com.symphony.s2.authz.canon.EntitlementIdEntity;
 
 /**
- * Facade for Object ObjectSchema(Entitlement)
+ * Facade for Object ObjectSchema(EntitlementId)
  *
- * An entitlement definition.
- * Generated from ObjectSchema(Entitlement) at #/components/schemas/Entitlement
+ * An ID of an entitlement, may be subclassed by services defining entitlements.
+ * Generated from ObjectSchema(EntitlementId) at #/components/schemas/EntitlementId
  */
 @Immutable
-public class Entitlement extends EntitlementEntity implements IEntitlement
+public class EntitlementId extends EntitlementIdEntity implements IEntitlementId
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public Entitlement(AbstractEntitlementBuilder<?,?> builder)
+  public EntitlementId(AbstractEntitlementIdBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -67,7 +58,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public Entitlement(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public EntitlementId(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -78,7 +69,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public Entitlement(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public EntitlementId(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -88,69 +79,9 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public Entitlement(IEntitlement other)
+  public EntitlementId(IEntitlementId other)
   {
     super(other);
-  }
-  
-  @Override
-  public IKvPartitionKey getPartitionKey()
-  {
-    return getPartitionKeyFor(getId().getHash());
-  }
-  
-  /**
-   * Get the partition key for Entitlement object for the given hash.
-   * 
-   * @param hash The entitlement hash for the required entitlement.
-   * 
-   * @return The partition key for Entitlement object for the given hash.
-   */
-  public static KvPartitionKey getPartitionKeyFor(Hash hash)
-  {
-    return new KvPartitionKey("E#" + hash);
-  }
-  
-  /**
-   * Get the partition key for Entitlement object for the given hash.
-   * 
-   * @param hash The entitlement hash for the required entitlement.
-   * 
-   * @return The partition key for Entitlement object for the given hash.
-   */
-  public static KvPartitionSortKeyProvider getPartitionSortKeyFor(Hash hash)
-  {
-    return new KvPartitionSortKeyProvider(getPartitionKeyFor(hash), new KvSortKey("E#"));
-  }
-
-  @Override
-  public IKvSortKey getSortKey()
-  {
-    return new KvSortKey("E#");
-  }
-
-  @Override
-  public String getJson()
-  {
-    return super.toString();
-  }
-
-  @Override
-  public String getType()
-  {
-    return getCanonType();
-  }
-
-  @Override
-  public Instant getPurgeDate()
-  {
-    return null;
-  }
-
-  @Override
-  public IFuguePodId getPodId()
-  {
-    return getId().getUserId().getPodId();
   }
 }
 /*----------------------------------------------------------------------------------------------------

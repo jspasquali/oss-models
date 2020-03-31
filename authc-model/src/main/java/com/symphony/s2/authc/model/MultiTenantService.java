@@ -34,7 +34,10 @@ public enum MultiTenantService implements IFugueApplication, IMultiTenantService
   MSAPI("msapi",    3,  7004),
   
   /** Authorization Service */
-  AUTHZ("authz",    4,  7003)
+  AUTHZ("authz",    4,  7003),
+  
+  /** SBE - Obviously not actually a multi tenant service but we need an Owner ID for entitlements and other SBE owned assets. */
+  SBE("sbe",        5,  7005)
   
   // We allocated the user ID and port number separately before, for future services use 5 and 7005 etc.
   ;

@@ -113,7 +113,7 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
    * 
    * @return The partition key for the mapping of the given pod.
    */
-  public static IKvPartitionKey getPartitionKeyFor(PodId podId)
+  public static KvPartitionKey getPartitionKeyFor(PodId podId)
   {
     return new KvPartitionKey("PE#" + podId);
   }
@@ -125,7 +125,7 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
    * 
    * @return The sort key for the mapping of the given entitlement.
    */
-  public static IKvSortKey getSortKeyFor(Hash entitlementHash)
+  public static KvSortKey getSortKeyFor(Hash entitlementHash)
   {
     return new KvSortKey(entitlementHash.toStringBase64());
   }
@@ -138,7 +138,7 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
    * 
    * @return The partition and sort key for the mapping of the given entitlement to the given pod.
    */
-  public static IKvPartitionSortKeyProvider getPartitionSortKeyFor(PodId podId, Hash entitlementHash)
+  public static KvPartitionSortKeyProvider getPartitionSortKeyFor(PodId podId, Hash entitlementHash)
   {
     return new KvPartitionSortKeyProvider(getPartitionKeyFor(podId), getSortKeyFor(entitlementHash));
   }
@@ -152,7 +152,7 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
   @Override
   public IKvSortKey getSortKey()
   {
-    return new KvSortKey(getEntitlementHash().toStringBase64());
+    return new KvSortKey(getEntitlementId().getHash().toStringBase64());
   }
 
   @Override

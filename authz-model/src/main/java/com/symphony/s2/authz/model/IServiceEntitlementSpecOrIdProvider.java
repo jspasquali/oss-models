@@ -7,11 +7,11 @@
 package com.symphony.s2.authz.model;
 
 /**
- * Specification of a user entitlement to be used to link entitlements to code.
+ * Super-interface for IServiceEntitlementSpec or IEntitlementIdProvider
  * 
  * @author Bruce Skingle
  *
  */
-public interface IEntitlementSpec extends IEntitlementIdProvider, IGeneralEntitlementSpec
+public interface IServiceEntitlementSpecOrIdProvider
 {
 }

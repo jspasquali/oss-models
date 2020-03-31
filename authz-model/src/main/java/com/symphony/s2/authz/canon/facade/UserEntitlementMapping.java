@@ -40,6 +40,7 @@ import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 import org.symphonyoss.s2.fugue.core.trace.NoOpTraceContext;
 import org.symphonyoss.s2.fugue.kv.IKvPagination;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
+import org.symphonyoss.s2.fugue.kv.IKvPartitionKeyProvider;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
 import org.symphonyoss.s2.fugue.kv.IKvSortKey;
 import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
@@ -110,13 +111,13 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   }
   
   /**
-   * Return the partition key for the mapping of the given user.
+   * Return the partition key for the mappings of the given user.
    * 
    * @param userId The ID of the required user.
    * 
    * @return The partition key for the mapping of the given user.
    */
-  public static IKvPartitionKey getPartitionKeyFor(PodAndUserId userId)
+  public static KvPartitionKey getPartitionKeyFor(PodAndUserId userId)
   {
     return new KvPartitionKey("UE#" + userId);
   }
@@ -128,7 +129,7 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
    * 
    * @return The sort key for the mapping of the given entitlement.
    */
-  public static IKvSortKey getSortKeyFor(Hash entitlementHash)
+  public static KvSortKey getSortKeyFor(Hash entitlementHash)
   {
     return new KvSortKey(entitlementHash.toStringBase64());
   }
@@ -155,7 +156,7 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   @Override
   public IKvSortKey getSortKey()
   {
-    return getSortKeyFor(getEntitlementHash());
+    return getSortKeyFor(getEntitlementId().getHash());
   }
 
   @Override
@@ -200,49 +201,6 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
       super(type, initial);
     }
   }
-
-//  public static IEntitlementResponse fetchEntitlements(IKvStore kvStore, PodAndUserId userId, Set<Hash> entitlementHashes)
-//  {
-//    return fetchEntitlements(kvStore, new EntitlementRequest.Builder()
-//      .withUserId(userId)
-//      .withEntitlementHashes(entitlementHashes)
-//      .build());
-//  }
-//  
-//
-//
-//  public static IEntitlementResponse fetchEntitlements(IKvStore kvStore, IEntitlementRequest request)
-//  {
-//    EntitlementResponse.Builder builder = new EntitlementResponse.Builder()
-//        .withUserId(request.getUserId())
-//        .withRequestHash(request.getAbsoluteHash())
-//        ;
-//    
-//    return builder.build();
-//  }
-//
-//  public static Map<Hash, EntitlementAction> fetchEntitlements(IKvStore kvStore, PodId podId, Set<Hash> entitlementHashes)
-//  { 
-//    Map<Hash, EntitlementAction>  result = new HashMap<>();
-//    ITraceContext trace = NoOpTraceContext.INSTANCE;
-//
-//    
-////    ;
-//    
-//    String after = null;
-//    do
-//    {
-//      IKvPagination pagination = kvStore.fetch(new KvPartitionKeyProvider(podId, getPartitionKeyFor(podId)),
-//          true, null, after, null, IPodEntitlementMapping.class, (item) ->
-//          {
-//            result.put(item.getEntitlementHash(), item.getAction());
-//          }, trace);
-//      
-//      after = pagination.getAfter();
-//    }while(after != null);
-//    
-//    return result;
-//  }
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

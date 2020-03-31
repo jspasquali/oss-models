@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2020-02-04 15:19:57 GMT
+ *  At                  2020-03-28 17:43:30 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -29,34 +29,42 @@ import java.time.Instant;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
+import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
+import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
 import org.symphonyoss.s2.fugue.kv.IKvSortKey;
 import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
 import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
 import org.symphonyoss.s2.fugue.kv.KvSortKey;
 import org.symphonyoss.s2.fugue.store.IFuguePodId;
+import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
+import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
+import org.symphonyoss.s2.common.hash.Hash;
+import org.symphonyoss.s2.canon.runtime.IEntity;
+import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 
-import com.symphony.s2.authz.canon.EntitlementEntity;
+
+import com.symphony.s2.authz.canon.UserStatusEntity;
+import com.symphony.s2.authz.canon.IUserStatusEntity;
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
+import com.symphony.s2.authz.canon.AuthzModel;
 
 /**
- * Facade for Object ObjectSchema(Entitlement)
+ * Facade for Object ObjectSchema(UserStatus)
  *
- * An entitlement definition.
- * Generated from ObjectSchema(Entitlement) at #/components/schemas/Entitlement
+ * The status of a user account.
+ * Generated from ObjectSchema(UserStatus) at #/components/schemas/UserStatus
  */
 @Immutable
-public class Entitlement extends EntitlementEntity implements IEntitlement
+@SuppressWarnings("unused")
+public class UserStatus extends UserStatusEntity implements IUserStatus
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public Entitlement(AbstractEntitlementBuilder<?,?> builder)
+  public UserStatus(AbstractUserStatusBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -67,7 +75,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public Entitlement(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public UserStatus(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -78,7 +86,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public Entitlement(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public UserStatus(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -88,7 +96,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public Entitlement(IEntitlement other)
+  public UserStatus(IUserStatus other)
   {
     super(other);
   }
@@ -96,37 +104,37 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
   @Override
   public IKvPartitionKey getPartitionKey()
   {
-    return getPartitionKeyFor(getId().getHash());
+    return getPartitionKeyFor(getUserId());
   }
   
   /**
    * Get the partition key for Entitlement object for the given hash.
    * 
-   * @param hash The entitlement hash for the required entitlement.
+   * @param userId The ID of the user to whom this status relates.
    * 
    * @return The partition key for Entitlement object for the given hash.
    */
-  public static KvPartitionKey getPartitionKeyFor(Hash hash)
+  public static KvPartitionKey getPartitionKeyFor(PodAndUserId userId)
   {
-    return new KvPartitionKey("E#" + hash);
+    return new KvPartitionKey("US#" + userId);
   }
   
   /**
    * Get the partition key for Entitlement object for the given hash.
    * 
-   * @param hash The entitlement hash for the required entitlement.
+   * @param userId The ID of the user to whom this status relates.
    * 
    * @return The partition key for Entitlement object for the given hash.
    */
-  public static KvPartitionSortKeyProvider getPartitionSortKeyFor(Hash hash)
+  public static KvPartitionSortKeyProvider getPartitionSortKeyFor(PodAndUserId userId)
   {
-    return new KvPartitionSortKeyProvider(getPartitionKeyFor(hash), new KvSortKey("E#"));
+    return new KvPartitionSortKeyProvider(getPartitionKeyFor(userId), new KvSortKey("US#"));
   }
 
   @Override
   public IKvSortKey getSortKey()
   {
-    return new KvSortKey("E#");
+    return new KvSortKey("US#");
   }
 
   @Override
@@ -150,7 +158,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
   @Override
   public IFuguePodId getPodId()
   {
-    return getId().getUserId().getPodId();
+    return getUserId().getPodId();
   }
 }
 /*----------------------------------------------------------------------------------------------------

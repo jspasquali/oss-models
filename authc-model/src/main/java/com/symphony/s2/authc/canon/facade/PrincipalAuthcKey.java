@@ -143,7 +143,7 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
    * 
    * @return The partition key for authentication keys for the given User.
    */
-  public static IKvPartitionKey getPartitionKeyFor(PodAndUserId userId)
+  public static KvPartitionKey getPartitionKeyFor(PodAndUserId userId)
   {
     return new KvPartitionKey("U#" + userId);
   }
@@ -155,7 +155,7 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
    * 
    * @return The partition key for authentication keys for the given Pod.
    */
-  public static IKvPartitionKey getPartitionKeyFor(PodId podId)
+  public static KvPartitionKey getPartitionKeyFor(PodId podId)
   {
     return new KvPartitionKey("P#" + podId);
   }
@@ -232,7 +232,7 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
     return key;
   }
 
-  private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, IKvPartitionKey partitionKey,
+  private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, KvPartitionKey partitionKey,
       KeyId keyId, ITraceContext trace)
   {
     try

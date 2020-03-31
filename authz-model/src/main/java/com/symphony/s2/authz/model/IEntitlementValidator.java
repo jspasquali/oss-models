@@ -26,21 +26,10 @@ public interface IEntitlementValidator extends IBaseEntitlementValidator
    * 
    * @param subjectUserId     The userId of the user whose entitlements are to be checked.
    * @param trace             A trace context.
-   * @param entitlementSpecs  One or more entitlements identified by their IEntitlementSpec.
+   * @param entitlements      One or more entitlements identified by their ID.
    * 
    * @throws PermissionDeniedException If the subject (or the subject's pod) does not have all of the required entitlements.
    */
   void ensureUserHasAllEntitlements(PodAndUserId subjectUserId, ITraceContext trace,
-      IEntitlementSpec... entitlementSpecs);
-  /**
-   * Ensure that the given subject has all of the given entitlements.
-   * 
-   * @param subjectUserId     The userId of the user whose entitlements are to be checked.
-   * @param trace             A trace context.
-   * @param entitlementSpecs  One or more entitlements identified by their IEntitlementSpec.
-   * 
-   * @throws PermissionDeniedException If the subject (or the subject's pod) does not have all of the required entitlements.
-   */
-  void ensureUserHasAllEntitlements(PodAndUserId subjectUserId, ITraceContext trace,
-      IMultiTenantServiceEntitlementSpec... entitlementSpecs);
+      IServiceEntitlementSpecOrIdProvider... entitlements);
 }

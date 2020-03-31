@@ -11,12 +11,12 @@ import org.symphonyoss.s2.common.hash.Hash;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
 
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
-import com.symphony.oss.models.object.canon.NamedUserIdObject;
 import com.symphony.s2.authc.model.IMultiTenantServiceRegistry;
 import com.symphony.s2.authz.canon.AuthzHttpModelClient;
 import com.symphony.s2.authz.canon.EntitlementRef;
 import com.symphony.s2.authz.canon.EntitlementRequest;
 import com.symphony.s2.authz.canon.IEntitlementRequest;
+import com.symphony.s2.authz.canon.facade.IEntitlementId;
 
 /**
  * Network implementation of IAuthzApi.
@@ -24,12 +24,10 @@ import com.symphony.s2.authz.canon.IEntitlementRequest;
  * @author Bruce Skingle
  *
  */
-public class BaseEntitlementValidator implements IEntitlementValidator
+public class BaseEntitlementValidator extends EntitlementSpecAdaptor implements IEntitlementValidator
 {
   private final CloseableHttpClient         httpClient_;
   private final AuthzHttpModelClient        authzApiClient_;
-  private final IMultiTenantServiceRegistry serviceRegistry_;
-  
   /**
    * Constructor.
    * 
@@ -40,9 +38,10 @@ public class BaseEntitlementValidator implements IEntitlementValidator
   public BaseEntitlementValidator(CloseableHttpClient httpClient, AuthzHttpModelClient authzApiClient,
       IMultiTenantServiceRegistry serviceRegistry)
   {
+    super(serviceRegistry);
+    
     httpClient_ = httpClient;
     authzApiClient_ = authzApiClient;
-    serviceRegistry_ = serviceRegistry;
   }
 
   @Override
@@ -63,45 +62,17 @@ public class BaseEntitlementValidator implements IEntitlementValidator
 
   @Override
   public void ensureUserHasAllEntitlements(PodAndUserId subjectUserId, ITraceContext trace,
-      IEntitlementSpec... entitlementSpecs)
+      IServiceEntitlementSpecOrIdProvider... entitlements)
   {
     EntitlementRequest.Builder builder = new EntitlementRequest.Builder();
     
-    for(IEntitlementSpec entitlementSpec : entitlementSpecs)
+    for(IServiceEntitlementSpecOrIdProvider entitlement : entitlements)
     {
-      Hash hash = new NamedUserIdObject.Builder()
-          .withUserId(entitlementSpec.getOwner())
-          .withName(entitlementSpec.getName())
-          .build()
-          .getHash();
+      IEntitlementId entitlementId = getEntitlementId(entitlement);
 
       builder.withEntitlementRefs(new EntitlementRef.Builder()
-          .withEntitlementHash(hash)
-          .withEntitlementType(entitlementSpec.getEntitlementType())
-          .build()
-          );
-    }
-    
-    ensureUserHasAllEntitlements(subjectUserId, builder.build());
-  }
-
-  @Override
-  public void ensureUserHasAllEntitlements(PodAndUserId subjectUserId, ITraceContext trace,
-      IMultiTenantServiceEntitlementSpec... entitlementSpecs)
-  {
-    EntitlementRequest.Builder builder = new EntitlementRequest.Builder();
-    
-    for(IMultiTenantServiceEntitlementSpec entitlementSpec : entitlementSpecs)
-    {
-      Hash hash = new NamedUserIdObject.Builder()
-          .withUserId(serviceRegistry_.fetchServiceInfo(entitlementSpec.getOwner()).getUserId())
-          .withName(entitlementSpec.getName())
-          .build()
-          .getHash();
-
-      builder.withEntitlementRefs(new EntitlementRef.Builder()
-          .withEntitlementHash(hash)
-          .withEntitlementType(entitlementSpec.getEntitlementType())
+          .withEntitlementHash(entitlementId.getHash())
+          .withEntitlementType(entitlementId.getEntitlementType())
           .build()
           );
     }

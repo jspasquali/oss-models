@@ -153,6 +153,9 @@
           "podId": {
             "$ref": "#/components/schemas/PodId"
           },
+          "internalPodId": {
+            "$ref": "#/components/schemas/PodId"
+          },
           "createdDate": {
             "$ref": "#/components/schemas/Instant"
           },
