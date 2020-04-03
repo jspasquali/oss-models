@@ -47,6 +47,7 @@ import org.symphonyoss.s2.fugue.kv.KvPartitionKeyProvider;
 import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
 import org.symphonyoss.s2.fugue.kv.KvSortKey;
 
+import com.google.common.collect.ImmutableMap;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.core.kv.store.IKvStore;
@@ -64,6 +65,11 @@ import com.symphony.s2.authz.canon.PodEntitlementMappingEntity;
 @SuppressWarnings("unused")
 public class PodEntitlementMapping extends PodEntitlementMappingEntity implements IPodEntitlementMapping
 {
+  /** Additional attribute name for the ID of the entitlement owner */
+  public static final String OWNER_ID_ATTRIBUTE_NAME = "ownerId";
+  
+  private final Map<String, Object> additionalAttributes_;
+
   /**
    * Constructor from builder.
    * 
@@ -72,8 +78,19 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
   public PodEntitlementMapping(AbstractPodEntitlementMappingBuilder<?,?> builder)
   {
     super(builder);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
   
+  private Map<String, Object> initAdditionalAttributes()
+  {
+    Map<String, Object> map = new HashMap<>();
+    
+    return new ImmutableMap.Builder<String, Object>()
+        .put(OWNER_ID_ATTRIBUTE_NAME, getEntitlementId().getUserId().getValue())
+        .build();
+  }
+
   /**
    * Constructor from serialised form.
    * 
@@ -83,6 +100,8 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
   public PodEntitlementMapping(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
   
   /**
@@ -94,6 +113,8 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
   public PodEntitlementMapping(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
    
   /**
@@ -104,6 +125,8 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
   public PodEntitlementMapping(IPodEntitlementMapping other)
   {
     super(other);
+    
+    additionalAttributes_ = other.getAdditionalAttributes();
   }
   
   /**
@@ -173,6 +196,12 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
     return null;
   }
   
+  @Override
+  public Map<String, Object> getAdditionalAttributes()
+  {
+    return additionalAttributes_;
+  }
+
   /**
    * Abstract builder for PodEntitlementMapping. If there are sub-classes of this type then their builders sub-class this builder.
    *
@@ -191,29 +220,6 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
       super(type, initial);
     }
   }
-
-//  static Map<Hash, EntitlementAction> fetchEntitlements(IKvStore kvStore, PodId podId, Set<Hash> entitlementHashes)
-//  { 
-//    Map<Hash, EntitlementAction>  result = new HashMap<>();
-//    ITraceContext trace = NoOpTraceContext.INSTANCE;
-////    new EntitlementRequest.Builder()
-////      .withUserId();
-////    new EntitlementResponse.Builder();
-//    
-//    String after = null;
-//    do
-//    {
-//      IKvPagination pagination = kvStore.fetch(new KvPartitionKeyProvider(getPartitionKeyFor(podId)),
-//          true, null, after, null, IPodEntitlementMapping.class, (item) ->
-//          {
-//            result.put(item.getEntitlementHash(), item.getAction());
-//          }, trace);
-//      
-//      after = pagination.getAfter();
-//    }while(after != null);
-//    
-//    return result;
-//  }
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

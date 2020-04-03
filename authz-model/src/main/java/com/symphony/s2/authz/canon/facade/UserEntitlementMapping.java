@@ -49,6 +49,7 @@ import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
 import org.symphonyoss.s2.fugue.kv.KvSortKey;
 import org.symphonyoss.s2.fugue.store.IFuguePodId;
 
+import com.google.common.collect.ImmutableMap;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.core.kv.store.IKvStore;
@@ -68,6 +69,11 @@ import com.symphony.s2.authz.canon.UserEntitlementMappingEntity;
 @SuppressWarnings("unused")
 public class UserEntitlementMapping extends UserEntitlementMappingEntity implements IUserEntitlementMapping
 {
+  /** Additional attribute name for the ID of the entitlement owner */
+  public static final String OWNER_ID_ATTRIBUTE_NAME = "ownerId";
+  
+  private final Map<String, Object> additionalAttributes_;
+
   /**
    * Constructor from builder.
    * 
@@ -76,6 +82,17 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   public UserEntitlementMapping(AbstractUserEntitlementMappingBuilder<?,?> builder)
   {
     super(builder);
+    
+    additionalAttributes_ = initAdditionalAttributes();
+  }
+  
+  private Map<String, Object> initAdditionalAttributes()
+  {
+    Map<String, Object> map = new HashMap<>();
+    
+    return new ImmutableMap.Builder<String, Object>()
+        .put(OWNER_ID_ATTRIBUTE_NAME, getEntitlementId().getUserId().getValue())
+        .build();
   }
   
   /**
@@ -87,6 +104,8 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   public UserEntitlementMapping(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
   
   /**
@@ -98,6 +117,8 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   public UserEntitlementMapping(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
    
   /**
@@ -108,6 +129,8 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   public UserEntitlementMapping(IUserEntitlementMapping other)
   {
     super(other);
+    
+    additionalAttributes_ = other.getAdditionalAttributes();
   }
   
   /**
@@ -181,6 +204,12 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   public IFuguePodId getPodId()
   {
     return getUserId().getPodId();
+  }
+  
+  @Override
+  public Map<String, Object> getAdditionalAttributes()
+  {
+    return additionalAttributes_;
   }
   
   /**

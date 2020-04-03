@@ -24,7 +24,10 @@
 package com.symphony.oss.models.core.kv.store;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Consumer;
+
+import javax.annotation.Nullable;
 
 import org.symphonyoss.s2.common.exception.NoSuchObjectException;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
@@ -137,16 +140,18 @@ public interface IKvStore
    * 
    * @param <T>                 The concrete type of retrieved objects. 
    * 
-   * @param partitionKey  The ID of the partition.
-   * @param scanForwards  If true then scan objects in the order of their sort keys, else in reverse order.
-   * @param limit         An optional limit to the number of objects retrieved.
-   * @param after         An optional page cursor to continue a previous query.
-   * @param sortKeyPrefix An optional sort key prefix.
-   * @param type          The type of the object to be returned.
-   * @param consumer      A consumer to receive the retrieved objects.
-   * @param trace         Trace context.
+   * @param partitionKey      The ID of the partition.
+   * @param scanForwards      If true then scan objects in the order of their sort keys, else in reverse order.
+   * @param limit             An optional limit to the number of objects retrieved.
+   * @param after             An optional page cursor to continue a previous query.
+   * @param sortKeyPrefix     An optional sort key prefix.
+   * @param type              The type of the object to be returned.
+   * @param filterAttributes  Optional attribute values to filter results. 
+   * @param consumer          A consumer to receive the retrieved objects.
+   * @param trace             Trace context.
    * 
    * @return Pagination tokens to allow a continuation query.
    */
-  <T extends IKvItem> IKvPagination fetch(IKvPartitionKeyProvider partitionKey, boolean scanForwards, Integer limit, String after, String sortKeyPrefix, Class<T> type, Consumer<T> consumer, ITraceContext trace);
+  <T extends IKvItem> IKvPagination fetch(IKvPartitionKeyProvider partitionKey, boolean scanForwards, Integer limit, String after, 
+      String sortKeyPrefix, Class<T> type, @Nullable Map<String, Object> filterAttributes, Consumer<T> consumer, ITraceContext trace);
 }

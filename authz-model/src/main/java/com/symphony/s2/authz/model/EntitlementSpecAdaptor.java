@@ -25,12 +25,24 @@ public class EntitlementSpecAdaptor
 {
   private final IMultiTenantServiceRegistry serviceRegistry_;
   
-  protected EntitlementSpecAdaptor(IMultiTenantServiceRegistry serviceRegistry)
+  /**
+   * Constructor.
+   * 
+   * @param serviceRegistry A service registry.
+   */
+  public EntitlementSpecAdaptor(IMultiTenantServiceRegistry serviceRegistry)
   {
     serviceRegistry_ = serviceRegistry;
   }
 
-  protected IEntitlementId getEntitlementId(IServiceEntitlementSpecOrIdProvider entitlement)
+  /**
+   * Return the entitlement ID for the given spec, id or id provider.
+   * 
+   * @param entitlement A spec, id or id provider.
+   * 
+   * @return The entitlement ID for the given spec, id or id provider.
+   */
+  public IEntitlementId getEntitlementId(IServiceEntitlementSpecOrIdProvider entitlement)
   {
     if(entitlement instanceof IServiceEntitlementSpec)
     {
@@ -47,9 +59,14 @@ public class EntitlementSpecAdaptor
     throw new IllegalArgumentException("Unknown sub-interface of IServiceEntitlementSpecOrIdProvider: " + entitlement.getClass());
   }
   
-
-
-  protected IEntitlementId getEntitlementId(IGeneralEntitlementSpec entitlement)
+  /**
+   * Return the entitlement ID for the given spec, id or id provider.
+   * 
+   * @param entitlement A spec, id or id provider.
+   * 
+   * @return The entitlement ID for the given spec, id or id provider.
+   */
+  public IEntitlementId getEntitlementId(IGeneralEntitlementSpec entitlement)
   {
     if(entitlement instanceof IServiceEntitlementSpec)
     {

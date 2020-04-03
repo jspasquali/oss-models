@@ -25,6 +25,7 @@ package com.symphony.oss.models.core.kv.store;
 
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import org.symphonyoss.s2.canon.runtime.IEntity;
@@ -114,7 +115,7 @@ public class KvStore implements IKvStore
   }
 
   @Override
-  public <T extends IKvItem> IKvPagination fetch(IKvPartitionKeyProvider partitionKey, boolean scanForwards, Integer limit, String after, String sortKeyPrefix, Class<T> type, Consumer<T> consumer, ITraceContext trace)
+  public <T extends IKvItem> IKvPagination fetch(IKvPartitionKeyProvider partitionKey, boolean scanForwards, Integer limit, String after, String sortKeyPrefix, Class<T> type, Map<String, Object> filterAttributes, Consumer<T> consumer, ITraceContext trace)
   {
     Consumer<String> stringConsumer = new Consumer<String>()
     {
@@ -125,6 +126,6 @@ public class KvStore implements IKvStore
       }
     };
     
-    return kvTable_.fetchPartitionObjects(partitionKey, scanForwards, limit, after, sortKeyPrefix, stringConsumer, trace);
+    return kvTable_.fetchPartitionObjects(partitionKey, scanForwards, limit, after, sortKeyPrefix, filterAttributes, stringConsumer, trace);
   }
 }
