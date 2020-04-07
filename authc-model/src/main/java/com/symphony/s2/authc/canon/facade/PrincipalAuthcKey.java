@@ -15,10 +15,10 @@
  *
  *----------------------------------------------------------------------------------------------------
  * Proforma generated from
- *		Template groupId		 org.symphonyoss.s2.canon
+ *    Template groupId     org.symphonyoss.s2.canon
  *           artifactId canon-template-java
- *		Template name		   proforma/java/Object/_.java.ftl
- *		Template version	   1.0
+ *    Template name      proforma/java/Object/_.java.ftl
+ *    Template version     1.0
  *  At                  2019-11-09 08:06:24 GMT
  *----------------------------------------------------------------------------------------------------
  */
@@ -33,6 +33,7 @@ import javax.annotation.concurrent.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.symphonyoss.s2.canon.runtime.IModelRegistry;
+import org.symphonyoss.s2.canon.runtime.exception.NotAuthenticatedException;
 import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
 import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 import org.symphonyoss.s2.common.exception.NoSuchObjectException;
@@ -209,50 +210,65 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
    * @param trace   A trace context.
    * 
    * @return The key, if it exists, or null.
+   * 
+   * @throws NotAuthenticatedException if the key cannot be found.
    */
-  public static @Nullable IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, PodAndUserId userId, @Nullable KeyId keyId, ITraceContext trace)
+  public static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, PodAndUserId userId, @Nullable KeyId keyId, ITraceContext trace)
   {
     PodId podId = userId.getPodId();
-    IPrincipalAuthcKey key = null;
     
     log_.info("Fetch key for user " + userId + " podId=" + podId + " keyId=" + keyId);
     
     if(keyId != null)
     {
-      key = fetchPublicKey(kvStore, getPartitionKeyFor(userId), keyId, trace);
-      log_.info("User key = " + key);
+      try
+      {
+        IPrincipalAuthcKey key = fetchPublicKey(kvStore, getPartitionKeyFor(userId), keyId, trace);
+        log_.info("User key = " + key);
+        return key;
+      }
+      catch(NoSuchObjectException e)
+      {
+        log_.debug("Not a user key " + keyId);
+      }
     }
     
-    if(key == null)
-    {
-      key = fetchPublicKey(kvStore, getPartitionKeyFor(podId), keyId, trace);
-      log_.info("Pod key = " + key);
-    }
-    
-    return key;
-  }
-
-  private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, KvPartitionKey partitionKey,
-      KeyId keyId, ITraceContext trace)
-  {
     try
     {
-      if(keyId != null)
-        return kvStore.fetch(new KvPartitionSortKeyProvider(partitionKey, keyId.toString()), IPrincipalAuthcKey.class, trace);
+      IPrincipalAuthcKey key = fetchPublicKey(kvStore, getPartitionKeyFor(podId), keyId, trace);
+      log_.info("Pod key = " + key);
+      return key;
     }
     catch (NoSuchObjectException e)
     {
-      // Fall through
+      // TEMP CODE
+      // TODO: delete this one day, we screwed up the calculation of kid on SBE so the key ID may be wrong (duh!).....
+      if(keyId!=null)
+      {
+        try
+        {
+          IPrincipalAuthcKey key = fetchPublicKey(kvStore, getPartitionKeyFor(podId), null, trace);
+          log_.info("Pod key = " + key);
+          return key;
+        }
+        catch (NoSuchObjectException e2)
+        {
+          throw new NotAuthenticatedException("Unable to locate keyid " + keyId + " for user " + userId + " in pod " + userId.getPodId(), e2);
+        }
+      }
+      // END TEMP CODE
+      
+      throw new NotAuthenticatedException("Unable to locate keyid " + keyId + " for user " + userId + " in pod " + userId.getPodId(), e);
     }
+  }
 
-    try
-    {
-      return kvStore.fetchFirst(new KvPartitionKeyProvider(partitionKey), IPrincipalAuthcKey.class, trace);
-    }
-    catch (NoSuchObjectException e2)
-    {
-      return null;
-    }
+  private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, KvPartitionKey partitionKey,
+      KeyId keyId, ITraceContext trace) throws NoSuchObjectException
+  {
+    if(keyId != null)
+      return kvStore.fetch(new KvPartitionSortKeyProvider(partitionKey, keyId.toString()), IPrincipalAuthcKey.class, trace);
+    
+    return kvStore.fetchFirst(new KvPartitionKeyProvider(partitionKey), IPrincipalAuthcKey.class, trace);
   }
 }
 /*----------------------------------------------------------------------------------------------------

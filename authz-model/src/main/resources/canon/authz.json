@@ -322,6 +322,9 @@
           },
           "action": {
             "$ref": "#/components/schemas/EntitlementAction"
+          },
+          "effectiveDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           }
         }
       },

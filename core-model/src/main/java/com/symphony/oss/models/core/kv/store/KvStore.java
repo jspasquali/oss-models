@@ -25,6 +25,7 @@ package com.symphony.oss.models.core.kv.store;
 
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -36,6 +37,7 @@ import org.symphonyoss.s2.fugue.kv.IKvItem;
 import org.symphonyoss.s2.fugue.kv.IKvPagination;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionKeyProvider;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
+import org.symphonyoss.s2.fugue.kv.KvCondition;
 import org.symphonyoss.s2.fugue.kv.table.IKvTable;
 
 /**
@@ -65,6 +67,12 @@ public class KvStore implements IKvStore
   public void store(Collection<IKvItem> kvItems, ITraceContext trace)
   {
     kvTable_.store(kvItems, trace);
+  }
+
+  @Override
+  public void store(IKvItem kvItem, KvCondition condition, ITraceContext trace)
+  {
+    kvTable_.store(kvItem, condition, trace);
   }
   
   private <T extends IKvItem> T normalize(String json, Class<T> type)

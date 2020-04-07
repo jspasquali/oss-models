@@ -71,6 +71,8 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
 {
   /** Additional attribute name for the ID of the entitlement owner */
   public static final String OWNER_ID_ATTRIBUTE_NAME = "ownerId";
+  /** Additional attribute name for the effective date of the entitlement mapping */
+  public static final String EFFECTIVE_DATE_ATTRIBUTE_NAME = "effective";
   
   private final Map<String, Object> additionalAttributes_;
 
@@ -92,6 +94,7 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
     
     return new ImmutableMap.Builder<String, Object>()
         .put(OWNER_ID_ATTRIBUTE_NAME, getEntitlementId().getUserId().getValue())
+        .put(EFFECTIVE_DATE_ATTRIBUTE_NAME, getEffectiveDate().toString())
         .build();
   }
   

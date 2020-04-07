@@ -35,6 +35,7 @@ import org.symphonyoss.s2.fugue.kv.IKvItem;
 import org.symphonyoss.s2.fugue.kv.IKvPagination;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionKeyProvider;
 import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
+import org.symphonyoss.s2.fugue.kv.KvCondition;
 
 /**
  * A Key Value Store.
@@ -51,6 +52,15 @@ public interface IKvStore
    * @param trace   Trace context.
    */
   void store(Collection<IKvItem> kvItems, ITraceContext trace);
+  
+  /**
+   * Store the given item, provided the given condition is met.
+   * 
+   * @param kvItem      Item to be stored.
+   * @param kvCondition Condition.
+   * @param trace       Trace context.
+   */
+  void store(IKvItem kvItem, KvCondition kvCondition, ITraceContext trace);
 
   /**
    * Fetch an item given a partition key and sort key.

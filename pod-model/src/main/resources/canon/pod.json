@@ -84,6 +84,66 @@
         }
       }
     },
+    "/v3/users": {
+      "get": {
+        "summary": "Search users by emails or ids. Only one of the search lists should be informed at a time. Search lists may containt up to 100 elements.",
+        "parameters": {
+          "sessionToken": {
+            "description": "Session authentication token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "uid": {
+            "description": "User IDs as a list of decimal integers separated by comma",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+            }
+          },
+          "username": {
+            "description": "List of username separated by comma",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "email": {
+            "description": "List of email addresses separated by comma",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "local": {
+            "description": [
+              "If true then a local DB search will be performed and only local pod users will be",
+              "returned. If absent or false then a directory search will be performed and users",
+              "from other pods who are visible to the calling user will also be returned."
+            ],
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/V2UserList"
+          }
+        }
+      }
+    },
     "/v2/sessioninfo": {
       "get": {
         "summary": "Get information about the current user's session.",
@@ -152,7 +212,44 @@
           "$ref": "#/components/schemas/Avatar"
         }
       },
-  		
+      "V2UserList": {
+        "description": "List of User record version 2",
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserV2"
+            },
+            "description": "List of all users found with the search"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserError"
+            },
+            "description": "List of all errors found with the informed search criteria"
+          }
+        }
+      },
+      "UserError": {
+        "description": "User error information",
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error code informing what is wrong"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email with error. Only one of the following fields should be present: email or id"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id with error. Only one of the following fields should be present: email or id"
+          }
+        }
+      },
       "UserV2": {
         "description": "User record version 2",
         "type": "object",
