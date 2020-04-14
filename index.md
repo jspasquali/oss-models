@@ -54,10 +54,3 @@ This model is not supported for customer use and is subject to change at any tim
 
 This model defines types used by the pod section of the Symphony REST API (see https://developers.symphony.com/restapi/reference) This is used by Allegro to call Symphony REST API endpoints.
 
-## pod-private-model
-[https://models.oss.symphony.com/podPrivate.json](https://models.oss.symphony.com/podPrivate.json)
-
-This model defines types and methods provided on a single-tenant basis by the Symphony 2.0 Object Store. These methods are 
-effectively private to members of the pod. In practice this means that callers from different pods will see different results
-from the same call.
-
