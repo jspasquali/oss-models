@@ -27,11 +27,11 @@
   <artifactId>allegro-model</artifactId>
 
   <dependencies>
-    <!-- <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>fundamental-model</artifactId>
+    <dependency>
+      <groupId>com.symphony.oss.models</groupId>
+      <artifactId>core-model</artifactId>
       <version>${project.version}</version>
-    </dependency> -->
+    </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>chat-model</artifactId>
@@ -42,6 +42,12 @@
       <groupId>org.symphonyoss.symphony</groupId>
       <artifactId>messageml</artifactId>
       <version>0.9.38</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.symphonyoss.s2.canon</groupId>
+      <artifactId>canon-runtime-java</artifactId>
+      <version>${canon.version}</version>
     </dependency>
 
     <dependency>
@@ -59,19 +65,12 @@
       <artifactId>S2-common-dom-jackson</artifactId>
       <version>${s2.common.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.symphonyoss.s2.canon</groupId>
-      <artifactId>canon-runtime-java</artifactId>
-    </dependency>
-
-    <!-- <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-    </dependency>
+    
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-    </dependency> -->
+    </dependency>
+    
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>

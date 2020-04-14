@@ -38,27 +38,11 @@
       <artifactId>crypto-model</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <!-- <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>fundamental-model</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+    
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>system-model</artifactId>
-      <version>${project.version}</version>
-    </dependency> -->
-
-<!--     <dependency>
-      <groupId>org.symphonyoss.s2.fugue</groupId>
-      <artifactId>inmemory-fugue</artifactId>
-      <version>${fugue.version}</version>
-      <scope>test</scope>
-    </dependency> -->
-    <dependency>
-      <groupId>org.symphonyoss.s2.fugue</groupId>
-      <artifactId>fugue-core</artifactId>
-      <version>${fugue.version}</version>
+      <groupId>org.symphonyoss.s2.canon</groupId>
+      <artifactId>canon-runtime-java</artifactId>
+       <version>${canon.version}</version>
     </dependency>
 
     <dependency>
@@ -76,60 +60,15 @@
       <artifactId>S2-common-dom-jackson</artifactId>
       <version>${s2.common.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.symphonyoss.s2.canon</groupId>
-      <artifactId>canon-runtime-java</artifactId>
-    </dependency>
 
-    <!-- <dependency>
-      <groupId>com.symphony.protobuf</groupId>
-      <artifactId>socialmessage</artifactId>
-      <version>1.0.19</version>
-      <exclusions>
-       <exclusion>
-         <groupId>io.grpc</groupId>
-         <artifactId>grpc-protobuf</artifactId>
-       </exclusion>
-       <exclusion>
-         <groupId>io.grpc</groupId>
-         <artifactId>grpc-stub</artifactId>
-       </exclusion>
-       <exclusion>
-         <groupId>io.grpc</groupId>
-         <artifactId>grpc-netty</artifactId>
-       </exclusion>
-       <exclusion>
-         <groupId>com.symphony.s2.protogen</groupId>
-         <artifactId>S2-protogen</artifactId>
-       </exclusion>
-      </exclusions>
-    </dependency> -->
-
-    <!-- <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-    </dependency> -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
+    
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpcore</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-    </dependency>
-    
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
     </dependency>
   </dependencies>
 </project>

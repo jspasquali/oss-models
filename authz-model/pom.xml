@@ -27,100 +27,62 @@
   
   
   <dependencies>
-    
-    <!-- <dependency>
-      <groupId>com.symphony.s2.fugue</groupId>
-      <artifactId>symphony-fugue-aws-api</artifactId>
-    </dependency>
-    
-    <dependency>
-       <groupId>com.symphony.s2.model</groupId>
-       <artifactId>core-model-impl</artifactId>
-     </dependency> -->
-    
-    <dependency>
-      <groupId>com.symphony.oss.models</groupId>
-      <artifactId>crypto-model</artifactId>
-      <version>0.3.21-SNAPSHOT</version>
-    </dependency>
     <dependency>
       <groupId>com.symphony.oss.models</groupId>
       <artifactId>core-model</artifactId>
-      <version>0.3.21-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.symphony.oss.models</groupId>
       <artifactId>object-model</artifactId>
-      <version>0.3.21-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.symphony.oss.models</groupId>
       <artifactId>authc-model</artifactId>
-      <version>0.3.21-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.symphonyoss.s2.canon</groupId>
       <artifactId>canon-runtime-java</artifactId>
-    </dependency>
-    <!-- <dependency>
-      <groupId>org.symphonyoss.s2.canon</groupId>
-      <artifactId>canon-jjwt</artifactId>
+      <version>${canon.version}</version>
     </dependency>
     
     <dependency>
       <groupId>org.symphonyoss.s2.fugue</groupId>
       <artifactId>fugue-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.symphonyoss.s2.fugue</groupId>
-      <artifactId>aws-fugue</artifactId>
+       <version>${fugue.version}</version>
     </dependency>
     
     <dependency>
       <groupId>org.symphonyoss.s2.common</groupId>
       <artifactId>S2-common-core</artifactId>
+       <version>${s2.common.version}</version>
     </dependency>
     <dependency>
       <groupId>org.symphonyoss.s2.common</groupId>
       <artifactId>S2-common-dom</artifactId>
+       <version>${s2.common.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-    </dependency>
-
+    
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpcore</artifactId>
     </dependency>
-
     <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
     </dependency>
-
+    
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
-    
-    
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
-      <version>0.6.0</version>
-    </dependency> -->
 
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
 </project>

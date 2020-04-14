@@ -265,92 +265,92 @@
   <dependencyManagement>
     <dependencies>
     
-      <dependency>
-        <groupId>org.symphonyoss.s2.common</groupId>
-        <artifactId>S2-common-core</artifactId>
-        <version>${s2.common.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.common</groupId>
-        <artifactId>S2-common-dom</artifactId>
-        <version>${s2.common.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.common</groupId>
-        <artifactId>S2-common-dom-jackson</artifactId>
-        <version>${s2.common.version}</version>
-      </dependency>
-    
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>fugue-core</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>fugue-config-manager</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>fugue-resources</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>fugue-config</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>fugue-pubsub</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>aws-fugue</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>fugue-launch</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.fugue</groupId>
-        <artifactId>google-fugue</artifactId>
-        <version>${fugue.version}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.symphonyoss.s2.canon</groupId>
-        <artifactId>canon-runtime-java</artifactId>
-        <version>${canon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.canon</groupId>
-        <artifactId>canon-jjwt</artifactId>
-        <version>${canon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.canon</groupId>
-        <artifactId>canon-model-gcp</artifactId>
-        <version>${canon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.canon</groupId>
-        <artifactId>canon-parser</artifactId>
-        <version>${canon.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.symphonyoss.s2.canon</groupId>
-        <artifactId>canon-template-java</artifactId>
-        <version>${canon.version}</version>
-      </dependency>
-    </dependencies>
+     <dependency>
+       <groupId>org.symphonyoss.s2.common</groupId>
+       <artifactId>S2-common-core</artifactId>
+       <version>${s2.common.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.common</groupId>
+       <artifactId>S2-common-dom</artifactId>
+       <version>${s2.common.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.common</groupId>
+       <artifactId>S2-common-dom-jackson</artifactId>
+       <version>${s2.common.version}</version>
+     </dependency>
+   
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>fugue-core</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>fugue-config-manager</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>fugue-resources</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>fugue-config</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>fugue-pubsub</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>aws-fugue</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>fugue-launch</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.fugue</groupId>
+       <artifactId>google-fugue</artifactId>
+       <version>${fugue.version}</version>
+     </dependency>
+     
+     <dependency>
+       <groupId>org.symphonyoss.s2.canon</groupId>
+       <artifactId>canon-runtime-java</artifactId>
+       <version>${canon.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.canon</groupId>
+       <artifactId>canon-jjwt</artifactId>
+       <version>${canon.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.canon</groupId>
+       <artifactId>canon-model-gcp</artifactId>
+       <version>${canon.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.canon</groupId>
+       <artifactId>canon-parser</artifactId>
+       <version>${canon.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.symphonyoss.s2.canon</groupId>
+       <artifactId>canon-template-java</artifactId>
+       <version>${canon.version}</version>
+     </dependency>
+   </dependencies>
   </dependencyManagement>
   
-  <dependencies>
+  <!-- <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -363,6 +363,6 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+  </dependencies> -->
   
 </project>
