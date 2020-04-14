@@ -26,6 +26,8 @@
 package com.symphony.s2.authz.canon.facade;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -46,6 +48,7 @@ import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 
 import com.symphony.s2.authz.canon.UserStatusEntity;
 import com.symphony.s2.authz.canon.IUserStatusEntity;
+import com.google.common.collect.ImmutableMap;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.s2.authz.canon.AuthzModel;
 
@@ -59,6 +62,11 @@ import com.symphony.s2.authz.canon.AuthzModel;
 @SuppressWarnings("unused")
 public class UserStatus extends UserStatusEntity implements IUserStatus
 {
+  /** Additional attribute name for the effective date of the entitlement mapping */
+  public static final String EFFECTIVE_DATE_ATTRIBUTE_NAME = "effective";
+  
+  private final Map<String, Object> additionalAttributes_;
+  
   /**
    * Constructor from builder.
    * 
@@ -67,6 +75,20 @@ public class UserStatus extends UserStatusEntity implements IUserStatus
   public UserStatus(AbstractUserStatusBuilder<?,?> builder)
   {
     super(builder);
+    
+    additionalAttributes_ = initAdditionalAttributes();
+  }
+  
+  private Map<String, Object> initAdditionalAttributes()
+  {
+    Map<String, Object> map = new HashMap<>();
+    
+    return new ImmutableMap.Builder<String, Object>()
+        .put(EFFECTIVE_DATE_ATTRIBUTE_NAME, 
+            getEffectiveDate()==null ? 
+                Instant.EPOCH : 
+                  getEffectiveDate().toString())
+        .build();
   }
   
   /**
@@ -78,6 +100,8 @@ public class UserStatus extends UserStatusEntity implements IUserStatus
   public UserStatus(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
   
   /**
@@ -89,6 +113,8 @@ public class UserStatus extends UserStatusEntity implements IUserStatus
   public UserStatus(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    
+    additionalAttributes_ = initAdditionalAttributes();
   }
    
   /**
@@ -99,6 +125,8 @@ public class UserStatus extends UserStatusEntity implements IUserStatus
   public UserStatus(IUserStatus other)
   {
     super(other);
+    
+    additionalAttributes_ = other.getAdditionalAttributes();
   }
   
   @Override
@@ -159,6 +187,12 @@ public class UserStatus extends UserStatusEntity implements IUserStatus
   public IFuguePodId getPodId()
   {
     return getUserId().getPodId();
+  }
+  
+  @Override
+  public Map<String, Object> getAdditionalAttributes()
+  {
+    return additionalAttributes_;
   }
 }
 /*----------------------------------------------------------------------------------------------------

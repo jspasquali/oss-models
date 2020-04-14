@@ -37,9 +37,10 @@ public enum MultiTenantService implements IFugueApplication, IMultiTenantService
   AUTHZ("authz",    4,  7003),
   
   /** SBE - Obviously not actually a multi tenant service but we need an Owner ID for entitlements and other SBE owned assets. */
-  SBE("sbe",        5,  7005)
+  SBE("sbe",        5,  7005),
   
-  // We allocated the user ID and port number separately before, for future services use 5 and 7005 etc.
+  /** The example service, for development and testing purposes. */
+  EXAMPLE("example", 6, 7006)
   ;
 
   private static final Map<String, MultiTenantService> nameMap_ = new HashMap<>();

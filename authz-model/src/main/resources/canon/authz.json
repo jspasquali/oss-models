@@ -307,6 +307,9 @@
           },
           "active": {
             "type": "boolean"
+          },
+          "effectiveDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           }
         }
       },

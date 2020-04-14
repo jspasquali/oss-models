@@ -53,11 +53,13 @@
       <groupId>org.symphonyoss.s2.canon</groupId>
       <artifactId>canon-runtime-java</artifactId>
     </dependency>
-    <!-- <dependency>
+    
+    <dependency>
       <groupId>org.symphonyoss.s2.canon</groupId>
       <artifactId>canon-jjwt</artifactId>
     </dependency>
     
+    <!-- 
     <dependency>
       <groupId>org.symphonyoss.s2.fugue</groupId>
       <artifactId>fugue-core</artifactId>
@@ -101,6 +103,26 @@
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
       <version>0.6.0</version>
+    </dependency> -->
+    
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.6.0</version>
+    </dependency>
+    <!-- 
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+    </dependency><dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <scope>runtime</scope>
     </dependency> -->
 
     <dependency>

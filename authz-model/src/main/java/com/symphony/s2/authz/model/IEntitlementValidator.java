@@ -8,6 +8,7 @@ package com.symphony.s2.authz.model;
 
 import org.symphonyoss.s2.canon.runtime.exception.PermissionDeniedException;
 import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
+import org.symphonyoss.s2.fugue.core.trace.NoOpTraceContext;
 
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 
@@ -32,4 +33,19 @@ public interface IEntitlementValidator extends IBaseEntitlementValidator
    */
   void ensureUserHasAllEntitlements(PodAndUserId subjectUserId, ITraceContext trace,
       IServiceEntitlementSpecOrIdProvider... entitlements);
+  
+
+  /**
+   * Ensure that the given subject has all of the given entitlements.
+   * 
+   * @param subjectUserId     The userId of the user whose entitlements are to be checked.
+   * @param entitlements      One or more entitlements identified by their ID.
+   * 
+   * @throws PermissionDeniedException If the subject (or the subject's pod) does not have all of the required entitlements.
+   */
+  default void ensureUserHasAllEntitlements(PodAndUserId subjectUserId,
+      IServiceEntitlementSpecOrIdProvider... entitlements)
+  {
+    ensureUserHasAllEntitlements(subjectUserId, NoOpTraceContext.INSTANCE, entitlements);
+  }
 }
