@@ -28,6 +28,7 @@ package com.symphony.oss.models.core.canon.facade;
 import javax.annotation.concurrent.Immutable;
 
 import org.symphonyoss.s2.common.hash.Hash;
+import org.symphonyoss.s2.fugue.core.trace.ITraceSubject;
 
 import com.symphony.oss.models.core.canon.IApplicationPayload;
 import com.symphony.oss.models.core.canon.ISystemObjectEntity;
@@ -39,7 +40,7 @@ import com.symphony.oss.models.core.canon.ISystemObjectEntity;
  * Generated from ObjectSchema(SystemObjectPayload) at #/components/schemas/SystemObjectPayload
  */
 @Immutable
-public interface ISystemObject extends IApplicationPayload, ISystemObjectEntity
+public interface ISystemObject extends IApplicationPayload, ISystemObjectEntity, ITraceSubject
 {
   /**
    * 

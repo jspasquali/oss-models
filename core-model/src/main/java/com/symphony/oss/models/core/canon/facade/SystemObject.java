@@ -111,6 +111,18 @@ public class SystemObject extends SystemObjectEntity implements ISystemObject
     return true;
   }
   
+  @Override
+  public String getTraceSubjectType()
+  {
+    return "OBJECT";
+  }
+
+  @Override
+  public String getTraceSubjectId()
+  {
+    return absoluteHash_.toStringBase64();
+  }
+
   /**
    * Abstract builder for SystemObject. If there are sub-classes of this type then their builders sub-class this builder.
    *
