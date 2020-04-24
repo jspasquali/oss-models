@@ -46,6 +46,9 @@ import com.symphony.oss.models.core.canon.SystemObjectEntity;
 @Immutable
 public class SystemObject extends SystemObjectEntity implements ISystemObject
 {
+  /** Trace subject type for object trace records. */
+  public static final String TRACE_SUBJECT_TYPE = "OBJECT";
+  
   private final Hash            absoluteHash_;
   
   /**
@@ -114,7 +117,7 @@ public class SystemObject extends SystemObjectEntity implements ISystemObject
   @Override
   public String getTraceSubjectType()
   {
-    return "OBJECT";
+    return TRACE_SUBJECT_TYPE;
   }
 
   @Override
