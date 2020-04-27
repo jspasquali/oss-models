@@ -8,13 +8,13 @@
 	},
 	"id": "com.symphony.s2.model.object",
   "version": "1.0",
-	"basePath": "/object/v1",
+	"basePath": "",
 	"model": {
 		"javaGenPackage": "com.symphony.oss.models.object.canon",
 		"javaFacadePackage": "com.symphony.oss.models.object.canon.facade"
 	},
   "methods": {
-    "/objects/{objectHash}": {
+    "/object/v1/objects/{objectHash}": {
       "parameters": {
         "objectHash": {
           "in": "path",
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/objects/{objectHash}/versions": {
+    "/object/v1/objects/{objectHash}/versions": {
       "parameters": {
         "objectHash": {
           "in": "path",
@@ -117,7 +117,7 @@
         }
       }
     },
-    "/partitions/{partitionHash}/{sortKey}": {
+    "/object/v1/partitions/{partitionHash}/{sortKey}": {
       "parameters": {
         "partitionHash": {
           "in": "path",
@@ -148,7 +148,7 @@
         }
       }
     },
-    "/partitions/upsert": {
+    "/object/v1/partitions/upsert": {
       "parameters": {
       },
       "post": {
@@ -173,7 +173,7 @@
         }
       }
     },
-    "/feeds/upsert": {
+    "/object/feeds/v1/upsert": {
       "parameters": {
       },
       "post": {
@@ -198,7 +198,7 @@
         }
       }
     },
-    "/feeds/{feedHash}/objects": {
+    "/object/feeds/v1/{feedHash}/objects": {
       "parameters": {
         "feedHash": {
           "in": "path",
@@ -228,7 +228,7 @@
         }
       }
     },
-    "/partitions/{partitionHash}/page": {
+    "/object/v1/partitions/{partitionHash}/page": {
       "parameters": {
         "partitionHash": {
           "in": "path",
