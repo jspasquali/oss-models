@@ -6,7 +6,7 @@
 
 package com.symphony.oss.models.core;
 
-import org.symphonyoss.s2.fugue.IFugueApplication;
+import com.symphony.oss.fugue.IFugueApplication;
 
 public enum Application implements IFugueApplication
 {

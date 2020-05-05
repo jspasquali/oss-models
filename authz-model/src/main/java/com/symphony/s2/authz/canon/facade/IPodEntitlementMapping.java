@@ -27,8 +27,7 @@ package com.symphony.s2.authz.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.fugue.kv.IKvItem;
-
+import com.symphony.oss.fugue.kv.IKvItem;
 import com.symphony.s2.authz.canon.IPodEntitlementMappingEntity;
 
 /**

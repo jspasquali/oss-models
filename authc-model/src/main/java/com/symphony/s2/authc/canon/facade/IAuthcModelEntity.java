@@ -26,7 +26,7 @@
 package com.symphony.s2.authc.canon.facade;
 
 
-import org.symphonyoss.s2.canon.runtime.IEntity;
+import com.symphony.oss.canon.runtime.IEntity;
 
 /**
  * Base interface for Authc model entities.

@@ -23,16 +23,16 @@ import java.lang.reflect.Method;
 import java.net.URL;
 
 import org.junit.Test;
-import org.symphonyoss.s2.canon.runtime.EntityFactory;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.canon.runtime.ModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.jackson.JacksonAdaptor;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.symphony.oss.canon.runtime.EntityFactory;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.canon.runtime.ModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.dom.json.jackson.JacksonAdaptor;
 import com.symphony.oss.models.chat.canon.ChatModel;
 import com.symphony.oss.models.core.canon.CoreModel;
 

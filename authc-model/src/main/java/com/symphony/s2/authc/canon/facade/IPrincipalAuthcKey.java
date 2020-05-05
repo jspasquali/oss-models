@@ -29,8 +29,7 @@ import java.security.PublicKey;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.fugue.kv.IKvItem;
-
+import com.symphony.oss.fugue.kv.IKvItem;
 import com.symphony.oss.models.core.canon.facade.ISystemObject;
 import com.symphony.s2.authc.canon.IPrincipalAuthcKeyEntity;
 

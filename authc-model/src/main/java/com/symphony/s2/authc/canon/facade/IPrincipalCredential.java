@@ -29,8 +29,7 @@ import java.security.PrivateKey;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
-
+import com.symphony.oss.fugue.kv.IKvPartitionSortKeyProvider;
 import com.symphony.s2.authc.canon.IPrincipalCredentialEntity;
 
 /**

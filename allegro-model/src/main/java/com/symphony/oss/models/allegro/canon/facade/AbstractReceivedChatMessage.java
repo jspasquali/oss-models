@@ -27,16 +27,13 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 import org.symphonyoss.symphony.messageml.elements.MessageML;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
 
-import org.symphonyoss.s2.canon.runtime.IEntity;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IEntity;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.allegro.canon.AbstractReceivedChatMessageEntity;
 import com.symphony.oss.models.allegro.canon.IAbstractReceivedChatMessageEntity;
 import com.symphony.oss.models.chat.canon.ILiveCurrentMessage;

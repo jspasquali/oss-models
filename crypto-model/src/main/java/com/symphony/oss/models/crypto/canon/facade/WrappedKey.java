@@ -28,8 +28,7 @@ package com.symphony.oss.models.crypto.canon.facade;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.crypto.canon.WrappedKeyTypeDef;
 
 /**

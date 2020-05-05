@@ -27,9 +27,8 @@ package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.hash.Hash;
-import org.symphonyoss.s2.fugue.core.trace.ITraceSubject;
-
+import com.symphony.oss.commons.hash.Hash;
+import com.symphony.oss.fugue.trace.ITraceSubject;
 import com.symphony.oss.models.core.canon.IApplicationPayload;
 import com.symphony.oss.models.core.canon.ISystemObjectEntity;
 

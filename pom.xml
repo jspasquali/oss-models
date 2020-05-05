@@ -22,7 +22,7 @@
   <parent>
 		<groupId>com.symphony.oss</groupId>
 		<artifactId>oss-parent-pom</artifactId>
-		<version>0.0.8-SNAPSHOT</version><!-- oss-parent-pom -->
+		<version>0.0.9</version><!-- oss-parent-pom -->
   </parent>
 
   <groupId>com.symphony.oss.models</groupId>
@@ -67,13 +67,13 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>  
     
-    <s2.common.version>0.2.8</s2.common.version>
-    <canon.version>0.2.22</canon.version>
-    <fugue.version>0.2.53</fugue.version>
+    <oss.commons.version>0.0.2</oss.commons.version>
+    <oss.canon.version>0.0.2</oss.canon.version>
+    <oss.fugue.version>0.0.2</oss.fugue.version>
     
-    <canon.template.groupid>org.symphonyoss.s2.canon</canon.template.groupid>
+    <canon.template.groupid>com.symphony.oss.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
-    <canon.template.version>${canon.version}</canon.template.version>
+    <canon.template.version>${oss.canon.version}</canon.template.version>
   </properties>
   
   <modules>
@@ -150,9 +150,9 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.symphonyoss.s2.canon</groupId>
+          <groupId>com.symphony.oss.canon</groupId>
           <artifactId>canon-maven-plugin</artifactId>
-          <version>${canon.version}</version>
+          <version>${oss.canon.version}</version>
         </plugin>
         <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
         <plugin>
@@ -165,7 +165,7 @@
                 <pluginExecution>
                   <pluginExecutionFilter>
                     <groupId>
-                      org.symphonyoss.s2.canon
+                      com.symphony.oss.canon
                     </groupId>
                     <artifactId>
                       canon-maven-plugin
@@ -191,7 +191,7 @@
     </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>org.symphonyoss.s2.canon</groupId>
+        <groupId>com.symphony.oss.canon</groupId>
         <artifactId>canon-maven-plugin</artifactId>
         <executions>
           <execution>
@@ -203,10 +203,6 @@
               <srcDirs>src/main/resources/canon</srcDirs>
               <proformaCopyDir>src/main</proformaCopyDir>
               <uriMapping>
-                <property>
-                 <name>https://models.oss.symphony.com/fundamental.json</name>
-                 <value>fundamental-model/src/main/resources/canon/fundamental.json</value>
-                </property>
                 <property>
                  <name>https://models.oss.symphony.com/core.json</name>
                  <value>core-model/src/main/resources/canon/core.json</value>

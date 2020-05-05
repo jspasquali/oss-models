@@ -29,17 +29,16 @@ import java.time.Instant;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.IKvSortKey;
-import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
-import org.symphonyoss.s2.fugue.kv.KvSortKey;
-import org.symphonyoss.s2.fugue.store.IFuguePodId;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.hash.Hash;
+import com.symphony.oss.fugue.kv.IKvPartitionKey;
+import com.symphony.oss.fugue.kv.IKvSortKey;
+import com.symphony.oss.fugue.kv.KvPartitionKey;
+import com.symphony.oss.fugue.kv.KvPartitionSortKeyProvider;
+import com.symphony.oss.fugue.kv.KvSortKey;
+import com.symphony.oss.fugue.store.IFuguePodId;
 import com.symphony.s2.authz.canon.EntitlementEntity;
 
 /**

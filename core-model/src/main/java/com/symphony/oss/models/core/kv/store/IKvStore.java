@@ -29,13 +29,13 @@ import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
-import org.symphonyoss.s2.common.exception.NoSuchObjectException;
-import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
-import org.symphonyoss.s2.fugue.kv.IKvItem;
-import org.symphonyoss.s2.fugue.kv.IKvPagination;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionKeyProvider;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
-import org.symphonyoss.s2.fugue.kv.KvCondition;
+import com.symphony.oss.fugue.kv.IKvItem;
+import com.symphony.oss.fugue.kv.IKvPagination;
+import com.symphony.oss.fugue.kv.IKvPartitionKeyProvider;
+import com.symphony.oss.fugue.kv.IKvPartitionSortKeyProvider;
+import com.symphony.oss.fugue.kv.KvCondition;
+import com.symphony.oss.fugue.store.NoSuchObjectException;
+import com.symphony.oss.fugue.trace.ITraceContext;
 
 /**
  * A Key Value Store.

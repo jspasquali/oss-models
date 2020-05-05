@@ -33,9 +33,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import org.apache.commons.codec.binary.Base64;
-import org.symphonyoss.s2.common.fault.CodingFault;
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
+import com.symphony.oss.commons.fault.CodingFault;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.s2.authc.canon.KeyIdTypeDef;
 
 /**

@@ -18,8 +18,7 @@
 
 package com.symphony.oss.models.object;
 
-import org.symphonyoss.s2.canon.runtime.ModelRegistry;
-
+import com.symphony.oss.canon.runtime.ModelRegistry;
 import com.symphony.oss.models.object.canon.facade.IStoredApplicationObject;
 
 /**

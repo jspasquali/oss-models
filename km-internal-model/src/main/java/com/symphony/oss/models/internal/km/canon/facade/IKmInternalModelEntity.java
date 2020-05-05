@@ -26,8 +26,7 @@
 package com.symphony.oss.models.internal.km.canon.facade;
 
 
-import org.symphonyoss.s2.canon.runtime.IEntity;
-
+import com.symphony.oss.canon.runtime.IEntity;
 import com.symphony.oss.models.crypto.canon.CipherSuiteId;
 import com.symphony.oss.models.crypto.cipher.CipherSuite;
 import com.symphony.oss.models.crypto.cipher.ICipherSuite;

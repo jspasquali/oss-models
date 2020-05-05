@@ -29,8 +29,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import org.apache.commons.codec.binary.Base64;
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.core.canon.ThreadIdTypeDef;
 
 /**

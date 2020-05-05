@@ -28,9 +28,8 @@ import java.security.cert.X509Certificate;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
 import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.crypto.canon.EncodedSignature;
 import com.symphony.oss.models.crypto.canon.PemCertificate;
 import com.symphony.oss.models.crypto.canon.PemPrivateKey;

@@ -18,19 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.symphonyoss.s2.canon.runtime.exception.CanonException;
-import org.symphonyoss.s2.canon.runtime.exception.NotAuthenticatedException;
-import org.symphonyoss.s2.canon.runtime.exception.PermissionDeniedException;
-import org.symphonyoss.s2.canon.runtime.http.IRequestAuthenticator;
-import org.symphonyoss.s2.canon.runtime.http.IRequestContext;
-import org.symphonyoss.s2.canon.runtime.http.ServletRequestContext;
-import org.symphonyoss.s2.canon.runtime.jjwt.JwtBase;
-import org.symphonyoss.s2.common.fault.CodingFault;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.util.concurrent.UncheckedExecutionException;
+import com.symphony.oss.canon.runtime.exception.CanonException;
+import com.symphony.oss.canon.runtime.exception.NotAuthenticatedException;
+import com.symphony.oss.canon.runtime.exception.PermissionDeniedException;
+import com.symphony.oss.canon.runtime.http.IRequestAuthenticator;
+import com.symphony.oss.canon.runtime.http.IRequestContext;
+import com.symphony.oss.canon.runtime.http.ServletRequestContext;
+import com.symphony.oss.canon.runtime.jjwt.JwtBase;
+import com.symphony.oss.commons.fault.CodingFault;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.crypto.canon.PemCertificate;

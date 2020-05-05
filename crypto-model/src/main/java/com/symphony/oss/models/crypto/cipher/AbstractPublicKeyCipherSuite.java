@@ -43,9 +43,9 @@ import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
-import org.symphonyoss.s2.common.fault.CodingFault;
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
+import com.symphony.oss.commons.fault.CodingFault;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.crypto.canon.EncodedSignature;
 import com.symphony.oss.models.crypto.canon.PemCertificate;
 import com.symphony.oss.models.crypto.canon.PemPrivateKey;

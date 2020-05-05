@@ -27,17 +27,11 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 import org.symphonyoss.symphony.messageml.elements.CashTag;
 import org.symphonyoss.symphony.messageml.elements.Element;
 import org.symphonyoss.symphony.messageml.elements.HashTag;
 import org.symphonyoss.symphony.messageml.elements.Mention;
 import org.symphonyoss.symphony.messageml.util.IUserPresentation;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-
-import org.symphonyoss.s2.canon.runtime.IEntity;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,14 +39,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
 import com.symphony.oss.models.allegro.canon.ReceivedSocialMessageEntity;
 import com.symphony.oss.models.chat.canon.facade.ISocialMessage;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.allegro.canon.IReceivedSocialMessageEntity;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.symphony.oss.canon.runtime.IEntity;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**

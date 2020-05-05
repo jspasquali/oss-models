@@ -48,10 +48,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
-import org.symphonyoss.s2.common.fault.CodingFault;
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
 import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.commons.fault.CodingFault;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.crypto.canon.PemPrivateKey;
 import com.symphony.oss.models.crypto.canon.PemPublicKey;
 

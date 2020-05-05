@@ -22,9 +22,8 @@ import java.security.PrivateKey;
 
 import javax.crypto.SecretKey;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-
 import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.crypto.canon.Base64SecretKey;
 import com.symphony.oss.models.crypto.canon.EncryptedData;
 

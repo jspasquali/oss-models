@@ -25,10 +25,9 @@
 
 package com.symphony.oss.models.object.canon.facade;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.models.object.canon.AbstractApplicationObjectPayloadEntity;
 import com.symphony.oss.models.object.canon.IAbstractApplicationObjectPayloadEntity;
 

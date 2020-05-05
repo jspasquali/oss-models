@@ -18,7 +18,7 @@
 
 package com.symphony.oss.models.object;
 
-import org.symphonyoss.s2.canon.runtime.exception.BadRequestException;
+import com.symphony.oss.canon.runtime.exception.BadRequestException;
 
 public class ObjectModelUtils
 {

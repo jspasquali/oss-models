@@ -28,8 +28,7 @@ package com.symphony.oss.models.core.canon.facade;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.fugue.store.IFuguePodId;
-
+import com.symphony.oss.fugue.store.IFuguePodId;
 import com.symphony.oss.models.core.canon.PodIdTypeDef;
 
 /**

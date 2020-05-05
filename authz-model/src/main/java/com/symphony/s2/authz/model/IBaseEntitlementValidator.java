@@ -6,11 +6,10 @@
 
 package com.symphony.s2.authz.model;
 
-import org.symphonyoss.s2.canon.runtime.exception.PermissionDeniedException;
-import org.symphonyoss.s2.common.hash.Hash;
-import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
-import org.symphonyoss.s2.fugue.core.trace.NoOpTraceContext;
-
+import com.symphony.oss.canon.runtime.exception.PermissionDeniedException;
+import com.symphony.oss.commons.hash.Hash;
+import com.symphony.oss.fugue.trace.ITraceContext;
+import com.symphony.oss.fugue.trace.NoOpTraceContext;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 
 /**

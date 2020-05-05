@@ -29,11 +29,10 @@ import java.time.Instant;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.hash.Hash;
 import com.symphony.oss.models.object.canon.IStoredApplicationObjectEntity;
 import com.symphony.oss.models.object.canon.StoredApplicationObjectEntity;
 

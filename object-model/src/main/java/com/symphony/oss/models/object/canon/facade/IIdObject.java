@@ -27,8 +27,7 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.hash.Hash;
-
+import com.symphony.oss.commons.hash.Hash;
 import com.symphony.oss.models.core.canon.IApplicationPayload;
 import com.symphony.oss.models.object.canon.IIdObjectEntity;
 

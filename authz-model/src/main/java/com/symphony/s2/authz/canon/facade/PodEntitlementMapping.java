@@ -32,22 +32,21 @@ import java.util.Set;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.hash.Hash;
-import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
-import org.symphonyoss.s2.fugue.core.trace.NoOpTraceContext;
-import org.symphonyoss.s2.fugue.kv.IKvPagination;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
-import org.symphonyoss.s2.fugue.kv.IKvSortKey;
-import org.symphonyoss.s2.fugue.kv.KvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.KvPartitionKeyProvider;
-import org.symphonyoss.s2.fugue.kv.KvPartitionSortKeyProvider;
-import org.symphonyoss.s2.fugue.kv.KvSortKey;
-
 import com.google.common.collect.ImmutableMap;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.hash.Hash;
+import com.symphony.oss.fugue.kv.IKvPagination;
+import com.symphony.oss.fugue.kv.IKvPartitionKey;
+import com.symphony.oss.fugue.kv.IKvPartitionSortKeyProvider;
+import com.symphony.oss.fugue.kv.IKvSortKey;
+import com.symphony.oss.fugue.kv.KvPartitionKey;
+import com.symphony.oss.fugue.kv.KvPartitionKeyProvider;
+import com.symphony.oss.fugue.kv.KvPartitionSortKeyProvider;
+import com.symphony.oss.fugue.kv.KvSortKey;
+import com.symphony.oss.fugue.trace.ITraceContext;
+import com.symphony.oss.fugue.trace.NoOpTraceContext;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.core.kv.store.IKvStore;

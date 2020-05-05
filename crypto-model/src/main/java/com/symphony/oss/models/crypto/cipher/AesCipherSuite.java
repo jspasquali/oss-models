@@ -35,10 +35,10 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-import org.symphonyoss.s2.common.fault.CodingFault;
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
 
 import com.symphony.oss.models.crypto.canon.facade.WrappedKey;
+import com.symphony.oss.commons.fault.CodingFault;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
 import com.symphony.oss.models.crypto.canon.Base64SecretKey;
 import com.symphony.oss.models.crypto.canon.EncryptedData;
 

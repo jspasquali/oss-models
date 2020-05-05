@@ -30,7 +30,7 @@
         "type": "string",
         "format": "byte",
         "x-canon-attributes": {
-          "javaExternalPackage": "org.symphonyoss.s2.common.hash",
+          "javaExternalPackage": "com.symphony.oss.commons.hash",
           "javaExternalType": "Hash",
           "isDirectExternal": "true"
         }

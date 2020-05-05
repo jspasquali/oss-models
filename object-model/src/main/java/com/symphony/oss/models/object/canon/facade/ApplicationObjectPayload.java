@@ -29,16 +29,15 @@ import java.io.IOException;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.CanonRuntime;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.IJsonDomNode;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.JsonString;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.jackson.JacksonAdaptor;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.symphony.oss.canon.runtime.CanonRuntime;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.IJsonDomNode;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.JsonString;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.dom.json.jackson.JacksonAdaptor;
 import com.symphony.oss.models.object.ObjectModelRegistry;
 import com.symphony.oss.models.object.canon.ApplicationObjectPayloadEntity;
 import com.symphony.oss.models.object.canon.IApplicationObjectPayloadEntity;

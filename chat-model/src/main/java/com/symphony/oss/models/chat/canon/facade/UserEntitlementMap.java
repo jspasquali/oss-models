@@ -27,18 +27,15 @@ package com.symphony.oss.models.chat.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.common.immutable.ImmutableByteArray;
-import org.symphonyoss.s2.common.type.provider.IBooleanProvider;
-import org.symphonyoss.s2.common.dom.json.IImmutableJsonDomNode;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-
-import org.symphonyoss.s2.canon.runtime.IEntity;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-
-
 import com.symphony.oss.models.chat.canon.UserEntitlementMapEntity;
 import com.symphony.oss.models.chat.canon.IUserEntitlementMapEntity;
+import com.symphony.oss.canon.runtime.IEntity;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.IImmutableJsonDomNode;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
+import com.symphony.oss.commons.type.provider.IBooleanProvider;
 import com.symphony.oss.models.chat.canon.ChatModel;
 
 /**

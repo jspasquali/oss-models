@@ -29,16 +29,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.symphonyoss.s2.canon.runtime.IEntity;
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.exception.NoSuchObjectException;
-import org.symphonyoss.s2.fugue.core.trace.ITraceContext;
-import org.symphonyoss.s2.fugue.kv.IKvItem;
-import org.symphonyoss.s2.fugue.kv.IKvPagination;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionKeyProvider;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionSortKeyProvider;
-import org.symphonyoss.s2.fugue.kv.KvCondition;
-import org.symphonyoss.s2.fugue.kv.table.IKvTable;
+import com.symphony.oss.canon.runtime.IEntity;
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.fugue.kv.IKvItem;
+import com.symphony.oss.fugue.kv.IKvPagination;
+import com.symphony.oss.fugue.kv.IKvPartitionKeyProvider;
+import com.symphony.oss.fugue.kv.IKvPartitionSortKeyProvider;
+import com.symphony.oss.fugue.kv.KvCondition;
+import com.symphony.oss.fugue.kv.table.IKvTable;
+import com.symphony.oss.fugue.store.NoSuchObjectException;
+import com.symphony.oss.fugue.trace.ITraceContext;
 
 /**
  * Implementation of IKvStore.

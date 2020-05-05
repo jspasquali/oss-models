@@ -9,9 +9,8 @@ package com.symphony.s2.authc.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.symphonyoss.s2.common.exception.NoSuchObjectException;
-import org.symphonyoss.s2.fugue.IFugueApplication;
-
+import com.symphony.oss.fugue.IFugueApplication;
+import com.symphony.oss.fugue.store.NoSuchObjectException;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.core.canon.facade.UserId;

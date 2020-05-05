@@ -9,8 +9,8 @@ package com.symphony.s2.authc.model;
 import java.security.PublicKey;
 
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.symphonyoss.s2.canon.runtime.exception.NotFoundException;
 
+import com.symphony.oss.canon.runtime.exception.NotFoundException;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.s2.authc.canon.AuthcHttpModelClient;
 import com.symphony.s2.authc.canon.UsersUserIdKeysFirstGetHttpRequest;

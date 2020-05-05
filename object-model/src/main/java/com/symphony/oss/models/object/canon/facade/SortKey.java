@@ -36,7 +36,7 @@ import com.symphony.oss.models.object.canon.SortKeyTypeDef;
  * Generated from TypeDef(SortKey,type=String) at #/components/schemas/SortKey
  */
 @Immutable
-public class SortKey extends SortKeyTypeDef implements org.symphonyoss.s2.fugue.kv.IKvSortKey
+public class SortKey extends SortKeyTypeDef implements com.symphony.oss.fugue.kv.IKvSortKey
 {
   private static Builder theBuilder = new Builder();
   

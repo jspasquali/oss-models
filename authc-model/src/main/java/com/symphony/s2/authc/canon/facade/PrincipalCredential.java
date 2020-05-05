@@ -29,13 +29,12 @@ import java.security.PrivateKey;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.canon.runtime.IModelRegistry;
-import org.symphonyoss.s2.common.dom.json.ImmutableJsonObject;
-import org.symphonyoss.s2.common.dom.json.MutableJsonObject;
-import org.symphonyoss.s2.fugue.kv.IKvPartitionKey;
-import org.symphonyoss.s2.fugue.kv.IKvSortKey;
-import org.symphonyoss.s2.fugue.kv.KvSortKey;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.commons.dom.json.MutableJsonObject;
+import com.symphony.oss.fugue.kv.IKvPartitionKey;
+import com.symphony.oss.fugue.kv.IKvSortKey;
+import com.symphony.oss.fugue.kv.KvSortKey;
 import com.symphony.oss.models.crypto.cipher.CipherSuite;
 import com.symphony.s2.authc.canon.PrincipalCredentialEntity;
 

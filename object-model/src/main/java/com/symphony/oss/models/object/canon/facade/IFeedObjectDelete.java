@@ -27,8 +27,7 @@ package com.symphony.oss.models.object.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.symphonyoss.s2.fugue.pubsub.IQueueMessageDelete;
-
+import com.symphony.oss.fugue.pubsub.IQueueMessageDelete;
 import com.symphony.oss.models.object.canon.IFeedObjectDeleteEntity;
 
 /**
