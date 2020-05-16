@@ -148,6 +148,29 @@
         }
       }
     },
+    "/partitions/{partitionHash}": {
+      "parameters": {
+        "partitionHash": {
+          "in": "path",
+          "description": "Partition Key Value",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the given partition.",
+        "operationId": "fetchPartition",
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Partition"
+          }
+        }
+      }
+    },
     "/partitions/upsert": {
       "parameters": {
       },
