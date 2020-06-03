@@ -181,10 +181,126 @@
           }
         }
       }
+    },
+    "/v1/streams/list": {
+      "post": {
+        "summary": "Retrieve a list of all streams of which the requesting user is a member,\nsorted by creation date (ascending).\n",
+        "parameters": {
+          "sessionToken": {
+            "description": "Session authentication token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "skip": {
+            "description": "No. of results to skip.\n",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "limit": {
+            "description": "Max no. of results to return. If no value is provided, 50 is the default.\n",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        },
+        "tags": [
+          "Streams"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/StreamFilter"
+          }
+        },
+        "response": {
+          "required": true,
+          "multiple": true,
+            "schema": {
+              "$ref": "#/components/schemas/StreamAttributes"
+          }
+        }
+      }
+    },
+    "/v2/streams/{sid}/info": {
+      "get": {
+        "summary": "Get information about a partcular stream.",
+        "parameters": {
+          "sessionToken": {
+            "description": "Session authentication token.",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "description": "Stream Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "Streams"
+        ],
+        "response": {
+          "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/V2StreamAttributes"
+          }
+        }
+      }
     }
   },
 	"components": {
 		"schemas": {
+      "UserNameList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/UserName"
+        }
+      },
+      "UserName": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "UserIdList": {
+        "type": "array",
+        "items": {
+          "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+        }
+      },
+      "UserId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "StringId": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
       "PodCertificate": {
         "type": "object",
         "properties": {
@@ -314,6 +430,148 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "#StreamList": {
+        "description": "A list of streams of which the requesting user is a member.",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/StreamAttributes"
+        }
+      },
+      "StreamAttributes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "crossPod": {
+            "type": "boolean",
+            "description": "If true, this is a cross-pod stream."
+          },
+          "active": {
+            "type": "boolean",
+            "description": "If true, this stream is active."
+          },
+          "streamType": {
+            "$ref": "#/components/schemas/StreamType"
+          },
+          "streamAttributes": {
+            "$ref": "#/components/schemas/ConversationSpecificStreamAttributes"
+          },
+          "roomAttributes": {
+            "$ref": "#/components/schemas/RoomSpecificStreamAttributes"
+          }
+        }
+      },
+      "StreamType": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/StreamTypeEnum"
+          }
+        }
+      },
+      "StreamTypeEnum": {
+        "type": "string",
+        "enum": [
+          "IM",
+          "MIM",
+          "ROOM",
+          "POST"
+        ]
+      },
+      "ConversationSpecificStreamAttributes": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "$ref": "#/components/schemas/UserIdList"
+          }
+        }
+      },
+      "RoomSpecificStreamAttributes": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Room name."
+          }
+        }
+      },
+      "StreamFilter": {
+        "description": "Stream filtering parameters.",
+        "properties": {
+          "streamTypes": {
+            "description": "Types of streams to search for.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StreamType"
+            }
+          },
+          "includeInactiveStreams": {
+            "description": "Whether to include inactive streams in the list of results.",
+            "type": "boolean"
+          }
+        }
+      },
+      "V2StreamAttributes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The stream ID."
+          },
+          "crossPod": {
+            "type": "boolean",
+            "description": "If true, this is a cross-pod stream."
+          },
+          "origin": {
+            "type": "string",
+            "description": "INTERNAL if the creator of this stream belongs to the pod, EXTERNAL otherwise"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "If true, this stream is active."
+          },
+          "lastMessageDate": {
+            "type": "integer",
+            "format": "int64",
+            "description": "unix timestamp of the last message sent in the stream"
+          },
+          "streamType": {
+            "$ref": "#/components/schemas/V2StreamType"
+          },
+          "streamAttributes": {
+            "$ref": "#/components/schemas/V2ConversationSpecificStreamAttributes"
+          },
+          "roomAttributes": {
+            "$ref": "#/components/schemas/V2RoomSpecificStreamAttributes"
+          }
+        }
+      },
+      "V2StreamType": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "V2ConversationSpecificStreamAttributes": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "$ref": "#/components/schemas/UserIdList"
+          }
+        }
+      },
+      "V2RoomSpecificStreamAttributes": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Room name."
           }
         }
       }

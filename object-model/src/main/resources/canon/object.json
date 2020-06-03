@@ -70,6 +70,32 @@
         }
       }
     },
+    "/objects/transaction": {
+      "parameters": {
+        "traceContextHash": {
+          "in": "query",
+          "required": false,
+          "description": "The id of the trace context of which this operation is a part",
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create several objects in a transaction.",
+        "operationId": "createObjectTransaction",
+        "tags": [
+          "objects"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/AbstractStoredApplicationObject"
+          }
+        }
+      }
+    },
     "/objects/{objectHash}/versions": {
       "parameters": {
         "objectHash": {
