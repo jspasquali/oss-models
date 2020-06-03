@@ -113,6 +113,8 @@ public class StoredApplicationObject extends StoredApplicationObjectEntity imple
    */
   public static abstract class AbstractStoredApplicationObjectBuilder<B extends AbstractStoredApplicationObjectBuilder<B,T>, T extends IStoredApplicationObjectEntity> extends AbstractStoredApplicationObjectEntityBuilder<B,T>
   {
+    private Instant createdDate_;
+    
     protected AbstractStoredApplicationObjectBuilder(Class<B> type)
     {
       super(type);
@@ -126,10 +128,19 @@ public class StoredApplicationObject extends StoredApplicationObjectEntity imple
     @Override
     public Instant getCreatedDate()
     {
-      if(super.getCreatedDate() == null)
-         return Instant.now();
+      if(createdDate_ == null)
+      {
+        if(super.getCreatedDate() == null)
+        {
+          createdDate_ =  Instant.now();
+        }
+        else
+        {
+          createdDate_ = super.getCreatedDate();
+        }
+      }
       
-      return super.getCreatedDate();
+      return createdDate_;
     }
   }
 }
