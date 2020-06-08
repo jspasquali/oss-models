@@ -90,6 +90,29 @@
           }
         }
       }
+    },
+    "/keys/{keyId}": {
+      "parameters": {
+        "keyId": {
+          "in": "path",
+          "description": "Key ID",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/KeyId"
+          }
+        }
+      },
+      "get": {
+        "summary": "Fetch the public signing key to validate a JWT for the environment with the given key ID.",
+        "operationId": "fetchKey",
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/Jwk"
+          }
+        }
+      }
     }
   },
 	"components": {
@@ -116,6 +139,21 @@
         "type": "string",
         "format": "byte",
         "facade": true
+      },
+      "EnvironmentAuthcKey": {
+        "description": "An RSA Public Key for an environment, this is the key the new standard JWTs are signed with.",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "facade": true,
+        "builderFacade": true,
+        "required": [
+          "jwk"
+        ],
+        "properties": {
+          "jwk": {
+            "$ref": "#/components/schemas/Jwk"
+          }
+        }
       },
       "PrincipalAuthcKey": {
         "description": "An RSA Public Key for a principal to authenticate with.",
@@ -166,6 +204,93 @@
           },
           "encodedPrivateKey": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
+          }
+        }
+      },
+      "JwkSet": {
+        "type": "object",
+        "facade": true,
+        "description": "A set of Json Web Keys.",
+        "required": [
+          "keys"
+        ],
+        "properties": {
+          "keys": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "#/components/schemas/Jwk"
+            }
+          }
+        }
+      },
+      "Jwk": {
+        "type": "object",
+        "facade": true,
+        "description": "A Json Web Key.",
+        "properties": {
+          "kty": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          },
+          "key_ops": {
+            "type": "string"
+          },
+          "alg": {
+            "type": "string"
+          },
+          "kid": {
+            "type": "string"
+          },
+          "x5u": {
+            "type": "string"
+          },
+          "x5c": {
+            "type": "string"
+          },
+          "x5t": {
+            "type": "string"
+          },
+          "# breaks canon x5t#S256": {
+            "type": "string"
+          },
+          "n": {
+            "type": "string"
+          },
+          "e": {
+            "type": "string"
+          },
+          "d": {
+            "type": "string"
+          },
+          "p": {
+            "type": "string"
+          },
+          "q": {
+            "type": "string"
+          },
+          "dp": {
+            "type": "string"
+          },
+          "dq": {
+            "type": "string"
+          },
+          "qi": {
+            "type": "string"
+          },
+          "oth": {
+            "type": "string"
+          },
+          "r": {
+            "type": "string"
+          },
+          "t": {
+            "type": "string"
+          },
+          "k": {
+            "type": "string"
           }
         }
       }

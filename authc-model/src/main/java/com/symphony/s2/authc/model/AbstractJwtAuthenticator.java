@@ -28,7 +28,6 @@ import com.symphony.oss.canon.runtime.exception.NotAuthenticatedException;
 import com.symphony.oss.canon.runtime.exception.PermissionDeniedException;
 import com.symphony.oss.canon.runtime.http.IRequestAuthenticator;
 import com.symphony.oss.canon.runtime.http.IRequestContext;
-import com.symphony.oss.canon.runtime.http.ServletRequestContext;
 import com.symphony.oss.canon.runtime.jjwt.JwtBase;
 import com.symphony.oss.commons.fault.CodingFault;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
@@ -178,6 +177,9 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     if(CLAIM_API_GATEWAY_ISSUER.equals(token.getBody().getIssuer()))
       return SignatureAlgorithm.HS512;
     
+    if(token.getBody().get("policy_id") != null)
+      return SignatureAlgorithm.RS256;
+    
     return SignatureAlgorithm.RS512;
   }
   
@@ -193,16 +195,23 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
           // An API Gateway token
           throw new NotAuthenticatedException("Invalid JWT token (legacy API Gateway unsupported)");
         }
+        else if(claims.get("policy_id") != null)
+        {
+          // A new standard JWT
+          //throw new NotAuthenticatedException("I dont have the key for these....");
+          
+          return geEnvironmentKey(header);
+        }
         else
         {
           // we think its an auth (wrapped skey) token.
 
-          return getPodKey(claims);
+          return getPodKey(claims, getUserId(claims));
         }
       }
       catch(NullPointerException | NumberFormatException e)
       {
-        throw new NotAuthenticatedException("Invalid JWT token");
+        throw new NotAuthenticatedException("Invalid JWT token", e);
       }
     }
   }
@@ -210,6 +219,9 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
   private PodAndUserId getUserId(Claims claims)
   {
     Object userIdObject = claims.get("userId");
+    
+    if(userIdObject == null)
+      userIdObject = claims.get("sub");
     
     PodAndUserId userId = userIdObject instanceof Long ? PodAndUserId.newBuilder().build((Long) userIdObject) : PodAndUserId.newBuilder().build(Long.parseLong(userIdObject.toString()));
     PodId        podId  = getPodId(claims, "podId");
@@ -219,6 +231,19 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     
     return userId;
   }
+
+//  private PodAndUserId getApuGwUserId(Claims claims)
+//  {
+//    Object userIdObject = claims.get("sub");
+//    
+//    PodAndUserId userId = userIdObject instanceof Long ? PodAndUserId.newBuilder().build((Long) userIdObject) : PodAndUserId.newBuilder().build(Long.parseLong(userIdObject.toString()));
+//    PodId        podId  = getPodId(claims, "ext_pod_id");
+//    
+//    if(podId != null)
+//      userId = PodAndUserId.newBuilder().build(podId, userId.getUserId());
+//    
+//    return userId;
+//  }
 
   private PodId getPodId(Claims claims, String name)
   {
@@ -233,12 +258,8 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     return PodId.newBuilder().build(Integer.parseInt(podIdObject.toString()));
   }
   
-  protected PublicKey getPodKey(Claims claims)
+  protected PublicKey getPodKey(Claims claims, PodAndUserId userId)
   {
-
-    PodAndUserId userId = getUserId(claims);
-    
-    
     String keyIdStr = claims.get("kid", String.class);
     KeyId  keyId    = keyIdStr == null ? null : KeyId.newBuilder().build(keyIdStr);
     
@@ -248,6 +269,36 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
       
       if(result == INVALID_POD)
         throw new PermissionDeniedException("Invalid JWT token: Unknwon podId " + userId.getPodId());
+      
+      return result;
+    }
+    catch (ExecutionException e)
+    {
+      if(e.getCause() instanceof RuntimeException)
+        throw (RuntimeException)e.getCause();
+      
+      throw new CodingFault(e);
+    }
+    catch(UncheckedExecutionException e)
+    {
+      if(e.getCause() instanceof RuntimeException)
+        throw (RuntimeException)e.getCause();
+      
+      throw e;
+    }
+  }
+  
+  protected PublicKey geEnvironmentKey(JwsHeader header)
+  {
+    String keyIdStr = header.getKeyId();
+    KeyId  keyId    = keyIdStr == null ? null : KeyId.newBuilder().build(keyIdStr);
+    
+    try
+    {
+      PublicKey result = podKeyCache_.get(new CacheKey(null, keyId));
+      
+      if(result == INVALID_POD)
+        throw new PermissionDeniedException("Invalid JWT token: Unknwon key " + keyId);
       
       return result;
     }

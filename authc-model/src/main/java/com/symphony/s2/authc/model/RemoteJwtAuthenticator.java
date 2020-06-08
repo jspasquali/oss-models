@@ -13,8 +13,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import com.symphony.oss.canon.runtime.exception.NotFoundException;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.s2.authc.canon.AuthcHttpModelClient;
+import com.symphony.s2.authc.canon.KeysKeyIdGetHttpRequest;
 import com.symphony.s2.authc.canon.UsersUserIdKeysFirstGetHttpRequest;
 import com.symphony.s2.authc.canon.UsersUserIdKeysKeyIdGetHttpRequest;
+import com.symphony.s2.authc.canon.facade.IJwk;
 import com.symphony.s2.authc.canon.facade.IPrincipalAuthcKey;
 import com.symphony.s2.authc.canon.facade.KeyId;
 
@@ -122,7 +124,17 @@ public class RemoteJwtAuthenticator extends AbstractJwtAuthenticator
     
     try
     {
-      if(keyId == null)
+      if(userId == null && keyId != null)
+      {
+        KeysKeyIdGetHttpRequest request = authcClient_.newKeysKeyIdGetHttpRequestBuilder()
+            .withKeyId(keyId)
+            .build();
+        
+        IJwk jwk = request.execute(httpclient_);
+        
+        return jwk.getPublicKey();
+      }
+      else if(keyId == null)
       {
         UsersUserIdKeysFirstGetHttpRequest request = authcClient_.newUsersUserIdKeysFirstGetHttpRequestBuilder()
             .withUserId(userId)

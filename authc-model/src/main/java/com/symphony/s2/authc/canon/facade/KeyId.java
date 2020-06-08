@@ -89,8 +89,8 @@ public class KeyId extends KeyIdTypeDef
       if(value == null)
         throw new NullPointerException("value is required.");
       
-      if(value.length() != 20)
-        throw new NullPointerException("A 160 bit SHA1 hash value is required.");
+//      if(value.length() != 20)
+//        throw new NullPointerException("A 160 bit SHA1 hash value is required.");
       
       return new KeyId(value);
     }
@@ -109,8 +109,8 @@ public class KeyId extends KeyIdTypeDef
       
       byte[] bytes = Base64.decodeBase64(value);
       
-      if(bytes.length != 20)
-        throw new NullPointerException("A 160 bit SHA1 hash value is required.");
+//      if(bytes.length != 20)
+//        throw new NullPointerException("A 160 bit SHA1 hash value is required.");
       
       return new KeyId(ImmutableByteArray.newInstance(bytes));
     }
