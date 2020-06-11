@@ -79,8 +79,6 @@ public class UserStatus extends UserStatusEntity implements IUserStatus
   
   private Map<String, Object> initAdditionalAttributes()
   {
-    Map<String, Object> map = new HashMap<>();
-    
     return new ImmutableMap.Builder<String, Object>()
         .put(EFFECTIVE_DATE_ATTRIBUTE_NAME, 
             getEffectiveDate()==null ? 

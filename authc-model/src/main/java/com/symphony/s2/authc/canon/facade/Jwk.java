@@ -68,8 +68,6 @@ public class Jwk extends JwkEntity implements IJwk
     super(builder);
     publicKey_ = initPublicKey();
     keyId_ = initKeyId();
-    
-    System.err.println("keyId " + keyId_ + " - " + getKid());
   }
   
   private KeyId initKeyId()
@@ -122,6 +120,9 @@ public class Jwk extends JwkEntity implements IJwk
     super(jsonObject, modelRegistry);
     publicKey_ = initPublicKey();
     keyId_ = initKeyId();
+    
+//    System.err.println("given keyId " + KeyId.newBuilder().build(getKid()));
+//    System.err.println("computed keyId " + KeyId.newBuilder().build(publicKey_));
   }
   
   /**

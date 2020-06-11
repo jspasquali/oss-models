@@ -89,8 +89,6 @@ public class UserEntitlementMapping extends UserEntitlementMappingEntity impleme
   
   private Map<String, Object> initAdditionalAttributes()
   {
-    Map<String, Object> map = new HashMap<>();
-    
     return new ImmutableMap.Builder<String, Object>()
         .put(OWNER_ID_ATTRIBUTE_NAME, getEntitlementId().getUserId().getValue())
         .put(EFFECTIVE_DATE_ATTRIBUTE_NAME, getEffectiveDate().toString())

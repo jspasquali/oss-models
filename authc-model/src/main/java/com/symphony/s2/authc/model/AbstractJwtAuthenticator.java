@@ -40,6 +40,7 @@ import com.symphony.s2.authc.canon.facade.KeyId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwsHeader;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SigningKeyResolverAdapter;
@@ -148,15 +149,17 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
   @Override
   public PodAndUserId authenticate(String token) throws NotAuthenticatedException
   {
-    Jws<Claims> parsedJwt = Jwts.parser().setSigningKeyResolver(new SigningKeyResolver())
-        .parseClaimsJws(token);
-    
-   
-    if(!getAlgorithm(parsedJwt).toString().equals(parsedJwt.getHeader().getAlgorithm()))
-      throw new NotAuthenticatedException("Invalid JWT Token, unacceptable signature algorithm");
     
     try
     {
+
+      Jws<Claims> parsedJwt = Jwts.parserBuilder().setSigningKeyResolver(new SigningKeyResolver()).build()
+          .parseClaimsJws(token);
+      
+     
+      if(!getAlgorithm(parsedJwt).toString().equals(parsedJwt.getHeader().getAlgorithm()))
+        throw new NotAuthenticatedException("Invalid JWT Token, unacceptable signature algorithm");
+      
       Claims claims = parsedJwt.getBody();
       
       PodAndUserId userId = getUserId(claims);
@@ -165,7 +168,11 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
       
       return userId;
     }
-    catch(NullPointerException | NumberFormatException e)
+    catch(JwtException e)
+    {
+      throw new NotAuthenticatedException("Invalid JWT token: " + e.getLocalizedMessage());
+    }
+    catch(RuntimeException e)
     {
       throw new NotAuthenticatedException("Invalid JWT token");
     }
@@ -288,7 +295,7 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     }
   }
   
-  protected PublicKey geEnvironmentKey(JwsHeader header)
+  protected PublicKey geEnvironmentKey(JwsHeader<?> header)
   {
     String keyIdStr = header.getKeyId();
     KeyId  keyId    = keyIdStr == null ? null : KeyId.newBuilder().build(keyIdStr);
