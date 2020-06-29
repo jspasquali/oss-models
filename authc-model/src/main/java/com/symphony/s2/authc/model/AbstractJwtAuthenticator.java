@@ -153,10 +153,9 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     try
     {
 
-      Jws<Claims> parsedJwt = Jwts.parserBuilder().setSigningKeyResolver(new SigningKeyResolver()).build()
+      Jws<Claims> parsedJwt = Jwts.parserBuilder().setSigningKeyResolver(new AuthcSigningKeyResolver()).build()
           .parseClaimsJws(token);
       
-     
       if(!getAlgorithm(parsedJwt).toString().equals(parsedJwt.getHeader().getAlgorithm()))
         throw new NotAuthenticatedException("Invalid JWT Token, unacceptable signature algorithm");
       
@@ -190,7 +189,7 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     return SignatureAlgorithm.RS512;
   }
   
-  class SigningKeyResolver extends SigningKeyResolverAdapter
+  class AuthcSigningKeyResolver extends SigningKeyResolverAdapter
   {
     @Override
     public Key resolveSigningKey(@SuppressWarnings("rawtypes") JwsHeader header, Claims claims)
@@ -204,8 +203,7 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
         }
         else if(claims.get("policy_id") != null)
         {
-          // A new standard JWT
-          //throw new NotAuthenticatedException("I dont have the key for these....");
+          // A new common JWT
           
           return geEnvironmentKey(header);
         }

@@ -109,6 +109,130 @@
             "$ref": "https://models.oss.symphony.com/chat.json#/components/schemas/MaestroMessage"
           }
         }
+      },
+      "AllegroBaseConfiguration": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "cipherSuiteId": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
+          },
+          "apiUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "rsaPemCredential": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
+          },
+          "rsaPemCredentialFile": {
+            "type": "string"
+          },
+          "apiConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          }
+        }
+      },
+      "AllegroMultiTenantConfiguration": {
+        "type": "object",
+        "extends": "#/components/schemas/AllegroBaseConfiguration",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "keyId": {
+            "type": "string"
+          },
+          "principalCredentialFile": {
+            "type": "string"
+          }
+        }
+      },
+      "AllegroConfiguration": {
+        "type": "object",
+        "extends": "#/components/schemas/AllegroBaseConfiguration",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "userName": {
+            "type": "string"
+          },
+          "podUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "authCertFile": {
+            "type": "string"
+          },
+          "authCertFilePassword": {
+            "type": "string"
+          },
+          "authCert": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
+          },
+          "authCertPrivateKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
+          },
+          "sessionAuthUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "keyAuthUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "defaultConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "podConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "keyManagerConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "certSessionAuthConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "certKeyAuthConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          }
+        }
+      },
+      "SslTrustStrategy": {
+        "type": "string",
+        "enum": [
+          "TRUST_ALL_CERTS",
+          "TRUST_SELF_SIGNED_CERTS"
+        ]
+      },
+      "ConnectionSettings": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "properties": {
+          "trustedCertResources": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trustedCerts": {
+            "type": "array",
+            "x-canon-cardinality": "SET",
+            "items": {
+              "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
+            }
+          },
+          "sslTrustStrategy": {
+            "$ref": "#/components/schemas/SslTrustStrategy"
+          },
+          "maxHttpConnections": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proxyUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          }
+        }
       }
 		}
 	}

@@ -35,6 +35,15 @@
           "isDirectExternal": "true"
         }
       },
+      "Url": {
+        "description": "A URL.",
+        "type": "string",
+        "format": "url",
+        "x-canon-attributes": {
+          "javaExternalPackage": "java.net",
+          "javaExternalType": "URL"
+        }
+      },
       "TimeStamp": {
         "description": "A millisecond resolution timestamp, compatible java.util.Date.",
         "type": "integer",

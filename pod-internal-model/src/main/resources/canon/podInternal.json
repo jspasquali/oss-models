@@ -90,6 +90,17 @@
         }
       }
     },
+    "/login/idm/tokens": {
+      "post": {
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/TokenResponse"
+          }
+        }
+      }
+    },
     "/settings-web/api/v1/tokens": {
       "get": {
         "response": {
@@ -407,6 +418,21 @@
             "type": "string"
           },
           "token": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenResponse": {
+        "type": "object",
+        "properties": {
+          "token_type": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "access_token": {
             "type": "string"
           }
         }
