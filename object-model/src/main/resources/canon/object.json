@@ -710,7 +710,7 @@
         "description": "A Feed subscription in the object store.",
 
         "properties": {
-          "FeedId": {
+          "feedId": {
             "$ref": "#/components/schemas/NamedUserIdObject"
           },
           "partitionHash": {
@@ -741,7 +741,7 @@
         "description": "Request to upsert a Feed in the object store.",
 
         "properties": {
-          "FeedId": {
+          "feedId": {
             "$ref": "#/components/schemas/NamedUserIdObject"
           },
           "#DEPRECATED": "Use partitionSelections",
