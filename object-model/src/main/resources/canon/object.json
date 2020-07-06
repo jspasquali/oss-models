@@ -166,7 +166,7 @@
         "summary": "Fetch the given object.",
         "operationId": "fetchObject",
         "response": {
-          "required": true,
+          "required": false,
           "multiple": false,
           "schema": {
             "$ref": "#/components/schemas/StoredApplicationObject"
