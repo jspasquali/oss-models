@@ -14,6 +14,21 @@
 		"javaFacadePackage": "com.symphony.oss.models.object.canon.facade"
 	},
   "methods": {
+    "/test/mtCredential": {
+      "get": {
+        "summary": "Multi tenant credential for use with integration tests - DO NOT IMPLEMENT EXCEPT IN TESTS",
+        "operationId": "getObject",
+        "tags": [
+          "objects"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/authc.json#/components/schemas/PrincipalCredential"
+          }
+        }
+      }
+    },
     "/objects/{objectHash}": {
       "parameters": {
         "objectHash": {

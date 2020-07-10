@@ -36,6 +36,11 @@
        <version>0.7.2-SNAPSHOT</version>
        <artifactId>crypto-model</artifactId>
      </dependency>
+    <dependency>
+       <groupId>com.symphony.oss.models</groupId>
+       <version>0.7.2-SNAPSHOT</version>
+       <artifactId>authc-model</artifactId>
+     </dependency>
     
     <dependency>
       <groupId>com.symphony.oss.canon</groupId>
