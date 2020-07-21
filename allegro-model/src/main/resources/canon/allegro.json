@@ -146,6 +146,9 @@
           },
           "principalCredentialFile": {
             "type": "string"
+          },
+           "principalCredential": {
+				"$ref": "https://models.oss.symphony.com/authc.json#/components/schemas/PrincipalCredential"
           }
         }
       },
