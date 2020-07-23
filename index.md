@@ -3,7 +3,7 @@ nav_order: 1
 title: Home
 ---
 # OSS Models
-This repository contains the Canon (see [https://github.com/symphonyoss/canon](https://github.com/symphonyoss/canon)) schemas for Symphony open source models.
+This repository contains the Canon (see [https://github.com/SymphonyOSF/oss-canon](https://github.com/SymphonyOSF/oss-canon)) schemas for Symphony open source models.
 
 The following models exist:
 
