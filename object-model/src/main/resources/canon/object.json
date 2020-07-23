@@ -302,6 +302,23 @@
         }
       }
     },
+    "/feeds/{feedHash}": {
+      "parameters": {
+        "feedHash": {
+          "in": "path",
+          "description": "Hash of Feed",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a feed.",
+        "operationId": "deleteFeed"
+        }
+      },
+    
     "/feeds/{feedHash}/objects": {
       "parameters": {
         "feedHash": {
