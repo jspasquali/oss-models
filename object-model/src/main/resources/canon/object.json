@@ -793,7 +793,10 @@
           },
           "queueName": {
             "type": "string"
-          }
+          },
+          "expiryTime": {
+               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+            }
         }
       },
       "FeedSubscription": {
@@ -815,6 +818,26 @@
             "type": "string"
           }
         }
+      },
+       "FeedReadRecord": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "description": "A Feed Record which stores the date of the last feed message and TTL.",
+
+        "properties": {
+          "feedId": {
+            "$ref": "#/components/schemas/NamedUserIdObject"
+          },       
+          "purgeDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+          "readDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+          "queueName": {
+            "type": "string"
+          }
+		}
       },
       "PartitionSelection": {
         "type": "object",
@@ -857,7 +880,10 @@
             "items": {
             "$ref": "#/components/schemas/UserPermissionsRequest"
             }
-          }
+          },
+           "expiryTime": {
+               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+            }
         }
       },
       "FeedObjectDelete": {
