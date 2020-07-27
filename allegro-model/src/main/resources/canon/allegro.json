@@ -234,7 +234,13 @@
           },
           "proxyUrl": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
-          }
+          },
+          "proxyUsername": {
+            "type": "string"
+          },
+          "ProxyPassword": {
+            "type": "string"
+          }         
         }
       }
 		}
