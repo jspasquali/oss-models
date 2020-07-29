@@ -113,8 +113,30 @@
           }
         }
       }
-    }
-  },
+    },
+  "/pod/certificate/create": {
+       "parameters": {
+      },
+	"post": {
+        "summary": "Create a pod certificate",
+        "operationId": "createPodCertificate",
+        "payload": {
+         "required": true,
+          "multiple": false,
+			"schema" :  {
+            "$ref": "#/components/schemas/PodIdAndUrl"
+         }
+        },
+        "response": {
+          "required": true,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PrincipalAuthcKey"
+          }
+        }   
+       }
+      }
+ },
 	"components": {
 		"schemas": {
       "ServiceInfo":  {
@@ -293,7 +315,21 @@
             "type": "string"
           }
         }
-      }
-    }
+      },
+        "PodIdAndUrl": {
+        "type": "object",
+        "facade": false,
+        "description": "A container for Pod related informations.",
+        "properties": {
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          },
+           "podUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+         	 }
+          }
+        }
+	 }
 	}
 }
+

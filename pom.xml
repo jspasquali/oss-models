@@ -69,7 +69,7 @@
 
     <oss.commons.version>0.2.0</oss.commons.version>
     <oss.canon.version>0.2.2</oss.canon.version>
-    <oss.fugue.version>0.2.4</oss.fugue.version>
+    <oss.fugue.version>0.2.7</oss.fugue.version>
     <canon.template.groupid>com.symphony.oss.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
     <canon.template.version>${oss.canon.version}</canon.template.version>
