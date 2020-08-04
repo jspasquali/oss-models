@@ -326,7 +326,10 @@
           },
            "podUrl": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
-         	 }
+         	 },
+           "podCertificate": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
+          }
           }
         }
 	 }
