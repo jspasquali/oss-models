@@ -21,7 +21,7 @@
   <parent>
     <groupId>com.symphony.oss.models</groupId>
     <artifactId>oss-models</artifactId>
-    <version>0.7.7-SNAPSHOT</version>
+    <version>0.7.8-SNAPSHOT</version>
   </parent>
   <artifactId>authz-model</artifactId>
   
@@ -30,17 +30,17 @@
     <dependency>
       <groupId>com.symphony.oss.models</groupId>
       <artifactId>core-model</artifactId>
-      <version>0.7.7-SNAPSHOT</version>
+      <version>0.7.8-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.symphony.oss.models</groupId>
       <artifactId>object-model</artifactId>
-      <version>0.7.7-SNAPSHOT</version>
+      <version>0.7.8-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.symphony.oss.models</groupId>
       <artifactId>authc-model</artifactId>
-      <version>0.7.7-SNAPSHOT</version>
+      <version>0.7.8-SNAPSHOT</version>
     </dependency>
 
     <dependency>
