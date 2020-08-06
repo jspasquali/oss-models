@@ -329,7 +329,10 @@
          	 },
            "podCertificate": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
-          }
+        	 },
+           "cleanup": {
+             "type": "boolean"
+          	}
           }
         }
 	 }
