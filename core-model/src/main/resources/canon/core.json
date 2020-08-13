@@ -94,6 +94,14 @@
           "javaExternalType": "Instant"
         }
       },
+      "ZonedDateTime": {
+        "description": "A nanosecond resolution timestamp, compatible with the Java8 definition of ZonedDateTime.",
+        "type": "string",
+        "x-canon-attributes": {
+          "javaExternalPackage": "java.time",
+          "javaExternalType": "ZonedDateTime"
+        }
+      },
       "BigDecimal": {
         "description": "A BigDecimal value.",
         "type": "string",

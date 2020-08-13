@@ -40,7 +40,12 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
 import org.apache.http.client.CookieStore;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
@@ -48,9 +53,14 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustAllStrategy;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.ProxyAuthenticationStrategy;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.SSLContexts;
@@ -196,15 +206,40 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     HttpClientBuilder httpBuilder = HttpClients.custom()
         .setDefaultCookieStore(cookieStore)
         .setConnectionManager(createConnectionManager(trustedCerts, sslContextBuilder));
+        
     
     if(getProxyUrl() != null)
     {
-      HttpHost proxy = new HttpHost(getProxyUrl().getHost(), getProxyUrl().getPort(), getProxyUrl().getProtocol());
       
-      httpBuilder.setProxy(proxy);
+      HttpHost proxy = new HttpHost(getProxyUrl().getHost(), getProxyUrl().getPort(), getProxyUrl().getProtocol());
+      DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+            
+      if(getProxyUsername() != null && getProxyPassword() != null )
+      {
+        CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        
+        credsProvider.setCredentials(
+                new AuthScope(getProxyUrl().getHost(), getProxyUrl().getPort()),
+                new UsernamePasswordCredentials(getProxyUsername(), getProxyPassword()));
+        
+        AuthCache authCache = new BasicAuthCache();
+         
+        BasicScheme basicAuth = new BasicScheme();
+        authCache.put(proxy, basicAuth);
+        HttpClientContext context = HttpClientContext.create();
+        context.setCredentialsProvider(credsProvider);
+        context.setAuthCache(authCache);
+        
+        httpBuilder.setDefaultCredentialsProvider(credsProvider);      
+        
+      }
+      
+      httpBuilder.setRoutePlanner(routePlanner);
+         // .setProxy(proxy);
     }
     
     CloseableHttpClient httpclient = httpBuilder
+        .setProxyAuthenticationStrategy(new ProxyAuthenticationStrategy())     
         .build();
 
     return httpclient;

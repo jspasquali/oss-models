@@ -14,6 +14,21 @@
 		"javaFacadePackage": "com.symphony.oss.models.object.canon.facade"
 	},
   "methods": {
+    "/test/mtCredential": {
+      "get": {
+        "summary": "Multi tenant credential for use with integration tests - DO NOT IMPLEMENT EXCEPT IN TESTS",
+        "operationId": "getObject",
+        "tags": [
+          "objects"
+        ],
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/authc.json#/components/schemas/PrincipalCredential"
+          }
+        }
+      }
+    },
     "/objects/{objectHash}": {
       "parameters": {
         "objectHash": {
@@ -166,7 +181,7 @@
         "summary": "Fetch the given object.",
         "operationId": "fetchObject",
         "response": {
-          "required": true,
+          "required": false,
           "multiple": false,
           "schema": {
             "$ref": "#/components/schemas/StoredApplicationObject"
@@ -197,6 +212,46 @@
         }
       }
     },
+    "/partitions/{partitionHash}/users": {
+      "parameters": {
+        "partitionHash": {
+          "in": "path",
+          "description": "Partition Key Value",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        },
+       "limit": {
+          "in": "query",
+          "description": "How many items to return at one time (max 100)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "after": {
+          "in": "query",
+          "description": "after cursor from a previous query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        } 
+      },
+   "get": {
+        "summary": "List the contents of a partition",
+        "operationId": "readSequence",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/PageOfUserPermissions"
+          }
+        }
+      }
+    },
+    
     "/partitions/upsert": {
       "parameters": {
       },
@@ -247,6 +302,23 @@
         }
       }
     },
+    "/feeds/{feedHash}": {
+      "parameters": {
+        "feedHash": {
+          "in": "path",
+          "description": "Hash of Feed",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a feed.",
+        "operationId": "deleteFeed"
+        }
+      },
+    
     "/feeds/{feedHash}/objects": {
       "parameters": {
         "feedHash": {
@@ -593,7 +665,27 @@
           }
         }
       },
-      
+      "PageOfUserPermissions":  {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "properties": {
+          "pagination": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Pagination"
+          },
+          "data": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/UserPermissionsRequest"
+            }
+          }
+        }
+      },    
       
       "Permission": {
         "type": "string",
@@ -701,7 +793,10 @@
           },
           "queueName": {
             "type": "string"
-          }
+          },
+          "expiryTime": {
+               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+            }
         }
       },
       "FeedSubscription": {
@@ -723,6 +818,26 @@
             "type": "string"
           }
         }
+      },
+       "FeedReadRecord": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",
+        "description": "A Feed Record which stores the date of the last feed message and TTL.",
+
+        "properties": {
+          "feedId": {
+            "$ref": "#/components/schemas/NamedUserIdObject"
+          },       
+          "purgeDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+          "readDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+          "queueName": {
+            "type": "string"
+          }
+		}
       },
       "PartitionSelection": {
         "type": "object",
@@ -765,7 +880,10 @@
             "items": {
             "$ref": "#/components/schemas/UserPermissionsRequest"
             }
-          }
+          },
+           "expiryTime": {
+               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+            }
         }
       },
       "FeedObjectDelete": {

@@ -27,7 +27,7 @@
 
   <groupId>com.symphony.oss.models</groupId>
   <artifactId>oss-models</artifactId>
-  <version>0.7.1-SNAPSHOT</version>
+  <version>0.7.11-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <url>https://github.com/SymphonyOSF/oss-models</url>
@@ -66,11 +66,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>  
-    
+
     <oss.commons.version>0.2.0</oss.commons.version>
-    <oss.canon.version>0.2.0</oss.canon.version>
-    <oss.fugue.version>0.2.0</oss.fugue.version>
-    
+    <oss.canon.version>0.2.2</oss.canon.version>
+    <oss.fugue.version>0.2.7</oss.fugue.version>
     <canon.template.groupid>com.symphony.oss.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
     <canon.template.version>${oss.canon.version}</canon.template.version>
@@ -206,6 +205,10 @@
                 <property>
                  <name>https://models.oss.symphony.com/core.json</name>
                  <value>core-model/src/main/resources/canon/core.json</value>
+                </property>
+                <property>
+                 <name>https://models.oss.symphony.com/authc.json</name>
+                 <value>authc-model/src/main/resources/canon/authc.json</value>
                 </property>
                 <property>
                  <name>https://models.oss.symphony.com/object.json</name>
