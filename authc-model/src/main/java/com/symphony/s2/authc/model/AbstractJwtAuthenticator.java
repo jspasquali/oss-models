@@ -57,7 +57,10 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
   private static final Logger log_ = LoggerFactory.getLogger(AbstractJwtAuthenticator.class);
   
   /** The issuer for API Gateway */
-  private static final String                   CLAIM_API_GATEWAY_ISSUER = "symphony.com/api-gateway";
+  private static final String                  CLAIM_API_GATEWAY_ISSUER = "symphony.com/api-gateway";
+  
+  /** A claim which only the common JWT has */
+  private static final Object                  COMMON_JWT_CLAIM         = "ext_pod_id";
 
   private static final InvalidPodPublicKey     INVALID_POD              = new InvalidPodPublicKey();
   private static final Map<Integer, PublicKey> podKeyMap_               = new HashMap<>();
@@ -183,7 +186,7 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     if(CLAIM_API_GATEWAY_ISSUER.equals(token.getBody().getIssuer()))
       return SignatureAlgorithm.HS512;
     
-    if(token.getBody().get("policy_id") != null)
+    if(token.getBody().get(COMMON_JWT_CLAIM) != null)
       return SignatureAlgorithm.RS256;
     
     return SignatureAlgorithm.RS512;
@@ -201,7 +204,7 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
           // An API Gateway token
           throw new NotAuthenticatedException("Invalid JWT token (legacy API Gateway unsupported)");
         }
-        else if(claims.get("policy_id") != null)
+        else if(claims.get(COMMON_JWT_CLAIM) != null)
         {
           // A new common JWT
           
