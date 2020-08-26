@@ -26,6 +26,7 @@ import com.google.common.util.concurrent.UncheckedExecutionException;
 import com.symphony.oss.canon.runtime.exception.CanonException;
 import com.symphony.oss.canon.runtime.exception.NotAuthenticatedException;
 import com.symphony.oss.canon.runtime.exception.PermissionDeniedException;
+import com.symphony.oss.canon.runtime.exception.ServerErrorException;
 import com.symphony.oss.canon.runtime.http.IRequestAuthenticator;
 import com.symphony.oss.canon.runtime.http.IRequestContext;
 import com.symphony.oss.canon.runtime.jjwt.JwtBase;
@@ -176,7 +177,7 @@ public abstract class AbstractJwtAuthenticator extends JwtBase implements IReque
     }
     catch(RuntimeException e)
     {
-      throw new NotAuthenticatedException("Invalid JWT token");
+      throw new ServerErrorException("Unable to verify JWT token", e);
     }
     
   }
