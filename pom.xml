@@ -27,7 +27,7 @@
 
   <groupId>com.symphony.oss.models</groupId>
   <artifactId>oss-models</artifactId>
-  <version>0.7.11-SNAPSHOT</version>
+  <version>0.7.12-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <url>https://github.com/SymphonyOSF/oss-models</url>
