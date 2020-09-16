@@ -114,6 +114,19 @@
         }
       }
     },
+    "/support/keys": {
+      "get": {
+        "summary": "Fetch the public signing key to validate a JWT for the support portal for current environment.",
+        "operationId": "fetchSupportKey",
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PrincipalAuthcKey"
+          }
+        }
+      }
+    },
   "/pod/certificate/create": {
        "parameters": {
       },
@@ -184,7 +197,6 @@
         "facade": true,
         "builderFacade": true,
         "required": [
-          "podId",
           "encodedPublicKey"
         ],
         "properties": {

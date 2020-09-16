@@ -75,6 +75,12 @@ public class KvStore implements IKvStore
     kvTable_.store(kvItem, condition, trace);
   }
   
+  @Override
+  public void storeEntitlementMapping(IKvItem kvItem, List<KvCondition> kvConditions, ITraceContext trace)
+  {
+    kvTable_.storeEntitlementMapping(kvItem, kvConditions, trace);  
+  }
+  
   private <T extends IKvItem> T normalize(String json, Class<T> type)
   {
     IEntity entity = modelRegistry_.parseOne(new StringReader(json));
@@ -136,4 +142,5 @@ public class KvStore implements IKvStore
     
     return kvTable_.fetchPartitionObjects(partitionKey, scanForwards, limit, after, sortKeyPrefix, filterAttributes, stringConsumer, trace);
   }
+
 }

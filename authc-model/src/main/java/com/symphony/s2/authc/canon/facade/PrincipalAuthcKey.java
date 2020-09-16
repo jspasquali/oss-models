@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.canon.runtime.exception.NotAuthenticatedException;
+import com.symphony.oss.canon.runtime.exception.NotFoundException;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.fugue.kv.IKvPartitionKey;
@@ -132,9 +133,24 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
   public IKvPartitionKey getPartitionKey()
   {
     if(getUserId() == null)
+    {
+      if(getPodId() == null)
+      {
+        return getSupportPartitionKey();
+      }
       return getPartitionKeyFor(getPodId());
-    
+    }
     return getPartitionKeyFor(getUserId());
+  }
+  
+  /**
+   * Get the support Portal partition key for authentication keys for the given User.
+   * 
+   * @return The support Portal partition key for authentication keys for the given User.
+   */
+  public static KvPartitionKey getSupportPartitionKey()
+  {
+    return new KvPartitionKey("S#");
   }
   
   /**
@@ -261,6 +277,36 @@ public class PrincipalAuthcKey extends PrincipalAuthcKeyEntity implements IPrinc
       throw new NotAuthenticatedException("Unable to locate keyid " + keyId + " for user " + userId + " in pod " + userId.getPodId(), e);
     }
   }
+  
+  /**
+   * Fetch the support portal signing key 
+   * 
+   * @param kvStore The Authc service kv store.
+
+   * @param trace   A trace context.
+   * 
+   * @return The key, if it exists, or null.
+   * 
+   * @throws NotAuthenticatedException if the key cannot be found.
+   */
+  public static IPrincipalAuthcKey fetchSupportPublicKey(IKvStore kvStore, ITraceContext trace)
+  {    
+    log_.info("Fetch support key");
+    
+      try
+      {
+        IPrincipalAuthcKey key = fetchPublicKey(kvStore, getSupportPartitionKey(), null, trace);
+        log_.info("User key = " + key);
+        return key;
+      }
+      catch(NoSuchObjectException e)
+      {
+        log_.debug("Support Partition key not found ");
+        throw new NotFoundException("Support Partition key not found ");
+      }
+      
+  }
+   
 
   private static IPrincipalAuthcKey fetchPublicKey(IKvStore kvStore, KvPartitionKey partitionKey,
       KeyId keyId, ITraceContext trace) throws NoSuchObjectException

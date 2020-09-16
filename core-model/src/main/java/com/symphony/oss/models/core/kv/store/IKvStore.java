@@ -24,6 +24,7 @@
 package com.symphony.oss.models.core.kv.store;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -61,6 +62,15 @@ public interface IKvStore
    * @param trace       Trace context.
    */
   void store(IKvItem kvItem, KvCondition kvCondition, ITraceContext trace);
+  
+  /**
+   * Store the given item, provided the given condition is met.
+   * 
+   * @param kvItem       Item to be stored.
+   * @param kvConditions Conditions for the EntitlementMapping
+   * @param trace        Trace context.
+   */
+  void storeEntitlementMapping(IKvItem kvItem, List<KvCondition> kvConditions, ITraceContext trace);
 
   /**
    * Fetch an item given a partition key and sort key.

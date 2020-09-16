@@ -244,6 +244,139 @@
           }
         }
       }
+    },
+     
+    "/users/entitlements/{ownerId}/{userId}": {
+      "parameters": {
+         "ownerId": {
+          "in": "path",
+          "description": "User ID of the Entitlement Owner",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+             }
+          },
+         "userId": {
+          "in": "path",
+          "description": "User ID of the entitlement assignee",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+           }
+          },
+          "limit": {
+          "in": "query",
+          "description": "How many items to return at one time (max 100)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+           }
+          },
+          "after": {
+          "in": "query",
+          "description": "after cursor from a previous query",
+          "required": false,
+          "schema": {
+            "type": "string"
+           }
+          },
+          "scanForwards": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": false,
+          "schema": {
+            "type": "boolean"
+            }
+          }
+     },
+      "get": {
+       "summary": "Fetch entitlements for a user.",
+        "operationId": "fetchOwnedUserEntitlements",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/PageOfEntitlementMappingInfo"
+          }
+        }
+      },
+      "put": {
+        "summary": "Upsert the given entitlement mapping.",
+        "operationId": "putUserPMPEntitlementMapping",
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/EntitlementAssignment"
+          }
+        }
+      }
+    },    
+    "/pod/entitlements/{ownerId}/{podId}": {
+      "parameters": {
+         "ownerId": {
+          "in": "path",
+          "description": "User ID of the Entitlement Owner",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+           }
+          },
+          "podId": {
+          "in": "path",
+          "description": "Pod ID of the entitlement assignee",
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+           }
+          },
+          "limit": {
+          "in": "query",
+          "description": "How many items to return at one time (max 100)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+           }
+          },
+          "after": {
+          "in": "query",
+          "description": "after cursor from a previous query",
+          "required": false,
+          "schema": {
+            "type": "string"
+           }
+          },
+          "scanForwards": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": false,
+          "schema": {
+            "type": "boolean"
+            }
+          }
+     },
+      "get": {
+       "summary": "Fetch entitlements for a user.",
+        "operationId": "fetchOwnedPodEntitlements",
+        "response": {
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/PageOfEntitlementMappingInfo"
+          }
+        }
+      },
+       "put": {
+        "summary": "Upsert the given entitlement mapping.",
+        "operationId": "putUserPMPEntitlementMapping",
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "#/components/schemas/EntitlementAssignment"
+          }
+        }
+      }
     }
   },
 	"components": {
@@ -328,7 +461,11 @@
           },
           "effectiveDate": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
-          }
+          },
+	      "updatedBy": {
+	         "type": "string",
+	         "format": "email"
+	       }
         }
       },
       "UserEntitlementMapping": {
@@ -425,6 +562,73 @@
             "x-canon-cardinality": "LIST",
             "items": {
               "$ref": "#/components/schemas/PodEntitlementMapping"
+            }
+          }
+        }
+      },
+      "EntitlementAssignment": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "description": "Grants or denies the entitlement defined by hash",
+         "properties": {
+	          "entitlementHash": {
+	            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+	          },
+              "action":{
+                "$ref": "#/components/schemas/EntitlementAction"
+              }
+              
+          }
+        },
+        "EntitlementMappingInfo":{
+	        "type": "object",	
+	        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/SystemObject",	
+	        "facade":false,
+	        "builderFacade": false,
+	        "description": "An entitlement definition.",	
+	        "required": [
+	          "id"
+	        ],
+	        "properties": {
+	          "id": {
+	            "$ref": "#/components/schemas/EntitlementId"
+	          },
+	         "entitlementHash": {
+	            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+	          },
+	          "description": {
+	            "type": "string"
+	          },
+	          "action": {
+	            "$ref": "#/components/schemas/EntitlementAction"
+	          },
+	          "effectiveDate": {
+	            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+	          },
+	          "updatedBy": {
+	            "type": "string",
+	            "format": "email"
+	            }
+          }
+        },
+       "PageOfEntitlementMappingInfo":  {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "properties": {
+          "pagination": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Pagination"
+          },
+          "data": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/EntitlementMappingInfo"
             }
           }
         }
