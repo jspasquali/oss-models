@@ -46,6 +46,20 @@
         }
       }
     },
+    "/adminUI": {
+      "parameters": {
+      },
+      "get": {
+        "summary": "Fetch Javascript code for support Portal",
+        "operationId": "fetchPMPjs",
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/PlainText"
+          }
+        }
+      }
+     },
     "/users/{userId}/entitlements/has-all": {
       "parameters": {
         "userId": {
@@ -611,6 +625,17 @@
 	            "format": "email"
 	            }
           }
+        },
+        "PlainText":{
+	        "type": "object",		
+	        "facade":true,
+	        "builderFacade": false,
+	        "description": "A simple text",
+	        "properties": {
+	          "text": {
+	            "type": "string"
+	          }
+           }
         },
        "PageOfEntitlementMappingInfo":  {
         "type": "object",
