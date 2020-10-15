@@ -68,7 +68,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>  
 
     <oss.commons.version>0.2.1</oss.commons.version>
-    <oss.canon.version>0.3.2-SNAPSHOT</oss.canon.version>
+    <oss.canon.version>0.3.2</oss.canon.version>
     <oss.fugue.version>0.2.16</oss.fugue.version>
     <canon.template.groupid>com.symphony.oss.canon</canon.template.groupid>
     <canon.template.java>canon-template-java</canon.template.java>
