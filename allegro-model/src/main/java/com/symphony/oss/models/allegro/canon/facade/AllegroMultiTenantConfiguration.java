@@ -48,6 +48,8 @@ import com.symphony.oss.models.allegro.canon.AllegroModel;
 @SuppressWarnings("unused")
 public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigurationEntity implements IAllegroMultiTenantConfiguration
 {
+  final IAllegroMultiTenantConfiguration redacted_;
+  
   /**
    * Constructor from builder.
    * 
@@ -56,6 +58,7 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(AbstractAllegroMultiTenantConfigurationBuilder<?,?> builder)
   {
     super(builder);
+    redacted_ = initRedacted();
   }
   
   /**
@@ -67,6 +70,7 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    redacted_ = initRedacted();
   }
   
   /**
@@ -78,6 +82,7 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    redacted_ = initRedacted();
   }
    
   /**
@@ -88,6 +93,24 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(IAllegroMultiTenantConfiguration other)
   {
     super(other);
+    redacted_ = other.getRedacted();
+  }
+  
+  private IAllegroMultiTenantConfiguration initRedacted()
+  {
+    AllegroMultiTenantConfiguration.Builder builder = null;
+    
+    if(getApiConnectionSettings() != null && getApiConnectionSettings() != getApiConnectionSettings().getRedacted())
+    {
+      builder = new AllegroMultiTenantConfiguration.Builder(this);
+      
+      builder.withApiConnectionSettings(getApiConnectionSettings().getRedacted());
+    }
+    
+    if(builder == null)
+      return this;
+    
+    return builder.build();
   }
   
   /**
@@ -107,6 +130,12 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
     {
       super(type, initial);
     }
+  }
+  
+  @Override
+  public IAllegroMultiTenantConfiguration getRedacted()
+  {
+    return redacted_;
   }
 }
 /*----------------------------------------------------------------------------------------------------

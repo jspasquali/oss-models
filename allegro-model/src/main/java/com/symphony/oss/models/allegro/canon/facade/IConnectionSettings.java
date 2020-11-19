@@ -53,6 +53,15 @@ public interface IConnectionSettings
   CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore);
 
   CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore, SSLContextBuilder sslContextBuilder);
+
+  /**
+   * Return a copy of this object with any passwords redacted.
+   * 
+   * The returned object can safely be logged.
+   * 
+   * @return a copy of this object with any passwords redacted.
+   */
+  IConnectionSettings getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

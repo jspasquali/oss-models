@@ -80,7 +80,10 @@ import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 @Immutable
 public class ConnectionSettings extends ConnectionSettingsEntity implements IConnectionSettings
 {
-  final TrustStrategy                    trustStrategy_;
+  static final String       REDACTED = "**REDACTED**";
+
+  final TrustStrategy       trustStrategy_;
+  final IConnectionSettings redacted_;
   
   /**
    * Constructor from builder.
@@ -92,6 +95,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(builder);
     
     trustStrategy_ = initTrustStrategy();
+    redacted_ = initRedacted();
   }
   
   private TrustStrategy initTrustStrategy()
@@ -110,6 +114,20 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     
     return null;
   }
+  
+  private IConnectionSettings initRedacted()
+  {
+    if(getProxyPassword() == null || REDACTED.equals(getProxyPassword()))
+    {
+      return this;
+    }
+    else
+    {
+      return new ConnectionSettings.Builder(this)
+          .withProxyPassword(REDACTED)
+          .build();
+    }
+  }
 
   /**
    * Constructor from serialised form.
@@ -122,6 +140,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(jsonObject, modelRegistry);
     
     trustStrategy_ = initTrustStrategy();
+    redacted_ = initRedacted();
   }
   
   /**
@@ -135,6 +154,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(mutableJsonObject, modelRegistry);
     
     trustStrategy_ = initTrustStrategy();
+    redacted_ = initRedacted();
   }
    
   /**
@@ -147,6 +167,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(other);
     
     trustStrategy_ = other.getTrustStrategy();
+    redacted_ = other.getRedacted();
   }
   
   /**
@@ -171,6 +192,12 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
       if(_maxHttpConnections_ == null)
         _maxHttpConnections_ = 200;
     }
+  }
+  
+  @Override
+  public IConnectionSettings getRedacted()
+  {
+    return redacted_;
   }
   
   @Override

@@ -50,6 +50,8 @@ import com.symphony.oss.models.allegro.canon.AllegroModel;
 @SuppressWarnings("unused")
 public class AllegroConfiguration extends AllegroConfigurationEntity implements IAllegroConfiguration
 {
+  final IAllegroConfiguration redacted_;
+  
   /**
    * Constructor from builder.
    * 
@@ -58,6 +60,7 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(AbstractAllegroConfigurationBuilder<?,?> builder)
   {
     super(builder);
+    redacted_ = initRedacted();
   }
   
   /**
@@ -69,6 +72,7 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
+    redacted_ = initRedacted();
   }
   
   /**
@@ -80,6 +84,7 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
+    redacted_ = initRedacted();
   }
    
   /**
@@ -90,6 +95,72 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(IAllegroConfiguration other)
   {
     super(other);
+    redacted_ = other.getRedacted();
+  }
+  
+  private IAllegroConfiguration initRedacted()
+  {
+    AllegroConfiguration.Builder builder = null;
+    
+    if(getApiConnectionSettings() != null && getApiConnectionSettings() != getApiConnectionSettings().getRedacted())
+    {
+      builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withApiConnectionSettings(getApiConnectionSettings().getRedacted());
+    }
+    
+    if(getPodConnectionSettings() != null && getPodConnectionSettings() != getPodConnectionSettings().getRedacted())
+    {
+      if(builder == null)
+        builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withPodConnectionSettings(getPodConnectionSettings().getRedacted());
+    }
+    
+    if(getKeyManagerConnectionSettings() != null && getKeyManagerConnectionSettings() != getKeyManagerConnectionSettings().getRedacted())
+    {
+      if(builder == null)
+        builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withKeyManagerConnectionSettings(getKeyManagerConnectionSettings().getRedacted());
+    }
+    
+    if(getCertSessionAuthConnectionSettings() != null && getCertSessionAuthConnectionSettings() != getCertSessionAuthConnectionSettings().getRedacted())
+    {
+      if(builder == null)
+        builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withCertSessionAuthConnectionSettings(getCertSessionAuthConnectionSettings().getRedacted());
+    }
+    
+    if(getCertKeyAuthConnectionSettings() != null && getCertKeyAuthConnectionSettings() != getCertKeyAuthConnectionSettings().getRedacted())
+    {
+      if(builder == null)
+        builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withCertKeyAuthConnectionSettings(getCertKeyAuthConnectionSettings().getRedacted());
+    }
+    
+    if(getAuthCertFilePassword() != null && !ConnectionSettings.REDACTED.equals(getAuthCertFilePassword()))
+    {
+      if(builder == null)
+        builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withAuthCertFilePassword(ConnectionSettings.REDACTED);
+    }
+    
+    if(getAuthCertPrivateKey() != null && !ConnectionSettings.REDACTED.equals(getAuthCertPrivateKey().asString()))
+    {
+      if(builder == null)
+        builder = new AllegroConfiguration.Builder(this);
+      
+      builder.withAuthCertPrivateKey(ConnectionSettings.REDACTED);
+    }
+    
+    if(builder == null)
+      return this;
+    
+    return builder.build();
   }
   
   /**
@@ -109,6 +180,12 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
     {
       super(type, initial);
     }
+  }
+  
+  @Override
+  public IAllegroConfiguration getRedacted()
+  {
+    return redacted_;
   }
 }
 /*----------------------------------------------------------------------------------------------------
