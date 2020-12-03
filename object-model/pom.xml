@@ -21,24 +21,24 @@
   <parent>
     <groupId>com.symphony.oss.models</groupId>
     <artifactId>oss-models</artifactId>
-    <version>0.7.20-SNAPSHOT</version>
+    <version>0.7.21-SNAPSHOT</version>
   </parent>
   <artifactId>object-model</artifactId>
 
   <dependencies>
     <dependency>
        <groupId>com.symphony.oss.models</groupId>
-       <version>0.7.20-SNAPSHOT</version>
+       <version>0.7.21-SNAPSHOT</version>
        <artifactId>core-model</artifactId>
      </dependency>
     <dependency>
        <groupId>com.symphony.oss.models</groupId>
-       <version>0.7.20-SNAPSHOT</version>
+       <version>0.7.21-SNAPSHOT</version>
        <artifactId>crypto-model</artifactId>
      </dependency>
     <dependency>
        <groupId>com.symphony.oss.models</groupId>
-       <version>0.7.20-SNAPSHOT</version>
+       <version>0.7.21-SNAPSHOT</version>
        <artifactId>authc-model</artifactId>
      </dependency>
     
