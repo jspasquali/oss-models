@@ -385,6 +385,14 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
           }
         },
+        "X-Symphony-ExternalPodId": {
+          "in": "header",
+          "description": "The symphony external pod ID added by API Gateway",
+          "required": false,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          }
+        },
         "limit": {
           "in": "query",
           "description": "How many items to return at one time (max 100)",
