@@ -173,6 +173,9 @@
           "internalPodId": {
             "$ref": "#/components/schemas/PodId"
           },
+          "threadId": {
+            "$ref": "#/components/schemas/ThreadId"
+          },
           "createdDate": {
             "$ref": "#/components/schemas/Instant"
           },
