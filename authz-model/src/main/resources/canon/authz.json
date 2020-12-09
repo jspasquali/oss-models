@@ -55,7 +55,21 @@
         "response": {
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/PlainText"
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
+          }
+        }
+      }
+     },
+     "/version": {
+      "parameters": {
+      },
+      "get": {
+        "summary": "Fetch build version of the service",
+        "operationId": "fetchVersion",
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
           }
         }
       }
@@ -625,17 +639,6 @@
 	            "format": "email"
 	            }
           }
-        },
-        "PlainText":{
-	        "type": "object",		
-	        "facade":true,
-	        "builderFacade": false,
-	        "description": "A simple text",
-	        "properties": {
-	          "text": {
-	            "type": "string"
-	          }
-           }
         },
        "PageOfEntitlementMappingInfo":  {
         "type": "object",

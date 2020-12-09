@@ -86,6 +86,17 @@
           "ALL"
         ]
       },
+      "PlainText":{
+	    "type": "object",		
+	     "facade":true,
+	     "builderFacade": false,
+	     "description": "A simple text",
+	     "properties": {
+	      "text": {
+	         "type": "string"
+	       }
+        }
+      },
       "Instant": {
         "description": "A nanosecond resolution timestamp, compatible with the Java8 definition of Instant.",
         "type": "string",

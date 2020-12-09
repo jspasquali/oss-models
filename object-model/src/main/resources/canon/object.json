@@ -437,7 +437,21 @@
           }
         }
       }
-    }
+    },
+    "/version": {
+      "parameters": {
+      },
+      "get": {
+        "summary": "Fetch build version of the service",
+        "operationId": "fetchVersion",
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
+          }
+        }
+      }
+     }
   },
 	"components": {
 		"schemas": {

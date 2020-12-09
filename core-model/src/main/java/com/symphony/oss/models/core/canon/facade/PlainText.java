@@ -23,23 +23,16 @@
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.s2.authz.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-
-import com.symphony.oss.canon.runtime.IEntity;
-import com.symphony.oss.canon.runtime.IModelRegistry;
-
-
-import com.symphony.s2.authz.canon.PlainTextEntity;
-import com.symphony.s2.authz.canon.IPlainTextEntity;
-import com.symphony.s2.authz.canon.AuthzModel;
+import com.symphony.oss.commons.immutable.ImmutableByteArray;
+import com.symphony.oss.models.core.canon.PlainTextEntity;
+import com.symphony.oss.models.core.canon.PlainTextEntity.AbstractPlainTextBuilder;
 
 /**
  * Facade for Object ObjectSchema(PlainText)

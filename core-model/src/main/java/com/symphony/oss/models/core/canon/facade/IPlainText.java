@@ -23,11 +23,11 @@
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.s2.authz.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.s2.authz.canon.IPlainTextEntity;
+import com.symphony.oss.models.core.canon.IPlainTextEntity;
 
 /**
  * Facade for Object ObjectSchema(PlainText)
