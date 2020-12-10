@@ -140,7 +140,7 @@ public class KvStore implements IKvStore
       }
     };
     
-    return kvTable_.fetchPartitionObjects(partitionKey, scanForwards, limit, after, sortKeyPrefix, filterAttributes, stringConsumer, false, trace);
+    return kvTable_.fetchPartitionObjects(partitionKey, scanForwards, limit, after, sortKeyPrefix, filterAttributes, stringConsumer, trace);
   }
 
 }
