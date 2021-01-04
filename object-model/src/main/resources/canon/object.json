@@ -343,6 +343,31 @@
           }
         }
       }
+      },      
+     "/feeds/endpoint": {
+      "parameters": {
+      },
+      "post": {
+        "summary": "Gets endpoint path and refreshes feed read records",
+        "operationId": "getEndpoint",
+        "tags": [
+          "feeds"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+         },
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/FeedsEndpoint"
+          }
+        }
+      }
       },
     
     "/feeds/{feedHash}/objects": {
@@ -371,6 +396,71 @@
           "multiple": true,
           "schema": {
             "$ref": "#/components/schemas/FeedObject"
+          }
+        }
+      }
+    },
+    "/feeds/fetch/aws/us-east-1": {
+      "parameters": {
+        "Action": {
+          "in": "query",
+          "description": "Receive/Delete/ChangeVisibility of feed records",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "MaxNumberOfMessages": {
+          "in": "query",
+          "description": "N of message to return (max 10)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "WaitTimeSeconds": {
+          "in": "query",
+          "description": "How much time the client can wait for the response",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "VisibilityTimeout": {
+          "in": "query",
+          "description": "How much the visibility should be extended (in seconds)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "feedHash": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "ReceiptHandle": {
+          "in": "query",
+          "description": "Hash value of the original message, used to delete it from the queue",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      },
+      "post": {
+        "summary": "List the contents of a partition",
+        "operationId": "readSQS",
+          "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
           }
         }
       }
@@ -1065,6 +1155,22 @@
           },
            "endPoint": {
             "type": "string"
+          }                 
+      }
+      },      
+     "FeedsEndpoint": {
+          "type": "object",
+          "facade": false,
+        "description": "Record needed to enable direct fetch from SQS",
+        "properties": {
+          "directFetch": {
+            "type": "boolean"
+          },
+           "endPoint": {
+            "type": "string"
+          },
+           "expirationDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           }                 
       }
       }
