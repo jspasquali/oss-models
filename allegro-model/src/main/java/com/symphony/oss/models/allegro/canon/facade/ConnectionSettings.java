@@ -71,7 +71,7 @@ import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.models.allegro.canon.ConnectionSettingsEntity;
 import com.symphony.oss.models.allegro.canon.IConnectionSettingsEntity;
-import com.symphony.oss.models.crypto.cipher.ICipherSuite;
+import com.symphony.oss.models.crypto.cipher.CipherSuiteUtils;
 
 /**
  * Facade for Object ObjectSchema(ConnectionSettings)
@@ -207,13 +207,13 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
   }
 
   @Override
-  public CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore)
+  public CloseableHttpClient createHttpClient(CookieStore cookieStore)
   {
-    return createHttpClient(cipherSuite, cookieStore, null);
+    return createHttpClient(cookieStore, null);
   }
   
   @Override
-  public CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore, @Nullable SSLContextBuilder sslContextBuilder)
+  public CloseableHttpClient createHttpClient(CookieStore cookieStore, @Nullable SSLContextBuilder sslContextBuilder)
   {
     
     List<X509Certificate> trustedCerts = new ArrayList<>(getTrustedCertResources() == null ? 0 : getTrustedCertResources().size() 
@@ -226,7 +226,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     {
       for(String resourceName : getTrustedCertResources())
       {
-        trustedCerts.add(cipherSuite.certificateFromPemResource(resourceName));
+        trustedCerts.add(CipherSuiteUtils.certificateFromPemResource(getClass(), resourceName));
       }
     }
     

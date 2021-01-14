@@ -33,7 +33,6 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 
 import com.symphony.oss.models.allegro.canon.IConnectionSettingsEntity;
-import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 
 /**
  * Facade for Object ObjectSchema(ConnectionSettings)
@@ -50,9 +49,9 @@ public interface IConnectionSettings
    */
   TrustStrategy getTrustStrategy();
 
-  CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore);
+  CloseableHttpClient createHttpClient(CookieStore cookieStore);
 
-  CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore, SSLContextBuilder sslContextBuilder);
+  CloseableHttpClient createHttpClient(CookieStore cookieStore, SSLContextBuilder sslContextBuilder);
 
   /**
    * Return a copy of this object with any passwords redacted.
