@@ -32,6 +32,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.models.allegro.canon.IConnectionSettingsEntity;
 
 /**
@@ -60,7 +61,7 @@ public interface IConnectionSettings
    * 
    * @return a copy of this object with any passwords redacted.
    */
-  IConnectionSettings getRedacted();
+  ImmutableJsonObject getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

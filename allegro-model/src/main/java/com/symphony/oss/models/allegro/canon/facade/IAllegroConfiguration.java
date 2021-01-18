@@ -37,14 +37,6 @@ import com.symphony.oss.models.allegro.canon.IAllegroConfigurationEntity;
 public interface IAllegroConfiguration
   extends IAllegroBaseConfiguration, IAllegroConfigurationEntity
 {
-  /**
-   * Return a copy of this object with any passwords redacted.
-   * 
-   * The returned object can safely be logged.
-   * 
-   * @return a copy of this object with any passwords redacted.
-   */
-  IAllegroConfiguration getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

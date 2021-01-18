@@ -27,31 +27,19 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-
-import com.symphony.oss.canon.runtime.IEntity;
-import com.symphony.oss.canon.runtime.IModelRegistry;
-
-import java.net.URL;
-import com.symphony.oss.models.core.canon.facade.UrlBuilder;
-
 import com.symphony.oss.models.allegro.canon.AllegroConfigurationEntity;
 import com.symphony.oss.models.allegro.canon.IAllegroConfigurationEntity;
-import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**
  * Facade for Object ObjectSchema(AllegroConfiguration)
  * Generated from ObjectSchema(AllegroConfiguration) at #/components/schemas/AllegroConfiguration
  */
 @Immutable
-@SuppressWarnings("unused")
 public class AllegroConfiguration extends AllegroConfigurationEntity implements IAllegroConfiguration
 {
-  final IAllegroConfiguration redacted_;
-  
   /**
    * Constructor from builder.
    * 
@@ -60,7 +48,6 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(AbstractAllegroConfigurationBuilder<?,?> builder)
   {
     super(builder);
-    redacted_ = initRedacted();
   }
   
   /**
@@ -72,7 +59,6 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
-    redacted_ = initRedacted();
   }
   
   /**
@@ -84,7 +70,6 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
-    redacted_ = initRedacted();
   }
    
   /**
@@ -95,72 +80,6 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
   public AllegroConfiguration(IAllegroConfiguration other)
   {
     super(other);
-    redacted_ = other.getRedacted();
-  }
-  
-  private IAllegroConfiguration initRedacted()
-  {
-    AllegroConfiguration.Builder builder = null;
-    
-    if(getApiConnectionSettings() != null && getApiConnectionSettings() != getApiConnectionSettings().getRedacted())
-    {
-      builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withApiConnectionSettings(getApiConnectionSettings().getRedacted());
-    }
-    
-    if(getPodConnectionSettings() != null && getPodConnectionSettings() != getPodConnectionSettings().getRedacted())
-    {
-      if(builder == null)
-        builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withPodConnectionSettings(getPodConnectionSettings().getRedacted());
-    }
-    
-    if(getKeyManagerConnectionSettings() != null && getKeyManagerConnectionSettings() != getKeyManagerConnectionSettings().getRedacted())
-    {
-      if(builder == null)
-        builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withKeyManagerConnectionSettings(getKeyManagerConnectionSettings().getRedacted());
-    }
-    
-    if(getCertSessionAuthConnectionSettings() != null && getCertSessionAuthConnectionSettings() != getCertSessionAuthConnectionSettings().getRedacted())
-    {
-      if(builder == null)
-        builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withCertSessionAuthConnectionSettings(getCertSessionAuthConnectionSettings().getRedacted());
-    }
-    
-    if(getCertKeyAuthConnectionSettings() != null && getCertKeyAuthConnectionSettings() != getCertKeyAuthConnectionSettings().getRedacted())
-    {
-      if(builder == null)
-        builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withCertKeyAuthConnectionSettings(getCertKeyAuthConnectionSettings().getRedacted());
-    }
-    
-    if(getAuthCertFilePassword() != null && !ConnectionSettings.REDACTED.equals(getAuthCertFilePassword()))
-    {
-      if(builder == null)
-        builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withAuthCertFilePassword(ConnectionSettings.REDACTED);
-    }
-    
-    if(getAuthCertPrivateKey() != null && !ConnectionSettings.REDACTED.equals(getAuthCertPrivateKey().asString()))
-    {
-      if(builder == null)
-        builder = new AllegroConfiguration.Builder(this);
-      
-      builder.withAuthCertPrivateKey(ConnectionSettings.REDACTED);
-    }
-    
-    if(builder == null)
-      return this;
-    
-    return builder.build();
   }
   
   /**
@@ -181,12 +100,53 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
       super(type, initial);
     }
   }
-  
+
   @Override
-  public IAllegroConfiguration getRedacted()
+  protected void redactJsonObject(MutableJsonObject jsonObject)
   {
-    return redacted_;
+    super.redactJsonObject(jsonObject);
+    
+    if(getDefaultConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("defaultConnectionSettings", getDefaultConnectionSettings().getRedacted());
+    }
+    
+    if(getPodConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("podConnectionSettings", getPodConnectionSettings().getRedacted());
+    }
+    
+    if(getKeyManagerConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("keyManagerConnectionSettings", getKeyManagerConnectionSettings().getRedacted());
+    }
+    
+    if(getCertSessionAuthConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("certSessionAuthConnectionSettings", getCertSessionAuthConnectionSettings().getRedacted());
+    }
+    
+    if(getCertKeyAuthConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("certKeyAuthConnectionSettings", getCertKeyAuthConnectionSettings().getRedacted());
+    }
+    
+    if(getAuthCertFilePassword() != null)
+    {
+      jsonObject.addIfNotNull("authCertFilePassword", ConnectionSettings.REDACTED);
+    }
+    
+    if(getAuthCertPrivateKey() != null)
+    {
+      jsonObject.addIfNotNull("authCertPrivateKey", ConnectionSettings.REDACTED);
+    }
+    
+    if(getRsaPemCredential() != null)
+    {
+      jsonObject.addIfNotNull("rsaPemCredential", ConnectionSettings.REDACTED);
+    }
   }
+  
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

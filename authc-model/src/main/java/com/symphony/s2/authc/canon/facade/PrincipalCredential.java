@@ -35,7 +35,9 @@ import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.fugue.kv.IKvPartitionKey;
 import com.symphony.oss.fugue.kv.IKvSortKey;
 import com.symphony.oss.fugue.kv.KvSortKey;
+import com.symphony.oss.models.crypto.canon.PemPrivateKey;
 import com.symphony.oss.models.crypto.cipher.CipherSuite;
+import com.symphony.s2.authc.canon.IPrincipalCredentialEntity;
 import com.symphony.s2.authc.canon.PrincipalCredentialEntity;
 
 /**
@@ -47,7 +49,11 @@ import com.symphony.s2.authc.canon.PrincipalCredentialEntity;
 @Immutable
 public class PrincipalCredential extends PrincipalCredentialEntity implements IPrincipalCredential
 {
-  private final PrivateKey privateKey_;
+  static final String REDACTED = "**REDACTED**";
+  static final String ENCODED_PRIVATE_KEY = "encodedPrivateKey";
+  
+  private final PrivateKey           privateKey_;
+  private ImmutableJsonObject redacted_;
 
   /**
    * Constructor from builder.
@@ -118,6 +124,29 @@ public class PrincipalCredential extends PrincipalCredentialEntity implements IP
       return PrincipalAuthcKey.getPartitionKeyFor(getPodId());
     
     return PrincipalAuthcKey.getPartitionKeyFor(getUserId());
+  }
+  
+  @Override
+  public synchronized ImmutableJsonObject getRedacted()
+  {
+    if(redacted_ == null)
+    {
+      MutableJsonObject jsonObject = getJsonObject().mutify();
+      
+      redactJsonObject(jsonObject);
+      
+      redacted_ = jsonObject.immutify();
+    }
+    
+    return redacted_;
+  }
+
+  protected void redactJsonObject(MutableJsonObject jsonObject)
+  {
+    if(getEncodedPrivateKey() != null)
+    {
+        jsonObject.addIfNotNull(ENCODED_PRIVATE_KEY, REDACTED);
+    }
   }
 }
 /*----------------------------------------------------------------------------------------------------

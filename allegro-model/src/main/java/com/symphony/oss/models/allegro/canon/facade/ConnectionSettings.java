@@ -81,9 +81,11 @@ import com.symphony.oss.models.crypto.cipher.CipherSuiteUtils;
 public class ConnectionSettings extends ConnectionSettingsEntity implements IConnectionSettings
 {
   static final String       REDACTED = "**REDACTED**";
+  static final String       PROXY_PASSWORD = "proxyPassword";
 
   final TrustStrategy       trustStrategy_;
-  final IConnectionSettings redacted_;
+
+  private ImmutableJsonObject redacted_;
   
   /**
    * Constructor from builder.
@@ -95,7 +97,6 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(builder);
     
     trustStrategy_ = initTrustStrategy();
-    redacted_ = initRedacted();
   }
   
   private TrustStrategy initTrustStrategy()
@@ -114,20 +115,6 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     
     return null;
   }
-  
-  private IConnectionSettings initRedacted()
-  {
-    if(getProxyPassword() == null || REDACTED.equals(getProxyPassword()))
-    {
-      return this;
-    }
-    else
-    {
-      return new ConnectionSettings.Builder(this)
-          .withProxyPassword(REDACTED)
-          .build();
-    }
-  }
 
   /**
    * Constructor from serialised form.
@@ -140,7 +127,6 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(jsonObject, modelRegistry);
     
     trustStrategy_ = initTrustStrategy();
-    redacted_ = initRedacted();
   }
   
   /**
@@ -154,7 +140,6 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(mutableJsonObject, modelRegistry);
     
     trustStrategy_ = initTrustStrategy();
-    redacted_ = initRedacted();
   }
    
   /**
@@ -195,9 +180,26 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
   }
   
   @Override
-  public IConnectionSettings getRedacted()
+  public synchronized ImmutableJsonObject getRedacted()
   {
+    if(redacted_ == null)
+    {
+      MutableJsonObject jsonObject = getJsonObject().mutify();
+      
+      redactJsonObject(jsonObject);
+      
+      redacted_ = jsonObject.immutify();
+    }
+    
     return redacted_;
+  }
+
+  protected void redactJsonObject(MutableJsonObject jsonObject)
+  {
+    if(getProxyPassword() != null)
+    {
+        jsonObject.addIfNotNull(PROXY_PASSWORD, REDACTED);
+    }
   }
   
   @Override

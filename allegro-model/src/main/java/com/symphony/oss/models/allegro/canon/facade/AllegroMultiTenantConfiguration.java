@@ -27,29 +27,22 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-
-import com.symphony.oss.canon.runtime.IEntity;
-import com.symphony.oss.canon.runtime.IModelRegistry;
-
-
 import com.symphony.oss.models.allegro.canon.AllegroMultiTenantConfigurationEntity;
 import com.symphony.oss.models.allegro.canon.IAllegroMultiTenantConfigurationEntity;
-import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**
  * Facade for Object ObjectSchema(AllegroMultiTenantConfiguration)
  * Generated from ObjectSchema(AllegroMultiTenantConfiguration) at #/components/schemas/AllegroMultiTenantConfiguration
+ * 
+ * @deprecated Use AllegroObjectStoreConfiguration
  */
 @Immutable
-@SuppressWarnings("unused")
+@Deprecated
 public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigurationEntity implements IAllegroMultiTenantConfiguration
 {
-  final IAllegroMultiTenantConfiguration redacted_;
-  
   /**
    * Constructor from builder.
    * 
@@ -58,7 +51,6 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(AbstractAllegroMultiTenantConfigurationBuilder<?,?> builder)
   {
     super(builder);
-    redacted_ = initRedacted();
   }
   
   /**
@@ -70,7 +62,6 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
-    redacted_ = initRedacted();
   }
   
   /**
@@ -82,7 +73,6 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
-    redacted_ = initRedacted();
   }
    
   /**
@@ -93,26 +83,8 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   public AllegroMultiTenantConfiguration(IAllegroMultiTenantConfiguration other)
   {
     super(other);
-    redacted_ = other.getRedacted();
   }
-  
-  private IAllegroMultiTenantConfiguration initRedacted()
-  {
-    AllegroMultiTenantConfiguration.Builder builder = null;
-    
-    if(getApiConnectionSettings() != null && getApiConnectionSettings() != getApiConnectionSettings().getRedacted())
-    {
-      builder = new AllegroMultiTenantConfiguration.Builder(this);
-      
-      builder.withApiConnectionSettings(getApiConnectionSettings().getRedacted());
-    }
-    
-    if(builder == null)
-      return this;
-    
-    return builder.build();
-  }
-  
+
   /**
    * Abstract builder for AllegroMultiTenantConfiguration. If there are sub-classes of this type then their builders sub-class this builder.
    *
@@ -133,9 +105,19 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   }
   
   @Override
-  public IAllegroMultiTenantConfiguration getRedacted()
+  protected void redactJsonObject(MutableJsonObject jsonObject)
   {
-    return redacted_;
+    super.redactJsonObject(jsonObject);
+    
+    if(getPrincipalCredential() != null)
+    {
+      jsonObject.addIfNotNull("principalCredential", getPrincipalCredential().getRedacted());
+    }
+    
+    if(getRsaPemCredential() != null)
+    {
+      jsonObject.addIfNotNull("rsaPemCredential", ConnectionSettings.REDACTED);
+    }
   }
 }
 /*----------------------------------------------------------------------------------------------------
