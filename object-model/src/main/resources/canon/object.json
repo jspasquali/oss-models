@@ -698,6 +698,30 @@
           }
         }
       },
+      "StoredApplicationRecord": {
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "builderFacade": true,
+        "description": "A stored application object in an external database.",
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/ApplicationObjectHeader"
+          },
+          "encryptedPayload": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
+          },
+          "cipherSuiteId": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
+          },
+          "threadId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "rotationId": {
+              "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          }
+        }
+      },
       "StoredApplicationObject": {
         "type": "object",
         "extends": "#/components/schemas/AbstractStoredApplicationObject",

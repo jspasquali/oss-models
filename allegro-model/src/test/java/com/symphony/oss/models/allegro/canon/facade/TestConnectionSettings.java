@@ -37,6 +37,18 @@ public class TestConnectionSettings
         .withProxyPassword("SUPER SECRET PROXY PASSWORD")
         .build();
     
+    System.out.println("Expect:{\n" + 
+        "  \"_type\":\"com.symphony.s2.model.allegro.ConnectionSettings\",\n" + 
+        "  \"_version\":\"1.0\",\n" + 
+        "  \"maxHttpConnections\":200,\n" + 
+        "  \"proxyPassword\":\"**REDACTED**\",\n" + 
+        "  \"proxyUrl\":\"https://proxy.url\",\n" + 
+        "  \"proxyUsername\":\"proxyUserame\",\n" + 
+        "  \"sslTrustStrategy\":\"TRUST_ALL_CERTS\",\n" + 
+        "  \"trustedCertResources\":[],\n" + 
+        "  \"trustedCerts\":[]\n" + 
+        "}\nReceived:" + connectionSettings.getRedacted().toString());
+    
     assertEquals("{\n" + 
         "  \"_type\":\"com.symphony.s2.model.allegro.ConnectionSettings\",\n" + 
         "  \"_version\":\"1.0\",\n" + 

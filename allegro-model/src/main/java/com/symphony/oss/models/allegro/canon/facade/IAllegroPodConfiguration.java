@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Symphony Communication Services, LLC.
+ * Copyright 2021 Symphony Communication Services, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +19,33 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-29 11:39:41 GMT
+ *  At                  2021-01-15 13:51:09 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.object.canon.facade;
+package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.object.canon.IAbstractStoredApplicationObject;
-import com.symphony.oss.models.object.canon.IStoredApplicationObjectEntity;
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
+import com.symphony.oss.models.allegro.canon.IAllegroPodConfigurationEntity;
 
 /**
- * Facade for Object ObjectSchema(ObjectPayload)
- *
- * Base type for application objects in the object store.
- * Generated from ObjectSchema(ObjectPayload) at #/components/schemas/ObjectPayload
+ * Facade for Object ObjectSchema(AllegroPodConfiguration)
+ * Generated from ObjectSchema(AllegroPodConfiguration) at #/components/schemas/AllegroPodConfiguration
  */
 @Immutable
-public interface IStoredApplicationObject
-  extends IAbstractStoredApplicationObject, IStoredApplicationObjectEntity, IStoredApplicationRecord
+public interface IAllegroPodConfiguration
+  extends IAllegroPodConfigurationEntity
 {
+  /**
+   * Return a copy of this object's configuration with any passwords or credentials redacted.
+   * 
+   * The returned object can safely be logged.
+   * 
+   * @return a copy of this object's configuration with any passwords or credentials redacted.
+   */
+  ImmutableJsonObject getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl
