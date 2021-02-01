@@ -1127,6 +1127,7 @@
           "deactivateRoomPayload",
           "joinRoomPayload",
           "leaveRoomPayload",
+          "streamInvitationMaestroPayload",
           "memberModifiedPayload",
           "updateRoomPayload",
           "updateStreamPayload",
@@ -1236,6 +1237,27 @@
           "masterPodId": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "StreamInvitationMaestroPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "inviterId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "inviteeId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "streamId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "streamName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
           }
         }
       },
