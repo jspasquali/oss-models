@@ -20,22 +20,17 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import static org.junit.Assert.assertEquals;
 
-import java.security.KeyPair;
-
 import org.junit.Test;
 
 import com.symphony.oss.models.allegro.canon.SslTrustStrategy;
 import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.oss.models.core.canon.facade.PodId;
 import com.symphony.oss.models.core.canon.facade.UserId;
-import com.symphony.oss.models.crypto.cipher.CipherSuite;
 import com.symphony.oss.models.crypto.cipher.CipherSuiteUtils;
-import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 import com.symphony.s2.authc.canon.facade.NewPrincipalCredential;
-import com.symphony.s2.authc.canon.facade.PrincipalAuthcKey;
 
 @SuppressWarnings("javadoc")
-public class TestAllegroPodConfiguration
+public class TestAllegro2Configuration
 {
   private static String SELF_SIGNED_TEST_CERT = "-----BEGIN CERTIFICATE-----\n" + 
       "MIICpDCCAYwCCQCpYxaSYm0hzDANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDDAls\n" + 
@@ -85,7 +80,7 @@ public class TestAllegroPodConfiguration
   @Test
   public void testRedact()
   {
-    IAllegroPodConfiguration config = new AllegroPodConfiguration.Builder()
+    IAllegro2Configuration config = new Allegro2Configuration.Builder()
       .withPodUrl("https://pod.url")
       .withUserName("serviceAccountUserName")
       .withRsaPemCredentialFile("RsaPemCredentialFile")
@@ -95,7 +90,7 @@ public class TestAllegroPodConfiguration
       .build();
     
     assertEquals("{\n" + 
-        "  \"_type\":\"com.symphony.s2.model.allegro.AllegroPodConfiguration\",\n" + 
+        "  \"_type\":\"com.symphony.s2.model.allegro.Allegro2Configuration\",\n" + 
         "  \"_version\":\"1.0\",\n" + 
         "  \"podConnectionSettings\":{\n" + 
         "    \"_type\":\"com.symphony.s2.model.allegro.ConnectionSettings\",\n" + 
@@ -111,7 +106,7 @@ public class TestAllegroPodConfiguration
         "}\n",  config.getRedacted().toString());
     
     
-    config = new AllegroPodConfiguration.Builder()
+    config = new Allegro2Configuration.Builder()
         .withPodUrl("https://pod.url")
         .withUserName("serviceAccountUserName")
         .withAuthCertFile("AuthCertFile")
@@ -144,7 +139,7 @@ public class TestAllegroPodConfiguration
         .build();
           
       assertEquals("{\n" + 
-          "  \"_type\":\"com.symphony.s2.model.allegro.AllegroPodConfiguration\",\n" + 
+          "  \"_type\":\"com.symphony.s2.model.allegro.Allegro2Configuration\",\n" + 
           "  \"_version\":\"1.0\",\n" + 
           "  \"authCertFile\":\"AuthCertFile\",\n" + 
           "  \"authCertFilePassword\":\"**REDACTED**\",\n" + 
@@ -209,7 +204,7 @@ public class TestAllegroPodConfiguration
           .withUserId(podAndUserId)
           .build();
       
-      config = new AllegroPodConfiguration.Builder()
+      config = new Allegro2Configuration.Builder()
           .withPodUrl("https://pod.url")
           .withUserName("serviceAccountUserName")
           .withRsaPemCredential(CipherSuiteUtils.privateKeyToPem(newCredential.getPrivateKey()))
@@ -223,7 +218,7 @@ public class TestAllegroPodConfiguration
         
       assertEquals("**REDACTED**",  config.getRedacted().getRequiredString("rsaPemCredential"));
 
-      config = new AllegroPodConfiguration.Builder()
+      config = new Allegro2Configuration.Builder()
           .withPodUrl("https://pod.url")
           .withUserName("serviceAccountUserName")
           .withAuthCert(SELF_SIGNED_TEST_CERT)

@@ -110,78 +110,7 @@
           }
         }
       },
-      
-      
-      
-      
-      
-      
-      "#AllegroStorageConfiguration": {
-        "type": "object",
-        "facade": true,
-        "builderFacade": false,
-        "properties": {
-          "podConfiguration": {
-            "$ref": "#/components/schemas/AllegroPodConfiguration"
-          },
-          "defaultConnectionSettings": {
-            "$ref": "#/components/schemas/ConnectionSettings"
-          }
-        }
-      },
-      "#AllegroMongoDbConfiguration": {
-        "type": "object",
-        "extends": "#/components/schemas/AllegroStorageConfiguration",
-        "facade": true,
-        "builderFacade": false,
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "hostname": {
-            "type": "string"
-          },
-          "mongoConnectionSettings": {
-            "$ref": "#/components/schemas/ConnectionSettings"
-          }
-        }
-      },
-      "#AllegroObjectStoreConfiguration": {
-        "type": "object",
-        "extends": "#/components/schemas/AllegroStorageConfiguration",
-        "facade": true,
-        "builderFacade": true,
-        "properties": {
-          "userId": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-          },
-          "keyId": {
-            "type": "string"
-          },
-          "principalCredentialFile": {
-            "type": "string"
-          },
-          "principalCredential": {
-            "$ref": "https://models.oss.symphony.com/authc.json#/components/schemas/PrincipalCredential"
-          },
-          "apiUrl": {
-            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
-          },
-          "apiConnectionSettings": {
-            "$ref": "#/components/schemas/ConnectionSettings"
-          },
-          "rsaPemCredential": {
-            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
-          },
-          "rsaPemCredentialFile": {
-            "type": "string"
-          }
-        }
-      },
-      "AllegroPodConfiguration": {
+      "Allegro2Configuration": {
         "type": "object",
         "facade": true,
         "builderFacade": false,
@@ -236,8 +165,6 @@
           }
         }
       },
-      
-      
       "AllegroBaseConfiguration": {
         "type": "object",
         "facade": true,

@@ -35,7 +35,7 @@ import com.symphony.oss.models.allegro.canon.IAllegroConfigurationEntity;
  */
 @Immutable
 public interface IAllegroConfiguration
-  extends IAllegroBaseConfiguration, IAllegroConfigurationEntity, IAllegroPodConfiguration
+  extends IAllegroBaseConfiguration, IAllegroConfigurationEntity, IAllegro2Configuration
 {
 }
 /*----------------------------------------------------------------------------------------------------

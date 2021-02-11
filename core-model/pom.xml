@@ -27,6 +27,12 @@
 
   <dependencies>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>crypto-model</artifactId>
+       <version>${project.version}</version>
+    </dependency>
+  
+    <dependency>
       <groupId>com.symphony.oss.canon</groupId>
       <artifactId>canon-runtime-java</artifactId>
        <version>${oss.canon.version}</version>

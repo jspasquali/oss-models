@@ -50,8 +50,23 @@ public interface IConnectionSettings
    */
   TrustStrategy getTrustStrategy();
 
+  /**
+   * Create an HTTP connection using the connection settings defined by this object and the given parameters.
+   * 
+   * @param cookieStore A cookie store.
+   * 
+   * @return an HTTP connection using the connection settings defined by this object and the given parameters.
+   */
   CloseableHttpClient createHttpClient(CookieStore cookieStore);
 
+  /**
+   * Create an HTTP connection using the connection settings defined by this object and the given parameters.
+   * 
+   * @param cookieStore A cookie store.
+   * @param sslContextBuilder SSL connection parameters.
+   * 
+   * @return an HTTP connection using the connection settings defined by this object and the given parameters.
+   */
   CloseableHttpClient createHttpClient(CookieStore cookieStore, SSLContextBuilder sslContextBuilder);
 
   /**

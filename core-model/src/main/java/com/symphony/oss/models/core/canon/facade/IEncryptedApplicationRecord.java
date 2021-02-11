@@ -19,33 +19,27 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2021-01-15 13:51:09 GMT
+ *  At                  2021-01-27 12:53:55 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.allegro.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
-import com.symphony.oss.models.allegro.canon.IAllegroPodConfigurationEntity;
+import com.symphony.oss.models.core.canon.IApplicationPayload;
+import com.symphony.oss.models.core.canon.IEncryptedApplicationRecordEntity;
 
 /**
- * Facade for Object ObjectSchema(AllegroPodConfiguration)
- * Generated from ObjectSchema(AllegroPodConfiguration) at #/components/schemas/AllegroPodConfiguration
+ * Facade for Object ObjectSchema(EncryptedApplicationRecord)
+ *
+ * An encrypted Application Record consisting of an encrypted payload and a unencrypted header, as might be stored in a database.
+ * Generated from ObjectSchema(EncryptedApplicationRecord) at #/components/schemas/EncryptedApplicationRecord
  */
 @Immutable
-public interface IAllegroPodConfiguration
-  extends IAllegroPodConfigurationEntity
+public interface IEncryptedApplicationRecord
+  extends IApplicationPayload, IEncryptedApplicationRecordEntity
 {
-  /**
-   * Return a copy of this object's configuration with any passwords or credentials redacted.
-   * 
-   * The returned object can safely be logged.
-   * 
-   * @return a copy of this object's configuration with any passwords or credentials redacted.
-   */
-  ImmutableJsonObject getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

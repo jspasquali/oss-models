@@ -142,6 +142,44 @@
           }
         }
       },
+      "ApplicationRecord": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": true,
+        "description": "An Application Record consisting of an encryptable payload and a non-encryptable header.",
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/ApplicationPayload"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ApplicationPayload"
+          }
+        }
+      },
+      "EncryptedApplicationRecord": {
+        "type": "object",
+        "extends": "#/components/schemas/ApplicationPayload",
+        "facade": true,
+        "builderFacade": true,
+        "description": "An encrypted Application Record consisting of an encrypted payload and a unencrypted header, as might be stored in a database.",
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/ApplicationPayload"
+          },
+          "encryptedPayload": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
+          },
+          "cipherSuiteId": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
+          },
+          "threadId": {
+            "$ref": "#/components/schemas/ThreadId"
+          },
+          "rotationId": {
+              "$ref": "#/components/schemas/RotationId"
+          }
+        }
+      },
       "Pagination":  {
         "type": "object",
         "facade": false,

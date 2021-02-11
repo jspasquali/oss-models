@@ -102,6 +102,13 @@ public class AllegroBaseConfiguration extends AllegroBaseConfigurationEntity imp
       super(type, initial);
     }
 
+    /**
+     * Set the configuration settings to be used for any connection which does not specify its own.
+     * 
+     * @param connectionSettings the configuration settings to be used for any connection which does not specify its own.
+     * 
+     * @return This (fluent method).
+     */
     public B withDefaultConnectionSettings(IConnectionSettings connectionSettings)
     {
       return withApiConnectionSettings(connectionSettings);

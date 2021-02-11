@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2021-01-15 13:51:09 GMT
+ *  At                  2021-02-03 10:52:53 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -30,14 +30,14 @@ import javax.annotation.concurrent.Immutable;
 import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-import com.symphony.oss.models.allegro.canon.AllegroPodConfigurationEntity;
+import com.symphony.oss.models.allegro.canon.Allegro2ConfigurationEntity;
 
 /**
- * Facade for Object ObjectSchema(AllegroPodConfiguration)
- * Generated from ObjectSchema(AllegroPodConfiguration) at #/components/schemas/AllegroPodConfiguration
+ * Facade for Object ObjectSchema(Allegro2Configuration)
+ * Generated from ObjectSchema(Allegro2Configuration) at #/components/schemas/Allegro2Configuration
  */
 @Immutable
-public class AllegroPodConfiguration extends AllegroPodConfigurationEntity implements IAllegroPodConfiguration
+public class Allegro2Configuration extends Allegro2ConfigurationEntity implements IAllegro2Configuration
 {
   private ImmutableJsonObject redacted_;
   
@@ -46,7 +46,7 @@ public class AllegroPodConfiguration extends AllegroPodConfigurationEntity imple
    * 
    * @param builder A mutable builder containing all values.
    */
-  public AllegroPodConfiguration(AbstractAllegroPodConfigurationBuilder<?,?> builder)
+  public Allegro2Configuration(AbstractAllegro2ConfigurationBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -57,7 +57,7 @@ public class AllegroPodConfiguration extends AllegroPodConfigurationEntity imple
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public AllegroPodConfiguration(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public Allegro2Configuration(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -68,7 +68,7 @@ public class AllegroPodConfiguration extends AllegroPodConfigurationEntity imple
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public AllegroPodConfiguration(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public Allegro2Configuration(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -78,7 +78,7 @@ public class AllegroPodConfiguration extends AllegroPodConfigurationEntity imple
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public AllegroPodConfiguration(IAllegroPodConfiguration other)
+  public Allegro2Configuration(IAllegro2Configuration other)
   {
     super(other);
   }

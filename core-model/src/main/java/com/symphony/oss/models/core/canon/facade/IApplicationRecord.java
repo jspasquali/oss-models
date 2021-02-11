@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Symphony Communication Services, LLC.
+ * Copyright 2021 Symphony Communication Services, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +19,25 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2019-11-29 11:39:41 GMT
+ *  At                  2021-01-27 12:53:55 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.object.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.object.canon.IAbstractStoredApplicationObject;
-import com.symphony.oss.models.object.canon.IEncryptedApplicationPayload;
-import com.symphony.oss.models.object.canon.IStoredApplicationObjectEntity;
+import com.symphony.oss.models.core.canon.IApplicationRecordEntity;
 
 /**
- * Facade for Object ObjectSchema(ObjectPayload)
+ * Facade for Object ObjectSchema(ApplicationRecord)
  *
- * Base type for application objects in the object store.
- * Generated from ObjectSchema(ObjectPayload) at #/components/schemas/ObjectPayload
+ * An Application Record consisting of an encryptable payload and a non-encryptable header.
+ * Generated from ObjectSchema(ApplicationRecord) at #/components/schemas/ApplicationRecord
  */
 @Immutable
-public interface IStoredApplicationObject
-  extends IAbstractStoredApplicationObject, IStoredApplicationObjectEntity, IEncryptedApplicationPayload
+public interface IApplicationRecord
+  extends IApplicationRecordEntity
 {
 }
 /*----------------------------------------------------------------------------------------------------

@@ -19,11 +19,11 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/_.java.ftl
  *		Template version	   1.0
- *  At                  2021-01-20 08:25:55 GMT
+ *  At                  2021-01-27 12:53:55 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
-package com.symphony.oss.models.object.canon.facade;
+package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -35,28 +35,27 @@ import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.canon.runtime.IEntity;
 import com.symphony.oss.canon.runtime.IModelRegistry;
 
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
 
-import com.symphony.oss.models.object.canon.StoredApplicationRecordEntity;
-import com.symphony.oss.models.object.canon.IStoredApplicationRecordEntity;
-import com.symphony.oss.models.object.canon.ObjectModel;
+import com.symphony.oss.models.core.canon.ApplicationRecordEntity;
+import com.symphony.oss.models.core.canon.IApplicationRecordEntity;
+import com.symphony.oss.models.core.canon.CoreModel;
 
 /**
- * Facade for Object ObjectSchema(StoredApplicationRecord)
+ * Facade for Object ObjectSchema(ApplicationRecord)
  *
- * A stored application object in an external database.
- * Generated from ObjectSchema(StoredApplicationRecord) at #/components/schemas/StoredApplicationRecord
+ * An Application Record consisting of an encryptable payload and a non-encryptable header.
+ * Generated from ObjectSchema(ApplicationRecord) at #/components/schemas/ApplicationRecord
  */
 @Immutable
 @SuppressWarnings("unused")
-public class StoredApplicationRecord extends StoredApplicationRecordEntity implements IStoredApplicationRecord
+public class ApplicationRecord extends ApplicationRecordEntity implements IApplicationRecord
 {
   /**
    * Constructor from builder.
    * 
    * @param builder A mutable builder containing all values.
    */
-  public StoredApplicationRecord(AbstractStoredApplicationRecordBuilder<?,?> builder)
+  public ApplicationRecord(AbstractApplicationRecordBuilder<?,?> builder)
   {
     super(builder);
   }
@@ -67,7 +66,7 @@ public class StoredApplicationRecord extends StoredApplicationRecordEntity imple
    * @param jsonObject An immutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public StoredApplicationRecord(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
+  public ApplicationRecord(ImmutableJsonObject jsonObject, IModelRegistry modelRegistry)
   {
     super(jsonObject, modelRegistry);
   }
@@ -78,7 +77,7 @@ public class StoredApplicationRecord extends StoredApplicationRecordEntity imple
    * @param mutableJsonObject A mutable JSON object containing the serialized form of the object.
    * @param modelRegistry A model registry to use to deserialize any nested objects.
    */
-  public StoredApplicationRecord(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
+  public ApplicationRecord(MutableJsonObject mutableJsonObject, IModelRegistry modelRegistry)
   {
     super(mutableJsonObject, modelRegistry);
   }
@@ -88,25 +87,25 @@ public class StoredApplicationRecord extends StoredApplicationRecordEntity imple
    * 
    * @param other Another instance from which all attributes are to be copied.
    */
-  public StoredApplicationRecord(IStoredApplicationRecord other)
+  public ApplicationRecord(IApplicationRecord other)
   {
     super(other);
   }
   
   /**
-   * Abstract builder for StoredApplicationRecord. If there are sub-classes of this type then their builders sub-class this builder.
+   * Abstract builder for ApplicationRecord. If there are sub-classes of this type then their builders sub-class this builder.
    *
    * @param <B> The concrete type of the builder, used for fluent methods.
    * @param <T> The concrete type of the built object.
    */
-  public static abstract class AbstractStoredApplicationRecordBuilder<B extends AbstractStoredApplicationRecordBuilder<B,T>, T extends IStoredApplicationRecordEntity> extends AbstractStoredApplicationRecordEntityBuilder<B,T>
+  public static abstract class AbstractApplicationRecordBuilder<B extends AbstractApplicationRecordBuilder<B,T>, T extends IApplicationRecordEntity> extends AbstractApplicationRecordEntityBuilder<B,T>
   {
-    protected AbstractStoredApplicationRecordBuilder(Class<B> type)
+    protected AbstractApplicationRecordBuilder(Class<B> type)
     {
       super(type);
     }
     
-    protected AbstractStoredApplicationRecordBuilder(Class<B> type, IStoredApplicationRecordEntity initial)
+    protected AbstractApplicationRecordBuilder(Class<B> type, IApplicationRecordEntity initial)
     {
       super(type, initial);
     }
