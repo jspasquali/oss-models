@@ -1261,6 +1261,27 @@
           }
         }
       },
+      "ReactionDetailsPayload": {
+        "type": "object",
+        "extends": "#/components/schemas/MaestroPayload",
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "reactionName": {
+            "type": "string"
+          },
+          "messageId": {
+            "$ref": "#/components/schemas/MessageId"
+          },
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "timestamp": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+          }
+        }
+      },
       "CreateRoomMaestroPayload": {
         "type": "object",
         "extends": "#/components/schemas/MaestroPayload",
