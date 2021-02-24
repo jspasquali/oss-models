@@ -43,10 +43,16 @@
       <version>${project.version}</version>
     </dependency>
     
+    <dependency> <!--  messageml introduces a vulnerable version -->
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>2.3.31</version>
+      </dependency>
+    
     <dependency>
       <groupId>org.symphonyoss.symphony</groupId>
       <artifactId>messageml</artifactId>
-      <version>0.9.38</version>
+      <version>0.9.67</version>
     </dependency>
     
     <dependency>
