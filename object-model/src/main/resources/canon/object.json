@@ -318,6 +318,57 @@
         "operationId": "deleteFeed"
         }
       },
+      
+     "/feeds/credentials": {
+      "parameters": {
+      },
+      "post": {
+        "summary": "Gets Temporary Credentials to access a Feed directly",
+        "operationId": "getCredentials",
+        "tags": [
+          "feeds"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+         },
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/TemporaryCredentials"
+          }
+        }
+      }
+      },      
+     "/feeds/endpoint": {
+      "parameters": {
+      },
+      "post": {
+        "summary": "Gets endpoint path and refreshes feed read records",
+        "operationId": "getEndpoint",
+        "tags": [
+          "feeds"
+        ],
+        "payload": {
+          "required": true,
+          "multiple": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+         },
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/FeedsEndpoint"
+          }
+        }
+      }
+      },
     
     "/feeds/{feedHash}/objects": {
       "parameters": {
@@ -349,6 +400,71 @@
         }
       }
     },
+    "/feeds/fetch/aws/us-east-1": {
+      "parameters": {
+        "Action": {
+          "in": "query",
+          "description": "Receive/Delete/ChangeVisibility of feed records",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "MaxNumberOfMessages": {
+          "in": "query",
+          "description": "N of message to return (max 10)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "WaitTimeSeconds": {
+          "in": "query",
+          "description": "How much time the client can wait for the response",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "VisibilityTimeout": {
+          "in": "query",
+          "description": "How much the visibility should be extended (in seconds)",
+          "required": false,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "feedHash": {
+          "in": "query",
+          "description": "if true then scan in chronological order, else reverse",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "ReceiptHandle": {
+          "in": "query",
+          "description": "Hash value of the original message, used to delete it from the queue",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      },
+      "post": {
+        "summary": "List the contents of a partition",
+        "operationId": "readSQS",
+          "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
+          }
+        }
+      }
+    },
     "/partitions/{partitionHash}/page": {
       "parameters": {
         "partitionHash": {
@@ -357,6 +473,14 @@
           "required": true,
           "schema": {
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        },
+        "X-Symphony-ExternalPodId": {
+          "in": "header",
+          "description": "The symphony external pod ID added by API Gateway",
+          "required": false,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
           }
         },
         "limit": {
@@ -384,6 +508,22 @@
             "type": "string"
           }
         },
+        "sortKeyMin": {
+          "in": "query",
+          "description": "The minimum exclusive sort key of returned objects",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "sortKeyMax": {
+          "in": "query",
+          "description": "The maximum inclusive sort key of returned objects",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
         "scanForwards": {
           "in": "query",
           "description": "if true then scan in chronological order, else reverse",
@@ -403,7 +543,21 @@
           }
         }
       }
-    }
+    },
+    "/version": {
+      "parameters": {
+      },
+      "get": {
+        "summary": "Fetch build version of the service",
+        "operationId": "fetchVersion",
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
+          }
+        }
+      }
+     }
   },
 	"components": {
 		"schemas": {
@@ -983,6 +1137,58 @@
             "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
           }
         }
+      }, 
+      
+      "TemporaryCredentials": {
+          "type": "object",
+          "facade": false,
+        "description": "Request to fetch and/or acknowledge messages from a feed.",
+        "properties": {
+          "accesskeyId": {
+            "type": "string"
+          },
+          "secretAccessKey": {
+            "type": "string"
+          },
+          "sessionToken": {
+            "type": "string"
+          },
+          "directFetch": {
+            "type": "boolean"
+          },
+          "expirationDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          },
+           "queueUrls": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "type": "string"
+            } 
+           } ,
+           "region": {
+            "type": "string"
+          },
+           "endPoint": {
+            "type": "string"
+          }                 
+      }
+      },      
+     "FeedsEndpoint": {
+          "type": "object",
+          "facade": false,
+        "description": "Record needed to enable direct fetch from SQS",
+        "properties": {
+          "directFetch": {
+            "type": "boolean"
+          },
+           "endPoint": {
+            "type": "string"
+          },
+           "expirationDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Instant"
+          }                 
+      }
       }
     }
 	}

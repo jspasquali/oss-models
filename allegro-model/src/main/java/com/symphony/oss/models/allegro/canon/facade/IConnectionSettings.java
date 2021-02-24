@@ -32,8 +32,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.models.allegro.canon.IConnectionSettingsEntity;
-import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 
 /**
  * Facade for Object ObjectSchema(ConnectionSettings)
@@ -50,9 +50,33 @@ public interface IConnectionSettings
    */
   TrustStrategy getTrustStrategy();
 
-  CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore);
+  /**
+   * Create an HTTP connection using the connection settings defined by this object and the given parameters.
+   * 
+   * @param cookieStore A cookie store.
+   * 
+   * @return an HTTP connection using the connection settings defined by this object and the given parameters.
+   */
+  CloseableHttpClient createHttpClient(CookieStore cookieStore);
 
-  CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore, SSLContextBuilder sslContextBuilder);
+  /**
+   * Create an HTTP connection using the connection settings defined by this object and the given parameters.
+   * 
+   * @param cookieStore A cookie store.
+   * @param sslContextBuilder SSL connection parameters.
+   * 
+   * @return an HTTP connection using the connection settings defined by this object and the given parameters.
+   */
+  CloseableHttpClient createHttpClient(CookieStore cookieStore, SSLContextBuilder sslContextBuilder);
+
+  /**
+   * Return a copy of this object with any passwords redacted.
+   * 
+   * The returned object can safely be logged.
+   * 
+   * @return a copy of this object with any passwords redacted.
+   */
+  ImmutableJsonObject getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

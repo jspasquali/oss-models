@@ -27,6 +27,7 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.models.allegro.canon.IAllegroBaseConfigurationEntity;
 
 /**
@@ -37,7 +38,21 @@ import com.symphony.oss.models.allegro.canon.IAllegroBaseConfigurationEntity;
 public interface IAllegroBaseConfiguration
   extends IAllegroBaseConfigurationEntity
 {
+  /**
+   * Return the connection settings to be used on all connections which do not specify specific settings.
+   * 
+   * @return the connection settings to be used on all connections which do not specify specific settings.
+   */
   IConnectionSettings getDefaultConnectionSettings();
+
+  /**
+   * Return a copy of this object's configuration with any passwords or credentials redacted.
+   * 
+   * The returned object can safely be logged.
+   * 
+   * @return a copy of this object's configuration with any passwords or credentials redacted.
+   */
+  ImmutableJsonObject getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

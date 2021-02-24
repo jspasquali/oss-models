@@ -25,6 +25,8 @@
 
 package com.symphony.s2.authz.canon.facade;
 
+import java.util.List;
+
 import javax.annotation.concurrent.Immutable;
 
 import com.symphony.oss.fugue.kv.IKvItem;
@@ -41,6 +43,12 @@ import com.symphony.s2.authz.canon.IEntitlementEntity;
 public interface IEntitlement
   extends ISystemObject, IEntitlementEntity, IKvItem
 {
+  /**
+   * Fetches Entitlement and the EntitlementOwnedItem
+   * <p>
+   * @return list of KvItems
+   */
+  public List<IKvItem> getKvItems();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

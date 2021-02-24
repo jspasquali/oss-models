@@ -29,6 +29,7 @@ import java.security.PrivateKey;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.fugue.kv.IKvPartitionSortKeyProvider;
 import com.symphony.s2.authc.canon.IPrincipalCredentialEntity;
 
@@ -47,6 +48,15 @@ public interface IPrincipalCredential
    * @return The PrivateKey.
    */
   PrivateKey getPrivateKey();
+  
+  /**
+   * Return a copy of this object with the private key redacted.
+   * 
+   * The returned object can safely be logged.
+   * 
+   * @return a copy of this object with the private key redacted.
+   */
+  ImmutableJsonObject getRedacted();
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/I_.java.ftl

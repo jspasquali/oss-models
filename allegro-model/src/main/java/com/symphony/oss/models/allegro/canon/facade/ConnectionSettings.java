@@ -71,7 +71,7 @@ import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.models.allegro.canon.ConnectionSettingsEntity;
 import com.symphony.oss.models.allegro.canon.IConnectionSettingsEntity;
-import com.symphony.oss.models.crypto.cipher.ICipherSuite;
+import com.symphony.oss.models.crypto.cipher.CipherSuiteUtils;
 
 /**
  * Facade for Object ObjectSchema(ConnectionSettings)
@@ -80,7 +80,12 @@ import com.symphony.oss.models.crypto.cipher.ICipherSuite;
 @Immutable
 public class ConnectionSettings extends ConnectionSettingsEntity implements IConnectionSettings
 {
-  final TrustStrategy                    trustStrategy_;
+  static final String       REDACTED = "**REDACTED**";
+  static final String       PROXY_PASSWORD = "proxyPassword";
+
+  final TrustStrategy       trustStrategy_;
+
+  private ImmutableJsonObject redacted_;
   
   /**
    * Constructor from builder.
@@ -147,6 +152,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     super(other);
     
     trustStrategy_ = other.getTrustStrategy();
+    redacted_ = other.getRedacted();
   }
   
   /**
@@ -174,19 +180,42 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
   }
   
   @Override
+  public synchronized ImmutableJsonObject getRedacted()
+  {
+    if(redacted_ == null)
+    {
+      MutableJsonObject jsonObject = getJsonObject().mutify();
+      
+      redactJsonObject(jsonObject);
+      
+      redacted_ = jsonObject.immutify();
+    }
+    
+    return redacted_;
+  }
+
+  protected void redactJsonObject(MutableJsonObject jsonObject)
+  {
+    if(getProxyPassword() != null)
+    {
+        jsonObject.addIfNotNull(PROXY_PASSWORD, REDACTED);
+    }
+  }
+  
+  @Override
   public TrustStrategy getTrustStrategy()
   {
     return trustStrategy_;
   }
 
   @Override
-  public CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore)
+  public CloseableHttpClient createHttpClient(CookieStore cookieStore)
   {
-    return createHttpClient(cipherSuite, cookieStore, null);
+    return createHttpClient(cookieStore, null);
   }
   
   @Override
-  public CloseableHttpClient createHttpClient(ICipherSuite cipherSuite, CookieStore cookieStore, @Nullable SSLContextBuilder sslContextBuilder)
+  public CloseableHttpClient createHttpClient(CookieStore cookieStore, @Nullable SSLContextBuilder sslContextBuilder)
   {
     
     List<X509Certificate> trustedCerts = new ArrayList<>(getTrustedCertResources() == null ? 0 : getTrustedCertResources().size() 
@@ -199,7 +228,7 @@ public class ConnectionSettings extends ConnectionSettingsEntity implements ICon
     {
       for(String resourceName : getTrustedCertResources())
       {
-        trustedCerts.add(cipherSuite.certificateFromPemResource(resourceName));
+        trustedCerts.add(CipherSuiteUtils.certificateFromPemResource(getClass(), resourceName));
       }
     }
     

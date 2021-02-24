@@ -15,10 +15,10 @@
  *
  *----------------------------------------------------------------------------------------------------
  * Proforma generated from
- *		Template groupId		 org.symphonyoss.s2.canon
+ *    Template groupId     org.symphonyoss.s2.canon
  *           artifactId canon-template-java
- *		Template name		   proforma/java/Object/_.java.ftl
- *		Template version	   1.0
+ *    Template name      proforma/java/Object/_.java.ftl
+ *    Template version     1.0
  *  At                  2020-03-18 11:36:51 GMT
  *----------------------------------------------------------------------------------------------------
  */
@@ -68,6 +68,8 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
   public static final String OWNER_ID_ATTRIBUTE_NAME = "ownerId";
   /** Additional attribute name for the effective date of the entitlement mapping */
   public static final String EFFECTIVE_DATE_ATTRIBUTE_NAME = "effective";
+  /** Additional attribute name for the action of the entitlement mapping */
+  public static final String ACTION_ATTRIBUTE_NAME = "entAction";
   
   private final Map<String, Object> additionalAttributes_;
 
@@ -88,6 +90,7 @@ public class PodEntitlementMapping extends PodEntitlementMappingEntity implement
     return new ImmutableMap.Builder<String, Object>()
         .put(OWNER_ID_ATTRIBUTE_NAME, getEntitlementId().getUserId().getValue())
         .put(EFFECTIVE_DATE_ATTRIBUTE_NAME, getEffectiveDate().toString())
+        .put(ACTION_ATTRIBUTE_NAME, getAction().toString())
         .build();
   }
 

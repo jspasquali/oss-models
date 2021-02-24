@@ -61,6 +61,17 @@ public interface IKvStore
    * @param trace       Trace context.
    */
   void store(IKvItem kvItem, KvCondition kvCondition, ITraceContext trace);
+  
+  /**
+   * Store the given item, provided the given condition is met.
+   * 
+   * @param kvItem       Item to be stored.
+   * @param effective    The effective condition
+   * @param entAction    The entitlement action condition
+   * @param action       The allow action
+   * @param trace        Trace context.
+   */
+  void storeEntitlementMapping(IKvItem kvItem, KvCondition effective, KvCondition entAction, String action, ITraceContext trace);
 
   /**
    * Fetch an item given a partition key and sort key.
@@ -155,6 +166,8 @@ public interface IKvStore
    * @param limit             An optional limit to the number of objects retrieved.
    * @param after             An optional page cursor to continue a previous query.
    * @param sortKeyPrefix     An optional sort key prefix.
+   * @param sortKeyMin        An optional sort key min.
+   * @param sortKeyMax        An optional sort key max.  
    * @param type              The type of the object to be returned.
    * @param filterAttributes  Optional attribute values to filter results. 
    * @param consumer          A consumer to receive the retrieved objects.
@@ -163,5 +176,6 @@ public interface IKvStore
    * @return Pagination tokens to allow a continuation query.
    */
   <T extends IKvItem> IKvPagination fetch(IKvPartitionKeyProvider partitionKey, boolean scanForwards, Integer limit, String after, 
-      String sortKeyPrefix, Class<T> type, @Nullable Map<String, Object> filterAttributes, Consumer<T> consumer, ITraceContext trace);
+      String sortKeyPrefix, @Nullable String sortKeyMin, @Nullable String sortKeyMax, 
+      Class<T> type, @Nullable Map<String, Object> filterAttributes, Consumer<T> consumer, ITraceContext trace);
 }

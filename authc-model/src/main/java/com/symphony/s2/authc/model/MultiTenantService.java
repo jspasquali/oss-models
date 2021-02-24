@@ -39,7 +39,10 @@ public enum MultiTenantService implements IFugueApplication, IMultiTenantService
   SBE("sbe",        5,  7005),
   
   /** The example service, for development and testing purposes. */
-  EXAMPLE("example", 6, 7006)
+  EXAMPLE("example", 6, 7006),
+  
+  /** Billing Service */
+  BILLING("billing",    7,  7007)
   ;
 
   private static final Map<String, MultiTenantService> nameMap_ = new HashMap<>();

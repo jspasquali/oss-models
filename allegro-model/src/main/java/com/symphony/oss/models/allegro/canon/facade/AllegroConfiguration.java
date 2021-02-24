@@ -27,27 +27,17 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-
-import com.symphony.oss.canon.runtime.IEntity;
-import com.symphony.oss.canon.runtime.IModelRegistry;
-
-import java.net.URL;
-import com.symphony.oss.models.core.canon.facade.UrlBuilder;
-
 import com.symphony.oss.models.allegro.canon.AllegroConfigurationEntity;
 import com.symphony.oss.models.allegro.canon.IAllegroConfigurationEntity;
-import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**
  * Facade for Object ObjectSchema(AllegroConfiguration)
  * Generated from ObjectSchema(AllegroConfiguration) at #/components/schemas/AllegroConfiguration
  */
 @Immutable
-@SuppressWarnings("unused")
 public class AllegroConfiguration extends AllegroConfigurationEntity implements IAllegroConfiguration
 {
   /**
@@ -110,6 +100,53 @@ public class AllegroConfiguration extends AllegroConfigurationEntity implements 
       super(type, initial);
     }
   }
+
+  @Override
+  protected void redactJsonObject(MutableJsonObject jsonObject)
+  {
+    super.redactJsonObject(jsonObject);
+    
+    if(getDefaultConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("defaultConnectionSettings", getDefaultConnectionSettings().getRedacted());
+    }
+    
+    if(getPodConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("podConnectionSettings", getPodConnectionSettings().getRedacted());
+    }
+    
+    if(getKeyManagerConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("keyManagerConnectionSettings", getKeyManagerConnectionSettings().getRedacted());
+    }
+    
+    if(getCertSessionAuthConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("certSessionAuthConnectionSettings", getCertSessionAuthConnectionSettings().getRedacted());
+    }
+    
+    if(getCertKeyAuthConnectionSettings() != null)
+    {
+      jsonObject.addIfNotNull("certKeyAuthConnectionSettings", getCertKeyAuthConnectionSettings().getRedacted());
+    }
+    
+    if(getAuthCertFilePassword() != null)
+    {
+      jsonObject.addIfNotNull("authCertFilePassword", ConnectionSettings.REDACTED);
+    }
+    
+    if(getAuthCertPrivateKey() != null)
+    {
+      jsonObject.addIfNotNull("authCertPrivateKey", ConnectionSettings.REDACTED);
+    }
+    
+    if(getRsaPemCredential() != null)
+    {
+      jsonObject.addIfNotNull("rsaPemCredential", ConnectionSettings.REDACTED);
+    }
+  }
+  
 }
 /*----------------------------------------------------------------------------------------------------
  * End of template proforma/java/Object/_.java.ftl

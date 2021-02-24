@@ -21,24 +21,24 @@
   <parent>
     <groupId>com.symphony.oss.models</groupId>
     <artifactId>oss-models</artifactId>
-    <version>0.7.11-SNAPSHOT</version>
+    <version>0.7.27-SNAPSHOT</version>
   </parent>
   <artifactId>object-model</artifactId>
 
   <dependencies>
     <dependency>
        <groupId>com.symphony.oss.models</groupId>
-       <version>0.7.11-SNAPSHOT</version>
+       <version>0.7.27-SNAPSHOT</version>
        <artifactId>core-model</artifactId>
      </dependency>
     <dependency>
        <groupId>com.symphony.oss.models</groupId>
-       <version>0.7.11-SNAPSHOT</version>
+       <version>0.7.27-SNAPSHOT</version>
        <artifactId>crypto-model</artifactId>
      </dependency>
     <dependency>
        <groupId>com.symphony.oss.models</groupId>
-       <version>0.7.11-SNAPSHOT</version>
+       <version>0.7.27-SNAPSHOT</version>
        <artifactId>authc-model</artifactId>
      </dependency>
     
@@ -56,6 +56,11 @@
     <dependency>
       <groupId>com.symphony.oss.fugue</groupId>
       <artifactId>fugue-pubsub</artifactId>
+       <version>${oss.fugue.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.symphony.oss.fugue</groupId>
+      <artifactId>fugue-launch</artifactId>
        <version>${oss.fugue.version}</version>
     </dependency>
     

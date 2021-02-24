@@ -27,25 +27,17 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-
-import com.symphony.oss.canon.runtime.IEntity;
-import com.symphony.oss.canon.runtime.IModelRegistry;
-
-
 import com.symphony.oss.models.allegro.canon.AllegroMultiTenantConfigurationEntity;
 import com.symphony.oss.models.allegro.canon.IAllegroMultiTenantConfigurationEntity;
-import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**
  * Facade for Object ObjectSchema(AllegroMultiTenantConfiguration)
  * Generated from ObjectSchema(AllegroMultiTenantConfiguration) at #/components/schemas/AllegroMultiTenantConfiguration
  */
 @Immutable
-@SuppressWarnings("unused")
 public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigurationEntity implements IAllegroMultiTenantConfiguration
 {
   /**
@@ -89,7 +81,7 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
   {
     super(other);
   }
-  
+
   /**
    * Abstract builder for AllegroMultiTenantConfiguration. If there are sub-classes of this type then their builders sub-class this builder.
    *
@@ -106,6 +98,22 @@ public class AllegroMultiTenantConfiguration extends AllegroMultiTenantConfigura
     protected AbstractAllegroMultiTenantConfigurationBuilder(Class<B> type, IAllegroMultiTenantConfigurationEntity initial)
     {
       super(type, initial);
+    }
+  }
+  
+  @Override
+  protected void redactJsonObject(MutableJsonObject jsonObject)
+  {
+    super.redactJsonObject(jsonObject);
+    
+    if(getPrincipalCredential() != null)
+    {
+      jsonObject.addIfNotNull("principalCredential", getPrincipalCredential().getRedacted());
+    }
+    
+    if(getRsaPemCredential() != null)
+    {
+      jsonObject.addIfNotNull("rsaPemCredential", ConnectionSettings.REDACTED);
     }
   }
 }

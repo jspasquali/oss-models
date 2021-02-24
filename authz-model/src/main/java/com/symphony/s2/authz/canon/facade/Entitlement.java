@@ -26,6 +26,7 @@
 package com.symphony.s2.authz.canon.facade;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -33,12 +34,15 @@ import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.commons.hash.Hash;
+import com.symphony.oss.fugue.kv.IKvItem;
 import com.symphony.oss.fugue.kv.IKvPartitionKey;
+import com.symphony.oss.fugue.kv.IKvPartitionSortKeyProvider;
 import com.symphony.oss.fugue.kv.IKvSortKey;
 import com.symphony.oss.fugue.kv.KvPartitionKey;
 import com.symphony.oss.fugue.kv.KvPartitionSortKeyProvider;
 import com.symphony.oss.fugue.kv.KvSortKey;
 import com.symphony.oss.fugue.store.IFuguePodId;
+import com.symphony.oss.models.core.canon.facade.PodAndUserId;
 import com.symphony.s2.authz.canon.EntitlementEntity;
 
 /**
@@ -93,9 +97,13 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
   }
   
   @Override
-  public IKvPartitionKey getPartitionKey()
+  public ArrayList<IKvItem> getKvItems()
   {
-    return getPartitionKeyFor(getId().getHash());
+    ArrayList<IKvItem> items = new ArrayList<>();
+    items.add(this);
+    items.add(new EntitlementOwnerItem());
+
+    return items;
   }
   
   /**
@@ -105,7 +113,7 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * 
    * @return The partition key for Entitlement object for the given hash.
    */
-  public static KvPartitionKey getPartitionKeyFor(Hash hash)
+  public static KvPartitionKey getPartitionKeyForItem(Hash hash)
   {
     return new KvPartitionKey("E#" + hash);
   }
@@ -117,39 +125,138 @@ public class Entitlement extends EntitlementEntity implements IEntitlement
    * 
    * @return The partition key for Entitlement object for the given hash.
    */
-  public static KvPartitionSortKeyProvider getPartitionSortKeyFor(Hash hash)
+  public static IKvPartitionSortKeyProvider getPartitionSortKeyForItem(Hash hash)
   {
-    return new KvPartitionSortKeyProvider(getPartitionKeyFor(hash), new KvSortKey("E#"));
+    return new KvPartitionSortKeyProvider(getPartitionKeyForItem(hash), new KvSortKey("E#"));
   }
-
-  @Override
-  public IKvSortKey getSortKey()
+  
+  /**
+   * Get the partition key for Entitlement object for the given hash.
+   * 
+   * @param ownerId The entitlement ownerId
+   * 
+   * @return The partition key for Entitlement object for the given hash.
+   */
+  public static KvPartitionKey getPartitionKeyForOwnerItem(PodAndUserId ownerId)
   {
-    return new KvSortKey("E#");
+    return new KvPartitionKey("EO#" + ownerId);
   }
-
-  @Override
-  public String getJson()
+  
+  /**
+   * Get the partition key for Entitlement object for the given hash.
+   * 
+   * @param hash The entitlement hash for the required entitlement.
+   * 
+   * @return The partition key for Entitlement object for the given hash.
+   */
+  public static KvPartitionSortKeyProvider getPartitionSortKeyForOwnerItem(PodAndUserId ownerId, Hash hash)
   {
-    return super.toString();
+    return new KvPartitionSortKeyProvider(getPartitionKeyForOwnerItem(ownerId), new KvSortKey(hash.toStringBase64()));
   }
+    
+    @Override
+    public IKvPartitionKey getPartitionKey()
+    {
+      return getPartitionKeyForItem(getId().getHash());
+    }
+    
+    @Override
+    public IKvSortKey getSortKey()
+    {
+      return new KvSortKey("E#");
+    }
+  
+    @Override
+    public String getJson()
+    {
+      return super.toString();
+    }
+  
+    @Override
+    public String getType()
+    {
+      return getCanonType();
+    }
+  
+    @Override
+    public Instant getPurgeDate()
+    {
+      return null;
+    }
+  
+    @Override
+    public IFuguePodId getPodId()
+    {
+      return getId().getUserId().getPodId();
+    }
 
-  @Override
-  public String getType()
-  {
-    return getCanonType();
-  }
+    @Override
+    public boolean isSaveToSecondaryStorage()
+    {
+      return true;
+    }
+  
+  public class EntitlementOwnerItem implements IKvItem
+  {    
+    @Override
+    public IKvPartitionKey getPartitionKey()
+    {
+      return getPartitionKeyForOwnerItem(getId().getUserId());
+    }
+  
+    @Override
+    public IKvSortKey getSortKey()
+    {
+      return new KvSortKey(getId().getEntitlementId().getHash().toStringBase64());
+    }
+  
+    @Override
+    public String getJson()
+    {
+      return Entitlement.this.getJson();
+    }
+  
+    @Override
+    public String getType()
+    {
+      return getCanonType();
+    }
+  
+    @Override
+    public IFuguePodId getPodId()
+    {
+      return getId().getUserId().getPodId();
+    }
+    
+    @Override
+    public boolean isSaveToSecondaryStorage()
+    {
+      return Entitlement.this.isSaveToSecondaryStorage();
+    }
 
-  @Override
-  public Instant getPurgeDate()
-  {
-    return null;
-  }
+    @Override
+    public String getTraceSubjectId()
+    {
+      return Entitlement.this.getTraceSubjectId();
+    }
 
-  @Override
-  public IFuguePodId getPodId()
-  {
-    return getId().getUserId().getPodId();
+    @Override
+    public String getTraceSubjectType()
+    {
+      return Entitlement.this.getTraceSubjectType();
+    }
+
+    @Override
+    public Hash getAbsoluteHash()
+    {
+      return Entitlement.this.getAbsoluteHash();
+    }
+
+    @Override
+    public Instant getPurgeDate()
+    {
+      return Entitlement.this.getPurgeDate();
+    }
   }
 }
 /*----------------------------------------------------------------------------------------------------

@@ -110,6 +110,61 @@
           }
         }
       },
+      "Allegro2Configuration": {
+        "type": "object",
+        "facade": true,
+        "builderFacade": false,
+        "properties": {
+          "cipherSuiteId": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/CipherSuiteId"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "podUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "rsaPemCredential": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
+          },
+          "rsaPemCredentialFile": {
+            "type": "string"
+          },
+          "authCertFile": {
+            "type": "string"
+          },
+          "authCertFilePassword": {
+            "type": "string"
+          },
+          "authCert": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
+          },
+          "authCertPrivateKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPrivateKey"
+          },
+          "sessionAuthUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "keyAuthUrl": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Url"
+          },
+          "defaultConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "podConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "keyManagerConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "certSessionAuthConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          },
+          "certKeyAuthConnectionSettings": {
+            "$ref": "#/components/schemas/ConnectionSettings"
+          }
+        }
+      },
       "AllegroBaseConfiguration": {
         "type": "object",
         "facade": true,
@@ -147,8 +202,8 @@
           "principalCredentialFile": {
             "type": "string"
           },
-           "principalCredential": {
-				"$ref": "https://models.oss.symphony.com/authc.json#/components/schemas/PrincipalCredential"
+          "principalCredential": {
+				    "$ref": "https://models.oss.symphony.com/authc.json#/components/schemas/PrincipalCredential"
           }
         }
       },

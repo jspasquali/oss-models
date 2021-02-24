@@ -27,31 +27,21 @@ package com.symphony.oss.models.allegro.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import org.apache.http.client.methods.RequestBuilder;
-
-import com.symphony.oss.commons.immutable.ImmutableByteArray;
-
+import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.ImmutableJsonObject;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
-
-import com.symphony.oss.canon.runtime.IEntity;
-import com.symphony.oss.canon.runtime.IModelRegistry;
-
-import java.net.URL;
-import com.symphony.oss.models.core.canon.facade.UrlBuilder;
-
 import com.symphony.oss.models.allegro.canon.AllegroBaseConfigurationEntity;
 import com.symphony.oss.models.allegro.canon.IAllegroBaseConfigurationEntity;
-import com.symphony.oss.models.allegro.canon.AllegroModel;
 
 /**
  * Facade for Object ObjectSchema(AllegroBaseConfiguration)
  * Generated from ObjectSchema(AllegroBaseConfiguration) at #/components/schemas/AllegroBaseConfiguration
  */
 @Immutable
-@SuppressWarnings("unused")
 public class AllegroBaseConfiguration extends AllegroBaseConfigurationEntity implements IAllegroBaseConfiguration
 {
+  private ImmutableJsonObject redacted_;
+  
   /**
    * Constructor from builder.
    * 
@@ -112,6 +102,13 @@ public class AllegroBaseConfiguration extends AllegroBaseConfigurationEntity imp
       super(type, initial);
     }
 
+    /**
+     * Set the configuration settings to be used for any connection which does not specify its own.
+     * 
+     * @param connectionSettings the configuration settings to be used for any connection which does not specify its own.
+     * 
+     * @return This (fluent method).
+     */
     public B withDefaultConnectionSettings(IConnectionSettings connectionSettings)
     {
       return withApiConnectionSettings(connectionSettings);
@@ -122,6 +119,29 @@ public class AllegroBaseConfiguration extends AllegroBaseConfigurationEntity imp
   public IConnectionSettings getDefaultConnectionSettings()
   {
     return getApiConnectionSettings();
+  }
+  
+  @Override
+  public synchronized ImmutableJsonObject getRedacted()
+  {
+    if(redacted_ == null)
+    {
+      MutableJsonObject jsonObject = getJsonObject().mutify();
+      
+      redactJsonObject(jsonObject);
+      
+      redacted_ = jsonObject.immutify();
+    }
+    
+    return redacted_;
+  }
+
+  protected void redactJsonObject(MutableJsonObject jsonObject)
+  {
+    if(getApiConnectionSettings() != null)
+    {
+        jsonObject.addIfNotNull("apiConnectionSettings", getApiConnectionSettings().getRedacted());
+    }
   }
 }
 /*----------------------------------------------------------------------------------------------------

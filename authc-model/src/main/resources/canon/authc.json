@@ -114,6 +114,19 @@
         }
       }
     },
+    "/support/keys": {
+      "get": {
+        "summary": "Fetch the public signing key to validate a JWT for the support portal for current environment.",
+        "operationId": "fetchSupportKey",
+        "response": {
+          "required": false,
+          "multiple": false,
+          "schema": {
+            "$ref": "#/components/schemas/PrincipalAuthcKey"
+          }
+        }
+      }
+    },
   "/pod/certificate/create": {
        "parameters": {
       },
@@ -135,7 +148,21 @@
           }
         }   
        }
+      },
+     "/version": {
+      "parameters": {
+      },
+      "get": {
+        "summary": "Fetch build version of the service",
+        "operationId": "fetchVersion",
+        "response": {
+          "required": true,
+          "schema": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PlainText"
+          }
+        }
       }
+     }
  },
 	"components": {
 		"schemas": {
@@ -184,7 +211,6 @@
         "facade": true,
         "builderFacade": true,
         "required": [
-          "podId",
           "encodedPublicKey"
         ],
         "properties": {
