@@ -508,6 +508,22 @@
             "type": "string"
           }
         },
+        "sortKeyMin": {
+          "in": "query",
+          "description": "The minimum exclusive sort key of returned objects",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "sortKeyMax": {
+          "in": "query",
+          "description": "The maximum inclusive sort key of returned objects",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
         "scanForwards": {
           "in": "query",
           "description": "if true then scan in chronological order, else reverse",

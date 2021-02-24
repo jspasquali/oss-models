@@ -102,6 +102,23 @@ public abstract class StreamingPartitionsPartitionHashPagePathHandler<T> extends
     {
       sortKeyPrefix = sortKeyPrefixValue;
     }
+    
+    String                    sortKeyMinValue = context.getParameterAsString("sortKeyMin", ParameterLocation.Query, false);
+    String                    sortKeyMin = null; 
+    
+    if(sortKeyMinValue != null)
+    {
+      sortKeyMin = sortKeyMinValue;
+    }
+
+
+    String                    sortKeyMaxValue = context.getParameterAsString("sortKeyMax", ParameterLocation.Query, false);
+    String                    sortKeyMax = null; 
+    
+    if(sortKeyMaxValue != null)
+    {
+      sortKeyMax = sortKeyMaxValue;
+    }
 
 
     Integer                   limitValue = context.getParameterAsInteger("limit", ParameterLocation.Query, false);
@@ -156,6 +173,8 @@ public abstract class StreamingPartitionsPartitionHashPagePathHandler<T> extends
             auth,
             context.getTrace(),
             sortKeyPrefix,
+            sortKeyMin,
+            sortKeyMax,
             limit,
             scanForwards,
             partitionHash,

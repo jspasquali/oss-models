@@ -65,6 +65,8 @@ public interface IStreamingPartitionsPartitionHashPagePathHandler<T> extends IEn
               T canonAuth, 
               ITraceContext             canonTrace,
     @Nullable String                    sortKeyPrefix,
+    @Nullable String                    sortKeyMin,
+    @Nullable String                    sortKeyMax,
     @Nullable Integer                   limit,
     @Nullable Boolean                   scanForwards,
     @Nonnull  Hash                      partitionHash,
