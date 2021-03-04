@@ -119,7 +119,7 @@ public class PodAndUserId extends PodAndUserIdTypeDef
      */
     public PodAndUserId build(PodId podId, UserId userId)
     {
-      return new PodAndUserId(userId.replacePodId(userId.getValue(), podId.asInteger()));
+      return new PodAndUserId(UserId.replacePodId(userId.getValue(), podId.asInteger()));
     }
     
     @Override

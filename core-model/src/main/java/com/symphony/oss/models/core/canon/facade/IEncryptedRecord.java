@@ -19,7 +19,7 @@
  *           artifactId canon-template-java
  *		Template name		   proforma/java/Object/I_.java.ftl
  *		Template version	   1.0
- *  At                  2021-01-27 12:53:55 GMT
+ *  At                  2021-03-04 15:35:33 GMT
  *----------------------------------------------------------------------------------------------------
  */
 
@@ -27,17 +27,18 @@ package com.symphony.oss.models.core.canon.facade;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.symphony.oss.models.core.canon.IEncryptedApplicationRecordEntity;
+import com.symphony.oss.models.core.canon.IApplicationPayload;
+import com.symphony.oss.models.core.canon.IEncryptedRecordEntity;
 
 /**
- * Facade for Object ObjectSchema(EncryptedApplicationRecord)
+ * Facade for Object ObjectSchema(EncryptedRecord)
  *
  * An encrypted Application Record consisting of an encrypted payload and a unencrypted header, as might be stored in a database.
- * Generated from ObjectSchema(EncryptedApplicationRecord) at #/components/schemas/EncryptedApplicationRecord
+ * Generated from ObjectSchema(EncryptedRecord) at #/components/schemas/EncryptedRecord
  */
 @Immutable
-public interface IEncryptedApplicationRecord
-  extends IEncryptedRecord, IEncryptedApplicationRecordEntity
+public interface IEncryptedRecord
+  extends IApplicationPayload, IEncryptedRecordEntity
 {
 }
 /*----------------------------------------------------------------------------------------------------

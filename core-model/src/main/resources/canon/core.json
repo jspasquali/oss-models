@@ -156,16 +156,13 @@
           }
         }
       },
-      "EncryptedApplicationRecord": {
+      "EncryptedRecord": {
         "type": "object",
         "extends": "#/components/schemas/ApplicationPayload",
         "facade": true,
         "builderFacade": true,
         "description": "An encrypted Application Record consisting of an encrypted payload and a unencrypted header, as might be stored in a database.",
         "properties": {
-          "header": {
-            "$ref": "#/components/schemas/ApplicationPayload"
-          },
           "encryptedPayload": {
             "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncryptedData"
           },
@@ -177,6 +174,18 @@
           },
           "rotationId": {
               "$ref": "#/components/schemas/RotationId"
+          }
+        }
+      },
+      "EncryptedApplicationRecord": {
+        "type": "object",
+        "extends": "#/components/schemas/EncryptedRecord",
+        "facade": true,
+        "builderFacade": true,
+        "description": "An encrypted Application Record consisting of an encrypted payload and a unencrypted header, as might be stored in a database.",
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/ApplicationPayload"
           }
         }
       },
