@@ -1119,6 +1119,7 @@
       "MaestroPayloadType": {
         "type": "string",
         "enum": [
+          "MaestroPayload",
           "D9ProvisioningPayload",
           "activateRoomPayload",
           "reactivateRoomPayload",
@@ -1150,8 +1151,10 @@
           "xPodIMStateChangeMaestroPayload",
           "requestContentExportKeyMaestroPayload",
           "updateStreamMembershipMetadataPayload",
-          "MaestroPayload",
-          "malwareScanUpdatePayload"
+          "malwareScanUpdatePayload",
+          "userDataRemovalRequestPayload",
+          "reactionDetailsPayload",
+          "cloud9EventPayload"
         ]
       },
       "MaestroPayloadContainer": {
@@ -1480,7 +1483,22 @@
           "MEETING_PARTICIPANT_RECORDING_START",
           "MEETING_PARTICIPANT_RECORDING_STOP",
           "MEETING_PARTICIPANT_RECORDING_FAILED",
-          "MESSAGE_SUPPRESSION_REQUEST"
+
+          "MESSAGE_SUPPRESSION_REQUEST",
+
+          "USER_DATA_REMOVAL_REQUEST",
+
+          "DENY_JOIN_ROOM_REQUEST",
+
+          "STREAM_INVITATION",
+
+          "REACTION_DETAILS",
+
+          "SDL_JOIN",
+          "SDL_JOINED",
+          "SDL_LEAVE",
+
+          "CLOUD9_EVENT"
         ]
       },
 			"MaestroMessage": {
