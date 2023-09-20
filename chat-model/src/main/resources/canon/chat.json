@@ -1,24 +1,24 @@
 {
-	"canon": "0.0.1",
-	"info": {
-		"title": "Symphony 2.0 Object Model Chat Application Types",
-		"license": {
-			"name": "Apache 2.0",
-			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-		}
-	},
-	"id": "com.symphony.s2.model.chat",
+  "canon": "0.0.1",
+  "info": {
+    "title": "Symphony 2.0 Object Model Chat Application Types",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "id": "com.symphony.s2.model.chat",
   "version": "1.0",
-	"basePath": "/chat/v1",
-	"model": {
-		"javaGenPackage": "com.symphony.oss.models.chat.canon",
-		"javaFacadePackage": "com.symphony.oss.models.chat.canon.facade"
-	},
+  "basePath": "/chat/v1",
+  "model": {
+    "javaGenPackage": "com.symphony.oss.models.chat.canon",
+    "javaFacadePackage": "com.symphony.oss.models.chat.canon.facade"
+  },
   "methods": {
   },
-	"components": {
-		"schemas": {
-		  "BookmarkType": {
+  "components": {
+    "schemas": {
+      "BookmarkType": {
         "description": "Taken from BookmarkMessageType.java.",
         "type": "string",
         "enum": [
@@ -51,9 +51,7 @@
           }
         }
       },
-      
       "#Presence V1": [],
-      
       "PresenceType": {
         "description": "Taken from PresenceType.java.",
         "type": "string",
@@ -102,8 +100,7 @@
           }
         }
       },
-		
-		  "ForwarderRequest": {
+      "ForwarderRequest": {
         "description": "A livecurrent message as persisted in the DB.",
         "type": "object",
         "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
@@ -124,69 +121,70 @@
           }
         }
       },
-      
-		  "#LiveCurrentMessage": ["And its subclasses"],
-		
-		  "MessageId": {
+      "#LiveCurrentMessage": [
+        "And its subclasses"
+      ],
+      "MessageId": {
         "type": "string",
         "format": "byte",
         "facade": true
       },
-			"MessageType": {
-				"description": "Taken from MessageType.java, obviously this is different in subtle ways from LiveCurrentMessageType.",
-				"type": "string",
-				"enum": [
-					"CLIENT_ID_ASSIGNED",
-					"CROSSPOD",
-					"DELETE_EVENT",
-					"DELIVERYRECEIPT",
-					"DOWNLOAD_EVENT",
-					"EXTERNAL_SOCIALMESSAGE",
-					"KEEPALIVE",
-					"LASTREAD",
-					"LIKE_EVENT",
-					"MAESTRO",
-					"MENTION",
-					"NOTIFICATION",
-					"OBJECT_STATUS",
-					"OFFLINENOTICE",
-					"READRECEIPT",
-					"REMOVE_BADGE_COUNT",
-					"REMOVE_MENTION_BADGE_COUNT",
-					"SIGNAL",
-					"SOCIALMESSAGE",
-					"STATISTIC",
-					"STREAM_HIDDEN",
-					"TRIGGER",
-					"USERINTERACTION",
-					"PRESENCE_CHANGE",
-					"STREAM_SETTINGS"
-				]
-			},
-			"LiveCurrentMessageType": {
-				"description": "Taken from Jackson annotations in ILiveCurrentMessage.java.",
-				"type": "string",
-				"enum": [
-					"DELETE_EVENT",
-					"DELIVERYRECEIPT",
-					"DOWNLOAD_EVENT",
-					"EXTERNAL_SOCIALMESSAGE",
-					"KEEPALIVE",
-					"LASTREAD",
-					"LIKE_EVENT",
-					"MAESTRO",
-					"MESSAGESTATUS",
-					"NOTIFICATION",
-					"OBJECTSTATUS",
-					"OFFLINENOTICE",
-					"READRECEIPT",
-					"REMOVE_BADGE_COUNT",
-					"REMOVE_MENTION_BADGE_COUNT",
-					"SIGNAL",
-					"SOCIALMESSAGE",
-					"STATISTIC",
-					"STREAM_HIDDEN",
-					"Synth",
+      "MessageType": {
+        "description": "Taken from MessageType.java, obviously this is different in subtle ways from LiveCurrentMessageType.",
+        "type": "string",
+        "enum": [
+          "CLIENT_ID_ASSIGNED",
+          "CROSSPOD",
+          "DELETE_EVENT",
+          "DELIVERYRECEIPT",
+          "DOWNLOAD_EVENT",
+          "EXTERNAL_SOCIALMESSAGE",
+          "KEEPALIVE",
+          "LASTREAD",
+          "LIKE_EVENT",
+          "MAESTRO",
+          "MENTION",
+          "NOTIFICATION",
+          "OBJECT_STATUS",
+          "OFFLINENOTICE",
+          "READRECEIPT",
+          "REMOVE_BADGE_COUNT",
+          "REMOVE_MENTION_BADGE_COUNT",
+          "SIGNAL",
+          "SOCIALMESSAGE",
+          "STATISTIC",
+          "STREAM_HIDDEN",
+          "TRIGGER",
+          "USERINTERACTION",
+          "PRESENCE_CHANGE",
+          "STREAM_SETTINGS",
+          "REACTION_AGGREGATED"
+        ]
+      },
+      "LiveCurrentMessageType": {
+        "description": "Taken from Jackson annotations in ILiveCurrentMessage.java.",
+        "type": "string",
+        "enum": [
+          "DELETE_EVENT",
+          "DELIVERYRECEIPT",
+          "DOWNLOAD_EVENT",
+          "EXTERNAL_SOCIALMESSAGE",
+          "KEEPALIVE",
+          "LASTREAD",
+          "LIKE_EVENT",
+          "MAESTRO",
+          "MESSAGESTATUS",
+          "NOTIFICATION",
+          "OBJECTSTATUS",
+          "OFFLINENOTICE",
+          "READRECEIPT",
+          "REMOVE_BADGE_COUNT",
+          "REMOVE_MENTION_BADGE_COUNT",
+          "SIGNAL",
+          "SOCIALMESSAGE",
+          "STATISTIC",
+          "STREAM_HIDDEN",
+          "Synth",
           "PRESENCE_CHANGE",
           "BOOKMARK",
           "SIGNAL_NOTIFICATION",
@@ -194,53 +192,54 @@
           "WALLPOST_NOTIFICATION",
           "TYPING",
           "PUSHED_SIGNAL",
-                  "STREAM_SETTINGS"
-				]
-			},
-			"LiveCurrentMessage": {
-				"description": "A livecurrent message as persisted in the DB.",
-				"type": "object",
+          "STREAM_SETTINGS",
+          "REACTION_AGGREGATED"
+        ]
+      },
+      "LiveCurrentMessage": {
+        "description": "A livecurrent message as persisted in the DB.",
+        "type": "object",
         "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
-				"facade": false,
-				"required": [
-					"version",
-					"messageId",
-					"ingestionDate"
-				],
-				"properties": {
-					"version": {
-						"$ref": "#/components/schemas/LiveCurrentMessageType"
-					},
-					"clientVersionInfo": {
-						"type": "string"
-					},
-					"semVersion": {
-						"type": "string"
-					},
-					"lastState": {
-						"type": "string",
-						"format": "byte"
-					},
-					"messageId": {
-						"$ref": "#/components/schemas/MessageId"
-					},
-					"objectHash": {
-						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-					},
-					"schemaVersion": {
-						"type": "integer",
-						"format": "int16"
-					},
-					"threadId": {
-						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
-					},
-					"ingestionDate": {
-						"$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
-					},
-					"fromPod": {
-						"type": "integer",
-						"format": "int32"
-					},
+        "facade": false,
+        "required": [
+          "version",
+          "messageId",
+          "ingestionDate"
+        ],
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/LiveCurrentMessageType"
+          },
+          "clientVersionInfo": {
+            "type": "string"
+          },
+          "semVersion": {
+            "type": "string"
+          },
+          "lastState": {
+            "type": "string",
+            "format": "byte"
+          },
+          "messageId": {
+            "$ref": "#/components/schemas/MessageId"
+          },
+          "objectHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "format": "int16"
+          },
+          "threadId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "ingestionDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+          },
+          "fromPod": {
+            "type": "integer",
+            "format": "int32"
+          },
           "podDistribution": {
             "type": "array",
             "x-canon-cardinality": "SET",
@@ -252,8 +251,8 @@
           "traceId": {
             "type": "string"
           }
-				}
-			},
+        }
+      },
       "PresenceChangeMessage": {
         "description": "A PresenceV1 livecurrent message.",
         "type": "object",
@@ -274,7 +273,7 @@
           }
         }
       },
-			"BaseSocialMaestroMessage": {
+      "BaseSocialMaestroMessage": {
         "description": "A BaseSocialMaestro message as persisted in the DB.",
         "type": "object",
         "extends": "#/components/schemas/LiveCurrentMessage",
@@ -373,14 +372,14 @@
           }
         }
       },
-			"BaseSocialMessage": {
-				"type": "object",
-				"extends": "#/components/schemas/BaseSocialMaestroMessage",
-				"properties": {
+      "BaseSocialMessage": {
+        "type": "object",
+        "extends": "#/components/schemas/BaseSocialMaestroMessage",
+        "properties": {
           "sendingApp": {
             "type": "string"
           },
-				  "msgFeatures": {
+          "msgFeatures": {
             "type": "string",
             "format": "int32"
           },
@@ -388,7 +387,7 @@
             "type": "boolean",
             "description": "This is encoded in msgFeatures."
           },
-				  "chatType": {
+          "chatType": {
             "$ref": "#/components/schemas/ChatType"
           },
           "tokenIds": {
@@ -415,11 +414,11 @@
             "type": "integer",
             "format": "int32"
           },
-					"#attributes is a Map<String, Object> - can't be modelled here": [],
-					"encryptedEntities": {
-						"type": "string",
-						"format": "byte"
-					},
+          "#attributes is a Map<String, Object> - can't be modelled here": [],
+          "encryptedEntities": {
+            "type": "string",
+            "format": "byte"
+          },
           "externalOrigination": {
             "#comment": [
               "The member variable is defined in SocialMessage but the getter is abstract in BaseSocialMessage so who knows",
@@ -427,21 +426,21 @@
             ],
             "type": "boolean"
           },
-                  "streamBaseHash" : {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-                  },
-                  "streamAbsoluteHash" : {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-                  },
-                  "streamMembershipBaseHash" : {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-                  },
-                  "streamMembershipAbsoluteHash" : {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
-                  }
-				}
-			},
-			"ExternalUser": {
+          "streamBaseHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "streamAbsoluteHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "streamMembershipBaseHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          },
+          "streamMembershipAbsoluteHash": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/Hash"
+          }
+        }
+      },
+      "ExternalUser": {
         "type": "object",
         "properties": {
           "id": {
@@ -466,7 +465,7 @@
           }
         }
       },
-			"ExternalSocialMessage": {
+      "ExternalSocialMessage": {
         "type": "object",
         "extends": "#/components/schemas/BaseSocialMessage",
         "properties": {
@@ -503,7 +502,7 @@
           }
         }
       },
-			"User": {
+      "User": {
         "description": "A user, based on IUser.",
         "#there seem to be different versions of user, this is what the JSON looks like when it comes out": [
           "on the internalMsg topic as a JSON object."
@@ -903,7 +902,7 @@
           "SELF_REGISTRATION"
         ]
       },
-			"Image": {
+      "Image": {
         "description": "An attachment image.",
         "type": "object",
         "properties": {
@@ -978,7 +977,7 @@
         ],
         "properties": {
           "message": {
-           "$ref": "#/components/schemas/BaseSocialMessage"
+            "$ref": "#/components/schemas/BaseSocialMessage"
           },
           "previousMsgId": {
             "type": "string",
@@ -986,7 +985,7 @@
           }
         }
       },
-			"Platform": {
+      "Platform": {
         "type": "string",
         "enum": [
           "DESKTOP",
@@ -1005,7 +1004,9 @@
           "oboDelegate": {
             "$ref": "#/components/schemas/User"
           },
-          "#media": [ "Unclear what this is, it looks like its for code snippets but seems to be deprecated."],
+          "#media": [
+            "Unclear what this is, it looks like its for code snippets but seems to be deprecated."
+          ],
           "encryptedMedia": {
             "type": "string",
             "format": "byte"
@@ -1097,7 +1098,7 @@
           }
         }
       },
-			"OfflineNoticeType": {
+      "OfflineNoticeType": {
         "type": "string",
         "enum": [
           "IM",
@@ -1167,7 +1168,7 @@
           "version": {
             "$ref": "#/components/schemas/MaestroPayloadType"
           },
-          "cargo":{
+          "cargo": {
             "$ref": "#/components/schemas/MaestroPayload"
           }
         }
@@ -1395,7 +1396,7 @@
           "CREATE_IM",
           "ROOM_SYNC",
           "ROOM_SYNC_REQUEST",
-           "REQUEST_CONTENT_EXPORT_KEY",
+          "REQUEST_CONTENT_EXPORT_KEY",
           "CHANNEL_CREATE",
           "CHANNEL_SUBSCRIBE",
           "CHANNEL_DELETE",
@@ -1405,34 +1406,26 @@
           "FILTER_UPDATE",
           "FILTER_DELETE",
           "FILTER_PUSHED_SIGNAL",
-
           "CONNECTION_REQUEST_ALERT",
           "CREATE_ALIAS",
           "UPDATE_ALIAS",
           "REMOVE_ALIAS",
-
           "XPOD_MEMBER_MODIFIED_REQUEST",
           "XPOD_JOIN_ROOM_REQUEST",
           "XPOD_LEAVE_ROOM_REQUEST",
           "XPOD_IM_STATE_CHANGE_REQUEST",
-
           "CREATE_USER",
           "UPDATE_USER",
-
           "DISTRIBUTION_LIST_DEFINE",
           "NOTIFICATION_SETTING_MUTE",
           "NOTIFICATION_SETTING_UNMUTE",
-      
           "PUBLIC_CERT",
           "EXTERNAL_WRAPPED_STREAM_KEY_SAVED",
           "EXTERNAL_WRAPPED_STREAM_KEY",
           "STREAM_KEY_REQUEST",
-
           "PUBNUB_CHANNEL_CREATED",
-
           "CONNECTOR_ADDED",
           "CONNECTOR_REMOVED",
-
           "STREAM_HIDDEN",
           "STREAM_UNHIDDEN",
           "STREAM_READ",
@@ -1442,19 +1435,15 @@
           "MENTION_ALERT",
           "FOLLOWING_ALERT",
           "SESSION_EXPIRE",
-
           "MESSAGE_SUPPRESSION",
-
           "JOIN_ROOM_REJECTED",
-
-           "INITIATE_SCREENSHARING",
+          "INITIATE_SCREENSHARING",
           "STOP_SCREENSHARING",
           "JOIN_SCREENSHARING",
           "LEAVE_SCREENSHARING",
           "INITIATE_SWITCH_SCREENSHARING",
           "CANCEL_SWITCH_SCREENSHARING",
           "SWITCH_SCREENSHARING",
-
           "MEETING_START",
           "MEETING_PARTICIPANT_JOIN",
           "MEETING_PARTICIPANT_AUDIO_MUTE",
@@ -1467,41 +1456,28 @@
           "MEETING_STOP",
           "MEETING_PARTICIPANT_DECLINE",
           "MEETING_PARTICIPANT_PIN_FOCUS",
-
           "EXTERNAL_PRESENCE_CHANGE",
           "EXTERNAL_PRESENCE_REQUEST",
-
           "SYNTHETIC_TRANSACTION",
-
           "ENABLED_EMAIL_INTEGRATION",
           "DISABLED_EMAIL_INTEGRATION",
-
           "UPDATE_STREAM_MEMBERSHIP_METADATA",
-
           "MALWARE_SCAN_STATE_UPDATE",
-
           "MEETING_PARTICIPANT_RECORDING_START",
           "MEETING_PARTICIPANT_RECORDING_STOP",
           "MEETING_PARTICIPANT_RECORDING_FAILED",
-
           "MESSAGE_SUPPRESSION_REQUEST",
-
           "USER_DATA_REMOVAL_REQUEST",
-
           "DENY_JOIN_ROOM_REQUEST",
-
           "STREAM_INVITATION",
-
           "REACTION_DETAILS",
-
           "SDL_JOIN",
           "SDL_JOINED",
           "SDL_LEAVE",
-
           "CLOUD9_EVENT"
         ]
       },
-			"MaestroMessage": {
+      "MaestroMessage": {
         "type": "object",
         "extends": "#/components/schemas/BaseSocialMaestroMessage",
         "properties": {
@@ -1515,7 +1491,7 @@
           "event": {
             "$ref": "#/components/schemas/MaestroEventType"
           },
-          "payload":{
+          "payload": {
             "$ref": "#/components/schemas/MaestroPayloadContainer"
           },
           "requestingUser": {
@@ -1529,7 +1505,7 @@
         "properties": {
         }
       },
-			"DeleteEvent": {
+      "DeleteEvent": {
         "description": "Event to signal a message should be marked as deleted.",
         "type": "object",
         "facade": false,
@@ -1546,7 +1522,7 @@
           }
         }
       },
-			"DownloadAttachmentEvent": {
+      "DownloadAttachmentEvent": {
         "description": "Represents an event when a file attachment is downloaded.",
         "type": "object",
         "facade": false,
@@ -1566,7 +1542,7 @@
           }
         }
       },
-			"KeepAlive": {
+      "KeepAlive": {
         "type": "object",
         "facade": false,
         "extends": "#/components/schemas/LiveCurrentMessage",
@@ -1576,7 +1552,7 @@
           }
         }
       },
-			"LikedEvent": {
+      "LikedEvent": {
         "description": "An event of a user liking a message.",
         "type": "object",
         "facade": false,
@@ -1627,7 +1603,6 @@
         "facade": false,
         "extends": "#/components/schemas/MessageStatus",
         "properties": {
-          
         }
       },
       "HideStream": {
@@ -1922,8 +1897,7 @@
           }
         }
       },
-			
-			"ExchangeEnvelope": {
+      "ExchangeEnvelope": {
         "description": "Envelope to wrap meta data around each payload sent through the system, and therefore should only contain transient data. The ExchangeEnvelope will be available to every component in the message bus, but <b>SHOULD NOT</b> be persisted outside of that.",
         "type": "object",
         "facade": true,
@@ -1933,7 +1907,7 @@
           }
         }
       },
-			"MessengerBag": {
+      "MessengerBag": {
         "description": "Logical grouping of a list of exchange envelopes by the message type.",
         "type": "object",
         "properties": {
@@ -1946,7 +1920,7 @@
           }
         }
       },
-			"ReceivedMessageBusMsg": {
+      "ReceivedMessageBusMsg": {
         "description": "Base class for the SBE message bus library wire formats.",
         "type": "object",
         "facade": false,
@@ -1963,7 +1937,6 @@
           }
         }
       },
-      
       "SNSSQSWireObject": {
         "description": "The SBE message bus library wire format for SnsSqs.",
         "type": "object",
@@ -1978,7 +1951,6 @@
           }
         }
       },
-      
       "UnforwardableMessage": {
         "description": "A message from a 1.X pod which we can't process'.",
         "type": "object",
@@ -2004,137 +1976,155 @@
           }
         }
       },
-          "CryptoRotationInfo": {
-            "description": "This is used by podInternalApi",
-            "type": "object",
-            "properties": {
-              "acceptedRotationId": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
-              },
-              "acceptedRotationRange": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
-              },
-              "retiredRotationId": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
-              }
-            }
+      "CryptoRotationInfo": {
+        "description": "This is used by podInternalApi",
+        "type": "object",
+        "properties": {
+          "acceptedRotationId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           },
-          "WrappedAccountKey": {
-            "description": "A Symphony wrapped account key",
-            "type": "object",
-            "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
-            "properties": {
-                "certId": {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/CertificateId"
-                },
-                "kdfVersion": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "keyId": {
-                    "type": "string",
-                    "format": "byte"
-                },
-                "relaySignature": {
-                    "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
-                },
-                "rotationId": {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
-                },
-                "userId": {
-                  "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-                },
-                "version": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "wrappedKey": {
-                    "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
-                }
-            }
-        },
-        "WrappedContentKey": {
-            "description": "A Symphony wrapped content key",
-            "type": "object",
-            "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
-            "properties": {
-                "kdfVersion": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "keyId": {
-                    "type": "string",
-                    "format": "byte"
-                },
-                "relaySignature": {
-                    "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
-                },
-                "rotationId": {
-                    "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
-                },
-                "userId": {
-                  "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-                },
-                "threadId": {
-                  "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
-                },
-                "version": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "wrappedKey": {
-                   "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
-                }
-            }
+          "acceptedRotationRange": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
           },
-          "AuthenticationKey": {
-            "description": "Authentication Key of the user based on AuthenticationKey",
-            "type": "object",
-            "properties": {
-              "currentKey": {
-                "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
-              },
-              "previousKey": {
-                "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
-              },
-              "previousKeyExpirationDate": {
-                "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
-              }
-            }
+          "retiredRotationId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          }
+        }
+      },
+      "WrappedAccountKey": {
+        "description": "A Symphony wrapped account key",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "properties": {
+          "certId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/CertificateId"
           },
-          "UserEntitlementMap": {
-            "description": "An user entitlement map as seen in IMaestroUser",
-            "type": "object",
-            "facade": true,
-            "properties": {
-            }
+          "kdfVersion": {
+            "type": "integer",
+            "format": "int32"
           },
-         "PodInitialization": {
-           "type": "object",
-           "facade": false,
-           "builderFacade": false,
-           "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
-           "required": [
-             "podId",
-             "podCertificate"
-           ],
-           "description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
-           "properties": {
-             "podId": {
-               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
-             },
-             "podUrl": {
-               "type": "string",
-               "format": "url"
-             },
-             "podCertificate": {
-               "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
-             },
-             "ceserviceUserId": {
-               "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
-             }
+          "keyId": {
+            "type": "string",
+            "format": "byte"
+          },
+          "relaySignature": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
+          },
+          "rotationId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          },
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wrappedKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
+          }
+        }
+      },
+      "WrappedContentKey": {
+        "description": "A Symphony wrapped content key",
+        "type": "object",
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "properties": {
+          "kdfVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "keyId": {
+            "type": "string",
+            "format": "byte"
+          },
+          "relaySignature": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/EncodedSignature"
+          },
+          "rotationId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/RotationId"
+          },
+          "userId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          },
+          "threadId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/ThreadId"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wrappedKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/WrappedKey"
+          }
+        }
+      },
+      "AuthenticationKey": {
+        "description": "Authentication Key of the user based on AuthenticationKey",
+        "type": "object",
+        "properties": {
+          "currentKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
+          },
+          "previousKey": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemPublicKey"
+          },
+          "previousKeyExpirationDate": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/TimeStamp"
+          }
+        }
+      },
+      "UserEntitlementMap": {
+        "description": "An user entitlement map as seen in IMaestroUser",
+        "type": "object",
+        "facade": true,
+        "properties": {
+        }
+      },
+      "PodInitialization": {
+        "type": "object",
+        "facade": false,
+        "builderFacade": false,
+        "extends": "https://models.oss.symphony.com/core.json#/components/schemas/ApplicationPayload",
+        "required": [
+          "podId",
+          "podCertificate"
+        ],
+        "description": "A pod. The operating security context contains system config objects, the environment principal has access to this. The root context gives access to all content for the pod, the public context is visible to all principals in the pod but not the environment operating principal, this is where the forwarder puts forwarded messages.",
+        "properties": {
+          "podId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodId"
+          },
+          "podUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "podCertificate": {
+            "$ref": "https://models.oss.symphony.com/crypto.json#/components/schemas/PemCertificate"
+          },
+          "ceserviceUserId": {
+            "$ref": "https://models.oss.symphony.com/core.json#/components/schemas/PodAndUserId"
+          }
+        }
+      },
+      "ReactionAggregated": {
+        "description": "Notification of reactions on a social message.",
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "targetInitialMessageId": {
+            "type": "string"
+          },
+          "targetMessageAuthorId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sequenceNumber": {
+            "type": "integer",
+            "format": "int64"
+          }
         }
       }
-		}
-	}
+    }
+  }
 }

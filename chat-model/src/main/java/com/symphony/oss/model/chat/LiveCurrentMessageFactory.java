@@ -10,34 +10,7 @@ import com.symphony.oss.canon.runtime.IModelRegistry;
 import com.symphony.oss.commons.dom.json.IJsonDomNode;
 import com.symphony.oss.commons.dom.json.MutableJsonObject;
 import com.symphony.oss.commons.type.provider.IStringProvider;
-import com.symphony.oss.models.chat.canon.Bookmark;
-import com.symphony.oss.models.chat.canon.DeleteEvent;
-import com.symphony.oss.models.chat.canon.DeliveryReceipt;
-import com.symphony.oss.models.chat.canon.DownloadAttachmentEvent;
-import com.symphony.oss.models.chat.canon.HideStream;
-import com.symphony.oss.models.chat.canon.ILiveCurrentMessage;
-import com.symphony.oss.models.chat.canon.KeepAlive;
-import com.symphony.oss.models.chat.canon.LikedEvent;
-import com.symphony.oss.models.chat.canon.LiveCurrentMessage;
-import com.symphony.oss.models.chat.canon.LiveCurrentMessageType;
-import com.symphony.oss.models.chat.canon.MaestroMessage;
-import com.symphony.oss.models.chat.canon.MaestroSynth;
-import com.symphony.oss.models.chat.canon.MentionNotification;
-import com.symphony.oss.models.chat.canon.MessageStatus;
-import com.symphony.oss.models.chat.canon.Notification;
-import com.symphony.oss.models.chat.canon.ObjectStatusMessage;
-import com.symphony.oss.models.chat.canon.OfflineNotice;
-import com.symphony.oss.models.chat.canon.PushedSignal;
-import com.symphony.oss.models.chat.canon.ReadReceipt;
-import com.symphony.oss.models.chat.canon.RemoveBadgeCount;
-import com.symphony.oss.models.chat.canon.RemoveMentionBadgeCount;
-import com.symphony.oss.models.chat.canon.Signal;
-import com.symphony.oss.models.chat.canon.SignalNotification;
-import com.symphony.oss.models.chat.canon.Statistic;
-import com.symphony.oss.models.chat.canon.StreamSettings;
-import com.symphony.oss.models.chat.canon.TypingNotification;
-import com.symphony.oss.models.chat.canon.UserLastRead;
-import com.symphony.oss.models.chat.canon.WallPostNotification;
+import com.symphony.oss.models.chat.canon.*;
 import com.symphony.oss.models.chat.canon.facade.PresenceChangeMessage;
 import com.symphony.oss.models.chat.canon.facade.SocialMessage;
 
@@ -100,9 +73,10 @@ public class LiveCurrentMessageFactory
           case WALLPOST_NOTIFICATION:       return new WallPostNotification(mutableJsonObject, modelRegistry);
           case TYPING:                      return new TypingNotification(mutableJsonObject, modelRegistry);
           case PUSHED_SIGNAL:               return new PushedSignal(mutableJsonObject, modelRegistry);
+          case REACTION_AGGREGATED:         return new ReactionAggregated(mutableJsonObject, modelRegistry);
 
           case OBJECTSTATUS:                return new ObjectStatusMessage(unwrapObjectStatus(mutableJsonObject), modelRegistry);
-            
+
           default:                          return new LiveCurrentMessage(mutableJsonObject, modelRegistry);
         }
       }
