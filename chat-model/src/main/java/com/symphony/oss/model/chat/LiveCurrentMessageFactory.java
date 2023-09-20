@@ -28,6 +28,7 @@ import com.symphony.oss.models.chat.canon.Notification;
 import com.symphony.oss.models.chat.canon.ObjectStatusMessage;
 import com.symphony.oss.models.chat.canon.OfflineNotice;
 import com.symphony.oss.models.chat.canon.PushedSignal;
+import com.symphony.oss.models.chat.canon.ReactionAggregated;
 import com.symphony.oss.models.chat.canon.ReadReceipt;
 import com.symphony.oss.models.chat.canon.RemoveBadgeCount;
 import com.symphony.oss.models.chat.canon.RemoveMentionBadgeCount;
@@ -100,9 +101,10 @@ public class LiveCurrentMessageFactory
           case WALLPOST_NOTIFICATION:       return new WallPostNotification(mutableJsonObject, modelRegistry);
           case TYPING:                      return new TypingNotification(mutableJsonObject, modelRegistry);
           case PUSHED_SIGNAL:               return new PushedSignal(mutableJsonObject, modelRegistry);
+          case REACTION_AGGREGATED:         return new ReactionAggregated(mutableJsonObject, modelRegistry);
 
           case OBJECTSTATUS:                return new ObjectStatusMessage(unwrapObjectStatus(mutableJsonObject), modelRegistry);
-            
+
           default:                          return new LiveCurrentMessage(mutableJsonObject, modelRegistry);
         }
       }
