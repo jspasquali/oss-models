@@ -2107,6 +2107,43 @@
           }
         }
       },
+      "ReactionDelta": {
+        "type": "object",
+        "description": "All reactions received since last notification.",
+        "properties": {},
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ReactionSummaryItem": {
+        "type": "object",
+        "description": "Reaction information for a specific emoji on a social message.",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      },
+      "ReactionSummary": {
+        "type": "object",
+        "description": "Summary of reactions that were posted on a social message.",
+        "properties": {},
+        "additionalProperties": {
+          "$ref": "#/components/schemas/ReactionSummary"
+        }
+      },
       "ReactionAggregated": {
         "description": "Notification of reactions on a social message.",
         "type": "object",
@@ -2122,6 +2159,12 @@
           "sequenceNumber": {
             "type": "integer",
             "format": "int64"
+          },
+          "reactionDelta": {
+            "$ref": "#/components/schemas/ReactionDelta"
+          },
+          "reactionSummary": {
+            "$ref": "#/components/schemas/ReactionSummary"
           }
         }
       }
