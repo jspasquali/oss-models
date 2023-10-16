@@ -1155,7 +1155,8 @@
           "malwareScanUpdatePayload",
           "userDataRemovalRequestPayload",
           "reactionDetailsPayload",
-          "cloud9EventPayload"
+          "cloud9EventPayload",
+          "genericSystemEventPayload"
         ]
       },
       "MaestroPayloadContainer": {
@@ -1474,7 +1475,8 @@
           "SDL_JOIN",
           "SDL_JOINED",
           "SDL_LEAVE",
-          "CLOUD9_EVENT"
+          "CLOUD9_EVENT",
+          "GENERIC_SYSTEM_EVENT"
         ]
       },
       "MaestroMessage": {
