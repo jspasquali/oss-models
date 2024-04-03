@@ -158,7 +158,8 @@
           "USERINTERACTION",
           "PRESENCE_CHANGE",
           "STREAM_SETTINGS",
-          "REACTION_AGGREGATED"
+          "REACTION_AGGREGATED",
+          "TEAMS_INTEROP_MESSAGE"
         ]
       },
       "LiveCurrentMessageType": {
@@ -193,7 +194,8 @@
           "TYPING",
           "PUSHED_SIGNAL",
           "STREAM_SETTINGS",
-          "REACTION_AGGREGATED"
+          "REACTION_AGGREGATED",
+          "TEAMS_INTEROP_MESSAGE"
         ]
       },
       "LiveCurrentMessage": {
@@ -2167,6 +2169,42 @@
           },
           "reactionSummary": {
             "$ref": "#/components/schemas/ReactionSummary"
+          }
+        }
+      },
+      "TeamsRecipient": {
+        "description": "Teams related metadata for a user of Teams Interop",
+        "type": "object",
+        "properties": {
+          "symphonyUserId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "teamsUserId": {
+            "type": "string"
+          },
+          "teamsChatId": {
+            "type": "string"
+          },
+          "teamsChatContext": {
+            "type": "string"
+          }
+        }
+      },
+      "TeamsInteropMessage": {
+        "description": "Events to push to on-prem Teams Interop consumer",
+        "type": "object",
+        "extends": "#/components/schemas/LiveCurrentMessage",
+        "properties": {
+          "wrapped": {
+            "$ref": "#/components/schemas/LiveCurrentMessage"
+          },
+          "teamsRecipients": {
+            "type": "array",
+            "x-canon-cardinality": "LIST",
+            "items": {
+              "$ref": "#/components/schemas/TeamsRecipient"
+            }
           }
         }
       }

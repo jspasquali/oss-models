@@ -36,6 +36,7 @@ import com.symphony.oss.models.chat.canon.Signal;
 import com.symphony.oss.models.chat.canon.SignalNotification;
 import com.symphony.oss.models.chat.canon.Statistic;
 import com.symphony.oss.models.chat.canon.StreamSettings;
+import com.symphony.oss.models.chat.canon.TeamsInteropMessage;
 import com.symphony.oss.models.chat.canon.TypingNotification;
 import com.symphony.oss.models.chat.canon.UserLastRead;
 import com.symphony.oss.models.chat.canon.WallPostNotification;
@@ -102,6 +103,7 @@ public class LiveCurrentMessageFactory
           case TYPING:                      return new TypingNotification(mutableJsonObject, modelRegistry);
           case PUSHED_SIGNAL:               return new PushedSignal(mutableJsonObject, modelRegistry);
           case REACTION_AGGREGATED:         return new ReactionAggregated(mutableJsonObject, modelRegistry);
+          case TEAMS_INTEROP_MESSAGE:       return new TeamsInteropMessage(mutableJsonObject, modelRegistry);
 
           case OBJECTSTATUS:                return new ObjectStatusMessage(unwrapObjectStatus(mutableJsonObject), modelRegistry);
 
